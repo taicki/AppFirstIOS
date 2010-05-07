@@ -1,0 +1,722 @@
+TAppFirst
+v7
+r0
+t294963285.948861
+cCheck dependencies
+cProcessInfoPlistFile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/Info.plist AppFirst-Info.plist
+cCompileXIB /Users/joeng/Documents/AppFirst/iPad/MainWindow_Pad.xib
+cCompileXIB /Users/joeng/Documents/AppFirst/iPhone/MainWindow_Phone.xib
+cCpResource build/Debug-iphonesimulator/AppFirst.app/af_icon.png af_icon.png
+cCompileXIB /Users/joeng/Documents/AppFirst/ServerStatusViewController.xib
+cProcessPCH /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch.gch AppFirst_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+cDataModelVersionCompile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst.momd /Users/joeng/Documents/AppFirst/Shared/AppFirst.xcdatamodeld
+cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/main.o /Users/joeng/Documents/AppFirst/Shared/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Pad.o /Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Shared.o /Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Phone.o /Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDashboard.o /Users/joeng/Documents/AppFirst/AFDashboard.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFAlert.o /Users/joeng/Documents/AppFirst/AFAlert.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/NSObject+SBJSON.o /Users/joeng/Documents/AppFirst/JSON/NSObject+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/NSString+SBJSON.o /Users/joeng/Documents/AppFirst/JSON/NSString+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJSON.o /Users/joeng/Documents/AppFirst/JSON/SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonBase.o /Users/joeng/Documents/AppFirst/JSON/SBJsonBase.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonParser.o /Users/joeng/Documents/AppFirst/JSON/SBJsonParser.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonWriter.o /Users/joeng/Documents/AppFirst/JSON/SBJsonWriter.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/ServerStatusViewController.o /Users/joeng/Documents/AppFirst/ServerStatusViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cLd /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst normal i386
+cGenerateDSYMFile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app.dSYM /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst
+cTouch /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk
+c000000004BDB2D7B0000000000000110
+t1272655227
+s272
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/CoreData.framework/CoreData
+c000000004B9F1E230000000000198F10
+t1268719139
+s1675024
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.h
+c000000004B9F1E17000000000000046B
+t1268719127
+s1131
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004BA03AB3000000000026F020
+t1268791987
+s2551840
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004B9F1DE40000000000289C20
+t1268719076
+s2661408
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004B9F1DD60000000000001355
+t1268719062
+s4949
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004BA6CAEC000000000000098F
+t1269222124
+s2447
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004BA6CB31000000000214E400
+t1269222193
+s34923520
+
+N/Users/joeng/Documents/AppFirst/AFAlert.h
+c000000004BE2D88900000000000000D3
+t1273157769
+s211
+i<UIKit/UIKit.h>
+
+N/Users/joeng/Documents/AppFirst/AFAlert.m
+c000000004BE3025A000000000000122E
+t1273168474
+s4654
+i"AFAlert.h"
+
+N/Users/joeng/Documents/AppFirst/AFDashboard.h
+c000000004BE34B3D0000000000000179
+t1273187133
+s377
+i<UIKit/UIKit.h>
+
+N/Users/joeng/Documents/AppFirst/AFDashboard.m
+c000000004BE490BE0000000000001957
+t1273270462
+s6487
+i"AFDashboard.h"
+i"ServerStatusViewController.h"
+i"config.h"
+
+N/Users/joeng/Documents/AppFirst/AppFirst_Prefix.pch
+c000000004BE1DD1900000000000000B9
+t1273093401
+s185
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/joeng/Documents/AppFirst/JSON/NSObject+SBJSON.h
+c000000004B93BE5E0000000000000A01
+t1267973726
+s2561
+i<Foundation/Foundation.h>
+
+N/Users/joeng/Documents/AppFirst/JSON/NSObject+SBJSON.m
+c000000004B93BE5E000000000000089E
+t1267973726
+s2206
+i"NSObject+SBJSON.h"
+i"SBJsonWriter.h"
+
+N/Users/joeng/Documents/AppFirst/JSON/NSString+SBJSON.h
+c000000004B93BE5E0000000000000916
+t1267973726
+s2326
+i<Foundation/Foundation.h>
+
+N/Users/joeng/Documents/AppFirst/JSON/NSString+SBJSON.m
+c000000004B93BE5E000000000000087D
+t1267973726
+s2173
+i"NSString+SBJSON.h"
+i"SBJsonParser.h"
+
+N/Users/joeng/Documents/AppFirst/JSON/SBJSON.h
+c000000004B93BE5E0000000000000AED
+t1267973726
+s2797
+i<Foundation/Foundation.h>
+i"SBJsonParser.h"
+i"SBJsonWriter.h"
+
+N/Users/joeng/Documents/AppFirst/JSON/SBJSON.m
+c000000004B93BE5E0000000000001ABC
+t1267973726
+s6844
+i"SBJSON.h"
+
+N/Users/joeng/Documents/AppFirst/JSON/SBJsonBase.h
+c000000004B93BE5E0000000000000B82
+t1267973726
+s2946
+i<Foundation/Foundation.h>
+
+N/Users/joeng/Documents/AppFirst/JSON/SBJsonBase.m
+c000000004B93BE5E0000000000000AC1
+t1267973726
+s2753
+i"SBJsonBase.h"
+
+N/Users/joeng/Documents/AppFirst/JSON/SBJsonParser.h
+c000000004B93BE5E0000000000000C0B
+t1267973726
+s3083
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/joeng/Documents/AppFirst/JSON/SBJsonParser.m
+c000000004B93C6A300000000000036D0
+t1267975843
+s14032
+i"SBJsonParser.h"
+
+N/Users/joeng/Documents/AppFirst/JSON/SBJsonWriter.h
+c000000004B93BE5E0000000000001140
+t1267973726
+s4416
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/joeng/Documents/AppFirst/JSON/SBJsonWriter.m
+c000000004B93BE5E0000000000001F26
+t1267973726
+s7974
+i"SBJsonWriter.h"
+
+N/Users/joeng/Documents/AppFirst/ServerStatusViewController.h
+c000000004BE4898F0000000000000372
+t1273268623
+s882
+i<UIKit/UIKit.h>
+
+N/Users/joeng/Documents/AppFirst/ServerStatusViewController.m
+c000000004BE48A8B0000000000001037
+t1273268875
+s4151
+i"ServerStatusViewController.h"
+i"config.h"
+
+N/Users/joeng/Documents/AppFirst/ServerStatusViewController.xib
+c000000004BE48A510000000000006EBA
+t1273268817
+s28346
+
+N/Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.h
+c000000004BE341BF00000000000004AC
+t1273184703
+s1196
+i<UIKit/UIKit.h>
+i<CoreData/CoreData.h>
+i"AFAlert.h"
+i"AFDashboard.h"
+
+N/Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.m
+c000000004BE33FA80000000000001227
+t1273184168
+s4647
+i"AppDelegate_Shared.h"
+
+N/Users/joeng/Documents/AppFirst/Shared/AppFirst.xcdatamodeld
+c000000004BE1DD190000000000000088
+t1273093401
+s136
+
+N/Users/joeng/Documents/AppFirst/Shared/JSON/JSON.h
+c000000004B93BE5E00000000000008F9
+t1267973726
+s2297
+i"SBJSON.h"
+i"NSObject+SBJSON.h"
+i"NSString+SBJSON.h"
+
+N/Users/joeng/Documents/AppFirst/Shared/JSON/NSObject+SBJSON.h
+c000000004B93BE5E0000000000000A01
+t1267973726
+s2561
+i<Foundation/Foundation.h>
+
+N/Users/joeng/Documents/AppFirst/Shared/JSON/NSString+SBJSON.h
+c000000004B93BE5E0000000000000916
+t1267973726
+s2326
+i<Foundation/Foundation.h>
+
+N/Users/joeng/Documents/AppFirst/Shared/JSON/SBJSON.h
+c000000004B93BE5E0000000000000AED
+t1267973726
+s2797
+i<Foundation/Foundation.h>
+i"SBJsonParser.h"
+i"SBJsonWriter.h"
+
+N/Users/joeng/Documents/AppFirst/Shared/JSON/SBJsonBase.h
+c000000004B93BE5E0000000000000B82
+t1267973726
+s2946
+i<Foundation/Foundation.h>
+
+N/Users/joeng/Documents/AppFirst/Shared/JSON/SBJsonParser.h
+c000000004B93BE5E0000000000000C0B
+t1267973726
+s3083
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/joeng/Documents/AppFirst/Shared/JSON/SBJsonWriter.h
+c000000004B93BE5E0000000000001140
+t1267973726
+s4416
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/joeng/Documents/AppFirst/Shared/main.m
+c000000004BE1DD190000000000000165
+t1273093401
+s357
+i<UIKit/UIKit.h>
+
+N/Users/joeng/Documents/AppFirst/af_57x57.png
+c000000004BE1DC7D0000000000000974
+t1273093245
+s2420
+
+N/Users/joeng/Documents/AppFirst/af_icon.png
+c000000004BE1DC7D0000000000000974
+t1273093245
+s2420
+
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFAlert.o
+t1273168475
+s37008
+
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDashboard.o
+t1273270485
+s50172
+
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Pad.o
+t1273243835
+s53956
+
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Phone.o
+t1273188131
+s44536
+
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Shared.o
+t1273188131
+s54992
+
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppFirst.LinkFileList
+c000000004BE349370000000000000665
+t1273186615
+s1637
+
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/NSObject+SBJSON.o
+t1273182255
+s7712
+
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/NSString+SBJSON.o
+t1273182255
+s7732
+
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJSON.o
+t1273182255
+s16736
+
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonBase.o
+t1273182255
+s12076
+
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonParser.o
+t1273182256
+s29780
+
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonWriter.o
+t1273182256
+s22532
+
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/ServerStatusViewController.o
+t1273269521
+s52884
+
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/main.o
+t1273093692
+s5944
+
+N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app
+t1273270485
+s340
+
+N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app.dSYM
+t1273270485
+s102
+
+N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst
+t1273270485
+s73856
+
+N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst.momd
+t1273093693
+s136
+
+N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/Info.plist
+t1273093691
+s942
+
+N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/MainWindow_Pad.nib
+t1273184543
+s2574
+
+N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/MainWindow_Phone.nib
+t1273162735
+s2482
+
+N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/PkgInfo
+t1273093691
+s8
+
+N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/ServerStatusViewController.nib
+t1273269521
+s1964
+
+N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/af_57x57.png
+t2
+s0
+
+N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/af_icon.png
+t1273093691
+s2420
+
+N/Users/joeng/Documents/AppFirst/config.h
+c000000004BE483F50000000000000116
+t1273267189
+s278
+
+N/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.h
+c000000004BE1DD1900000000000000FF
+t1273093401
+s255
+i<UIKit/UIKit.h>
+i"AppDelegate_Shared.h"
+
+N/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m
+c000000004BE428AC0000000000001059
+t1273243820
+s4185
+i"AppDelegate_Pad.h"
+i"../Shared/JSON/JSON.h"
+
+N/Users/joeng/Documents/AppFirst/iPad/MainWindow_Pad.xib
+c000000004BE3402800000000000097E6
+t1273184296
+s38886
+
+N/Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.h
+c000000004BE1DD190000000000000103
+t1273093401
+s259
+i<UIKit/UIKit.h>
+i"AppDelegate_Shared.h"
+
+N/Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.m
+c000000004BE2E5010000000000000366
+t1273160961
+s870
+i"AppDelegate_Phone.h"
+
+N/Users/joeng/Documents/AppFirst/iPhone/MainWindow_Phone.xib
+c000000004BE2EBD000000000000090CB
+t1273162704
+s37067
+
+N/var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch.gch
+t1273093692
+s13805456
+
+NAppFirst-Info.plist
+c000000004BE1DE3A0000000000000572
+t1273093690
+s1394
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies294963285#294963285#0(0"0(0#1#0"4300911832#0"0#
+
+CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFAlert.o /Users/joeng/Documents/AppFirst/AFAlert.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s294861275.841872
+e294861275.967418
+r1
+xCompileC
+xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFAlert.o
+x/Users/joeng/Documents/AppFirst/AFAlert.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@49"Compile /Users/joeng/Documents/AppFirst/AFAlert.m294861275#294861275#0(0"0(0#0#41"/Users/joeng/Documents/AppFirst/AFAlert.m4300911832#1806"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-generated-files.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-own-target-headers.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-all-target-headers.hmap -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-project-headers.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/AFAlert.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFAlert.o0#
+
+CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDashboard.o /Users/joeng/Documents/AppFirst/AFDashboard.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s294963285.650517
+e294963285.873983
+r1
+xCompileC
+xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDashboard.o
+x/Users/joeng/Documents/AppFirst/AFDashboard.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/joeng/Documents/AppFirst/AFDashboard.m: In function '-[AFDashboard tableView:didSelectRowAtIndexPath:]':
+o/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: 'NSObject' may not respond to '-objectForKey:'
+o/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: (Messages without a matching method signature
+o/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: will be assumed to return 'id' and accept
+o/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: '...' as arguments.)
+o/Users/joeng/Documents/AppFirst/AFDashboard.m:184: warning: 'NSObject' may not respond to '-stringByReplacingOccurrencesOfString:withString:'
+lSLF07#2@53"Compile /Users/joeng/Documents/AppFirst/AFDashboard.m294963285#294963285#0(650"/Users/joeng/Documents/AppFirst/AFDashboard.m: In function '-[AFDashboard tableView:didSelectRowAtIndexPath:]':/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: 'NSObject' may not respond to '-objectForKey:'/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: (Messages without a matching method signature/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: will be assumed to return 'id' and accept/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: '...' as arguments.)/Users/joeng/Documents/AppFirst/AFDashboard.m:184: warning: 'NSObject' may not respond to '-stringByReplacingOccurrencesOfString:withString:'3(22@46"'NSObject' may not respond to '-objectForKey:'294963285#112#107#0(6@45"/Users/joeng/Documents/AppFirst/AFDashboard.m294963262#174#0#174#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)294963285#219#106#0(6@45"/Users/joeng/Documents/AppFirst/AFDashboard.m294963262#174#0#174#0#0"0(22@81"'NSObject' may not respond to '-stringByReplacingOccurrencesOfString:withString:'294963285#508#142#0(6@45"/Users/joeng/Documents/AppFirst/AFDashboard.m294963262#184#0#184#0#26"'*' may not respond to '*'0(0#0#45"/Users/joeng/Documents/AppFirst/AFDashboard.m4300911832#1814"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-generated-files.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-own-target-headers.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-all-target-headers.hmap -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-project-headers.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/AFDashboard.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDashboard.o0#
+
+CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Pad.o /Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s294936635.395780
+e294936635.567925
+r1
+xCompileC
+xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Pad.o
+x/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m: In function '-[AppDelegate_Pad application:didFinishLaunchingWithOptions:]':
+o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:25: warning: 'AppDelegate_Pad' may not respond to '-trySignIn'
+o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:25: warning: (Messages without a matching method signature
+o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:25: warning: will be assumed to return 'id' and accept
+o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:25: warning: '...' as arguments.)
+o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m: In function '-[AppDelegate_Pad trySignIn]':
+o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:54: warning: 'NSURLRequest' may not respond to '+setAllowsAnyHTTPSCertificate:forHost:'
+o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:103: warning: incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setServers:' from distinct Objective-C type
+lSLF07#2@62"Compile /Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m294936635#294936635#0(1034"/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m: In function '-[AppDelegate_Pad application:didFinishLaunchingWithOptions:]':/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:25: warning: 'AppDelegate_Pad' may not respond to '-trySignIn'/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:25: warning: (Messages without a matching method signature/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:25: warning: will be assumed to return 'id' and accept/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:25: warning: '...' as arguments.)/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m: In function '-[AppDelegate_Pad trySignIn]':/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:54: warning: 'NSURLRequest' may not respond to '+setAllowsAnyHTTPSCertificate:forHost:'/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:103: warning: incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setServers:' from distinct Objective-C type4(22@49"'AppDelegate_Pad' may not respond to '-trySignIn'294936635#133#118#0(6@54"/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m294936620#25#0#25#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)294936635#251#114#0(6@54"/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m294936620#25#0#25#0#0"0(22@74"'NSURLRequest' may not respond to '+setAllowsAnyHTTPSCertificate:forHost:'294936635#664#143#0(6@54"/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m294936620#54#0#54#0#26"'*' may not respond to '*'0(22@157"Incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setServers:' from distinct Objective-C type294936635#807#227#0(6@54"/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m294936620#103#0#103#0#0"0(0#0#54"/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m4300911832#1827"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-generated-files.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-own-target-headers.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-all-target-headers.hmap -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-project-headers.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Pad.o0#
+
+CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Phone.o /Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s294880931.146325
+e294880931.338906
+r1
+xCompileC
+xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Phone.o
+x/Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@66"Compile /Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.m294880931#294880931#0(0"0(0#0#58"/Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.m4300911832#1833"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-generated-files.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-own-target-headers.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-all-target-headers.hmap -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-project-headers.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Phone.o0#
+
+CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Shared.o /Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s294880930.895626
+e294880931.145925
+r1
+xCompileC
+xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Shared.o
+x/Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@67"Compile /Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.m294880930#294880931#0(0"0(0#0#59"/Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.m4300911832#1835"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-generated-files.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-own-target-headers.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-all-target-headers.hmap -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-project-headers.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Shared.o0#
+
+CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/NSObject+SBJSON.o /Users/joeng/Documents/AppFirst/JSON/NSObject+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s294875055.660014
+e294875055.766804
+r1
+xCompileC
+xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/NSObject+SBJSON.o
+x/Users/joeng/Documents/AppFirst/JSON/NSObject+SBJSON.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@62"Compile /Users/joeng/Documents/AppFirst/JSON/NSObject+SBJSON.m294875055#294875055#0(0"0(0#0#54"/Users/joeng/Documents/AppFirst/JSON/NSObject+SBJSON.m4300911832#1827"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-generated-files.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-own-target-headers.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-all-target-headers.hmap -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-project-headers.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/JSON/NSObject+SBJSON.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/NSObject+SBJSON.o0#
+
+CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/NSString+SBJSON.o /Users/joeng/Documents/AppFirst/JSON/NSString+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s294875055.767140
+e294875055.828653
+r1
+xCompileC
+xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/NSString+SBJSON.o
+x/Users/joeng/Documents/AppFirst/JSON/NSString+SBJSON.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@62"Compile /Users/joeng/Documents/AppFirst/JSON/NSString+SBJSON.m294875055#294875055#0(0"0(0#0#54"/Users/joeng/Documents/AppFirst/JSON/NSString+SBJSON.m4300911832#1827"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-generated-files.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-own-target-headers.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-all-target-headers.hmap -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-project-headers.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/JSON/NSString+SBJSON.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/NSString+SBJSON.o0#
+
+CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJSON.o /Users/joeng/Documents/AppFirst/JSON/SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s294875055.828749
+e294875055.939250
+r1
+xCompileC
+xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJSON.o
+x/Users/joeng/Documents/AppFirst/JSON/SBJSON.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@53"Compile /Users/joeng/Documents/AppFirst/JSON/SBJSON.m294875055#294875055#0(0"0(0#0#45"/Users/joeng/Documents/AppFirst/JSON/SBJSON.m4300911832#1809"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-generated-files.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-own-target-headers.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-all-target-headers.hmap -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-project-headers.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/JSON/SBJSON.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJSON.o0#
+
+CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonBase.o /Users/joeng/Documents/AppFirst/JSON/SBJsonBase.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s294875055.881266
+e294875055.976714
+r1
+xCompileC
+xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonBase.o
+x/Users/joeng/Documents/AppFirst/JSON/SBJsonBase.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@57"Compile /Users/joeng/Documents/AppFirst/JSON/SBJsonBase.m294875055#294875055#0(0"0(0#0#49"/Users/joeng/Documents/AppFirst/JSON/SBJsonBase.m4300911832#1817"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-generated-files.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-own-target-headers.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-all-target-headers.hmap -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-project-headers.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/JSON/SBJsonBase.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonBase.o0#
+
+CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonParser.o /Users/joeng/Documents/AppFirst/JSON/SBJsonParser.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s294875055.939393
+e294875056.152953
+r1
+xCompileC
+xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonParser.o
+x/Users/joeng/Documents/AppFirst/JSON/SBJsonParser.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@59"Compile /Users/joeng/Documents/AppFirst/JSON/SBJsonParser.m294875055#294875056#0(0"0(0#0#51"/Users/joeng/Documents/AppFirst/JSON/SBJsonParser.m4300911832#1821"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-generated-files.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-own-target-headers.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-all-target-headers.hmap -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-project-headers.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/JSON/SBJsonParser.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonParser.o0#
+
+CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonWriter.o /Users/joeng/Documents/AppFirst/JSON/SBJsonWriter.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s294875055.976810
+e294875056.127089
+r1
+xCompileC
+xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonWriter.o
+x/Users/joeng/Documents/AppFirst/JSON/SBJsonWriter.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@59"Compile /Users/joeng/Documents/AppFirst/JSON/SBJsonWriter.m294875055#294875056#0(0"0(0#0#51"/Users/joeng/Documents/AppFirst/JSON/SBJsonWriter.m4300911832#1821"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-generated-files.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-own-target-headers.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-all-target-headers.hmap -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-project-headers.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/JSON/SBJsonWriter.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonWriter.o0#
+
+CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/ServerStatusViewController.o /Users/joeng/Documents/AppFirst/ServerStatusViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s294962321.456205
+e294962321.802936
+r1
+xCompileC
+xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/ServerStatusViewController.o
+x/Users/joeng/Documents/AppFirst/ServerStatusViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/joeng/Documents/AppFirst/ServerStatusViewController.m: In function '-[ServerStatusViewController viewWillAppear:]':
+o/Users/joeng/Documents/AppFirst/ServerStatusViewController.m:40: warning: 'ServerStatusViewController' may not respond to '-displayCpuValue'
+o/Users/joeng/Documents/AppFirst/ServerStatusViewController.m:40: warning: (Messages without a matching method signature
+o/Users/joeng/Documents/AppFirst/ServerStatusViewController.m:40: warning: will be assumed to return 'id' and accept
+o/Users/joeng/Documents/AppFirst/ServerStatusViewController.m:40: warning: '...' as arguments.)
+o/Users/joeng/Documents/AppFirst/ServerStatusViewController.m:41: warning: 'ServerStatusViewController' may not respond to '-displayMemoryValue'
+o/Users/joeng/Documents/AppFirst/ServerStatusViewController.m:42: warning: 'ServerStatusViewController' may not respond to '-displayDiskValue'
+lSLF07#2@68"Compile /Users/joeng/Documents/AppFirst/ServerStatusViewController.m294962321#294962321#0(881"/Users/joeng/Documents/AppFirst/ServerStatusViewController.m: In function '-[ServerStatusViewController viewWillAppear:]':/Users/joeng/Documents/AppFirst/ServerStatusViewController.m:40: warning: 'ServerStatusViewController' may not respond to '-displayCpuValue'/Users/joeng/Documents/AppFirst/ServerStatusViewController.m:40: warning: (Messages without a matching method signature/Users/joeng/Documents/AppFirst/ServerStatusViewController.m:40: warning: will be assumed to return 'id' and accept/Users/joeng/Documents/AppFirst/ServerStatusViewController.m:40: warning: '...' as arguments.)/Users/joeng/Documents/AppFirst/ServerStatusViewController.m:41: warning: 'ServerStatusViewController' may not respond to '-displayMemoryValue'/Users/joeng/Documents/AppFirst/ServerStatusViewController.m:42: warning: 'ServerStatusViewController' may not respond to '-displayDiskValue'4(22@66"'ServerStatusViewController' may not respond to '-displayCpuValue'294962321#123#141#0(6@60"/Users/joeng/Documents/AppFirst/ServerStatusViewController.m294961675#40#0#40#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)294962321#264#120#0(6@60"/Users/joeng/Documents/AppFirst/ServerStatusViewController.m294961675#40#0#40#0#0"0(22@69"'ServerStatusViewController' may not respond to '-displayMemoryValue'294962321#595#144#0(6@60"/Users/joeng/Documents/AppFirst/ServerStatusViewController.m294961675#41#0#41#0#26"'*' may not respond to '*'0(22@67"'ServerStatusViewController' may not respond to '-displayDiskValue'294962321#739#142#0(6@60"/Users/joeng/Documents/AppFirst/ServerStatusViewController.m294961675#42#0#42#0#26"'*' may not respond to '*'0(0#0#60"/Users/joeng/Documents/AppFirst/ServerStatusViewController.m4300911832#1844"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-generated-files.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-own-target-headers.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-all-target-headers.hmap -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-project-headers.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/ServerStatusViewController.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/ServerStatusViewController.o0#
+
+CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/main.o /Users/joeng/Documents/AppFirst/Shared/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s294786492.753880
+e294786492.909450
+r1
+xCompileC
+xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/main.o
+x/Users/joeng/Documents/AppFirst/Shared/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@53"Compile /Users/joeng/Documents/AppFirst/Shared/main.m294786492#294786492#0(0"0(0#0#45"/Users/joeng/Documents/AppFirst/Shared/main.m4300911832#1807"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-generated-files.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-own-target-headers.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-all-target-headers.hmap -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-project-headers.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/Shared/main.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/main.o0#
+
+CCompileXIB /Users/joeng/Documents/AppFirst/ServerStatusViewController.xib
+s294962319.736541
+e294962321.387263
+r1
+xCompileXIB
+x/Users/joeng/Documents/AppFirst/ServerStatusViewController.xib
+lSLF07#2@41"CompileXIB ServerStatusViewController.xib294962319#294962321#0(0"0(0#0#62"/Users/joeng/Documents/AppFirst/ServerStatusViewController.xib4300911832#492"    cd /Users/joeng/Documents/AppFirst    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/ServerStatusViewController.nib /Users/joeng/Documents/AppFirst/ServerStatusViewController.xib0#
+
+CCompileXIB /Users/joeng/Documents/AppFirst/iPad/MainWindow_Pad.xib
+s294877341.272080
+e294877343.276764
+r1
+xCompileXIB
+x/Users/joeng/Documents/AppFirst/iPad/MainWindow_Pad.xib
+lSLF07#2@34"CompileXIB iPad/MainWindow_Pad.xib294877341#294877343#0(0"0(0#0#55"/Users/joeng/Documents/AppFirst/iPad/MainWindow_Pad.xib4300911832#473"    cd /Users/joeng/Documents/AppFirst    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/MainWindow_Pad.nib /Users/joeng/Documents/AppFirst/iPad/MainWindow_Pad.xib0#
+
+CCompileXIB /Users/joeng/Documents/AppFirst/iPhone/MainWindow_Phone.xib
+s294855534.843837
+e294855535.375762
+r1
+xCompileXIB
+x/Users/joeng/Documents/AppFirst/iPhone/MainWindow_Phone.xib
+lSLF07#2@38"CompileXIB iPhone/MainWindow_Phone.xib294855534#294855535#0(0"0(0#0#59"/Users/joeng/Documents/AppFirst/iPhone/MainWindow_Phone.xib4300911832#479"    cd /Users/joeng/Documents/AppFirst    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/MainWindow_Phone.nib /Users/joeng/Documents/AppFirst/iPhone/MainWindow_Phone.xib0#
+
+CCpResource build/Debug-iphonesimulator/AppFirst.app/af_57x57.png af_57x57.png
+r0
+
+CCpResource build/Debug-iphonesimulator/AppFirst.app/af_icon.png af_icon.png
+s294786491.394915
+e294786491.444924
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/AppFirst.app/af_icon.png
+xaf_icon.png
+lSLF07#2@16"Copy af_icon.png294786491#294786491#0(0"0(0#0#43"/Users/joeng/Documents/AppFirst/af_icon.png4300911832#435"    cd /Users/joeng/Documents/AppFirst    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Users/joeng/Documents/AppFirst/af_icon.png /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app0#
+
+CDataModelVersionCompile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst.momd /Users/joeng/Documents/AppFirst/Shared/AppFirst.xcdatamodeld
+s294786492.742793
+e294786493.060511
+r1
+xDataModelVersionCompile
+x/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst.momd
+x/Users/joeng/Documents/AppFirst/Shared/AppFirst.xcdatamodeld
+lSLF07#2@107"DataModelVersionCompile build/Debug-iphonesimulator/AppFirst.app/AppFirst.momd Shared/AppFirst.xcdatamodeld294786492#294786493#0(0"0(0#0#60"/Users/joeng/Documents/AppFirst/Shared/AppFirst.xcdatamodeld4300911832#375"    cd /Users/joeng/Documents/AppFirst    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/momc -XD_MOMC_TARGET_VERSION=10.5 /Users/joeng/Documents/AppFirst/Shared/AppFirst.xcdatamodeld /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst.momd0#
+
+CGenerateDSYMFile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app.dSYM /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst
+s294963285.915819
+e294963285.946127
+r1
+xGenerateDSYMFile
+x/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app.dSYM
+x/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst
+lSLF07#2@112"GenerateDSYMFile build/Debug-iphonesimulator/AppFirst.app.dSYM build/Debug-iphonesimulator/AppFirst.app/AppFirst294963285#294963285#0(0"0(0#0#81"/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst4300911832#365"    cd /Users/joeng/Documents/AppFirst    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst -o /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app.dSYM0#
+
+CLd /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst normal i386
+s294963285.874244
+e294963285.915714
+r1
+xLd
+x/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst
+xnormal
+xi386
+lSLF07#2@86"Link /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst294963285#294963285#0(0"0(0#0#0"4300911832#852"    cd /Users/joeng/Documents/AppFirst    setenv MACOSX_DEPLOYMENT_TARGET 10.5    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -L/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -filelist /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppFirst.LinkFileList -mmacosx-version-min=10.5 -framework Foundation -framework UIKit -framework CoreGraphics -framework CoreData -o /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst0#
+
+CProcessInfoPlistFile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/Info.plist AppFirst-Info.plist
+s294786491.013330
+e294786491.035001
+r1
+xProcessInfoPlistFile
+x/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/Info.plist
+xAppFirst-Info.plist
+lSLF07#2@27"Process AppFirst-Info.plist294786491#294786491#0(0"0(0#0#51"/Users/joeng/Documents/AppFirst/AppFirst-Info.plist4300911832#461"    cd /Users/joeng/Documents/AppFirst    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility AppFirst-Info.plist -genpkginfo /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/Info.plist0#
+
+CProcessPCH /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch.gch AppFirst_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+s294786491.454137
+e294786492.742612
+r1
+xProcessPCH
+x/var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch.gch
+xAppFirst_Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@30"Precompile AppFirst_Prefix.pch294786491#294786492#0(0"0(0#0#51"/Users/joeng/Documents/AppFirst/AppFirst_Prefix.pch4300911832#1698"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-generated-files.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-own-target-headers.hmap -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-all-target-headers.hmap -iquote /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst-project-headers.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -c /Users/joeng/Documents/AppFirst/AppFirst_Prefix.pch -o /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-cfiqmphxjukxdbcihwfgjymmkcoo/AppFirst_Prefix.pch.gch0#
+
+CTouch /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app
+s294963285.946210
+e294963285.948830
+r1
+xTouch
+x/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app
+lSLF07#2@78"Touch /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app294963285#294963285#0(0"0(0#0#0"4300911832#265"    cd /Users/joeng/Documents/AppFirst    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app0#
+
