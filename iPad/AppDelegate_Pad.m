@@ -8,40 +8,81 @@
 
 #import "AppDelegate_Pad.h"
 #import "../Shared/JSON/JSON.h"
+#import "config.h"
+#import "CorePlot-CocoaTouch.h"
+
 
 @implementation AppDelegate_Pad
 
-
+@synthesize viewController;
 #pragma mark -
 #pragma mark Application delegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
 	
     // Override point for customization after application launch
-	[window addSubview:tabcontroller.view];
-    [window makeKeyAndVisible];
+	
+	//CPLayerHostingView * newView = [[CPLayerHostingView alloc]initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+	[window addSubview:viewController.view];
+	[window makeKeyAndVisible];
+	//[newView release];
+	return YES;
+
+	NSString *path = [[NSBundle mainBundle] pathForResource: @"cookie" 
+													 ofType: @"plist"] ;
+	NSMutableArray *tmpArray = [[NSMutableArray alloc] 
+								initWithContentsOfFile: path];
+	
+	if (DEBUGGING == @"YES") {
+		self.urlBase = DEV_SERVER_IP;
+	}
+	self.loginUrl = [NSString stringWithFormat:@"%@%@", urlBase, LOGIN_API_STRING];
+	self.serverListUrl = [NSString stringWithFormat:@"%@%@", urlBase, SERVER_LIST_API_STRING];
+	
+	if (tmpArray) {
+		self.availableCookies = tmpArray;
+		[window addSubview:tabcontroller.view];
+		[self getServerListData];
+		
+	} else {
+		[window addSubview:[loginController view]];
+    }
+	
+	[tmpArray release];
+	[window makeKeyAndVisible];
+	
+	return YES;
+}
+
+- (IBAction) login: (id) sender
+{
+	
+	// TODO: spawn a login thread
+	
+	loginController.loginIndicator.hidden = FALSE;
+	loginController.invalidLoginLabel.hidden = YES;
+	[loginController.loginIndicator startAnimating];
+	
+	loginController.loginButton.enabled = FALSE;
 	
 	
 	[self trySignIn];
-	
-		
-	return YES;
 }
+
 
 - (void) trySignIn {
 	
 	NSHTTPURLResponse *response;
 	NSError *error;
 	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
-    NSString *urlBase = @"https://192.168.1.102";
-	//NSString *urlBase = @"http://192.168.1.141:8000";
-	NSString *logInUrl = [NSString stringWithFormat:@"%@%@", urlBase, @"/api/iphone/login/"];
-	NSString *serverListUrl = [NSString stringWithFormat:@"%@%@", urlBase, @"/api/topology/data/node/"];
+    
 	
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-	NSURL *myWebserverURL = [NSURL URLWithString:logInUrl];
+	NSLog(@"%@", loginUrl);
+	NSURL *myWebserverURL = [NSURL URLWithString:self.loginUrl];
 	
-	NSString *post =[NSString stringWithFormat:@"username=%@&password=%@",@"andrew@appfirst.com", @"appfirst"];
+	NSString *post =[NSString stringWithFormat:@"username=%@&password=%@", 
+					self.loginController.usernameField.text , self.loginController.passwordField.text];
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
 	
@@ -51,19 +92,30 @@
 	[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
 	[request setHTTPBody:postData];
 	
-	[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
+	
+	if (DEBUGGING == @"YES") {
+		[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
+		
+		
+	}
 	
 	[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];	
-	if (error) {
-		NSLog(@"%@", [error localizedDescription]);
-		return;
-	}
+	
 	
 	NSLog(@"RESPONSE HEADERS: \n%@", [response allHeaderFields]);
 	
 	// If you want to get all of the cookies:
 	NSArray * all = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:[NSURL URLWithString:urlBase]];
 	NSLog(@"How many Cookies: %d", all.count);
+	
+	if (error || all.count == 0) {
+		NSLog(@"%@", [error localizedDescription]);
+		loginController.loginButton.enabled = YES;
+		loginController.loginIndicator.hidden = YES;
+		loginController.invalidLoginLabel.hidden = FALSE;
+		return;
+	}
+	
 	// Store the cookies:
 	// NSHTTPCookieStorage is a Singleton.
 	[[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:all forURL:[NSURL URLWithString:urlBase] mainDocumentURL:nil];
@@ -72,9 +124,22 @@
 	for (NSHTTPCookie *cookie in all)
 		NSLog(@"Name: %@ : Value: %@, Expires: %@", cookie.name, cookie.value, cookie.expiresDate); 
 	
+	self.availableCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:urlBase]];
 	
-	NSArray * availableCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:urlBase]];
-	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:availableCookies];
+	//NSString *path = [ [ NSBundle mainBundle]  
+	//				  pathForResource: @"cookies" ofType: @"plist"] ;
+	//[self.availableCookies writeToFile: path atomically: YES] ;
+	
+	[loginController.view removeFromSuperview];
+	[window addSubview:tabcontroller.view];
+	
+	[self getServerListData];
+}
+
+- (void) getServerListData {
+	NSHTTPURLResponse *response;
+	NSError *error;
+	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:self.availableCookies];
 	
 	
 	NSMutableURLRequest *serverListRequest = [[[NSMutableURLRequest alloc] init] autorelease];
@@ -83,9 +148,8 @@
 	[serverListRequest setAllHTTPHeaderFields:headers];
 	[serverListRequest setHTTPBody:nil];
 	
-	serverListRequest.URL = [NSURL URLWithString:serverListUrl];
-	error       = nil;
-	response    = nil;
+	serverListRequest.URL = [NSURL URLWithString:self.serverListUrl];
+	
 	
 	NSData * data = [NSURLConnection sendSynchronousRequest:serverListRequest returningResponse:&response error:&error];
 	if (error) {
@@ -97,12 +161,12 @@
 	NSLog(@"The server saw:\n%@", jsonString);
 	
 	NSDictionary *dictionary = [jsonString JSONValue];
-	//NSLog(@"Dictionary value for \"request\" is \"%@\"", [dictionary objectForKey:@"appfirst-snoopy"]);
-
-
+	
+	
 	dashboardController.servers = dictionary.allKeys;
 	dashboardController.allData = dictionary;
 }
+
 
 /**
  Superclass implementation saves changes in the application's managed object context before the application terminates.
@@ -117,6 +181,7 @@
 
 - (void)dealloc {
 	
+	[viewController release];
 	[super dealloc];
 }
 

@@ -17,7 +17,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
 	
     // Override point for customization after application launch
-	[window addSubview:tabcontroller.view];
+	[window addSubview:loginController.view];
     [window makeKeyAndVisible];
 	
 	return YES;

@@ -12,8 +12,10 @@
 @implementation AppDelegate_Shared
 
 @synthesize window;
-@synthesize tabcontroller;
+@synthesize tabcontroller, loginController;
 @synthesize alertController, dashboardController;
+@synthesize availableCookies;
+@synthesize serverListUrl, urlBase, loginUrl;
 
 
 /**
@@ -131,9 +133,15 @@
     
 	[window release];
 	[tabcontroller release];
+	[loginController release];
 	
+	[alertController release];
 	[dashboardController release];
-	[tabcontroller release];
+	
+	[availableCookies release];
+	[serverListUrl release];
+	[loginUrl release];
+	[urlBase release];
 	
 	[super dealloc];
 }

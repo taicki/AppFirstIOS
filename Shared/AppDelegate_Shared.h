@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "AFAlert.h"
 #import "AFDashboard.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate_Shared : NSObject <UIApplicationDelegate> {
     
@@ -19,8 +20,15 @@
     
     UIWindow *window;
 	UITabBarController *tabcontroller;
+	LoginViewController *loginController;
 	AFAlert *alertController;
 	AFDashboard *dashboardController;
+	
+	NSArray *availableCookies;
+	
+	NSString *urlBase;
+	NSString *loginUrl;
+	NSString *serverListUrl;
 	
 }
 
@@ -30,9 +38,16 @@
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabcontroller;
+@property (nonatomic, retain) IBOutlet LoginViewController *loginController;
 
 @property (nonatomic, retain) IBOutlet AFAlert *alertController;
 @property (nonatomic, retain) IBOutlet AFDashboard *dashboardController;
+
+@property (nonatomic, retain) NSArray* availableCookies;
+
+@property (nonatomic, retain) NSString* urlBase;
+@property (nonatomic, retain) NSString* loginUrl;
+@property (nonatomic, retain) NSString* serverListUrl;
 
 - (NSString *)applicationDocumentsDirectory;
 

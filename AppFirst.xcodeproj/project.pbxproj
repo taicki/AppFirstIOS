@@ -29,7 +29,45 @@
 		3E8224E611936EC9001F3644 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8224E011936EC9001F3644 /* SBJsonWriter.m */; };
 		3E82253411937E20001F3644 /* ServerStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E82253211937E20001F3644 /* ServerStatusViewController.m */; };
 		3E82253511937E20001F3644 /* ServerStatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E82253311937E20001F3644 /* ServerStatusViewController.xib */; };
+		3EE9A439119856B8007D3E14 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9A437119856B8007D3E14 /* LoginViewController.m */; };
+		3EE9A43A119856B8007D3E14 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EE9A438119856B8007D3E14 /* LoginViewController.xib */; };
+		3EE9A6F811989CC3007D3E14 /* cookies.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EE9A6F711989CC3007D3E14 /* cookies.plist */; };
+		3EE9A79F1198AB6F007D3E14 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE9A7491198AA92007D3E14 /* libCorePlot-CocoaTouch.a */; };
+		3EE9A7D71198B099007D3E14 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE9A7D61198B099007D3E14 /* QuartzCore.framework */; };
+		3EE9AC601198BE92007D3E14 /* PieChart_SampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9AC5D1198BE92007D3E14 /* PieChart_SampleAppDelegate.m */; };
+		3EE9AC611198BE92007D3E14 /* PieChart_SampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9AC5F1198BE92007D3E14 /* PieChart_SampleViewController.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3EE9A7481198AA92007D3E14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EE9A7401198AA92007D3E14 /* CorePlot-CocoaTouch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC9B83470FB8A0A40035D8DA /* libCorePlot-CocoaTouch.a */;
+			remoteInfo = "CorePlot-CocoaTouch";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3EE9A7A81198ACBB007D3E14 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework/build/Debug-iphonesimulator/libCorePlot-CocoaTouch.a";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3EE9A9FE1198B6E0007D3E14 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -70,6 +108,16 @@
 		3E82253211937E20001F3644 /* ServerStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerStatusViewController.m; sourceTree = "<group>"; };
 		3E82253311937E20001F3644 /* ServerStatusViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServerStatusViewController.xib; sourceTree = "<group>"; };
 		3E82262E11946E9F001F3644 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		3EE9A436119856B8007D3E14 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		3EE9A437119856B8007D3E14 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		3EE9A438119856B8007D3E14 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		3EE9A6F711989CC3007D3E14 /* cookies.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cookies.plist; sourceTree = "<group>"; };
+		3EE9A7401198AA92007D3E14 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../mobile/mobile/IPhoneOS/lib/core-plot/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		3EE9A7D61198B099007D3E14 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3EE9AC5C1198BE92007D3E14 /* PieChart_SampleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChart_SampleAppDelegate.h; sourceTree = "<group>"; };
+		3EE9AC5D1198BE92007D3E14 /* PieChart_SampleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChart_SampleAppDelegate.m; sourceTree = "<group>"; };
+		3EE9AC5E1198BE92007D3E14 /* PieChart_SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChart_SampleViewController.h; sourceTree = "<group>"; };
+		3EE9AC5F1198BE92007D3E14 /* PieChart_SampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChart_SampleViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AppFirst-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppFirst-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,10 +126,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EE9A79F1198AB6F007D3E14 /* libCorePlot-CocoaTouch.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				28EEBFDD1118E19E00187D67 /* CoreData.framework in Frameworks */,
+				3EE9A7D71198B099007D3E14 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +159,10 @@
 		28EEBF621118D79A00187D67 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				3EE9AC5C1198BE92007D3E14 /* PieChart_SampleAppDelegate.h */,
+				3EE9AC5D1198BE92007D3E14 /* PieChart_SampleAppDelegate.m */,
+				3EE9AC5E1198BE92007D3E14 /* PieChart_SampleViewController.h */,
+				3EE9AC5F1198BE92007D3E14 /* PieChart_SampleViewController.m */,
 				3E8224D311936EC8001F3644 /* JSON */,
 				3E82224611921574001F3644 /* af_icon.png */,
 				2819307C112F81BE00ECF9B4 /* AppFirst.xcdatamodeld */,
@@ -123,6 +177,10 @@
 				3E82253211937E20001F3644 /* ServerStatusViewController.m */,
 				3E82253311937E20001F3644 /* ServerStatusViewController.xib */,
 				3E82262E11946E9F001F3644 /* config.h */,
+				3EE9A436119856B8007D3E14 /* LoginViewController.h */,
+				3EE9A437119856B8007D3E14 /* LoginViewController.m */,
+				3EE9A438119856B8007D3E14 /* LoginViewController.xib */,
+				3EE9A6F711989CC3007D3E14 /* cookies.plist */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -130,6 +188,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				3EE9A7401198AA92007D3E14 /* CorePlot-CocoaTouch.xcodeproj */,
 				2860E386111B897F00E27156 /* iPhone */,
 				29B97317FDCFA39411CA2CEA /* iPad */,
 				28EEBF621118D79A00187D67 /* Shared */,
@@ -166,6 +225,7 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				28EEBFDC1118E19E00187D67 /* CoreData.framework */,
+				3EE9A7D61198B099007D3E14 /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -190,6 +250,14 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
+		3EE9A7411198AA92007D3E14 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3EE9A7491198AA92007D3E14 /* libCorePlot-CocoaTouch.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -200,6 +268,8 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				3EE9A7A81198ACBB007D3E14 /* CopyFiles */,
+				3EE9A9FE1198B6E0007D3E14 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -220,12 +290,28 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3EE9A7411198AA92007D3E14 /* Products */;
+					ProjectRef = 3EE9A7401198AA92007D3E14 /* CorePlot-CocoaTouch.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* AppFirst */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3EE9A7491198AA92007D3E14 /* libCorePlot-CocoaTouch.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libCorePlot-CocoaTouch.a";
+			remoteRef = 3EE9A7481198AA92007D3E14 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
@@ -236,6 +322,8 @@
 				2860E38B111B897F00E27156 /* MainWindow_Phone.xib in Resources */,
 				3E82224711921574001F3644 /* af_icon.png in Resources */,
 				3E82253511937E20001F3644 /* ServerStatusViewController.xib in Resources */,
+				3EE9A43A119856B8007D3E14 /* LoginViewController.xib in Resources */,
+				3EE9A6F811989CC3007D3E14 /* cookies.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +348,9 @@
 				3E8224E511936EC9001F3644 /* SBJsonParser.m in Sources */,
 				3E8224E611936EC9001F3644 /* SBJsonWriter.m in Sources */,
 				3E82253411937E20001F3644 /* ServerStatusViewController.m in Sources */,
+				3EE9A439119856B8007D3E14 /* LoginViewController.m in Sources */,
+				3EE9AC601198BE92007D3E14 /* PieChart_SampleAppDelegate.m in Sources */,
+				3EE9AC611198BE92007D3E14 /* PieChart_SampleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,13 +360,22 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppFirst_Prefix.pch;
+				HEADER_SEARCH_PATHS = "framework/**";
 				INFOPLIST_FILE = "AppFirst-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/framework/build/Debug-iphonesimulator\"",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = AppFirst;
 			};
 			name = Debug;
@@ -288,6 +388,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppFirst_Prefix.pch;
 				INFOPLIST_FILE = "AppFirst-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/framework/build/Debug-iphonesimulator\"",
+				);
 				PRODUCT_NAME = AppFirst;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -301,6 +405,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "file:///Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework//**";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				PREBINDING = NO;
 				SDKROOT = iphoneos3.2;

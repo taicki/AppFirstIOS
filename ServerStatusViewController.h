@@ -31,5 +31,8 @@
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *timeLabelText;
 
+- (void) displayCpuValue;
+- (void) displayMemoryValue;
+- (void) displayDiskValue;
 
 @end
