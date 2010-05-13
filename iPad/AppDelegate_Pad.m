@@ -14,7 +14,6 @@
 
 @implementation AppDelegate_Pad
 
-@synthesize viewController;
 #pragma mark -
 #pragma mark Application delegate
 
@@ -22,12 +21,7 @@
 	
     // Override point for customization after application launch
 	
-	//CPLayerHostingView * newView = [[CPLayerHostingView alloc]initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-	//[window addSubview:viewController.view];
-	//[window makeKeyAndVisible];
-	//[newView release];
-	//return YES;
-
+	
 	NSString *path = [[NSBundle mainBundle] pathForResource: @"cookie" 
 													 ofType: @"plist"] ;
 	NSMutableArray *tmpArray = [[NSMutableArray alloc] 
@@ -41,6 +35,7 @@
 	}
 	self.loginUrl = [NSString stringWithFormat:@"%@%@", urlBase, LOGIN_API_STRING];
 	self.serverListUrl = [NSString stringWithFormat:@"%@%@", urlBase, SERVER_LIST_API_STRING];
+	self.alertListUrl = [NSString stringWithFormat:@"%@%@", urlBase, ALERT_LIST_API_STRING];
 	
 	if (tmpArray) {
 		self.availableCookies = tmpArray;
@@ -64,11 +59,11 @@
 	
 	// TODO: spawn a login thread
 	
-	loginController.loginIndicator.hidden = FALSE;
+	loginController.loginIndicator.hidden = NO;
 	loginController.invalidLoginLabel.hidden = YES;
 	[loginController.loginIndicator startAnimating];
 	
-	loginController.loginButton.enabled = FALSE;
+	loginController.loginButton.enabled = NO;
 	
 	
 	[self trySignIn];
@@ -113,11 +108,13 @@
 	NSArray * all = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:[NSURL URLWithString:urlBase]];
 	NSLog(@"How many Cookies: %d", all.count);
 	
+	loginController.loginIndicator.hidden = YES;
+	
 	if (error || all.count == 0) {
 		NSLog(@"%@", [error localizedDescription]);
 		loginController.loginButton.enabled = YES;
-		loginController.loginIndicator.hidden = YES;
-		loginController.invalidLoginLabel.hidden = FALSE;
+		
+		loginController.invalidLoginLabel.hidden = NO;
 		return;
 	}
 	
@@ -139,6 +136,7 @@
 	[window addSubview:tabcontroller.view];
 	
 	[self getServerListData];
+	[self getAlertListData];
 }
 
 - (void) getServerListData {
@@ -172,6 +170,37 @@
 	dashboardController.allData = dictionary;
 }
 
+- (void) getAlertListData {
+	NSHTTPURLResponse *response;
+	NSError *error;
+	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:self.availableCookies];
+	
+	
+	NSMutableURLRequest *alertListRequest = [[[NSMutableURLRequest alloc] init] autorelease];
+	// we are just recycling the original request
+	[alertListRequest setHTTPMethod:@"GET"];
+	[alertListRequest setAllHTTPHeaderFields:headers];
+	[alertListRequest setHTTPBody:nil];
+	
+	alertListRequest.URL = [NSURL URLWithString:self.alertListUrl];
+	
+	
+	NSData * data = [NSURLConnection sendSynchronousRequest:alertListRequest returningResponse:&response error:&error];
+	if (error) {
+		NSLog(@"%@", [error localizedDescription]);
+		return;
+	}
+	
+	NSString *jsonString = [[[NSString alloc] initWithData:data encoding: NSASCIIStringEncoding] autorelease];
+	NSLog(@"The server saw:\n%@", jsonString);
+	
+	NSDictionary *dictionary = [jsonString JSONValue];
+	
+	alertController.alerts = dictionary.allKeys;
+	alertController.allData = dictionary;
+
+}
+
 
 /**
  Superclass implementation saves changes in the application's managed object context before the application terminates.
@@ -185,8 +214,6 @@
 #pragma mark Memory management
 
 - (void)dealloc {
-	
-	[viewController release];
 	[super dealloc];
 }
 

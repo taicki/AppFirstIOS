@@ -7,10 +7,14 @@
 //
 
 #import "AFAlert.h"
+#import "AlertDetailViewController.h"
+#import "config.h"
 
 
 @implementation AFAlert
 
+
+@synthesize alerts, allData;
 
 #pragma mark -
 #pragma mark Initialization
@@ -79,7 +83,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 0;
+    return [self.alerts count];
 }
 
 
@@ -93,6 +97,10 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
+	
+	NSDictionary* detailData = [self.allData objectForKey:[self.alerts objectAtIndex:indexPath.row]];
+	cell.textLabel.text = [detailData objectForKey:ALERT_NAME];
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     // Configure the cell...
     
     return cell;
@@ -144,13 +152,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
+	
+	 AlertDetailViewController *detailViewController = [[AlertDetailViewController alloc] initWithNibName:@"AlertDetailViewController" bundle:nil];
+    
+	
+	detailViewController.detailData = [self.allData objectForKey:[self.alerts objectAtIndex:indexPath.row]];
+	[self.navigationController pushViewController:detailViewController animated:YES];
+	detailViewController.alertName.text = [NSString stringWithFormat:@"Alert Name: %@", 
+										   [[self.allData objectForKey:[self.alerts objectAtIndex:indexPath.row]] objectForKey:ALERT_NAME]];
+	[detailViewController release];
+	 
+	
+	
 }
 
 
@@ -171,6 +184,8 @@
 
 
 - (void)dealloc {
+	[alerts release];
+	[allData release];
     [super dealloc];
 }
 

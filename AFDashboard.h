@@ -10,11 +10,11 @@
 
 
 @interface AFDashboard : UITableViewController {
-	NSMutableArray* servers;
+	NSArray* servers;
 	NSDictionary* allData;
 }
 
-@property (nonatomic, retain) NSMutableArray* servers;
+@property (nonatomic, retain) NSArray* servers;
 @property (nonatomic, retain) NSDictionary* allData;
 
 @end

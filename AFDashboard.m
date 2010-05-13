@@ -34,9 +34,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-	
-	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 
@@ -194,8 +191,6 @@
 	}
 	
 	detailViewController.name = [servers objectAtIndex:indexPath.row];
-	
-	
 	
 
 	[self.navigationController pushViewController:detailViewController animated:YES];

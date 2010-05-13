@@ -15,7 +15,7 @@
 @synthesize tabcontroller, loginController;
 @synthesize alertController, dashboardController;
 @synthesize availableCookies;
-@synthesize serverListUrl, urlBase, loginUrl;
+@synthesize alertListUrl, serverListUrl, urlBase, loginUrl;
 
 
 /**
@@ -141,6 +141,7 @@
 	[availableCookies release];
 	[serverListUrl release];
 	[loginUrl release];
+	[alertListUrl release];
 	[urlBase release];
 	
 	[super dealloc];

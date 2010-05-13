@@ -10,7 +10,11 @@
 
 
 @interface AFAlert : UITableViewController {
-
+	NSArray* alerts;
+	NSDictionary* allData;
 }
+
+@property (nonatomic, retain) NSArray* alerts;
+@property (nonatomic, retain) NSDictionary* allData;
 
 @end

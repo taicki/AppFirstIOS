@@ -32,13 +32,13 @@
 		3ED1510B119B138900D4AB4E /* AFBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1510A119B138900D4AB4E /* AFBarView.m */; };
 		3ED15111119B142E00D4AB4E /* AFEmptyBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED15110119B142E00D4AB4E /* AFEmptyBarView.m */; };
 		3ED151DA119B2FEA00D4AB4E /* AFDiskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED151D9119B2FEA00D4AB4E /* AFDiskView.m */; };
-		3ED154F8119B768A00D4AB4E /* DiskLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED154F7119B768A00D4AB4E /* DiskLegendView.m */; };
+		3ED154F8119B768A00D4AB4E /* AFDiskLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED154F7119B768A00D4AB4E /* AFDiskLegendView.m */; };
+		3ED15661119C7B4500D4AB4E /* AlertDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1565F119C7B4500D4AB4E /* AlertDetailViewController.m */; };
+		3ED15662119C7B4500D4AB4E /* AlertDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED15660119C7B4500D4AB4E /* AlertDetailViewController.xib */; };
 		3EE9A439119856B8007D3E14 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9A437119856B8007D3E14 /* LoginViewController.m */; };
 		3EE9A43A119856B8007D3E14 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EE9A438119856B8007D3E14 /* LoginViewController.xib */; };
-		3EE9A6F811989CC3007D3E14 /* cookies.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EE9A6F711989CC3007D3E14 /* cookies.plist */; };
 		3EE9A79F1198AB6F007D3E14 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE9A7491198AA92007D3E14 /* libCorePlot-CocoaTouch.a */; };
 		3EE9A7D71198B099007D3E14 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE9A7D61198B099007D3E14 /* QuartzCore.framework */; };
-		3EE9AC611198BE92007D3E14 /* PieChart_SampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9AC5F1198BE92007D3E14 /* PieChart_SampleViewController.m */; };
 		3EE9AE221199E1DA007D3E14 /* AFUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9AE211199E1DA007D3E14 /* AFUIView.m */; };
 /* End PBXBuildFile section */
 
@@ -125,16 +125,16 @@
 		3ED15110119B142E00D4AB4E /* AFEmptyBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEmptyBarView.m; sourceTree = "<group>"; };
 		3ED151D8119B2FEA00D4AB4E /* AFDiskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDiskView.h; sourceTree = "<group>"; };
 		3ED151D9119B2FEA00D4AB4E /* AFDiskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDiskView.m; sourceTree = "<group>"; };
-		3ED154F6119B768A00D4AB4E /* DiskLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiskLegendView.h; sourceTree = "<group>"; };
-		3ED154F7119B768A00D4AB4E /* DiskLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiskLegendView.m; sourceTree = "<group>"; };
+		3ED154F6119B768A00D4AB4E /* AFDiskLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDiskLegendView.h; sourceTree = "<group>"; };
+		3ED154F7119B768A00D4AB4E /* AFDiskLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDiskLegendView.m; sourceTree = "<group>"; };
+		3ED1565E119C7B4500D4AB4E /* AlertDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertDetailViewController.h; sourceTree = "<group>"; };
+		3ED1565F119C7B4500D4AB4E /* AlertDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertDetailViewController.m; sourceTree = "<group>"; };
+		3ED15660119C7B4500D4AB4E /* AlertDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertDetailViewController.xib; sourceTree = "<group>"; };
 		3EE9A436119856B8007D3E14 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		3EE9A437119856B8007D3E14 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		3EE9A438119856B8007D3E14 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		3EE9A6F711989CC3007D3E14 /* cookies.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cookies.plist; sourceTree = "<group>"; };
 		3EE9A7401198AA92007D3E14 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../mobile/mobile/IPhoneOS/lib/core-plot/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		3EE9A7D61198B099007D3E14 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		3EE9AC5E1198BE92007D3E14 /* PieChart_SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChart_SampleViewController.h; sourceTree = "<group>"; };
-		3EE9AC5F1198BE92007D3E14 /* PieChart_SampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChart_SampleViewController.m; sourceTree = "<group>"; };
 		3EE9AE201199E1DA007D3E14 /* AFUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFUIView.h; sourceTree = "<group>"; };
 		3EE9AE211199E1DA007D3E14 /* AFUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFUIView.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AppFirst-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppFirst-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -181,8 +181,6 @@
 				3ED15108119B134000D4AB4E /* AFGraphics */,
 				3EE9AE201199E1DA007D3E14 /* AFUIView.h */,
 				3EE9AE211199E1DA007D3E14 /* AFUIView.m */,
-				3EE9AC5E1198BE92007D3E14 /* PieChart_SampleViewController.h */,
-				3EE9AC5F1198BE92007D3E14 /* PieChart_SampleViewController.m */,
 				3E8224D311936EC8001F3644 /* JSON */,
 				3E82224611921574001F3644 /* af_icon.png */,
 				2819307C112F81BE00ECF9B4 /* AppFirst.xcdatamodeld */,
@@ -200,7 +198,9 @@
 				3EE9A436119856B8007D3E14 /* LoginViewController.h */,
 				3EE9A437119856B8007D3E14 /* LoginViewController.m */,
 				3EE9A438119856B8007D3E14 /* LoginViewController.xib */,
-				3EE9A6F711989CC3007D3E14 /* cookies.plist */,
+				3ED1565E119C7B4500D4AB4E /* AlertDetailViewController.h */,
+				3ED1565F119C7B4500D4AB4E /* AlertDetailViewController.m */,
+				3ED15660119C7B4500D4AB4E /* AlertDetailViewController.xib */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -279,8 +279,8 @@
 				3ED15110119B142E00D4AB4E /* AFEmptyBarView.m */,
 				3ED151D8119B2FEA00D4AB4E /* AFDiskView.h */,
 				3ED151D9119B2FEA00D4AB4E /* AFDiskView.m */,
-				3ED154F6119B768A00D4AB4E /* DiskLegendView.h */,
-				3ED154F7119B768A00D4AB4E /* DiskLegendView.m */,
+				3ED154F6119B768A00D4AB4E /* AFDiskLegendView.h */,
+				3ED154F7119B768A00D4AB4E /* AFDiskLegendView.m */,
 			);
 			name = AFGraphics;
 			sourceTree = "<group>";
@@ -359,7 +359,7 @@
 				3E82224711921574001F3644 /* af_icon.png in Resources */,
 				3E82253511937E20001F3644 /* ServerStatusViewController.xib in Resources */,
 				3EE9A43A119856B8007D3E14 /* LoginViewController.xib in Resources */,
-				3EE9A6F811989CC3007D3E14 /* cookies.plist in Resources */,
+				3ED15662119C7B4500D4AB4E /* AlertDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,12 +385,12 @@
 				3E8224E611936EC9001F3644 /* SBJsonWriter.m in Sources */,
 				3E82253411937E20001F3644 /* ServerStatusViewController.m in Sources */,
 				3EE9A439119856B8007D3E14 /* LoginViewController.m in Sources */,
-				3EE9AC611198BE92007D3E14 /* PieChart_SampleViewController.m in Sources */,
 				3EE9AE221199E1DA007D3E14 /* AFUIView.m in Sources */,
 				3ED1510B119B138900D4AB4E /* AFBarView.m in Sources */,
 				3ED15111119B142E00D4AB4E /* AFEmptyBarView.m in Sources */,
 				3ED151DA119B2FEA00D4AB4E /* AFDiskView.m in Sources */,
-				3ED154F8119B768A00D4AB4E /* DiskLegendView.m in Sources */,
+				3ED154F8119B768A00D4AB4E /* AFDiskLegendView.m in Sources */,
+				3ED15661119C7B4500D4AB4E /* AlertDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

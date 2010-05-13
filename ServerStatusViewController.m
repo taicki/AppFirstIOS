@@ -12,6 +12,7 @@
 #import "AFBarView.h"
 #import "AFEmptyBarView.h"
 #import "AFDiskView.h"
+#import "AFDiskLegendView.h"
 
 
 @implementation ServerStatusViewController
@@ -74,7 +75,7 @@
 - (void) displayCpuValue {
 	if (detailData != nil) {
 		double leftPadding = 50;
-		double topPadding = 100;
+		double topPadding = 80;
 		
 		NSArray *cpuValues = [[[detailData objectForKey:DATA_NAME] objectForKey:CPU_RESOURCE_NAME] objectForKey:RESOURCE_VALUE_NAME];
 		NSString *cpuTotal = [[[detailData objectForKey:DATA_NAME] objectForKey:CPU_RESOURCE_NAME] objectForKey:RESOURCE_TOTAL_NAME];
@@ -125,7 +126,7 @@
 		
 		
 		double leftPadding = 50;
-		double topPadding = 140;
+		double topPadding = 120;
 		
 				
 		CGRect emptyBarFrame = CGRectMake(leftPadding, topPadding, AF_BAR_WIDTH, AF_BAR_HEIGHT);
@@ -147,6 +148,7 @@
 		totalView.text = [NSString stringWithFormat:@"Total: %.0f MB", [memoryTotal doubleValue] / 1000000];
 		totalView.font = [UIFont systemFontOfSize:9];
 		
+		
 		[self.view addSubview:emptyBarView];
 		[self.view addSubview:newView];
 		[self.view addSubview:valueView];
@@ -166,9 +168,17 @@
 - (void) displayDiskValue {
 	if (detailData != nil) {
 		
-		double leftPadding = 10;
-		double topPadding = 200;
 		
+		
+		double leftPadding = 10;
+		double topPadding = 150;
+		
+		AFDiskLegendView* legendView = [[AFDiskLegendView alloc] initWithFrame:CGRectMake(leftPadding + 160, topPadding + 15, 200, 25)];
+		[self.view addSubview:legendView];
+		[legendView release];
+		
+		
+
 		CGRect diskFrame = CGRectMake(leftPadding, topPadding, 200, 200);
 		
 		AFDiskView* diskView = [[AFDiskView alloc] initWithFrame:diskFrame];
@@ -200,9 +210,6 @@
 		diskText = [NSString stringWithFormat:@"Overall disk used: %.1f%@ \n%@", valueSum / totalSum * 100, @"%", diskText];
 		
 		diskLabel.text = diskText;
-		 
-		
-		
 	}
 }
 

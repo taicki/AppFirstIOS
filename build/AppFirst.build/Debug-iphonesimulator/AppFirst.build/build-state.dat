@@ -1,7 +1,7 @@
 TAppFirst
 v7
 r0
-t295401496.791436
+t295480920.411919
 cCheck dependencies
 cProcessInfoPlistFile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/Info.plist AppFirst-Info.plist
 cCompileXIB /Users/joeng/Documents/AppFirst/iPad/MainWindow_Pad.xib
@@ -9,7 +9,7 @@ cCompileXIB /Users/joeng/Documents/AppFirst/iPhone/MainWindow_Phone.xib
 cCpResource build/Debug-iphonesimulator/AppFirst.app/af_icon.png af_icon.png
 cCompileXIB /Users/joeng/Documents/AppFirst/ServerStatusViewController.xib
 cCompileXIB /Users/joeng/Documents/AppFirst/LoginViewController.xib
-cCopyPlistFile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/cookies.plist cookies.plist
+cCompileXIB /Users/joeng/Documents/AppFirst/AlertDetailViewController.xib
 cProcessPCH /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch.gch AppFirst_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
 cDataModelVersionCompile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst.momd /Users/joeng/Documents/AppFirst/Shared/AppFirst.xcdatamodeld
 cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/main.o /Users/joeng/Documents/AppFirst/Shared/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
@@ -26,12 +26,12 @@ cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-norm
 cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonWriter.o /Users/joeng/Documents/AppFirst/JSON/SBJsonWriter.m normal i386 objective-c com.apple.compilers.gcc.4_2
 cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/ServerStatusViewController.o /Users/joeng/Documents/AppFirst/ServerStatusViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
 cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/LoginViewController.o /Users/joeng/Documents/AppFirst/LoginViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/PieChart_SampleViewController.o /Users/joeng/Documents/AppFirst/PieChart_SampleViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
 cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFUIView.o /Users/joeng/Documents/AppFirst/AFUIView.m normal i386 objective-c com.apple.compilers.gcc.4_2
 cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFBarView.o /Users/joeng/Documents/AppFirst/AFBarView.m normal i386 objective-c com.apple.compilers.gcc.4_2
 cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFEmptyBarView.o /Users/joeng/Documents/AppFirst/AFEmptyBarView.m normal i386 objective-c com.apple.compilers.gcc.4_2
 cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDiskView.o /Users/joeng/Documents/AppFirst/AFDiskView.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/DiskLegendView.o /Users/joeng/Documents/AppFirst/DiskLegendView.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDiskLegendView.o /Users/joeng/Documents/AppFirst/AFDiskLegendView.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AlertDetailViewController.o /Users/joeng/Documents/AppFirst/AlertDetailViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
 cLd /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst normal i386
 cGenerateDSYMFile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app.dSYM /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst
 cTouch /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app
@@ -112,16 +112,18 @@ t1195945877
 s8229
 
 N/Users/joeng/Documents/AppFirst/AFAlert.h
-c000000004BE2D88900000000000000D3
-t1273157769
-s211
+c000000004BEC70290000000000000161
+t1273786409
+s353
 i<UIKit/UIKit.h>
 
 N/Users/joeng/Documents/AppFirst/AFAlert.m
-c000000004BE8820E000000000000122E
-t1273528846
-s4654
+c000000004BEC699F000000000000149D
+t1273784735
+s5277
 i"AFAlert.h"
+i"AlertDetailViewController.h"
+i"config.h"
 
 N/Users/joeng/Documents/AppFirst/AFBarView.h
 c000000004BEADC0900000000000000C9
@@ -137,17 +139,30 @@ i"AFBarView.h"
 i"config.h"
 
 N/Users/joeng/Documents/AppFirst/AFDashboard.h
-c000000004BE34B3D0000000000000179
-t1273187133
-s377
+c000000004BEC7021000000000000016B
+t1273786401
+s363
 i<UIKit/UIKit.h>
 
 N/Users/joeng/Documents/AppFirst/AFDashboard.m
-c000000004BE490BE0000000000001957
-t1273270462
-s6487
+c000000004BEC70770000000000001911
+t1273786487
+s6417
 i"AFDashboard.h"
 i"ServerStatusViewController.h"
+i"config.h"
+
+N/Users/joeng/Documents/AppFirst/AFDiskLegendView.h
+c000000004BEBFFF500000000000000D5
+t1273757685
+s213
+i<UIKit/UIKit.h>
+
+N/Users/joeng/Documents/AppFirst/AFDiskLegendView.m
+c000000004BEC1F730000000000000800
+t1273765747
+s2048
+i"AFDiskLegendView.h"
 i"config.h"
 
 N/Users/joeng/Documents/AppFirst/AFDiskView.h
@@ -214,6 +229,24 @@ t1273677415
 s417
 i"AFUIView.h"
 
+N/Users/joeng/Documents/AppFirst/AlertDetailViewController.h
+c000000004BEC4DE100000000000003EE
+t1273777633
+s1006
+i<UIKit/UIKit.h>
+
+N/Users/joeng/Documents/AppFirst/AlertDetailViewController.m
+c000000004BEC76D40000000000000D7D
+t1273788116
+s3453
+i"AlertDetailViewController.h"
+i"config.h"
+
+N/Users/joeng/Documents/AppFirst/AlertDetailViewController.xib
+c000000004BEC52330000000000007D6C
+t1273778739
+s32108
+
 N/Users/joeng/Documents/AppFirst/AppFirst_Prefix.pch
 c000000004BE1DD1900000000000000B9
 t1273093401
@@ -228,9 +261,9 @@ s211
 i<UIKit/UIKit.h>
 
 N/Users/joeng/Documents/AppFirst/DiskLegendView.m
-c000000004BEB409700000000000004F9
-t1273708695
-s1273
+c000000004BEB40FC0000000000000529
+t1273708796
+s1321
 i"DiskLegendView.h"
 
 N/Users/joeng/Documents/AppFirst/JSON/NSObject+SBJSON.h
@@ -359,17 +392,14 @@ i"PieChart_SampleAppDelegate.h"
 i"PieChart_SampleViewController.h"
 
 N/Users/joeng/Documents/AppFirst/PieChart_SampleViewController.h
-c000000004BBA21640000000000000139
-t1270489444
-s313
-i<UIKit/UIKit.h>
-i"CorePlot-CocoaTouch.h"
+c00000000000000000000000000000000
+t2
+s0
 
 N/Users/joeng/Documents/AppFirst/PieChart_SampleViewController.m
-c000000004BE9759600000000000008AA
-t1273591190
-s2218
-i"PieChart_SampleViewController.h"
+c00000000000000000000000000000000
+t2
+s0
 
 N/Users/joeng/Documents/AppFirst/ServerStatusViewController.h
 c000000004BEADB8600000000000003C8
@@ -378,25 +408,26 @@ s968
 i<UIKit/UIKit.h>
 
 N/Users/joeng/Documents/AppFirst/ServerStatusViewController.m
-c000000004BEB3E570000000000001CB7
-t1273708119
-s7351
+c000000004BEC20A40000000000001D99
+t1273766052
+s7577
 i"ServerStatusViewController.h"
 i"config.h"
 i<QuartzCore/QuartzCore.h>
 i"AFBarView.h"
 i"AFEmptyBarView.h"
 i"AFDiskView.h"
+i"AFDiskLegendView.h"
 
 N/Users/joeng/Documents/AppFirst/ServerStatusViewController.xib
-c000000004BEB3E6500000000000072EB
-t1273708133
+c000000004BEC1E5100000000000072EB
+t1273765457
 s29419
 
 N/Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.h
-c000000004BE857EA0000000000000678
-t1273518058
-s1656
+c000000004BEC243000000000000006C7
+t1273766960
+s1735
 i<UIKit/UIKit.h>
 i<CoreData/CoreData.h>
 i"AFAlert.h"
@@ -404,9 +435,9 @@ i"AFDashboard.h"
 i"LoginViewController.h"
 
 N/Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.m
-c000000004BE858260000000000001304
-t1273518118
-s4868
+c000000004BEC223E000000000000132B
+t1273766462
+s4907
 i"AppDelegate_Shared.h"
 
 N/Users/joeng/Documents/AppFirst/Shared/AppFirst.xcdatamodeld
@@ -496,19 +527,23 @@ s997
 i<unistd.h>
 
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFAlert.o
-t1273593289
-s37008
+t1273786411
+s41816
 
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFBarView.o
-t1273707069
+t1273779737
 s10900
 
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDashboard.o
-t1273707069
-s50172
+t1273786535
+s49908
+
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDiskLegendView.o
+t1273779737
+s15420
 
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDiskView.o
-t1273707972
+t1273779737
 s19296
 
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFEmptyBar.o
@@ -516,7 +551,7 @@ t2
 s0
 
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFEmptyBarView.o
-t1273707986
+t1273779737
 s11360
 
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFSubView.o
@@ -527,22 +562,26 @@ N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppF
 t1273677428
 s9848
 
+N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AlertDetailViewController.o
+t1273788119
+s49416
+
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Pad.o
-t1273707069
-s62560
+t1273786411
+s61668
 
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Phone.o
-t1273593289
-s45284
+t1273786411
+s45348
 
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Shared.o
-t1273593288
-s59956
+t1273786411
+s60848
 
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppFirst.LinkFileList
-c000000004BEB405200000000000009E3
-t1273708626
-s2531
+c000000004BEC4D1700000000000009E1
+t1273777431
+s2529
 
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/CPAnimation.o
 t1273529158
@@ -893,8 +932,8 @@ t2
 s0
 
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/DiskLegendView.o
-t1273708696
-s13556
+t1273757471
+s13856
 
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/LoginViewController.o
 t1273593289
@@ -945,8 +984,8 @@ t1273593289
 s22532
 
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/ServerStatusViewController.o
-t1273708147
-s62820
+t1273779737
+s63504
 
 N/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/VariableStore.o
 t1273613669
@@ -985,16 +1024,20 @@ t1273593288
 s5944
 
 N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app
-t1273708696
+t1273788120
 s884
 
 N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app.dSYM
-t1273708696
+t1273788120
 s102
 
+N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AlertDetailViewController.nib
+t1273778883
+s2628
+
 N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst
-t1273708696
-s551856
+t1273788120
+s558352
 
 N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst.momd
 t1273093693
@@ -1057,8 +1100,8 @@ t1273511284
 s800
 
 N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/MainWindow_Pad.nib
-t1273593774
-s4953
+t1273786233
+s4842
 
 N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/MainWindow_Phone.nib
 t1273162735
@@ -1069,7 +1112,7 @@ t1273529210
 s8
 
 N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/ServerStatusViewController.nib
-t1273708147
+t1273765475
 s2045
 
 N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/UnitTests-Info.plist
@@ -1093,18 +1136,18 @@ t1273528037
 s324035
 
 N/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/cookies.plist
-t1273521860
-s42
+t2
+s0
 
 N/Users/joeng/Documents/AppFirst/config.h
-c000000004BEB3A370000000000000225
-t1273707063
-s549
+c000000004BEC560500000000000003BF
+t1273779717
+s959
 
 N/Users/joeng/Documents/AppFirst/cookies.plist
-c000000004BE8654D00000000000000B6
-t1273521485
-s182
+c00000000000000000000000000000000
+t2
+s0
 
 N/Users/joeng/Documents/AppFirst/framework/CorePlot-CocoaTouch.h
 c000000004BE871F70000000000000743
@@ -2975,26 +3018,25 @@ i<Cocoa/Cocoa.h>
 i"GTMUnitTestingUtilities.h"
 
 N/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.h
-c000000004BE888E30000000000000204
-t1273530595
-s516
+c000000004BEC2407000000000000016E
+t1273766919
+s366
 i<UIKit/UIKit.h>
 i"AppDelegate_Shared.h"
-i"PieChart_SampleViewController.h"
 
 N/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m
-c000000004BE989C70000000000001676
-t1273596359
-s5750
+c000000004BEC6FFE00000000000019B2
+t1273786366
+s6578
 i"AppDelegate_Pad.h"
 i"../Shared/JSON/JSON.h"
 i"config.h"
 i"CorePlot-CocoaTouch.h"
 
 N/Users/joeng/Documents/AppFirst/iPad/MainWindow_Pad.xib
-c000000004BE97FA0000000000000E3E6
-t1273593760
-s58342
+c000000004BEC6F72000000000000DCB1
+t1273786226
+s56497
 
 N/Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.h
 c000000004BE1DD190000000000000103
@@ -3054,11 +3096,11 @@ s1394
 
 CCheck dependencies
 r0
-lSLF07#2@18"Check dependencies295401496#295401496#0(0"0(0#1#0"4300911832#0"0#
+lSLF07#2@18"Check dependencies295480919#295480919#0(0"0(0#1#0"4300911832#0"0#
 
 CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFAlert.o /Users/joeng/Documents/AppFirst/AFAlert.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s295286089.074527
-e295286089.165442
+s295479211.692967
+e295479211.793405
 r1
 xCompileC
 xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFAlert.o
@@ -3067,11 +3109,11 @@ xnormal
 xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@49"Compile /Users/joeng/Documents/AppFirst/AFAlert.m295286089#295286089#0(0"0(0#0#41"/Users/joeng/Documents/AppFirst/AFAlert.m4300911832#2311"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/AFAlert.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFAlert.o0#
+lSLF07#2@49"Compile /Users/joeng/Documents/AppFirst/AFAlert.m295479211#295479211#0(0"0(0#0#41"/Users/joeng/Documents/AppFirst/AFAlert.m4300911832#2311"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/AFAlert.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFAlert.o0#
 
 CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFBarView.o /Users/joeng/Documents/AppFirst/AFBarView.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s295399869.318681
-e295399869.419816
+s295472536.996446
+e295472537.117816
 r1
 xCompileC
 xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFBarView.o
@@ -3080,11 +3122,11 @@ xnormal
 xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@51"Compile /Users/joeng/Documents/AppFirst/AFBarView.m295399869#295399869#0(0"0(0#0#43"/Users/joeng/Documents/AppFirst/AFBarView.m4300911832#2315"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/AFBarView.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFBarView.o0#
+lSLF07#2@51"Compile /Users/joeng/Documents/AppFirst/AFBarView.m295472536#295472537#0(0"0(0#0#43"/Users/joeng/Documents/AppFirst/AFBarView.m4300911832#2315"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/AFBarView.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFBarView.o0#
 
 CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDashboard.o /Users/joeng/Documents/AppFirst/AFDashboard.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s295399869.038830
-e295399869.161340
+s295479335.479583
+e295479335.698743
 r1
 xCompileC
 xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDashboard.o
@@ -3094,16 +3136,29 @@ xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
 o/Users/joeng/Documents/AppFirst/AFDashboard.m: In function '-[AFDashboard tableView:didSelectRowAtIndexPath:]':
-o/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: 'NSObject' may not respond to '-objectForKey:'
-o/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: (Messages without a matching method signature
-o/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: will be assumed to return 'id' and accept
-o/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: '...' as arguments.)
-o/Users/joeng/Documents/AppFirst/AFDashboard.m:184: warning: 'NSObject' may not respond to '-stringByReplacingOccurrencesOfString:withString:'
-lSLF07#2@53"Compile /Users/joeng/Documents/AppFirst/AFDashboard.m295399869#295399869#0(650"/Users/joeng/Documents/AppFirst/AFDashboard.m: In function '-[AFDashboard tableView:didSelectRowAtIndexPath:]':/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: 'NSObject' may not respond to '-objectForKey:'/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: (Messages without a matching method signature/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: will be assumed to return 'id' and accept/Users/joeng/Documents/AppFirst/AFDashboard.m:174: warning: '...' as arguments.)/Users/joeng/Documents/AppFirst/AFDashboard.m:184: warning: 'NSObject' may not respond to '-stringByReplacingOccurrencesOfString:withString:'3(22@46"'NSObject' may not respond to '-objectForKey:'295399869#112#107#0(6@45"/Users/joeng/Documents/AppFirst/AFDashboard.m294963262#174#0#174#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)295399869#219#106#0(6@45"/Users/joeng/Documents/AppFirst/AFDashboard.m294963262#174#0#174#0#0"0(22@81"'NSObject' may not respond to '-stringByReplacingOccurrencesOfString:withString:'295399869#508#142#0(6@45"/Users/joeng/Documents/AppFirst/AFDashboard.m294963262#184#0#184#0#26"'*' may not respond to '*'0(0#0#45"/Users/joeng/Documents/AppFirst/AFDashboard.m4300911832#2319"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/AFDashboard.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDashboard.o0#
+o/Users/joeng/Documents/AppFirst/AFDashboard.m:171: warning: 'NSObject' may not respond to '-objectForKey:'
+o/Users/joeng/Documents/AppFirst/AFDashboard.m:171: warning: (Messages without a matching method signature
+o/Users/joeng/Documents/AppFirst/AFDashboard.m:171: warning: will be assumed to return 'id' and accept
+o/Users/joeng/Documents/AppFirst/AFDashboard.m:171: warning: '...' as arguments.)
+o/Users/joeng/Documents/AppFirst/AFDashboard.m:181: warning: 'NSObject' may not respond to '-stringByReplacingOccurrencesOfString:withString:'
+lSLF07#2@53"Compile /Users/joeng/Documents/AppFirst/AFDashboard.m295479335#295479335#0(650"/Users/joeng/Documents/AppFirst/AFDashboard.m: In function '-[AFDashboard tableView:didSelectRowAtIndexPath:]':/Users/joeng/Documents/AppFirst/AFDashboard.m:171: warning: 'NSObject' may not respond to '-objectForKey:'/Users/joeng/Documents/AppFirst/AFDashboard.m:171: warning: (Messages without a matching method signature/Users/joeng/Documents/AppFirst/AFDashboard.m:171: warning: will be assumed to return 'id' and accept/Users/joeng/Documents/AppFirst/AFDashboard.m:171: warning: '...' as arguments.)/Users/joeng/Documents/AppFirst/AFDashboard.m:181: warning: 'NSObject' may not respond to '-stringByReplacingOccurrencesOfString:withString:'3(22@46"'NSObject' may not respond to '-objectForKey:'295479335#112#107#0(6@45"/Users/joeng/Documents/AppFirst/AFDashboard.m295479287#171#0#171#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)295479335#219#106#0(6@45"/Users/joeng/Documents/AppFirst/AFDashboard.m295479287#171#0#171#0#0"0(22@81"'NSObject' may not respond to '-stringByReplacingOccurrencesOfString:withString:'295479335#508#142#0(6@45"/Users/joeng/Documents/AppFirst/AFDashboard.m295479287#181#0#181#0#26"'*' may not respond to '*'0(0#0#45"/Users/joeng/Documents/AppFirst/AFDashboard.m4300911832#2319"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/AFDashboard.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDashboard.o0#
+
+CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDiskLegendView.o /Users/joeng/Documents/AppFirst/AFDiskLegendView.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s295472537.186288
+e295472537.329916
+r1
+xCompileC
+xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDiskLegendView.o
+x/Users/joeng/Documents/AppFirst/AFDiskLegendView.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@58"Compile /Users/joeng/Documents/AppFirst/AFDiskLegendView.m295472537#295472537#0(0"0(0#0#50"/Users/joeng/Documents/AppFirst/AFDiskLegendView.m4300911832#2329"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/AFDiskLegendView.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDiskLegendView.o0#
 
 CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDiskView.o /Users/joeng/Documents/AppFirst/AFDiskView.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s295400772.635281
-e295400772.823929
+s295472537.118435
+e295472537.259359
 r1
 xCompileC
 xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDiskView.o
@@ -3112,14 +3167,14 @@ xnormal
 xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@52"Compile /Users/joeng/Documents/AppFirst/AFDiskView.m295400772#295400772#0(0"0(0#0#44"/Users/joeng/Documents/AppFirst/AFDiskView.m4300911832#2317"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/AFDiskView.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDiskView.o0#
+lSLF07#2@52"Compile /Users/joeng/Documents/AppFirst/AFDiskView.m295472537#295472537#0(0"0(0#0#44"/Users/joeng/Documents/AppFirst/AFDiskView.m4300911832#2317"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/AFDiskView.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFDiskView.o0#
 
 CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFEmptyBar.o /Users/joeng/Documents/AppFirst/AFEmptyBar.m normal i386 objective-c com.apple.compilers.gcc.4_2
 r0
 
 CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFEmptyBarView.o /Users/joeng/Documents/AppFirst/AFEmptyBarView.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s295400786.338659
-e295400786.459319
+s295472537.056244
+e295472537.186124
 r1
 xCompileC
 xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFEmptyBarView.o
@@ -3128,7 +3183,7 @@ xnormal
 xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@56"Compile /Users/joeng/Documents/AppFirst/AFEmptyBarView.m295400786#295400786#0(0"0(0#0#48"/Users/joeng/Documents/AppFirst/AFEmptyBarView.m4300911832#2325"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/AFEmptyBarView.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFEmptyBarView.o0#
+lSLF07#2@56"Compile /Users/joeng/Documents/AppFirst/AFEmptyBarView.m295472537#295472537#0(0"0(0#0#48"/Users/joeng/Documents/AppFirst/AFEmptyBarView.m4300911832#2325"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/AFEmptyBarView.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFEmptyBarView.o0#
 
 CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFSubView.o /Users/joeng/Documents/AppFirst/AFSubView.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s295372948.959048
@@ -3156,9 +3211,22 @@ xobjective-c
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@50"Compile /Users/joeng/Documents/AppFirst/AFUIView.m295370228#295370228#0(0"0(0#0#42"/Users/joeng/Documents/AppFirst/AFUIView.m4300911832#2313"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/AFUIView.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AFUIView.o0#
 
+CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AlertDetailViewController.o /Users/joeng/Documents/AppFirst/AlertDetailViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s295480919.748925
+e295480919.953313
+r1
+xCompileC
+xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AlertDetailViewController.o
+x/Users/joeng/Documents/AppFirst/AlertDetailViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@67"Compile /Users/joeng/Documents/AppFirst/AlertDetailViewController.m295480919#295480920#0(0"0(0#0#59"/Users/joeng/Documents/AppFirst/AlertDetailViewController.m4300911832#2347"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/AlertDetailViewController.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AlertDetailViewController.o0#
+
 CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Pad.o /Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s295399869.025836
-e295399869.318367
+s295479211.346322
+e295479211.692193
 r1
 xCompileC
 xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Pad.o
@@ -3168,17 +3236,15 @@ xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
 o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m: In function '-[AppDelegate_Pad trySignIn]':
-o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:102: warning: 'NSURLRequest' may not respond to '+setAllowsAnyHTTPSCertificate:forHost:'
-o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:102: warning: (Messages without a matching method signature
-o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:102: warning: will be assumed to return 'id' and accept
-o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:102: warning: '...' as arguments.)
-o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m: In function '-[AppDelegate_Pad getServerListData]':
-o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:171: warning: incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setServers:' from distinct Objective-C type
-lSLF07#2@62"Compile /Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m295399869#295399869#0(895"/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m: In function '-[AppDelegate_Pad trySignIn]':/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:102: warning: 'NSURLRequest' may not respond to '+setAllowsAnyHTTPSCertificate:forHost:'/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:102: warning: (Messages without a matching method signature/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:102: warning: will be assumed to return 'id' and accept/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:102: warning: '...' as arguments.)/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m: In function '-[AppDelegate_Pad getServerListData]':/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:171: warning: incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setServers:' from distinct Objective-C type3(22@74"'NSURLRequest' may not respond to '+setAllowsAnyHTTPSCertificate:forHost:'295399869#100#144#0(6@54"/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m295289159#102#0#102#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)295399869#244#115#0(6@54"/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m295289159#102#0#102#0#0"0(22@157"Incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setServers:' from distinct Objective-C type295399869#668#227#0(6@54"/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m295289159#171#0#171#0#0"0(0#0#54"/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m4300911832#2332"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Pad.o0#
+o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:97: warning: 'NSURLRequest' may not respond to '+setAllowsAnyHTTPSCertificate:forHost:'
+o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:97: warning: (Messages without a matching method signature
+o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:97: warning: will be assumed to return 'id' and accept
+o/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:97: warning: '...' as arguments.)
+lSLF07#2@62"Compile /Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m295479211#295479211#0(556"/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m: In function '-[AppDelegate_Pad trySignIn]':/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:97: warning: 'NSURLRequest' may not respond to '+setAllowsAnyHTTPSCertificate:forHost:'/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:97: warning: (Messages without a matching method signature/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:97: warning: will be assumed to return 'id' and accept/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m:97: warning: '...' as arguments.)2(22@74"'NSURLRequest' may not respond to '+setAllowsAnyHTTPSCertificate:forHost:'295479211#100#143#0(6@54"/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m295479166#97#0#97#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)295479211#243#114#0(6@54"/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m295479166#97#0#97#0#0"0(0#0#54"/Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m4300911832#2332"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/iPad/AppDelegate_Pad.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Pad.o0#
 
 CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Phone.o /Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s295286088.937541
-e295286089.093062
+s295479211.492367
+e295479211.601317
 r1
 xCompileC
 xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Phone.o
@@ -3187,11 +3253,11 @@ xnormal
 xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@66"Compile /Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.m295286088#295286089#0(0"0(0#0#58"/Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.m4300911832#2338"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Phone.o0#
+lSLF07#2@66"Compile /Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.m295479211#295479211#0(0"0(0#0#58"/Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.m4300911832#2338"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/iPhone/AppDelegate_Phone.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Phone.o0#
 
 CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Shared.o /Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s295286088.796011
-e295286088.975248
+s295479211.347688
+e295479211.492263
 r1
 xCompileC
 xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Shared.o
@@ -3200,7 +3266,7 @@ xnormal
 xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@67"Compile /Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.m295286088#295286089#0(0"0(0#0#59"/Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.m4300911832#2340"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Shared.o0#
+lSLF07#2@67"Compile /Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.m295479211#295479211#0(0"0(0#0#59"/Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.m4300911832#2340"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/Shared/AppDelegate_Shared.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppDelegate_Shared.o0#
 
 CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/CPAnimation.o /Users/joeng/Documents/AppFirst/framework/Source/CPAnimation.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s295221957.998249
@@ -5162,8 +5228,8 @@ o/Users/joeng/Documents/AppFirst/framework/MacOnly/CPPlatformSpecificDefines.h:1
 lSLF07#2@68"Compile /Users/joeng/Documents/AppFirst/framework/Source/CPXYTheme.m295221961#295221961#0(1308"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPLayer.h:4,                 from /Users/joeng/Documents/AppFirst/framework/Source/CPBorderedLayer.h:2,                 from /Users/joeng/Documents/AppFirst/framework/Source/CPGraph.h:2,                 from /Users/joeng/Documents/AppFirst/framework/Source/CPXYGraph.h:2,                 from /Users/joeng/Documents/AppFirst/framework/Source/CPXYTheme.m:4:/Users/joeng/Documents/AppFirst/framework/MacOnly/CPPlatformSpecificDefines.h:3:26: error: AppKit/AppKit.h: No such file or directoryIn file included from /Users/joeng/Documents/AppFirst/framework/Source/CPLayer.h:4,                 from /Users/joeng/Documents/AppFirst/framework/Source/CPBorderedLayer.h:2,                 from /Users/joeng/Documents/AppFirst/framework/Source/CPGraph.h:2,                 from /Users/joeng/Documents/AppFirst/framework/Source/CPXYGraph.h:2,                 from /Users/joeng/Documents/AppFirst/framework/Source/CPXYTheme.m:4:/Users/joeng/Documents/AppFirst/framework/MacOnly/CPPlatformSpecificDefines.h:7: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'CPNativeImage'/Users/joeng/Documents/AppFirst/framework/MacOnly/CPPlatformSpecificDefines.h:12: error: expected specifier-qualifier-list before 'NSGraphicsContext'3(4@42"AppKit/AppKit.h: No such file or directory295221961#432#134#6(7@82"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPXYTheme.m295221961#18446744073709551615#0#0(6@60"/Users/joeng/Documents/AppFirst/framework/Source/CPXYTheme.m295217528#4#0#4#0#0"0(7@82"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPXYGraph.h295221961#18446744073709551615#0#0(6@60"/Users/joeng/Documents/AppFirst/framework/Source/CPXYGraph.h295217528#2#0#2#0#0"0(7@80"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPGraph.h295221961#18446744073709551615#0#0(6@58"/Users/joeng/Documents/AppFirst/framework/Source/CPGraph.h295217527#2#0#2#0#0"0(7@88"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPBorderedLayer.h295221961#18446744073709551615#0#0(6@66"/Users/joeng/Documents/AppFirst/framework/Source/CPBorderedLayer.h295217527#2#0#2#0#0"0(7@80"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPLayer.h295221961#18446744073709551615#0#0(6@58"/Users/joeng/Documents/AppFirst/framework/Source/CPLayer.h295217527#4#0#4#0#0"0(13@123"AppKit/AppKit.h: No such file or directory in /Users/joeng/Documents/AppFirst/framework/MacOnly/CPPlatformSpecificDefines.h295221961#18446744073709551615#0#0(6@77"/Users/joeng/Documents/AppFirst/framework/MacOnly/CPPlatformSpecificDefines.h295217527#3#0#3#0#0"0(6@77"/Users/joeng/Documents/AppFirst/framework/MacOnly/CPPlatformSpecificDefines.h295217527#3#0#3#0#28"*: No such file or directory0(4@71"Expected '=', ',', ';', 'asm' or '__attribute__' before 'CPNativeImage'295221961#998#160#6(7@82"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPXYTheme.m295221961#18446744073709551615#0#0(6@60"/Users/joeng/Documents/AppFirst/framework/Source/CPXYTheme.m295217528#4#0#4#0#0"0(7@82"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPXYGraph.h295221961#18446744073709551615#0#0(6@60"/Users/joeng/Documents/AppFirst/framework/Source/CPXYGraph.h295217528#2#0#2#0#0"0(7@80"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPGraph.h295221961#18446744073709551615#0#0(6@58"/Users/joeng/Documents/AppFirst/framework/Source/CPGraph.h295217527#2#0#2#0#0"0(7@88"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPBorderedLayer.h295221961#18446744073709551615#0#0(6@66"/Users/joeng/Documents/AppFirst/framework/Source/CPBorderedLayer.h295217527#2#0#2#0#0"0(7@80"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPLayer.h295221961#18446744073709551615#0#0(6@58"/Users/joeng/Documents/AppFirst/framework/Source/CPLayer.h295217527#4#0#4#0#0"0(13@152"Expected '=', ',', ';', 'asm' or '__attribute__' before 'CPNativeImage' in /Users/joeng/Documents/AppFirst/framework/MacOnly/CPPlatformSpecificDefines.h295221961#18446744073709551615#0#0(6@77"/Users/joeng/Documents/AppFirst/framework/MacOnly/CPPlatformSpecificDefines.h295217527#7#0#7#0#0"0(6@77"/Users/joeng/Documents/AppFirst/framework/MacOnly/CPPlatformSpecificDefines.h295217527#7#0#7#0#19"expected * before *0(4@60"Expected specifier-qualifier-list before 'NSGraphicsContext'295221961#1158#150#6(7@82"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPXYTheme.m295221961#18446744073709551615#0#0(6@60"/Users/joeng/Documents/AppFirst/framework/Source/CPXYTheme.m295217528#4#0#4#0#0"0(7@82"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPXYGraph.h295221961#18446744073709551615#0#0(6@60"/Users/joeng/Documents/AppFirst/framework/Source/CPXYGraph.h295217528#2#0#2#0#0"0(7@80"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPGraph.h295221961#18446744073709551615#0#0(6@58"/Users/joeng/Documents/AppFirst/framework/Source/CPGraph.h295217527#2#0#2#0#0"0(7@88"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPBorderedLayer.h295221961#18446744073709551615#0#0(6@66"/Users/joeng/Documents/AppFirst/framework/Source/CPBorderedLayer.h295217527#2#0#2#0#0"0(7@80"In file included from /Users/joeng/Documents/AppFirst/framework/Source/CPLayer.h295221961#18446744073709551615#0#0(6@58"/Users/joeng/Documents/AppFirst/framework/Source/CPLayer.h295217527#4#0#4#0#0"0(13@141"Expected specifier-qualifier-list before 'NSGraphicsContext' in /Users/joeng/Documents/AppFirst/framework/MacOnly/CPPlatformSpecificDefines.h295221961#18446744073709551615#0#0(6@77"/Users/joeng/Documents/AppFirst/framework/MacOnly/CPPlatformSpecificDefines.h295217527#12#0#12#0#0"0(6@77"/Users/joeng/Documents/AppFirst/framework/MacOnly/CPPlatformSpecificDefines.h295217527#12#0#12#0#19"expected * before *0(0#0#60"/Users/joeng/Documents/AppFirst/framework/Source/CPXYTheme.m4300911832#2265"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-brlynhlrvjwkdkafllehmlqybzgv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/framework/Source/CPXYTheme.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/CPXYTheme.o1#
 
 CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/DiskLegendView.o /Users/joeng/Documents/AppFirst/DiskLegendView.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s295401496.348693
-e295401496.480806
+s295450271.009812
+e295450271.257259
 r1
 xCompileC
 xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/DiskLegendView.o
@@ -5172,10 +5238,7 @@ xnormal
 xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
-o/Users/joeng/Documents/AppFirst/DiskLegendView.m: In function '-[DiskLegendView drawRect:]':
-o/Users/joeng/Documents/AppFirst/DiskLegendView.m:30: warning: passing argument 1 of 'setText:' from incompatible pointer type
-o/Users/joeng/Documents/AppFirst/DiskLegendView.m:40: warning: passing argument 1 of 'setText:' from incompatible pointer type
-lSLF07#2@56"Compile /Users/joeng/Documents/AppFirst/DiskLegendView.m295401496#295401496#0(345"/Users/joeng/Documents/AppFirst/DiskLegendView.m: In function '-[DiskLegendView drawRect:]':/Users/joeng/Documents/AppFirst/DiskLegendView.m:30: warning: passing argument 1 of 'setText:' from incompatible pointer type/Users/joeng/Documents/AppFirst/DiskLegendView.m:40: warning: passing argument 1 of 'setText:' from incompatible pointer type2(22@63"Passing argument 1 of 'setText:' from incompatible pointer type295401496#93#126#0(6@48"/Users/joeng/Documents/AppFirst/DiskLegendView.m295401495#30#0#30#0#56"passing argument * of '*' from incompatible pointer type0(22@63"Passing argument 1 of 'setText:' from incompatible pointer type295401496#219#126#0(6@48"/Users/joeng/Documents/AppFirst/DiskLegendView.m295401495#40#0#40#0#56"passing argument * of '*' from incompatible pointer type0(0#0#48"/Users/joeng/Documents/AppFirst/DiskLegendView.m4300911832#2325"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/DiskLegendView.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/DiskLegendView.o0#
+lSLF07#2@56"Compile /Users/joeng/Documents/AppFirst/DiskLegendView.m295450271#295450271#0(0"0(0#0#48"/Users/joeng/Documents/AppFirst/DiskLegendView.m4300911832#2325"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/DiskLegendView.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/DiskLegendView.o0#
 
 CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/LoginViewController.o /Users/joeng/Documents/AppFirst/LoginViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s295286089.547936
@@ -5334,8 +5397,8 @@ xcom.apple.compilers.gcc.4_2
 lSLF07#2@59"Compile /Users/joeng/Documents/AppFirst/JSON/SBJsonWriter.m295286089#295286089#0(0"0(0#0#51"/Users/joeng/Documents/AppFirst/JSON/SBJsonWriter.m4300911832#2326"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/JSON/SBJsonWriter.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/SBJsonWriter.o0#
 
 CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/ServerStatusViewController.o /Users/joeng/Documents/AppFirst/ServerStatusViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s295400947.605925
-e295400947.800281
+s295472536.861420
+e295472537.056099
 r1
 xCompileC
 xbuild/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/ServerStatusViewController.o
@@ -5344,7 +5407,7 @@ xnormal
 xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@68"Compile /Users/joeng/Documents/AppFirst/ServerStatusViewController.m295400947#295400947#0(0"0(0#0#60"/Users/joeng/Documents/AppFirst/ServerStatusViewController.m4300911832#2349"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/ServerStatusViewController.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/ServerStatusViewController.o0#
+lSLF07#2@68"Compile /Users/joeng/Documents/AppFirst/ServerStatusViewController.m295472536#295472537#0(0"0(0#0#60"/Users/joeng/Documents/AppFirst/ServerStatusViewController.m4300911832#2349"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Iframework -Iframework/build -Iframework/iPhoneOnly -Iframework/MacOnly -Iframework/Source -Iframework/TestResources -Iframework/build/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator -Iframework/build/Debug-iphonesimulator/usr -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build -Iframework/build/Debug-iphonesimulator/usr/local -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/DerivedSources -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal -Iframework/build/Debug-iphonesimulator/usr/local/include -Iframework/build/CorePlot-CocoaTouch.build/Debug-iphonesimulator/CorePlot-CocoaTouch.build/Objects-normal/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -include /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-dmkjswjuaczaarevmpfvjcidxbvv/AppFirst_Prefix.pch -c /Users/joeng/Documents/AppFirst/ServerStatusViewController.m -o /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/ServerStatusViewController.o0#
 
 CCompileC build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/VariableStore.o /Users/joeng/Documents/AppFirst/VariableStore.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s295306469.307645
@@ -5488,6 +5551,14 @@ lSLF07#2@60"CompileDTraceScript framework/TestResources/CorePlotProbes.d29522084
 CCompileDTraceScript framework/TestResources/checkformisalignedlayers.d
 r0
 
+CCompileXIB /Users/joeng/Documents/AppFirst/AlertDetailViewController.xib
+s295471681.749255
+e295471683.640533
+r1
+xCompileXIB
+x/Users/joeng/Documents/AppFirst/AlertDetailViewController.xib
+lSLF07#2@40"CompileXIB AlertDetailViewController.xib295471681#295471683#0(0"0(0#0#61"/Users/joeng/Documents/AppFirst/AlertDetailViewController.xib4300911832#490"    cd /Users/joeng/Documents/AppFirst    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AlertDetailViewController.nib /Users/joeng/Documents/AppFirst/AlertDetailViewController.xib0#
+
 CCompileXIB /Users/joeng/Documents/AppFirst/LoginViewController.xib
 s295212584.594562
 e295212585.146991
@@ -5509,12 +5580,12 @@ o/Users/joeng/Documents/AppFirst/LoginViewController2.xib:-1: warning: The 'view
 lSLF07#2@35"CompileXIB LoginViewController2.xib295204082#295204084#0(227"/* com.apple.ibtool.document.warnings *//Users/joeng/Documents/AppFirst/LoginViewController2.xib:-1: warning: The 'view' outlet of 'File's Owner' is connected to 'View' but 'view' is no longer defined on LoginViewController2.1(22@115"The 'view' outlet of 'File's Owner' is connected to 'View' but 'view' is no longer defined on LoginViewController2.295204084#18446744073709551615#0#0(6@56"/Users/joeng/Documents/AppFirst/LoginViewController2.xib295203850#18446744073709551615#0#18446744073709551615#0#0"0(0#0#56"/Users/joeng/Documents/AppFirst/LoginViewController2.xib4300911832#480"    cd /Users/joeng/Documents/AppFirst    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/LoginViewController2.nib /Users/joeng/Documents/AppFirst/LoginViewController2.xib0#
 
 CCompileXIB /Users/joeng/Documents/AppFirst/ServerStatusViewController.xib
-s295400947.236556
-e295400947.604815
+s295458273.834898
+e295458275.157535
 r1
 xCompileXIB
 x/Users/joeng/Documents/AppFirst/ServerStatusViewController.xib
-lSLF07#2@41"CompileXIB ServerStatusViewController.xib295400947#295400947#0(0"0(0#0#62"/Users/joeng/Documents/AppFirst/ServerStatusViewController.xib4300911832#492"    cd /Users/joeng/Documents/AppFirst    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/ServerStatusViewController.nib /Users/joeng/Documents/AppFirst/ServerStatusViewController.xib0#
+lSLF07#2@41"CompileXIB ServerStatusViewController.xib295458273#295458275#0(0"0(0#0#62"/Users/joeng/Documents/AppFirst/ServerStatusViewController.xib4300911832#492"    cd /Users/joeng/Documents/AppFirst    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/ServerStatusViewController.nib /Users/joeng/Documents/AppFirst/ServerStatusViewController.xib0#
 
 CCompileXIB /Users/joeng/Documents/AppFirst/framework/English.lproj/MainMenu.xib
 s295220837.231658
@@ -5525,12 +5596,12 @@ x/Users/joeng/Documents/AppFirst/framework/English.lproj/MainMenu.xib
 lSLF07#2@47"CompileXIB framework/English.lproj/MainMenu.xib295220837#295220838#0(0"0(0#0#68"/Users/joeng/Documents/AppFirst/framework/English.lproj/MainMenu.xib4300911832#494"    cd /Users/joeng/Documents/AppFirst    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/English.lproj/MainMenu.nib /Users/joeng/Documents/AppFirst/framework/English.lproj/MainMenu.xib0#
 
 CCompileXIB /Users/joeng/Documents/AppFirst/iPad/MainWindow_Pad.xib
-s295286574.289331
-e295286574.775361
+s295479032.651539
+e295479033.215573
 r1
 xCompileXIB
 x/Users/joeng/Documents/AppFirst/iPad/MainWindow_Pad.xib
-lSLF07#2@34"CompileXIB iPad/MainWindow_Pad.xib295286574#295286574#0(0"0(0#0#55"/Users/joeng/Documents/AppFirst/iPad/MainWindow_Pad.xib4300911832#473"    cd /Users/joeng/Documents/AppFirst    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/MainWindow_Pad.nib /Users/joeng/Documents/AppFirst/iPad/MainWindow_Pad.xib0#
+lSLF07#2@34"CompileXIB iPad/MainWindow_Pad.xib295479032#295479033#0(0"0(0#0#55"/Users/joeng/Documents/AppFirst/iPad/MainWindow_Pad.xib4300911832#473"    cd /Users/joeng/Documents/AppFirst    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/MainWindow_Pad.nib /Users/joeng/Documents/AppFirst/iPad/MainWindow_Pad.xib0#
 
 CCompileXIB /Users/joeng/Documents/AppFirst/iPhone/MainWindow_Phone.xib
 s294855534.843837
@@ -5568,13 +5639,14 @@ xframework/UnitTests-Info.plist
 lSLF07#2@35"Copy framework/UnitTests-Info.plist295220837#295220837#0(0"0(0#0#62"/Users/joeng/Documents/AppFirst/framework/UnitTests-Info.plist4300911832#392"    cd /Users/joeng/Documents/AppFirst    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist --convert binary1 framework/UnitTests-Info.plist --outdir /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app0#
 
 CCopyPlistFile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/cookies.plist cookies.plist
-s295214660.022056
-e295214660.303941
-r1
+s295450270.272308
+e295450270.929801
+r0
 xCopyPlistFile
 x/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/cookies.plist
 xcookies.plist
-lSLF07#2@18"Copy cookies.plist295214660#295214660#0(0"0(0#0#45"/Users/joeng/Documents/AppFirst/cookies.plist4300911832#375"    cd /Users/joeng/Documents/AppFirst    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist --convert binary1 cookies.plist --outdir /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app0#
+ocookies.plist: file does not exist or is not readable or is not a regular file
+lSLF07#2@18"Copy cookies.plist295450270#295450270#0(198"cookies.plist: file does not exist or is not readable or is not a regular fileCommand /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist failed with exit code 11(4@118"Command /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist failed with exit code 1295450270#18446744073709551615#0#0(1@0"0(0#0#45"/Users/joeng/Documents/AppFirst/cookies.plist4300911832#375"    cd /Users/joeng/Documents/AppFirst    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist --convert binary1 cookies.plist --outdir /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app1#
 
 CCopyStringsFile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/English.lproj/InfoPlist.strings framework/English.lproj/InfoPlist.strings
 s295220836.884682
@@ -5698,24 +5770,24 @@ x/Users/joeng/Documents/AppFirst/Shared/AppFirst.xcdatamodeld
 lSLF07#2@107"DataModelVersionCompile build/Debug-iphonesimulator/AppFirst.app/AppFirst.momd Shared/AppFirst.xcdatamodeld294786492#294786493#0(0"0(0#0#60"/Users/joeng/Documents/AppFirst/Shared/AppFirst.xcdatamodeld4300911832#375"    cd /Users/joeng/Documents/AppFirst    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/momc -XD_MOMC_TARGET_VERSION=10.5 /Users/joeng/Documents/AppFirst/Shared/AppFirst.xcdatamodeld /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst.momd0#
 
 CGenerateDSYMFile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app.dSYM /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst
-s295401496.673968
-e295401496.786404
+s295480920.145717
+e295480920.409405
 r1
 xGenerateDSYMFile
 x/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app.dSYM
 x/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst
-lSLF07#2@112"GenerateDSYMFile build/Debug-iphonesimulator/AppFirst.app.dSYM build/Debug-iphonesimulator/AppFirst.app/AppFirst295401496#295401496#0(0"0(0#0#81"/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst4300911832#365"    cd /Users/joeng/Documents/AppFirst    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst -o /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app.dSYM0#
+lSLF07#2@112"GenerateDSYMFile build/Debug-iphonesimulator/AppFirst.app.dSYM build/Debug-iphonesimulator/AppFirst.app/AppFirst295480920#295480920#0(0"0(0#0#81"/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst4300911832#365"    cd /Users/joeng/Documents/AppFirst    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst -o /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app.dSYM0#
 
 CLd /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst normal i386
-s295401496.480889
-e295401496.673755
+s295480919.953394
+e295480920.145624
 r1
 xLd
 x/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst
 xnormal
 xi386
 old: warning: directory 'file:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework' following -F not found
-lSLF07#2@86"Link /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst295401496#295401496#0(113"ld: warning: directory 'file:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework' following -F not found1(22@99"Directory 'file:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework' following -F not found295401496#0#113#0(6@0"295401496#0#0#0#0#0"0(0#0#0"4300911832#1142"    cd /Users/joeng/Documents/AppFirst    setenv MACOSX_DEPLOYMENT_TARGET 10.5    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -L/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -L/Users/joeng/Documents/AppFirst/framework/build/Debug-iphonesimulator -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -filelist /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppFirst.LinkFileList -mmacosx-version-min=10.5 -all_load -ObjC /Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework/build/Debug-iphonesimulator/libCorePlot-CocoaTouch.a -framework Foundation -framework UIKit -framework CoreGraphics -framework CoreData -framework QuartzCore -o /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst0#
+lSLF07#2@86"Link /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst295480919#295480920#0(113"ld: warning: directory 'file:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework' following -F not found1(22@99"Directory 'file:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework' following -F not found295480920#0#113#0(6@0"295480920#0#0#0#0#0"0(0#0#0"4300911832#1142"    cd /Users/joeng/Documents/AppFirst    setenv MACOSX_DEPLOYMENT_TARGET 10.5    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -L/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -L/Users/joeng/Documents/AppFirst/framework/build/Debug-iphonesimulator -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -filelist /Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/Objects-normal/i386/AppFirst.LinkFileList -mmacosx-version-min=10.5 -all_load -ObjC /Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework/build/Debug-iphonesimulator/libCorePlot-CocoaTouch.a -framework Foundation -framework UIKit -framework CoreGraphics -framework CoreData -framework QuartzCore -o /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/AppFirst0#
 
 CProcessInfoPlistFile /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app/Info.plist AppFirst-Info.plist
 s295222010.659121
@@ -5808,10 +5880,10 @@ xcom.apple.compilers.gcc.4_2
 lSLF07#2@30"Precompile AppFirst_Prefix.pch295285990#295285991#0(0"0(0#0#51"/Users/joeng/Documents/AppFirst/AppFirst_Prefix.pch4300911832#1432"    cd /Users/joeng/Documents/AppFirst    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/AppFirst.hmap -F/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator -Ffile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/include -Ifile:/Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources/i386 -I/Users/joeng/Documents/AppFirst/build/AppFirst.build/Debug-iphonesimulator/AppFirst.build/DerivedSources -c /Users/joeng/Documents/AppFirst/AppFirst_Prefix.pch -o /var/folders/3t/3tuWObmhHHKqExfHh-+aNU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppFirst_Prefix-gvayqunsaoumzwbswswfnjvoaweh/AppFirst_Prefix.pch.gch0#
 
 CTouch /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app
-s295401496.786521
-e295401496.791397
+s295480920.409575
+e295480920.411893
 r1
 xTouch
 x/Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app
-lSLF07#2@78"Touch /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app295401496#295401496#0(0"0(0#0#0"4300911832#265"    cd /Users/joeng/Documents/AppFirst    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app0#
+lSLF07#2@78"Touch /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app295480920#295480920#0(0"0(0#0#0"4300911832#265"    cd /Users/joeng/Documents/AppFirst    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/joeng/Documents/AppFirst/build/Debug-iphonesimulator/AppFirst.app0#
 

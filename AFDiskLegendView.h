@@ -1,5 +1,5 @@
 //
-//  AFSubView.h
+//  DiskLegendView.h
 //  AppFirst
 //
 //  Created by appfirst on 5/12/10.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface AFSubView : UIView {
+@interface AFDiskLegendView : UIView {
 
 }
 

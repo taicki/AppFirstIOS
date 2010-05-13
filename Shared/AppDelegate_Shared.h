@@ -29,6 +29,7 @@
 	NSString *urlBase;
 	NSString *loginUrl;
 	NSString *serverListUrl;
+	NSString *alertListUrl;
 	
 }
 
@@ -48,6 +49,7 @@
 @property (nonatomic, retain) NSString* urlBase;
 @property (nonatomic, retain) NSString* loginUrl;
 @property (nonatomic, retain) NSString* serverListUrl;
+@property (nonatomic, retain) NSString* alertListUrl;
 
 - (NSString *)applicationDocumentsDirectory;
 
