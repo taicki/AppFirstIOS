@@ -19,6 +19,8 @@
 	NSDictionary *detailData;
 	NSString *name;
 	NSString *timeLabelText;
+	
+	
 }
 
 @property (nonatomic, retain) UILabel *nameLabel;

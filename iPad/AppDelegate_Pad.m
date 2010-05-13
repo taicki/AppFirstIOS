@@ -23,15 +23,18 @@
     // Override point for customization after application launch
 	
 	//CPLayerHostingView * newView = [[CPLayerHostingView alloc]initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-	[window addSubview:viewController.view];
-	[window makeKeyAndVisible];
+	//[window addSubview:viewController.view];
+	//[window makeKeyAndVisible];
 	//[newView release];
-	return YES;
+	//return YES;
 
 	NSString *path = [[NSBundle mainBundle] pathForResource: @"cookie" 
 													 ofType: @"plist"] ;
 	NSMutableArray *tmpArray = [[NSMutableArray alloc] 
 								initWithContentsOfFile: path];
+	
+	self.loginController.usernameField.text = @"andrew@appfirst.com";
+	self.loginController.passwordField.text = @"appfirst";
 	
 	if (DEBUGGING == @"YES") {
 		self.urlBase = DEV_SERVER_IP;
@@ -50,6 +53,8 @@
 	
 	[tmpArray release];
 	[window makeKeyAndVisible];
+	
+	
 	
 	return YES;
 }
