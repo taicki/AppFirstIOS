@@ -48,8 +48,6 @@
 	[tmpArray release];
 	[window makeKeyAndVisible];
 	
-	
-	
 	return YES;
 }
 
@@ -61,15 +59,45 @@
 	loginController.loginIndicator.hidden = NO;
 	loginController.invalidLoginLabel.hidden = YES;
 	[loginController.loginIndicator startAnimating];
+	[loginController.loginIndicator setNeedsDisplay];
 	
 	loginController.loginButton.enabled = NO;
 	
 	
-	[self trySignIn];
+	[self performSelectorInBackground:
+	 @selector(trySignIn:)
+						   withObject:nil];
+	
+}
+
+- (void) finishLoading:(id)theJobToDo {
+	
+	[loginController.loginIndicator stopAnimating];
+	loginController.loginIndicator.hidden = YES;
+	[loginController.view removeFromSuperview];
+	[window addSubview:tabcontroller.view];
+}
+
+- (void) forLoop:(id)theJobToDo {
+	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+	
+	assert(pool != nil);
+	
+	[self performSelectorOnMainThread:
+	 @selector(finishLoading:)
+						   withObject:nil
+						waitUntilDone:NO
+	 ];
+	
+	
+	[pool drain];
 }
 
 
-- (void) trySignIn {
+
+- (void) trySignIn:(id)theJobToDo {
+	
+	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	
 	NSHTTPURLResponse *response;
 	NSError *error;
@@ -107,7 +135,7 @@
 	NSArray * all = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:[NSURL URLWithString:urlBase]];
 	NSLog(@"How many Cookies: %d", all.count);
 	
-	loginController.loginIndicator.hidden = YES;
+	//loginController.loginIndicator.hidden = YES;
 	
 	if (error || all.count == 0) {
 		NSLog(@"%@", [error localizedDescription]);
@@ -131,11 +159,18 @@
 	//				  pathForResource: @"cookies" ofType: @"plist"] ;
 	//[self.availableCookies writeToFile: path atomically: YES] ;
 	
-	[loginController.view removeFromSuperview];
-	[window addSubview:tabcontroller.view];
-	
 	[self getServerListData];
 	[self getAlertListData];
+	
+	[self performSelectorOnMainThread:
+	 @selector(finishLoading:)
+						   withObject:nil
+						waitUntilDone:NO
+	 ];
+	
+	
+	[pool drain];
+	
 }
 
 - (void) getServerListData {

@@ -19,14 +19,15 @@
 #pragma mark -
 #pragma mark Initialization
 
+
+
 /*
 - (id)initWithStyle:(UITableViewStyle)style {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if ((self = [super initWithStyle:style])) {
-    }
+    self.tabBarItem.image = [UIImage imageNamed:@"Alerts.png"];
     return self;
-}
-*/
+}*/
+
 
 
 #pragma mark -

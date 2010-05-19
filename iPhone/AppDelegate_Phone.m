@@ -100,7 +100,7 @@
 	NSArray * all = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:[NSURL URLWithString:urlBase]];
 	NSLog(@"How many Cookies: %d", all.count);
 	
-	loginController.loginIndicator.hidden = YES;
+	
 	
 	if (error || all.count == 0) {
 		NSLog(@"%@", [error localizedDescription]);
@@ -123,6 +123,8 @@
 	//NSString *path = [ [ NSBundle mainBundle]  
 	//				  pathForResource: @"cookies" ofType: @"plist"] ;
 	//[self.availableCookies writeToFile: path atomically: YES] ;
+	
+	loginController.loginIndicator.hidden = YES;
 	
 	[loginController.view removeFromSuperview];
 	[window addSubview:tabcontroller.view];

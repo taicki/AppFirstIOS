@@ -40,6 +40,9 @@
 		3EE9A79F1198AB6F007D3E14 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE9A7491198AA92007D3E14 /* libCorePlot-CocoaTouch.a */; };
 		3EE9A7D71198B099007D3E14 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE9A7D61198B099007D3E14 /* QuartzCore.framework */; };
 		3EE9AE221199E1DA007D3E14 /* AFUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9AE211199E1DA007D3E14 /* AFUIView.m */; };
+		3EF1004011A48C9A00C336FD /* alert.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EF1003F11A48C9A00C336FD /* alert.png */; };
+		3EF1004B11A48EFD00C336FD /* dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EF1004A11A48EFD00C336FD /* dashboard.png */; };
+		3EF1007811A4929600C336FD /* graph.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EF1007711A4929600C336FD /* graph.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +140,9 @@
 		3EE9A7D61198B099007D3E14 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3EE9AE201199E1DA007D3E14 /* AFUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFUIView.h; sourceTree = "<group>"; };
 		3EE9AE211199E1DA007D3E14 /* AFUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFUIView.m; sourceTree = "<group>"; };
+		3EF1003F11A48C9A00C336FD /* alert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alert.png; sourceTree = "<group>"; };
+		3EF1004A11A48EFD00C336FD /* dashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboard.png; sourceTree = "<group>"; };
+		3EF1007711A4929600C336FD /* graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graph.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AppFirst-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppFirst-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,6 +214,9 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				3EF1007711A4929600C336FD /* graph.png */,
+				3EF1004A11A48EFD00C336FD /* dashboard.png */,
+				3EF1003F11A48C9A00C336FD /* alert.png */,
 				3EE9A7401198AA92007D3E14 /* CorePlot-CocoaTouch.xcodeproj */,
 				2860E386111B897F00E27156 /* iPhone */,
 				29B97317FDCFA39411CA2CEA /* iPad */,
@@ -360,6 +369,9 @@
 				3E82253511937E20001F3644 /* ServerStatusViewController.xib in Resources */,
 				3EE9A43A119856B8007D3E14 /* LoginViewController.xib in Resources */,
 				3ED15662119C7B4500D4AB4E /* AlertDetailViewController.xib in Resources */,
+				3EF1004011A48C9A00C336FD /* alert.png in Resources */,
+				3EF1004B11A48EFD00C336FD /* dashboard.png in Resources */,
+				3EF1007811A4929600C336FD /* graph.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
