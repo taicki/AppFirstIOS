@@ -9,7 +9,6 @@
 #import "AppDelegate_Pad.h"
 #import "../Shared/JSON/JSON.h"
 #import "config.h"
-#import "CorePlot-CocoaTouch.h"
 
 
 @implementation AppDelegate_Pad

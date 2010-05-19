@@ -12,6 +12,11 @@
 @interface AppDelegate_Phone : AppDelegate_Shared {
 }
 
+- (IBAction) login : (id) sender;
+
+- (void) trySignIn;
+- (void) getServerListData;
+- (void) getAlertListData;
 
 @end
 
