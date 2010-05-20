@@ -1,3 +1,6 @@
+#define APPLICATION_NAME @"appfirst"
+#define DEFAULT_USER_NAME_KEY @"AppFirstDefaultUserName"
+
 #define DATA_NAME @"data"
 
 #define CPU_RESOURCE_NAME @"cpu"

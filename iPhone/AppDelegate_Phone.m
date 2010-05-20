@@ -9,6 +9,8 @@
 #import "AppDelegate_Phone.h"
 #import "../Shared/JSON/JSON.h"
 #import "config.h"
+#import "SFHFKeychainUtils.h"
+
 
 @implementation AppDelegate_Phone
 
@@ -18,33 +20,47 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
 	
-    NSString *path = [[NSBundle mainBundle] pathForResource: @"cookie" 
-													 ofType: @"plist"] ;
-	NSMutableArray *tmpArray = [[NSMutableArray alloc] 
-								initWithContentsOfFile: path];
+    // Override point for customization after application launch
 	
-	self.loginController.usernameField.text = @"andrew@appfirst.com";
-	self.loginController.passwordField.text = @"appfirst";
+	NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+	NSError* error;
+	
+	if (standardUserDefaults) {
+		self.loginController.usernameField.text = [standardUserDefaults objectForKey:DEFAULT_USER_NAME_KEY];
+		
+		@try {
+			self.loginController.passwordField.text = [SFHFKeychainUtils getPasswordForUsername:self.loginController.usernameField.text andServiceName:@"appfirst" error:&error];
+			NSLog(@"password: %@", [SFHFKeychainUtils getPasswordForUsername:self.loginController.usernameField.text andServiceName:@"appfirst" error:&error]);
+		}
+		
+		@catch (NSException * e) {
+			NSLog(@"Exception :%@", [e reason]);
+		}
+		@finally {
+			
+		}
+	}
+	
+	//self.loginController.usernameField.text = @"andrew@appfirst.com";
+	//self.loginController.passwordField.text = @"appfirst";
+	
 	
 	if (DEBUGGING == @"YES") {
 		self.urlBase = DEV_SERVER_IP;
 	}
+	
 	self.loginUrl = [NSString stringWithFormat:@"%@%@", urlBase, LOGIN_API_STRING];
 	self.serverListUrl = [NSString stringWithFormat:@"%@%@", urlBase, SERVER_LIST_API_STRING];
 	self.alertListUrl = [NSString stringWithFormat:@"%@%@", urlBase, ALERT_LIST_API_STRING];
 	
-	if (tmpArray) {
-		self.availableCookies = tmpArray;
-		[window addSubview:tabcontroller.view];
-		[self getServerListData];
-		
-	} else {
-		[window addSubview:[loginController view]];
-    }
 	
-	[tmpArray release];
+	[window addSubview:[loginController view]];
+    
 	[window makeKeyAndVisible];
+	
+	return YES;
 }
+
 
 - (IBAction) login: (id) sender
 {
@@ -54,23 +70,70 @@
 	loginController.loginIndicator.hidden = NO;
 	loginController.invalidLoginLabel.hidden = YES;
 	[loginController.loginIndicator startAnimating];
+	[loginController.loginIndicator setNeedsDisplay];
 	
 	loginController.loginButton.enabled = NO;
 	
 	
-	[self trySignIn];
+	// start the background queries of data
+	[self performSelectorInBackground:@selector(trySignIn:)
+						   withObject:nil];
+	
+}
+
+- (void) finishLoading:(id)theJobToDo {
+	NSError *error;
+	
+	if (self.loginController.savePassword.on == YES) {
+		// now remember the password if login is successful
+		[SFHFKeychainUtils storeUsername:self.loginController.usernameField.text andPassword:self.loginController.passwordField.text
+						  forServiceName:@"appfirst" updateExisting:YES error:&error];
+		
+		NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+		if (standardUserDefaults) {
+			[standardUserDefaults setObject:self.loginController.usernameField.text forKey:DEFAULT_USER_NAME_KEY];
+			[standardUserDefaults synchronize];
+		}
+		
+		[error release];
+	}
+	
+	
+	[loginController.loginIndicator stopAnimating];
+	loginController.loginIndicator.hidden = YES;
+	[loginController.view removeFromSuperview];
+	[window addSubview:tabcontroller.view];
+	
+}
+
+- (void) loginFailed:(id)theJobToDo {
+	NSError *error;
+	
+	
+	loginController.loginButton.enabled = YES;
+	loginController.invalidLoginLabel.hidden = NO;
+	[loginController.loginIndicator stopAnimating];
+	loginController.loginIndicator.hidden = YES;
+	
+	// delete the password
+	[SFHFKeychainUtils storeUsername:self.loginController.usernameField.text andPassword:@""
+					  forServiceName:@"appfirst" updateExisting:YES error:&error];
 }
 
 
-- (void) trySignIn {
+
+- (void) trySignIn:(id)theJobToDo {
+	
+	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	
 	NSHTTPURLResponse *response;
 	NSError *error;
 	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
-    
 	
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-	NSLog(@"%@", loginUrl);
+	
+	
+	
+	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	NSURL *myWebserverURL = [NSURL URLWithString:self.loginUrl];
 	
 	NSString *post =[NSString stringWithFormat:@"username=%@&password=%@", 
@@ -87,50 +150,55 @@
 	
 	if (DEBUGGING == @"YES") {
 		[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
-		
-		
 	}
 	
 	[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];	
 	
-	
-	NSLog(@"RESPONSE HEADERS: \n%@", [response allHeaderFields]);
+	if (DEBUGGING == @"YES") {
+		NSLog(@"RESPONSE HEADERS: \n%@", [response allHeaderFields]);
+	}
 	
 	// If you want to get all of the cookies:
 	NSArray * all = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:[NSURL URLWithString:urlBase]];
-	NSLog(@"How many Cookies: %d", all.count);
 	
-	
+	//loginController.loginIndicator.hidden = YES;
 	
 	if (error || all.count == 0) {
-		NSLog(@"%@", [error localizedDescription]);
-		loginController.loginButton.enabled = YES;
 		
-		loginController.invalidLoginLabel.hidden = NO;
-		return;
+		NSLog(@"%@", [error localizedDescription]);
+		
+		[self performSelectorOnMainThread:@selector(loginFailed:)
+							   withObject:nil
+							waitUntilDone:NO
+		 ];
+		
+		
+	} else {
+		
+		[[NSHTTPCookieStorage sharedHTTPCookieStorage] 
+		 setCookies:all forURL:[NSURL URLWithString:urlBase] mainDocumentURL:nil];
+		
+		if (DEBUGGING == @"YES") {
+			for (NSHTTPCookie *cookie in all)
+				NSLog(@"Name: %@ : Value: %@, Expires: %@", cookie.name, cookie.value, cookie.expiresDate); 
+		}
+		self.availableCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:urlBase]];
+		
+		
+		
+		
+		[self getServerListData];
+		[self getAlertListData];
+		
+		[self performSelectorOnMainThread:@selector(finishLoading:)
+							   withObject:nil
+							waitUntilDone:NO
+		 ];
+		
 	}
 	
-	// Store the cookies:
-	// NSHTTPCookieStorage is a Singleton.
-	[[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:all forURL:[NSURL URLWithString:urlBase] mainDocumentURL:nil];
+	[pool drain];
 	
-	// Now we can print all of the cookies we have:
-	for (NSHTTPCookie *cookie in all)
-		NSLog(@"Name: %@ : Value: %@, Expires: %@", cookie.name, cookie.value, cookie.expiresDate); 
-	
-	self.availableCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:urlBase]];
-	
-	//NSString *path = [ [ NSBundle mainBundle]  
-	//				  pathForResource: @"cookies" ofType: @"plist"] ;
-	//[self.availableCookies writeToFile: path atomically: YES] ;
-	
-	loginController.loginIndicator.hidden = YES;
-	
-	[loginController.view removeFromSuperview];
-	[window addSubview:tabcontroller.view];
-	
-	[self getServerListData];
-	[self getAlertListData];
 }
 
 - (void) getServerListData {
@@ -195,6 +263,8 @@
 	
 }
 
+
+
 /**
  Superclass implementation saves changes in the application's managed object context before the application terminates.
  */
@@ -207,7 +277,6 @@
 #pragma mark Memory management
 
 - (void)dealloc {
-	
 	[super dealloc];
 }
 

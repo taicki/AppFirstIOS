@@ -31,6 +31,7 @@
 	NSString *serverListUrl;
 	NSString *alertListUrl;
 	
+	NSMutableArray *usernames;
 }
 
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
@@ -50,6 +51,7 @@
 @property (nonatomic, retain) NSString* loginUrl;
 @property (nonatomic, retain) NSString* serverListUrl;
 @property (nonatomic, retain) NSString* alertListUrl;
+@property (nonatomic, retain) NSMutableArray* usernames;
 
 - (NSString *)applicationDocumentsDirectory;
 

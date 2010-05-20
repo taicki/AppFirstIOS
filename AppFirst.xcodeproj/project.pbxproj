@@ -37,30 +37,15 @@
 		3ED15662119C7B4500D4AB4E /* AlertDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED15660119C7B4500D4AB4E /* AlertDetailViewController.xib */; };
 		3EE9A439119856B8007D3E14 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9A437119856B8007D3E14 /* LoginViewController.m */; };
 		3EE9A43A119856B8007D3E14 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EE9A438119856B8007D3E14 /* LoginViewController.xib */; };
-		3EE9A79F1198AB6F007D3E14 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE9A7491198AA92007D3E14 /* libCorePlot-CocoaTouch.a */; };
 		3EE9A7D71198B099007D3E14 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE9A7D61198B099007D3E14 /* QuartzCore.framework */; };
 		3EE9AE221199E1DA007D3E14 /* AFUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE9AE211199E1DA007D3E14 /* AFUIView.m */; };
 		3EF1004011A48C9A00C336FD /* alert.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EF1003F11A48C9A00C336FD /* alert.png */; };
-		3EF1004B11A48EFD00C336FD /* dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EF1004A11A48EFD00C336FD /* dashboard.png */; };
 		3EF1007811A4929600C336FD /* graph.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EF1007711A4929600C336FD /* graph.png */; };
+		3EF1015A11A5943C00C336FD /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF1015911A5943C00C336FD /* SFHFKeychainUtils.m */; };
+		3EF1018C11A5A89500C336FD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF1018B11A5A89500C336FD /* Security.framework */; };
+		3EF101F511A5B52900C336FD /* appfirst_logo_header_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EF101F411A5B52900C336FD /* appfirst_logo_header_large.png */; };
+		3EF102A811A5DD4F00C336FD /* appfirst_logo_header.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EF102A711A5DD4F00C336FD /* appfirst_logo_header.png */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3EE9A7481198AA92007D3E14 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3EE9A7401198AA92007D3E14 /* CorePlot-CocoaTouch.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BC9B83470FB8A0A40035D8DA;
-			remoteInfo = "CorePlot-CocoaTouch";
-		};
-		3EE9AD7C1199B480007D3E14 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3EE9A7401198AA92007D3E14 /* CorePlot-CocoaTouch.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BC9B83460FB8A0A40035D8DA;
-			remoteInfo = "CorePlot-CocoaTouch";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		3EE9A7A81198ACBB007D3E14 /* CopyFiles */ = {
@@ -136,13 +121,16 @@
 		3EE9A436119856B8007D3E14 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		3EE9A437119856B8007D3E14 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		3EE9A438119856B8007D3E14 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		3EE9A7401198AA92007D3E14 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../mobile/mobile/IPhoneOS/lib/core-plot/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		3EE9A7D61198B099007D3E14 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3EE9AE201199E1DA007D3E14 /* AFUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFUIView.h; sourceTree = "<group>"; };
 		3EE9AE211199E1DA007D3E14 /* AFUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFUIView.m; sourceTree = "<group>"; };
 		3EF1003F11A48C9A00C336FD /* alert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alert.png; sourceTree = "<group>"; };
-		3EF1004A11A48EFD00C336FD /* dashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboard.png; sourceTree = "<group>"; };
 		3EF1007711A4929600C336FD /* graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graph.png; sourceTree = "<group>"; };
+		3EF1015811A5943C00C336FD /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
+		3EF1015911A5943C00C336FD /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
+		3EF1018B11A5A89500C336FD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		3EF101F411A5B52900C336FD /* appfirst_logo_header_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appfirst_logo_header_large.png; sourceTree = "<group>"; };
+		3EF102A711A5DD4F00C336FD /* appfirst_logo_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appfirst_logo_header.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AppFirst-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppFirst-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,12 +139,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EE9A79F1198AB6F007D3E14 /* libCorePlot-CocoaTouch.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				28EEBFDD1118E19E00187D67 /* CoreData.framework in Frameworks */,
 				3EE9A7D71198B099007D3E14 /* QuartzCore.framework in Frameworks */,
+				3EF1018C11A5A89500C336FD /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +180,8 @@
 				2819307C112F81BE00ECF9B4 /* AppFirst.xcdatamodeld */,
 				28EEC0491118E28000187D67 /* AppDelegate_Shared.h */,
 				28EEC04A1118E28000187D67 /* AppDelegate_Shared.m */,
+				3EF1015811A5943C00C336FD /* SFHFKeychainUtils.h */,
+				3EF1015911A5943C00C336FD /* SFHFKeychainUtils.m */,
 				8D1107310486CEB800E47090 /* AppFirst-Info.plist */,
 				3E82225F11930FE8001F3644 /* AFDashboard.h */,
 				3E82226011930FE8001F3644 /* AFDashboard.m */,
@@ -214,16 +204,17 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				3EF102A711A5DD4F00C336FD /* appfirst_logo_header.png */,
+				3EF101F411A5B52900C336FD /* appfirst_logo_header_large.png */,
 				3EF1007711A4929600C336FD /* graph.png */,
-				3EF1004A11A48EFD00C336FD /* dashboard.png */,
 				3EF1003F11A48C9A00C336FD /* alert.png */,
-				3EE9A7401198AA92007D3E14 /* CorePlot-CocoaTouch.xcodeproj */,
 				2860E386111B897F00E27156 /* iPhone */,
 				29B97317FDCFA39411CA2CEA /* iPad */,
 				28EEBF621118D79A00187D67 /* Shared */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				3EF1018B11A5A89500C336FD /* Security.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -294,14 +285,6 @@
 			name = AFGraphics;
 			sourceTree = "<group>";
 		};
-		3EE9A7411198AA92007D3E14 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3EE9A7491198AA92007D3E14 /* libCorePlot-CocoaTouch.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -318,7 +301,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				3EE9AD7D1199B480007D3E14 /* PBXTargetDependency */,
 			);
 			name = AppFirst;
 			productName = AppFirst;
@@ -335,28 +317,12 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 3EE9A7411198AA92007D3E14 /* Products */;
-					ProjectRef = 3EE9A7401198AA92007D3E14 /* CorePlot-CocoaTouch.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* AppFirst */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		3EE9A7491198AA92007D3E14 /* libCorePlot-CocoaTouch.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libCorePlot-CocoaTouch.a";
-			remoteRef = 3EE9A7481198AA92007D3E14 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
@@ -370,8 +336,9 @@
 				3EE9A43A119856B8007D3E14 /* LoginViewController.xib in Resources */,
 				3ED15662119C7B4500D4AB4E /* AlertDetailViewController.xib in Resources */,
 				3EF1004011A48C9A00C336FD /* alert.png in Resources */,
-				3EF1004B11A48EFD00C336FD /* dashboard.png in Resources */,
 				3EF1007811A4929600C336FD /* graph.png in Resources */,
+				3EF101F511A5B52900C336FD /* appfirst_logo_header_large.png in Resources */,
+				3EF102A811A5DD4F00C336FD /* appfirst_logo_header.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,18 +370,11 @@
 				3ED151DA119B2FEA00D4AB4E /* AFDiskView.m in Sources */,
 				3ED154F8119B768A00D4AB4E /* AFDiskLegendView.m in Sources */,
 				3ED15661119C7B4500D4AB4E /* AlertDetailViewController.m in Sources */,
+				3EF1015A11A5943C00C336FD /* SFHFKeychainUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3EE9AD7D1199B480007D3E14 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "CorePlot-CocoaTouch";
-			targetProxy = 3EE9AD7C1199B480007D3E14 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {

@@ -16,6 +16,8 @@
 @synthesize loginButton;
 @synthesize loginIndicator;
 @synthesize invalidLoginLabel;
+@synthesize savePassword;
+
 
 
 /*
@@ -67,6 +69,7 @@
 	[loginButton release];
 	[loginIndicator release];
 	[invalidLoginLabel release];
+	[savePassword release];
     [super dealloc];
 }
 
