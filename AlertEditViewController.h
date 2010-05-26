@@ -1,39 +1,42 @@
 //
-//  AlertDetailViewController.h
+//  AlertEditViewController.h
 //  AppFirst
 //
-//  Created by appfirst on 5/13/10.
+//  Created by appfirst on 5/25/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "AlertDetailViewController.h"
 
 
-@interface AlertDetailViewController : UIViewController {
+@interface AlertEditViewController : UIViewController {
 	IBOutlet UILabel* alertName;
 	IBOutlet UILabel* lastTriggeredTime;
 	IBOutlet UILabel* alertTarget;
 	IBOutlet UILabel* alertValue;
-	IBOutlet UILabel* alertReset;
+	IBOutlet UITextField* alertReset;
 	IBOutlet UILabel* alertTrigger;
 	IBOutlet UILabel* alertType;
 	IBOutlet UISwitch* alertEnabled;
 	
 	NSDictionary* detailData;
+	NSArray* availableCookies;
 	
 	IBOutlet UIScrollView* viewContainer;
 	CGSize bounds;
 	
-	NSArray* availableCookies;
+	BOOL keyboardVisible;
 	NSString* alertId;
-	
+	AlertDetailViewController* delegate;
 }
+
 
 @property (nonatomic, retain) UILabel* alertName;
 @property (nonatomic, retain) UILabel* lastTriggeredTime;
 @property (nonatomic, retain) UILabel* alertTarget;
 @property (nonatomic, retain) UILabel* alertValue;
-@property (nonatomic, retain) UILabel* alertReset;
+@property (nonatomic, retain) UITextField* alertReset;
 @property (nonatomic, retain) UILabel* alertTrigger;
 @property (nonatomic, retain) UILabel* alertType;
 @property (nonatomic, retain) UISwitch* alertEnabled;
@@ -42,6 +45,12 @@
 @property (nonatomic, readwrite) CGSize bounds;
 @property (nonatomic, retain) NSArray* availableCookies;
 @property (nonatomic, retain) NSString* alertId;
+@property (nonatomic, retain) AlertDetailViewController* delegate;
 
+
+- (IBAction) save: (id) sender;
+- (IBAction) cancel: (id) sender;
+- (void) keyboardDidShow: (NSNotification *) notif;
+- (void) keyboardDidHide: (NSNotification *) notif;
 
 @end

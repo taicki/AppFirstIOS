@@ -45,9 +45,12 @@
 	//self.loginController.passwordField.text = @"appfirst";
 	
 	
-	if (DEBUGGING == @"YES") {
+	if (DEBUGGING == YES) {
 		self.urlBase = DEV_SERVER_IP;
+	} else {
+		self.urlBase = PROD_SERVER_IP;
 	}
+
 	
 	self.loginUrl = [NSString stringWithFormat:@"%@%@", urlBase, LOGIN_API_STRING];
 	self.serverListUrl = [NSString stringWithFormat:@"%@%@", urlBase, SERVER_LIST_API_STRING];
@@ -148,13 +151,13 @@
 	[request setHTTPBody:postData];
 	
 	
-	if (DEBUGGING == @"YES") {
+	if (DEBUGGING == YES) {
 		[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
 	}
 	
 	[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];	
 	
-	if (DEBUGGING == @"YES") {
+	if (DEBUGGING == YES) {
 		NSLog(@"RESPONSE HEADERS: \n%@", [response allHeaderFields]);
 	}
 	
@@ -178,7 +181,7 @@
 		[[NSHTTPCookieStorage sharedHTTPCookieStorage] 
 		 setCookies:all forURL:[NSURL URLWithString:urlBase] mainDocumentURL:nil];
 		
-		if (DEBUGGING == @"YES") {
+		if (DEBUGGING == YES) {
 			for (NSHTTPCookie *cookie in all)
 				NSLog(@"Name: %@ : Value: %@, Expires: %@", cookie.name, cookie.value, cookie.expiresDate); 
 		}
@@ -186,9 +189,12 @@
 		
 		
 		
+		dashboardController.availableCookies = self.availableCookies;
+		[self.dashboardController getServerListData:NO];
+	
+		alertController.availableCookies = self.availableCookies;
+		[self.alertController getAlertListData:NO];
 		
-		[self getServerListData];
-		[self getAlertListData];
 		
 		[self performSelectorOnMainThread:@selector(finishLoading:)
 							   withObject:nil
@@ -201,67 +207,8 @@
 	
 }
 
-- (void) getServerListData {
-	NSHTTPURLResponse *response;
-	NSError *error;
-	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:self.availableCookies];
-	
-	
-	NSMutableURLRequest *serverListRequest = [[[NSMutableURLRequest alloc] init] autorelease];
-	// we are just recycling the original request
-	[serverListRequest setHTTPMethod:@"GET"];
-	[serverListRequest setAllHTTPHeaderFields:headers];
-	[serverListRequest setHTTPBody:nil];
-	
-	serverListRequest.URL = [NSURL URLWithString:self.serverListUrl];
-	
-	
-	NSData * data = [NSURLConnection sendSynchronousRequest:serverListRequest returningResponse:&response error:&error];
-	if (error) {
-		NSLog(@"%@", [error localizedDescription]);
-		return;
-	}
-	
-	NSString *jsonString = [[[NSString alloc] initWithData:data encoding: NSASCIIStringEncoding] autorelease];
-	NSLog(@"The server saw:\n%@", jsonString);
-	
-	NSDictionary *dictionary = [jsonString JSONValue];
-	
-	
-	dashboardController.servers = dictionary.allKeys;
-	dashboardController.allData = dictionary;
-}
 
-- (void) getAlertListData {
-	NSHTTPURLResponse *response;
-	NSError *error;
-	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:self.availableCookies];
-	
-	
-	NSMutableURLRequest *alertListRequest = [[[NSMutableURLRequest alloc] init] autorelease];
-	// we are just recycling the original request
-	[alertListRequest setHTTPMethod:@"GET"];
-	[alertListRequest setAllHTTPHeaderFields:headers];
-	[alertListRequest setHTTPBody:nil];
-	
-	alertListRequest.URL = [NSURL URLWithString:self.alertListUrl];
-	
-	
-	NSData * data = [NSURLConnection sendSynchronousRequest:alertListRequest returningResponse:&response error:&error];
-	if (error) {
-		NSLog(@"%@", [error localizedDescription]);
-		return;
-	}
-	
-	NSString *jsonString = [[[NSString alloc] initWithData:data encoding: NSASCIIStringEncoding] autorelease];
-	NSLog(@"The server saw:\n%@", jsonString);
-	
-	NSDictionary *dictionary = [jsonString JSONValue];
-	
-	alertController.alerts = dictionary.allKeys;
-	alertController.allData = dictionary;
-	
-}
+
 
 
 

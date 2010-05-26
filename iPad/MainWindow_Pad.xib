@@ -2,16 +2,17 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">800</int>
-		<string key="IBDocument.SystemVersion">10C540</string>
+		<string key="IBDocument.SystemVersion">10D573</string>
 		<string key="IBDocument.InterfaceBuilderVersion">762</string>
-		<string key="IBDocument.AppKitVersion">1038.25</string>
-		<string key="IBDocument.HIToolboxVersion">458.00</string>
+		<string key="IBDocument.AppKitVersion">1038.29</string>
+		<string key="IBDocument.HIToolboxVersion">460.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">87</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="23"/>
 			<integer value="52"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -281,15 +282,15 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
-				<object class="IBUINavigationController" key="IBUISelectedViewController" id="389642667">
-					<string key="IBUITitle">Dashboard</string>
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="110267414">
-						<string key="IBUITitle">Dashboard</string>
+				<object class="IBUINavigationController" key="IBUISelectedViewController" id="867422915">
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="893333912">
+						<string key="IBUITitle">Alert</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">graph.png</string>
+							<string key="NSResourceName">alert.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<reference key="IBUITabBar"/>
 					</object>
 					<reference key="IBUIParentViewController" ref="124401737"/>
 					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
@@ -300,7 +301,7 @@
 					</object>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					<bool key="IBUIHorizontal">NO</bool>
-					<object class="IBUINavigationBar" key="IBUINavigationBar" id="1054313004">
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="370793328">
 						<nil key="NSNextResponder"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{0, 0}</string>
@@ -310,29 +311,30 @@
 					</object>
 					<object class="NSMutableArray" key="IBUIViewControllers">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="IBUIViewController" id="1049379708">
-							<object class="IBUITableView" key="IBUIView" id="271259103">
+						<object class="IBUIViewController" id="967396638">
+							<object class="IBUITableView" key="IBUIView" id="1001842162">
 								<reference key="NSNextResponder"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrame">{{0, 24}, {768, 911}}</string>
+								<string key="NSFrameSize">{768, 911}</string>
 								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<reference key="IBUIBackgroundColor" ref="857542828"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<bool key="IBUIBouncesZoom">NO</bool>
 								<int key="IBUISeparatorStyle">1</int>
 								<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
+								<bool key="IBUIAllowsSelectionDuringEditing">YES</bool>
 								<bool key="IBUIShowsSelectionImmediatelyOnTouchBegin">YES</bool>
 								<float key="IBUIRowHeight">44</float>
 								<float key="IBUISectionHeaderHeight">22</float>
 								<float key="IBUISectionFooterHeight">22</float>
 							</object>
-							<object class="IBUINavigationItem" key="IBUINavigationItem" id="752383713">
-								<string key="IBUITitle">Dashboard</string>
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="877055108">
+								<reference key="IBUINavigationBar"/>
+								<string key="IBUITitle">Alert</string>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
-							<reference key="IBUIParentViewController" ref="389642667"/>
+							<reference key="IBUIParentViewController" ref="867422915"/>
 							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 								<int key="interfaceOrientation">1</int>
 							</object>
@@ -343,15 +345,16 @@
 				</object>
 				<object class="NSMutableArray" key="IBUIViewControllers">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<reference ref="389642667"/>
-					<object class="IBUINavigationController" id="867422915">
-						<object class="IBUITabBarItem" key="IBUITabBarItem" id="893333912">
-							<string key="IBUITitle">Alert</string>
+					<object class="IBUINavigationController" id="389642667">
+						<string key="IBUITitle">Dashboard</string>
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="110267414">
+							<string key="IBUITitle">Dashboard</string>
 							<object class="NSCustomResource" key="IBUIImage">
 								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">alert.png</string>
+								<string key="NSResourceName">graph.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							<reference key="IBUITabBar"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="124401737"/>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
@@ -362,7 +365,7 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIHorizontal">NO</bool>
-						<object class="IBUINavigationBar" key="IBUINavigationBar" id="370793328">
+						<object class="IBUINavigationBar" key="IBUINavigationBar" id="1054313004">
 							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">256</int>
 							<string key="NSFrameSize">{0, 0}</string>
@@ -372,8 +375,8 @@
 						</object>
 						<object class="NSMutableArray" key="IBUIViewControllers">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIViewController" id="967396638">
-								<object class="IBUITableView" key="IBUIView" id="1001842162">
+							<object class="IBUIViewController" id="1049379708">
+								<object class="IBUITableView" key="IBUIView" id="271259103">
 									<nil key="NSNextResponder"/>
 									<int key="NSvFlags">274</int>
 									<string key="NSFrameSize">{768, 911}</string>
@@ -388,11 +391,11 @@
 									<float key="IBUISectionHeaderHeight">22</float>
 									<float key="IBUISectionFooterHeight">22</float>
 								</object>
-								<object class="IBUINavigationItem" key="IBUINavigationItem" id="877055108">
-									<string key="IBUITitle">Alert</string>
+								<object class="IBUINavigationItem" key="IBUINavigationItem" id="752383713">
+									<string key="IBUITitle">Dashboard</string>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								</object>
-								<reference key="IBUIParentViewController" ref="867422915"/>
+								<reference key="IBUIParentViewController" ref="389642667"/>
 								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 									<int key="interfaceOrientation">1</int>
 								</object>
@@ -401,6 +404,7 @@
 							</object>
 						</object>
 					</object>
+					<reference ref="867422915"/>
 				</object>
 				<object class="IBUITabBar" key="IBUITabBar" id="200878171">
 					<nil key="NSNextResponder"/>
@@ -834,7 +838,7 @@
 					<string>LoginViewController</string>
 					<string>{{513, 7}, {783, 798}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{1754, -1121}, {768, 1024}}</string>
+					<string>{{1754, -1020}, {768, 1024}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

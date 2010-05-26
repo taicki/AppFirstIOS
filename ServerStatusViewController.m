@@ -18,6 +18,7 @@
 @implementation ServerStatusViewController
 @synthesize nameLabel, cpuLabel, memoryLabel, diskLabel, timeLabel;
 @synthesize detailData, name, timeLabelText;
+@synthesize viewContainer, bounds;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -33,6 +34,10 @@
 
 - (void)loadView {
 	[super loadView];
+	
+	viewContainer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.width, self.bounds.height)];
+	[self.view addSubview:viewContainer];
+	
 	[self displayCpuValue];
 	[self displayMemoryValue];
 	[self displayDiskValue];
@@ -43,25 +48,38 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
-	
 }
 
 
 
 
 - (void) viewWillAppear: (BOOL) animated {
-	[super viewWillAppear: animated] ;
+	[super viewWillAppear: animated];
+	self.nameLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 10, 300, 20)];
 	nameLabel.text = name;
+	[viewContainer addSubview:self.nameLabel];
+	
+	self.timeLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 35, 300, 20)];
 	timeLabel.text = timeLabelText;
-	//[self displayCpuValue];
-	//
+	[viewContainer addSubview:self.timeLabel];
 	
+	viewContainer.contentSize = CGSizeMake(self.bounds.width, self.bounds.height);
 	
+	//NSLog(@"%f-----%f", self.bounds.width, self.bounds.height);
 
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Overriden to allow any orientation.
+    if ((interfaceOrientation == UIDeviceOrientationLandscapeRight)) {
+		viewContainer.frame = CGRectMake(0, 0, self.bounds.height, self.bounds.width);
+	}
+	else if ((interfaceOrientation == UIDeviceOrientationLandscapeLeft))	{
+		viewContainer.frame = CGRectMake(0, 0, self.bounds.height, self.bounds.width);
+	}
+	else if ((interfaceOrientation == UIDeviceOrientationPortrait))		{
+		viewContainer.frame = CGRectMake(0, 0, self.bounds.width, self.bounds.height);
+	} else {
+		viewContainer.frame = CGRectMake(0, 0, self.bounds.width, self.bounds.height);
+	}
     return YES;
 }
 
@@ -74,9 +92,18 @@
 
 - (void) displayCpuValue {
 	if (detailData != nil) {
-		double leftPadding = 50;
+		double leftPadding = 10;
 		double topPadding = 80;
 		
+		
+		self.cpuLabel = [[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding, 35, 20)];
+		cpuLabel.text = [NSString stringWithFormat:@"CPU:"];
+		cpuLabel.font = [UIFont systemFontOfSize:10.0];
+		[viewContainer addSubview:self.cpuLabel];
+		
+		leftPadding += 40;
+		
+	
 		NSArray *cpuValues = [[[detailData objectForKey:DATA_NAME] objectForKey:CPU_RESOURCE_NAME] objectForKey:RESOURCE_VALUE_NAME];
 		NSString *cpuTotal = [[[detailData objectForKey:DATA_NAME] objectForKey:CPU_RESOURCE_NAME] objectForKey:RESOURCE_TOTAL_NAME];
 		NSDecimalNumber *cpuValue = [cpuValues objectAtIndex:0];
@@ -99,10 +126,10 @@
 		cpuTotalView.text = [NSString stringWithFormat:@"Total: %@", cpuTotal];
 		cpuTotalView.font = [UIFont systemFontOfSize:9];
 		
-		[self.view addSubview:emptyBarView];
-		[self.view addSubview:newView];
-		[self.view addSubview:cpuValueView];
-		[self.view addSubview:cpuTotalView];
+		[viewContainer addSubview:emptyBarView];
+		[viewContainer addSubview:newView];
+		[viewContainer addSubview:cpuValueView];
+		[viewContainer addSubview:cpuTotalView];
 		
 		
 		[newView release];
@@ -110,8 +137,7 @@
 		[cpuValueView release];
 		[cpuTotalView release];
 		
-		cpuLabel.text = [NSString stringWithFormat:@"CPU:"];
-		cpuLabel.font = [UIFont systemFontOfSize:10.0];
+		
 	}
 }
 
@@ -125,8 +151,15 @@
 		
 		
 		
-		double leftPadding = 50;
+		double leftPadding = 10;
 		double topPadding = 120;
+		
+		self.memoryLabel = [[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding, 35, 20)];
+		memoryLabel.text = [NSString stringWithFormat:@"Memory:"];
+		memoryLabel.font = [UIFont systemFontOfSize:10.0];
+		[viewContainer addSubview:self.memoryLabel];
+		
+		leftPadding += 40;
 		
 				
 		CGRect emptyBarFrame = CGRectMake(leftPadding, topPadding, AF_BAR_WIDTH, AF_BAR_HEIGHT);
@@ -149,10 +182,10 @@
 		totalView.font = [UIFont systemFontOfSize:9];
 		
 		
-		[self.view addSubview:emptyBarView];
-		[self.view addSubview:newView];
-		[self.view addSubview:valueView];
-		[self.view addSubview:totalView];
+		[viewContainer addSubview:emptyBarView];
+		[viewContainer addSubview:newView];
+		[viewContainer addSubview:valueView];
+		[viewContainer addSubview:totalView];
 		
 		
 		[newView release];
@@ -160,25 +193,19 @@
 		[valueView release];
 		[totalView release];
 		
-		memoryLabel.text = [NSString stringWithFormat:@"Memory:"];
-		memoryLabel.font = [UIFont systemFontOfSize:10.0];
+		
 	}
 }
 
 - (void) displayDiskValue {
 	if (detailData != nil) {
-		
-		
-		
 		double leftPadding = 10;
 		double topPadding = 150;
 		
 		AFDiskLegendView* legendView = [[AFDiskLegendView alloc] initWithFrame:CGRectMake(leftPadding + 160, topPadding + 15, 200, 25)];
-		[self.view addSubview:legendView];
+		[viewContainer addSubview:legendView];
 		[legendView release];
 		
-		
-
 		CGRect diskFrame = CGRectMake(leftPadding, topPadding, 200, 200);
 		
 		AFDiskView* diskView = [[AFDiskView alloc] initWithFrame:diskFrame];
@@ -186,9 +213,9 @@
 		diskView.diskValues = [[[detailData objectForKey:DATA_NAME] objectForKey:DISK_RESOURCE_NAME] objectForKey:RESOURCE_VALUE_NAME];
 		diskView.diskTotals = [[[detailData objectForKey:DATA_NAME] objectForKey:DISK_RESOURCE_NAME] objectForKey:RESOURCE_TOTAL_NAME];
 		diskView.diskNames = [[[detailData objectForKey:DATA_NAME] objectForKey:DISK_RESOURCE_NAME] objectForKey:RESOURCE_NAME_NAME];
-		diskLabel.font = [UIFont systemFontOfSize:9.5];
 		
-		[self.view addSubview:diskView];
+		
+		[viewContainer addSubview:diskView];
 		[diskView release];
 		
 		double valueSum = 0;
@@ -209,7 +236,11 @@
 		
 		diskText = [NSString stringWithFormat:@"Overall disk used: %.1f%@ \n%@", valueSum / totalSum * 100, @"%", diskText];
 		
+		self.diskLabel = [[UITextView alloc] initWithFrame: CGRectMake(150, 150, 154, 164)];
+		diskLabel.font = [UIFont systemFontOfSize:9.5];
 		diskLabel.text = diskText;
+		
+		[self.viewContainer addSubview:self.diskLabel];
 	}
 }
 
@@ -240,6 +271,8 @@
 	[detailData release];
 	[name release];
 	[timeLabelText release];
+	
+	[viewContainer release];
 	
     [super dealloc];
 }

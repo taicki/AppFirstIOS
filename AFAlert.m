@@ -8,13 +8,17 @@
 
 #import "AFAlert.h"
 #import "AlertDetailViewController.h"
+#import "AlertEditViewController.h"
 #import "config.h"
-
+#import "JSON/JSON.h"
 
 @implementation AFAlert
 
 
-@synthesize alerts, allData;
+@synthesize alerts, allData, availableCookies;
+@synthesize nagiosAlerts, otherAlerts;
+@synthesize queryUrl;
+@synthesize activityIndicator;
 
 #pragma mark -
 #pragma mark Initialization
@@ -33,23 +37,158 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-/*
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+		
+	UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
+		  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)];
+	refreshButton.style = UIBarButtonItemStyleBordered;
+	
 
-    // Uncomment the following line to preserve selection between presentations.
-    self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	self.navigationItem.rightBarButtonItem = refreshButton;
+	[refreshButton release];
+	
+	
+	CGRect frame = CGRectMake(0.0, 0.0, 25.0, 25.0);
+	self.activityIndicator = [[UIActivityIndicatorView alloc]
+							  initWithFrame:frame];
+	[self.activityIndicator sizeToFit];
+	self.activityIndicator.autoresizingMask =
+    (UIViewAutoresizingFlexibleLeftMargin |
+	 UIViewAutoresizingFlexibleRightMargin |
+	 UIViewAutoresizingFlexibleTopMargin |
+	 UIViewAutoresizingFlexibleBottomMargin);
+	
+	
+	UIBarButtonItem *loadingView = [[UIBarButtonItem alloc] 
+									initWithCustomView:self.activityIndicator];
+	loadingView.target = self;
+	self.navigationItem.leftBarButtonItem = loadingView;
+	
+	
+	
+	if (DEBUGGING) {
+		self.queryUrl = DEV_SERVER_IP;
+	} else {
+		self.queryUrl = PROD_SERVER_IP;
+	}
+	
+	self.queryUrl = [NSString stringWithFormat:@"%@%@", self.queryUrl, ALERT_LIST_API_STRING];
+	
+	
+
 }
-*/
 
-/*
+
+- (void) finishLoading:(id)theJobToDo {
+	
+	self.activityIndicator.hidden = YES;
+	[self.activityIndicator stopAnimating];
+	
+}
+
+- (void) refresh: (id)theJobToDo {
+	
+	self.activityIndicator.hidden = NO;
+	[self.activityIndicator startAnimating];
+	[self.activityIndicator setNeedsDisplay];
+	
+	[self performSelectorInBackground:@selector(tryUpdating:)
+						   withObject:nil];
+}
+
+- (void) tryUpdating: (id)theJobToDo {
+	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+	[self getAlertListData:YES];
+	[self.tableView reloadData];
+	[pool release];
+}
+
+- (void) getAlertListData: (BOOL)usingRefresh{
+	NSHTTPURLResponse *response;
+	NSError *error;
+	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:self.availableCookies];
+	
+	
+	NSMutableURLRequest *alertListRequest = [[[NSMutableURLRequest alloc] init] autorelease];
+	// we are just recycling the original request
+	[alertListRequest setHTTPMethod:@"GET"];
+	[alertListRequest setAllHTTPHeaderFields:headers];
+	[alertListRequest setHTTPBody:nil];
+	
+	alertListRequest.URL = [NSURL URLWithString:self.queryUrl];
+	
+
+	
+	NSData * data = [NSURLConnection sendSynchronousRequest:alertListRequest returningResponse:&response error:&error];
+	if (error) {
+		NSLog(@"%@", [error localizedDescription]);
+		return;
+	}
+	
+	NSString *jsonString = [[[NSString alloc] initWithData:data encoding: NSASCIIStringEncoding] autorelease];
+	NSLog(@"The server saw:\n%@", jsonString);
+	
+	NSDictionary *dictionary = [jsonString JSONValue];
+	
+	self.alerts = dictionary.allKeys;
+	self.allData = dictionary;
+	
+	
+	NSDate *today = [NSDate date];
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"MMM dd, yyyy HH:mm"];
+	NSString *currentTime = [dateFormatter stringFromDate:today];
+	self.navigationItem.title = [NSString stringWithFormat:@"Alerting (Updated at %@)", currentTime];
+	NSLog(@"%@", [NSString stringWithFormat:@"Alerting (Updated at %@)", currentTime]);
+	
+	[dateFormatter release];
+	
+	
+	if (usingRefresh) {
+		[self performSelectorOnMainThread:@selector(finishLoading:)
+							   withObject:nil
+							waitUntilDone:NO
+		 ];
+	}
+}
+
+
+
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	
+	if (self.otherAlerts != nil) {
+		return;
+	} else {
+		 self.otherAlerts = [[NSMutableArray alloc] init];
+		self.nagiosAlerts = [[NSMutableArray alloc] init];
+	}
+	
+	
+	for(int cnt = 0; cnt < [self.alerts count]; cnt ++) {
+		if ([[[self.allData objectForKey:[self.alerts objectAtIndex:cnt]]  objectForKey:ALERT_TRIGGER_TYPE_NAME] isEqualToString:@"Nagios"]) {
+			[self.nagiosAlerts addObject:[NSDictionary dictionaryWithObjectsAndKeys: [self.alerts objectAtIndex:cnt], @"id", 
+									  [[self.allData objectForKey:[self.alerts objectAtIndex:cnt]] objectForKey:ALERT_NAME], ALERT_NAME, nil]];
+		}
+		else {
+			[self.otherAlerts addObject:[NSDictionary dictionaryWithObjectsAndKeys: [self.alerts objectAtIndex:cnt], @"id", 
+									 [[self.allData objectForKey:[self.alerts objectAtIndex:cnt]] objectForKey:ALERT_NAME], ALERT_NAME, nil]];
+		}
+	}
+	
+	NSSortDescriptor *nameSorter = [[NSSortDescriptor alloc] 
+									initWithKey: ALERT_NAME ascending: YES selector: @selector(caseInsensitiveCompare
+																						: ) ] ;
+    [nagiosAlerts sortUsingDescriptors: [NSArray arrayWithObject: nameSorter] ] ;
+	[otherAlerts sortUsingDescriptors: [NSArray arrayWithObject: nameSorter] ] ;
+    [nameSorter release] ;
+	
+	
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -78,14 +217,36 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 2;
+}
+
+//RootViewController.m
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	
+	if(section == 0)
+		return @"System Alerts";
+	else
+		return @"Nagios Alerts";
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
+	if (section == 0) {
+		return [self.otherAlerts count];
+	}
+	else if (section == 1) {
+		return [self.nagiosAlerts count];
+	}
+	
     return [self.alerts count];
 }
+
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return UITableViewCellEditingStyleNone;
+}
+
 
 
 // Customize the appearance of table view cells.
@@ -95,26 +256,46 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
+	NSArray *dictionary;
 	
-	NSDictionary* detailData = [self.allData objectForKey:[self.alerts objectAtIndex:indexPath.row]];
-	cell.textLabel.text = [detailData objectForKey:ALERT_NAME];
+	if (indexPath.section == 0) {
+		dictionary = self.otherAlerts;
+	} else {
+		dictionary = self.nagiosAlerts;
+	}
+	
+	
+	
+	//NSDictionary* detailData = [self.allData objectForKey:[dictionary objectAtIndex:indexPath.row]];
+	cell.textLabel.text = [[dictionary objectAtIndex:indexPath.row] objectForKey:ALERT_NAME];//[detailData objectForKey:ALERT_NAME];
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	
+	NSString* alertId = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];
+	
+	NSDate *triggerTime = [NSDate dateWithTimeIntervalSince1970:[[[self.allData objectForKey:alertId] objectForKey:AlERT_LAST_TRIGGER_NAME] doubleValue]];
+	NSDateFormatter *format = [[NSDateFormatter alloc] init];
+	[format setDateFormat:@"MMM dd, yyyy HH:mm"];
+	
+
+	cell.detailTextLabel.text = [NSString stringWithFormat:@"Enabled: %@; Last triggered: %@", 
+								 [[self.allData objectForKey:alertId] objectForKey:ALERT_STATUS_NAME], 
+								 [format stringFromDate:triggerTime]];
     // Configure the cell...
-    
+    [format release];
     return cell;
 }
 
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
+
 
 
 /*
@@ -154,17 +335,65 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
 	
-	 AlertDetailViewController *detailViewController = [[AlertDetailViewController alloc] initWithNibName:@"AlertDetailViewController" bundle:nil];
-    
-	
-	detailViewController.detailData = [self.allData objectForKey:[self.alerts objectAtIndex:indexPath.row]];
-	[self.navigationController pushViewController:detailViewController animated:YES];
-	detailViewController.alertName.text = [NSString stringWithFormat:@"Alert Name: %@", 
-										   [[self.allData objectForKey:[self.alerts objectAtIndex:indexPath.row]] objectForKey:ALERT_NAME]];
-	[detailViewController release];
-	 
+	NSArray* dictionary;
 	
 	
+	if (indexPath.section == 0) {
+		dictionary = self.otherAlerts;
+	} else {
+		dictionary = self.nagiosAlerts;
+	}
+
+	
+	
+	if (!self.editing) {
+		AlertDetailViewController *detailViewController = [[AlertDetailViewController alloc] initWithNibName:@"AlertDetailViewController" bundle:nil];
+		
+		if (self.view.bounds.size.width < 400) {
+			detailViewController.bounds = CGSizeMake(320, 480);
+		} else {
+			detailViewController.bounds = CGSizeMake(768, 1024);
+		}
+		
+		detailViewController.alertId = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];
+		detailViewController.detailData = [self.allData objectForKey:[[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"]];;
+		detailViewController.availableCookies = self.availableCookies;
+		
+		[self.navigationController pushViewController:detailViewController animated:YES];
+		
+		detailViewController.alertName.text = [NSString stringWithFormat:@"Alert Name: %@", 
+											   [[dictionary objectAtIndex:indexPath.row] objectForKey:ALERT_NAME]];
+		
+		[detailViewController release];
+		
+	} else {
+		
+		AlertEditViewController *detailViewController = [[AlertEditViewController alloc] initWithNibName:@"AlertEditViewController" bundle:nil];
+		
+		UINavigationController *editController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+		
+		
+		
+		if (self.view.bounds.size.width < 400) {
+			detailViewController.bounds = CGSizeMake(320, 480);
+		} else {
+			detailViewController.bounds = CGSizeMake(768, 1024);
+		}
+		
+		detailViewController.alertId = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];
+		detailViewController.detailData = [self.allData objectForKey:[[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"]];;
+		detailViewController.availableCookies = self.availableCookies;
+		
+		[self presentModalViewController:editController animated:YES];
+		
+		//[self.navigationController pushViewController:detailViewController animated:YES];
+		
+		//detailViewController.alertName.text =[NSString stringWithFormat:@"Alert Name: %@", 
+		//									  [[dictionary objectAtIndex:indexPath.row] objectForKey:ALERT_NAME]];
+		[detailViewController release];
+		[editController release];
+		
+	}
 }
 
 
@@ -187,6 +416,12 @@
 - (void)dealloc {
 	[alerts release];
 	[allData release];
+	[availableCookies release];
+	[nagiosAlerts release];
+	[otherAlerts release];
+	[activityIndicator release];
+	[queryUrl release];
+	
     [super dealloc];
 }
 

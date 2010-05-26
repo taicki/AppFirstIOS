@@ -20,7 +20,9 @@
 	NSString *name;
 	NSString *timeLabelText;
 	
+	IBOutlet UIScrollView* viewContainer;
 	
+	CGSize bounds;
 }
 
 @property (nonatomic, retain) UILabel *nameLabel;
@@ -32,6 +34,9 @@
 @property (nonatomic, retain) NSDictionary *detailData;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *timeLabelText;
+
+@property (nonatomic, retain) UIScrollView* viewContainer;
+@property (nonatomic, readwrite) CGSize bounds;
 
 - (void) displayCpuValue;
 - (void) displayMemoryValue;

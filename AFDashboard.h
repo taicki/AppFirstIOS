@@ -12,9 +12,18 @@
 @interface AFDashboard : UITableViewController {
 	NSArray* servers;
 	NSDictionary* allData;
+	NSArray* availableCookies;
+	NSString* queryUrl;
+	IBOutlet UIActivityIndicatorView* activityIndicator;
 }
 
 @property (nonatomic, retain) NSArray* servers;
 @property (nonatomic, retain) NSDictionary* allData;
+@property (nonatomic, retain) NSArray* availableCookies;
+@property (nonatomic, retain) NSString* queryUrl;
+@property (nonatomic, retain) UIActivityIndicatorView* activityIndicator;
 
+- (void) getServerListData: (BOOL)usingRefresh;
+- (void) finishLoading:(id)theJobToDo;
+- (void) tryUpdating:(id)theJobtoDo;
 @end

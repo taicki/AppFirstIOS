@@ -17,8 +17,6 @@
 - (void) trySignIn:(id)theJobToDo;
 - (void) finishLoading:(id)theJobToDo;
 - (void) getServerListData;
-- (void) getAlertListData;
-- (void) forLoop:(id)theJobToDo;
 
 @end
 

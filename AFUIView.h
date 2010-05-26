@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AFUIView : UIView {
+@interface AFUIView : UIScrollView{
 
 }
 

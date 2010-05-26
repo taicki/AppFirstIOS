@@ -14,7 +14,7 @@
 
 
 @synthesize servers;
-@synthesize allData;
+@synthesize allData, availableCookies, queryUrl, activityIndicator;
 
 #pragma mark -
 #pragma mark Initialization
@@ -34,6 +34,118 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
+									  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(getServerListData:)];
+	refreshButton.style = UIBarButtonItemStyleBordered;
+	
+	
+	self.navigationItem.rightBarButtonItem = refreshButton;
+	[refreshButton release];
+	
+	
+	CGRect frame = CGRectMake(0.0, 0.0, 25.0, 25.0);
+	self.activityIndicator = [[UIActivityIndicatorView alloc]
+							  initWithFrame:frame];
+	[self.activityIndicator sizeToFit];
+	self.activityIndicator.autoresizingMask =
+    (UIViewAutoresizingFlexibleLeftMargin |
+	 UIViewAutoresizingFlexibleRightMargin |
+	 UIViewAutoresizingFlexibleTopMargin |
+	 UIViewAutoresizingFlexibleBottomMargin);
+	
+	
+	UIBarButtonItem *loadingView = [[UIBarButtonItem alloc] 
+									initWithCustomView:self.activityIndicator];
+	loadingView.target = self;
+	self.navigationItem.leftBarButtonItem = loadingView;
+	
+	
+	
+	if (DEBUGGING) {
+		self.queryUrl = DEV_SERVER_IP;
+	} else {
+		self.queryUrl = PROD_SERVER_IP;
+	}
+	
+	self.queryUrl = [NSString stringWithFormat:@"%@%@", self.queryUrl, SERVER_LIST_API_STRING];
+	
+	
+}
+
+- (void) finishLoading:(id)theJobToDo {
+	
+	self.activityIndicator.hidden = YES;
+	[self.activityIndicator stopAnimating];
+	
+}
+
+- (void) refresh: (id)theJobToDo {
+	
+	self.activityIndicator.hidden = NO;
+	[self.activityIndicator startAnimating];
+	[self.activityIndicator setNeedsDisplay];
+	
+	[self performSelectorInBackground:@selector(tryUpdating:)
+						   withObject:nil];
+}
+
+- (void) tryUpdating: (id)theJobToDo {
+	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+	[self getServerListData:YES];
+	[self.tableView reloadData];
+	[pool release];
+}
+
+
+
+- (void) getServerListData: (BOOL)usingRefresh{
+	NSHTTPURLResponse *response;
+	NSError *error;
+	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:self.availableCookies];
+	
+	
+	NSMutableURLRequest *serverListRequest = [[[NSMutableURLRequest alloc] init] autorelease];
+	// we are just recycling the original request
+	[serverListRequest setHTTPMethod:@"GET"];
+	[serverListRequest setAllHTTPHeaderFields:headers];
+	[serverListRequest setHTTPBody:nil];
+	
+	serverListRequest.URL = [NSURL URLWithString:self.queryUrl];
+	
+	
+	NSData * data = [NSURLConnection sendSynchronousRequest:serverListRequest returningResponse:&response error:&error];
+	if (error) {
+		NSLog(@"%@", [error localizedDescription]);
+		return;
+	}
+	
+	NSString *jsonString = [[[NSString alloc] initWithData:data encoding: NSASCIIStringEncoding] autorelease];
+	NSLog(@"The server saw:\n%@", jsonString);
+	
+	NSDictionary *dictionary = [jsonString JSONValue];
+	
+	
+	self.servers = dictionary.allKeys;
+	self.allData = dictionary;
+	
+	NSDate *today = [NSDate date];
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"MMM dd, yyyy HH:mm"];
+	NSString *currentTime = [dateFormatter stringFromDate:today];
+	self.navigationItem.title = [NSString stringWithFormat:@"Dashboard (Updated at %@)", currentTime];
+	
+	[dateFormatter release];
+	
+	
+	if (usingRefresh) {
+		[self performSelectorOnMainThread:@selector(finishLoading:)
+							   withObject:nil
+							waitUntilDone:NO
+		 ];
+	}
+	
+	
 }
 
 
@@ -173,7 +285,7 @@
 		[format setDateFormat:@"MMM dd, yyyy HH:mm"];
 		
 		NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Updated at", [format stringFromDate:updateDate]];
-		NSLog(@"%@", timeText);
+		//NSLog(@"%@", timeText);
 		detailViewController.timeLabelText = timeText;
 		[format release];
 	} else {
@@ -184,10 +296,18 @@
 		[format setDateFormat:@"MMM dd, yyyy HH:mm"];
 		
 		NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Stopped at", [format stringFromDate:updateDate]];
-		NSLog(@"%@", timeText);
+		//NSLog(@"%@", timeText);
 		
 		detailViewController.timeLabelText = timeText;
 		[format release];
+	}
+	
+	// temp solutions, should be better ways. 
+	
+	if (self.view.bounds.size.width < 400) {
+		detailViewController.bounds = CGSizeMake(320, 480);
+	} else {
+		detailViewController.bounds = CGSizeMake(768, 1024);
 	}
 	
 	detailViewController.name = [servers objectAtIndex:indexPath.row];
@@ -219,6 +339,9 @@
 - (void)dealloc {
 	[servers release];
 	[allData release];
+	[availableCookies release];
+	[queryUrl release];
+	[activityIndicator release];
     [super dealloc];
 }
 

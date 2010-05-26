@@ -29,6 +29,8 @@
 		3E8224E611936EC9001F3644 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8224E011936EC9001F3644 /* SBJsonWriter.m */; };
 		3E82253411937E20001F3644 /* ServerStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E82253211937E20001F3644 /* ServerStatusViewController.m */; };
 		3E82253511937E20001F3644 /* ServerStatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E82253311937E20001F3644 /* ServerStatusViewController.xib */; };
+		3E9C3AD011AC0552005B8021 /* AlertEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9C3ACE11AC0552005B8021 /* AlertEditViewController.m */; };
+		3E9C3AD111AC0553005B8021 /* AlertEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E9C3ACF11AC0552005B8021 /* AlertEditViewController.xib */; };
 		3ED1510B119B138900D4AB4E /* AFBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1510A119B138900D4AB4E /* AFBarView.m */; };
 		3ED15111119B142E00D4AB4E /* AFEmptyBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED15110119B142E00D4AB4E /* AFEmptyBarView.m */; };
 		3ED151DA119B2FEA00D4AB4E /* AFDiskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED151D9119B2FEA00D4AB4E /* AFDiskView.m */; };
@@ -107,6 +109,9 @@
 		3E82253211937E20001F3644 /* ServerStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerStatusViewController.m; sourceTree = "<group>"; };
 		3E82253311937E20001F3644 /* ServerStatusViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServerStatusViewController.xib; sourceTree = "<group>"; };
 		3E82262E11946E9F001F3644 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		3E9C3ACD11AC0552005B8021 /* AlertEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertEditViewController.h; sourceTree = "<group>"; };
+		3E9C3ACE11AC0552005B8021 /* AlertEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertEditViewController.m; sourceTree = "<group>"; };
+		3E9C3ACF11AC0552005B8021 /* AlertEditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertEditViewController.xib; sourceTree = "<group>"; };
 		3ED15109119B138900D4AB4E /* AFBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFBarView.h; sourceTree = "<group>"; };
 		3ED1510A119B138900D4AB4E /* AFBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFBarView.m; sourceTree = "<group>"; };
 		3ED1510F119B142E00D4AB4E /* AFEmptyBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEmptyBarView.h; sourceTree = "<group>"; };
@@ -172,6 +177,9 @@
 		28EEBF621118D79A00187D67 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				3E9C3ACD11AC0552005B8021 /* AlertEditViewController.h */,
+				3E9C3ACE11AC0552005B8021 /* AlertEditViewController.m */,
+				3E9C3ACF11AC0552005B8021 /* AlertEditViewController.xib */,
 				3ED15108119B134000D4AB4E /* AFGraphics */,
 				3EE9AE201199E1DA007D3E14 /* AFUIView.h */,
 				3EE9AE211199E1DA007D3E14 /* AFUIView.m */,
@@ -214,7 +222,6 @@
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				3EF1018B11A5A89500C336FD /* Security.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -241,6 +248,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3EF1018B11A5A89500C336FD /* Security.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
@@ -339,6 +347,7 @@
 				3EF1007811A4929600C336FD /* graph.png in Resources */,
 				3EF101F511A5B52900C336FD /* appfirst_logo_header_large.png in Resources */,
 				3EF102A811A5DD4F00C336FD /* appfirst_logo_header.png in Resources */,
+				3E9C3AD111AC0553005B8021 /* AlertEditViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +380,7 @@
 				3ED154F8119B768A00D4AB4E /* AFDiskLegendView.m in Sources */,
 				3ED15661119C7B4500D4AB4E /* AlertDetailViewController.m in Sources */,
 				3EF1015A11A5943C00C336FD /* SFHFKeychainUtils.m in Sources */,
+				3E9C3AD011AC0552005B8021 /* AlertEditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

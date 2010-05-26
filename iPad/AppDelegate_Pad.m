@@ -41,9 +41,12 @@
 	}
 	
 	
-	if (DEBUGGING == @"YES") {
+	if (DEBUGGING == YES) {
 		self.urlBase = DEV_SERVER_IP;
+	}else {
+			self.urlBase = PROD_SERVER_IP;
 	}
+
 	
 	self.loginUrl = [NSString stringWithFormat:@"%@%@", urlBase, LOGIN_API_STRING];
 	self.serverListUrl = [NSString stringWithFormat:@"%@%@", urlBase, SERVER_LIST_API_STRING];
@@ -144,13 +147,13 @@
 	[request setHTTPBody:postData];
 	
 	
-	if (DEBUGGING == @"YES") {
+	if (DEBUGGING == YES) {
 		[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
 	}
 	
 	[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];	
 	
-	if (DEBUGGING == @"YES") {
+	if (DEBUGGING == YES) {
 		NSLog(@"RESPONSE HEADERS: \n%@", [response allHeaderFields]);
 	}
 	
@@ -174,23 +177,24 @@
 		[[NSHTTPCookieStorage sharedHTTPCookieStorage] 
 				setCookies:all forURL:[NSURL URLWithString:urlBase] mainDocumentURL:nil];
 	
-		if (DEBUGGING == @"YES") {
+		if (DEBUGGING == YES) {
 			for (NSHTTPCookie *cookie in all)
 				NSLog(@"Name: %@ : Value: %@, Expires: %@", cookie.name, cookie.value, cookie.expiresDate); 
 		}
 		self.availableCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:urlBase]];
 	
-	
-	
+		dashboardController.availableCookies = self.availableCookies;
+		[self.dashboardController getServerListData:NO];
 		
-		[self getServerListData];
-		[self getAlertListData];
-	
+		alertController.availableCookies = self.availableCookies;
+		[self.alertController getAlertListData:NO];
+		
+		
 		[self performSelectorOnMainThread:@selector(finishLoading:)
-						   withObject:nil
-						waitUntilDone:NO
+							   withObject:nil
+							waitUntilDone:NO
 		 ];
-	
+
 	}
 	
 	[pool drain];

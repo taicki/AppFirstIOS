@@ -28,12 +28,21 @@
 #define AF_LEGEND_HEIGHT 10.0
 #define AF_LEGEND_WIDTH 10.0
 
+#define IPAD_SCREEN_WIDTH 768
+#define IPAD_SCREEN_HEIGHT 1024
+
+#define IPHONE_SCREEN_WIDTH 320
+#define IPHONE_SCREEN_HEIGHT 480
+
 #define DEV_SERVER_IP @"https://192.168.1.102"
+#define PROD_SERVER_IP @"https://wwws.appfirst.com"
 
 #define LOGIN_API_STRING @"/api/iphone/login/"
 #define SERVER_LIST_API_STRING @"/api/topology/data/node/"
 #define ALERT_LIST_API_STRING @"/api/iphone/alertlist/"
+#define ALERT_EDIT_API_STRING @"/api/iphone/alert/edit/"
 
 #define PI 3.14159265358979323846
 
-#define DEBUGGING @"YES"
+#define DEBUGGING NO
+
