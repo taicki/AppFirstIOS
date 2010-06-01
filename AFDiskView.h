@@ -10,14 +10,14 @@
 
 
 @interface AFDiskView : UIView {
-	IBOutlet NSArray* diskValues;
-	IBOutlet NSArray* diskTotals;
-	IBOutlet NSArray* diskNames;
+	IBOutlet NSMutableArray* diskValues;
+	IBOutlet NSMutableArray* diskTotals;
+	IBOutlet NSMutableArray* diskNames;
 }
 
-@property (nonatomic, retain) NSArray* diskValues;
-@property (nonatomic, retain) NSArray* diskTotals;
-@property (nonatomic, retain) NSArray* diskNames;
+@property (nonatomic, retain) NSMutableArray* diskValues;
+@property (nonatomic, retain) NSMutableArray* diskTotals;
+@property (nonatomic, retain) NSMutableArray* diskNames;
 
 
 @end

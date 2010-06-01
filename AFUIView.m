@@ -7,7 +7,7 @@
 //
 
 #import "AFUIView.h"
-
+#import <QuartzCore/QuartzCore.h>
 
 @implementation AFUIView
 
@@ -23,8 +23,9 @@
 - (void)drawRect:(CGRect)rect
 
 {
-	
-	
+	//self.layer.borderWidth = 1;
+	//self.layer.borderColor =  [[UIColor grayColor] CGColor];
+	//self.layer.cornerRadius = 8;
 
 }
 

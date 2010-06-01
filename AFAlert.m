@@ -11,12 +11,13 @@
 #import "AlertEditViewController.h"
 #import "config.h"
 #import "JSON/JSON.h"
+#import "AFTitleView.h"
 
 @implementation AFAlert
 
 
 @synthesize alerts, allData, availableCookies;
-@synthesize nagiosAlerts, otherAlerts;
+@synthesize nagiosAlerts, otherAlerts, needRefresh;
 @synthesize queryUrl;
 @synthesize activityIndicator;
 
@@ -66,7 +67,11 @@
 	loadingView.target = self;
 	self.navigationItem.leftBarButtonItem = loadingView;
 	
+	AFTitleView* titleView = [[AFTitleView alloc] initWithFrame:CGRectMake(0, 0, 250, 30)];
+	self.navigationItem.titleView = titleView;
 	
+	
+	[loadingView release];
 	
 	if (DEBUGGING) {
 		self.queryUrl = DEV_SERVER_IP;
@@ -76,16 +81,24 @@
 	
 	self.queryUrl = [NSString stringWithFormat:@"%@%@", self.queryUrl, ALERT_LIST_API_STRING];
 	
-	
-
+	[titleView release];
+	self.needRefresh = NO;
 }
 
 
-- (void) finishLoading:(id)theJobToDo {
+- (void) finishLoading:(NSString*)theJobToDo {
 	
+
 	self.activityIndicator.hidden = YES;
 	[self.activityIndicator stopAnimating];
+	self.tableView.userInteractionEnabled = YES;
 	
+	AFTitleView* titleView = self.navigationItem.titleView;
+	titleView.timeLabel.text = [NSString stringWithFormat:@"%@", theJobToDo];
+	
+	titleView.titleLabel.text = @"Alerts";
+	
+	[self.tableView reloadData];
 }
 
 - (void) refresh: (id)theJobToDo {
@@ -93,6 +106,7 @@
 	self.activityIndicator.hidden = NO;
 	[self.activityIndicator startAnimating];
 	[self.activityIndicator setNeedsDisplay];
+	self.tableView.userInteractionEnabled = NO;
 	
 	[self performSelectorInBackground:@selector(tryUpdating:)
 						   withObject:nil];
@@ -101,8 +115,9 @@
 - (void) tryUpdating: (id)theJobToDo {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	[self getAlertListData:YES];
-	[self.tableView reloadData];
+	
 	[pool release];
+	
 }
 
 - (void) getAlertListData: (BOOL)usingRefresh{
@@ -128,7 +143,9 @@
 	}
 	
 	NSString *jsonString = [[[NSString alloc] initWithData:data encoding: NSASCIIStringEncoding] autorelease];
-	NSLog(@"The server saw:\n%@", jsonString);
+	
+	if (DEBUGGING)
+		NSLog(@"The server saw:\n%@", jsonString);
 	
 	NSDictionary *dictionary = [jsonString JSONValue];
 	
@@ -140,15 +157,15 @@
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"MMM dd, yyyy HH:mm"];
 	NSString *currentTime = [dateFormatter stringFromDate:today];
-	self.navigationItem.title = [NSString stringWithFormat:@"Alerting (Updated at %@)", currentTime];
-	NSLog(@"%@", [NSString stringWithFormat:@"Alerting (Updated at %@)", currentTime]);
+	//self.navigationItem.title = [NSString stringWithFormat:@"Alerting (Updated at %@)", currentTime];
+	//NSLog(@"%@", [NSString stringWithFormat:@"Alerting (Updated at %@)", currentTime]);
 	
 	[dateFormatter release];
 	
 	
 	if (usingRefresh) {
 		[self performSelectorOnMainThread:@selector(finishLoading:)
-							   withObject:nil
+							   withObject:[NSString stringWithFormat:@"Updated at %@", currentTime]
 							waitUntilDone:NO
 		 ];
 	}
@@ -160,11 +177,17 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	
+	
+	if (self.needRefresh) {
+		[self refresh:nil];
+		self.needRefresh = NO;
+	}
+	
 	if (self.otherAlerts != nil) {
 		return;
 	} else {
-		 self.otherAlerts = [[NSMutableArray alloc] init];
-		self.nagiosAlerts = [[NSMutableArray alloc] init];
+		 self.otherAlerts = [[[NSMutableArray alloc] init] autorelease];
+		self.nagiosAlerts = [[[NSMutableArray alloc] init] autorelease];
 	}
 	
 	
@@ -275,16 +298,40 @@
 	
 	NSString* alertId = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];
 	
-	NSDate *triggerTime = [NSDate dateWithTimeIntervalSince1970:[[[self.allData objectForKey:alertId] objectForKey:AlERT_LAST_TRIGGER_NAME] doubleValue]];
-	NSDateFormatter *format = [[NSDateFormatter alloc] init];
-	[format setDateFormat:@"MMM dd, yyyy HH:mm"];
+	if ([[self.allData objectForKey:alertId] objectForKey:AlERT_LAST_TRIGGER_NAME] != nil) {
+	
+		NSDate *triggerTime = [NSDate dateWithTimeIntervalSince1970:[[[self.allData objectForKey:alertId] objectForKey:AlERT_LAST_TRIGGER_NAME] doubleValue]];
+		NSDateFormatter *format = [[NSDateFormatter alloc] init];
+		[format setDateFormat:@"MMM dd, yyyy HH:mm"];
 	
 
-	cell.detailTextLabel.text = [NSString stringWithFormat:@"Enabled: %@; Last triggered: %@", 
-								 [[self.allData objectForKey:alertId] objectForKey:ALERT_STATUS_NAME], 
-								 [format stringFromDate:triggerTime]];
+		cell.detailTextLabel.text = [NSString stringWithFormat:@"Last triggered: %@", 
+									 [format stringFromDate:triggerTime]];
+		
+		[format release];
+	} else {
+		cell.detailTextLabel.text = @"Last triggered: N/A";
+	}
+	
+	
+	NSString* enabled = [[self.allData objectForKey:alertId] objectForKey:ALERT_STATUS_NAME];
+	
+	
+	NSString *path;
+	UIImage* theImage;
+	
+	if ([enabled isEqualToString:@"True"]) {
+		path = [[NSBundle mainBundle] pathForResource:@"checked_box" ofType:@"png"];
+		theImage = [UIImage imageWithContentsOfFile:path];
+	} else {
+		path = [[NSBundle mainBundle] pathForResource:@"unchecked_box" ofType:@"png"];
+		theImage = [UIImage imageWithContentsOfFile:path];
+	}
+	
+	cell.imageView.image = theImage;
+	
     // Configure the cell...
-    [format release];
+    
     return cell;
 }
 
@@ -358,11 +405,12 @@
 		detailViewController.alertId = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];
 		detailViewController.detailData = [self.allData objectForKey:[[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"]];;
 		detailViewController.availableCookies = self.availableCookies;
+		detailViewController.parentController = self;
 		
 		[self.navigationController pushViewController:detailViewController animated:YES];
 		
-		detailViewController.alertName.text = [NSString stringWithFormat:@"Alert Name: %@", 
-											   [[dictionary objectAtIndex:indexPath.row] objectForKey:ALERT_NAME]];
+		//detailViewController.alertName.text = [NSString stringWithFormat:@"Alert Name: %@", 
+		//									   [[dictionary objectAtIndex:indexPath.row] objectForKey:ALERT_NAME]];
 		
 		[detailViewController release];
 		
@@ -383,6 +431,7 @@
 		detailViewController.alertId = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];
 		detailViewController.detailData = [self.allData objectForKey:[[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"]];;
 		detailViewController.availableCookies = self.availableCookies;
+		
 		
 		[self presentModalViewController:editController animated:YES];
 		

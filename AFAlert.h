@@ -18,6 +18,7 @@
 	
 	NSString* queryUrl;
 	IBOutlet UIActivityIndicatorView* activityIndicator;
+	BOOL needRefresh;
 }
 
 @property (nonatomic, retain) NSArray* alerts;
@@ -28,9 +29,11 @@
 @property (nonatomic, retain) NSString* queryUrl;
 @property (nonatomic, retain) UIActivityIndicatorView* activityIndicator;
 
+@property (nonatomic, readwrite) BOOL needRefresh;
+
 
 - (void) getAlertListData:(BOOL)usingRefresh;
-- (void) finishLoading:(id)theJobToDo;
+- (void) finishLoading:(NSString*)theJobToDo;
 - (void) tryUpdating:(id)theJobtoDo;
 
 @end

@@ -14,9 +14,6 @@
 
 - (IBAction) login : (id) sender;
 
-- (void) trySignIn:(id)theJobToDo;
-- (void) finishLoading:(id)theJobToDo;
-- (void) getServerListData;
 
 @end
 

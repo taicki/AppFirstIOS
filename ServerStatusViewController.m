@@ -56,14 +56,16 @@
 - (void) viewWillAppear: (BOOL) animated {
 	[super viewWillAppear: animated];
 	self.nameLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 10, 300, 20)];
+	self.nameLabel.font = [UIFont boldSystemFontOfSize:16];
 	nameLabel.text = name;
 	[viewContainer addSubview:self.nameLabel];
 	
 	self.timeLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 35, 300, 20)];
+	self.timeLabel.font = [UIFont systemFontOfSize:15];
 	timeLabel.text = timeLabelText;
 	[viewContainer addSubview:self.timeLabel];
 	
-	viewContainer.contentSize = CGSizeMake(self.bounds.width, self.bounds.height);
+	//viewContainer.contentSize = CGSizeMake(self.bounds.width, 1000);
 	
 	//NSLog(@"%f-----%f", self.bounds.width, self.bounds.height);
 
@@ -96,12 +98,12 @@
 		double topPadding = 80;
 		
 		
-		self.cpuLabel = [[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding, 35, 20)];
+		self.cpuLabel = [[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding, CPU_LABEL_WIDTH, 20)];
 		cpuLabel.text = [NSString stringWithFormat:@"CPU:"];
-		cpuLabel.font = [UIFont systemFontOfSize:10.0];
+		cpuLabel.font = [UIFont systemFontOfSize:DASHBOARD_TAB_NORMAL_FONT_SIZE];
 		[viewContainer addSubview:self.cpuLabel];
 		
-		leftPadding += 40;
+		leftPadding += (CPU_LABEL_WIDTH + 5);
 		
 	
 		NSArray *cpuValues = [[[detailData objectForKey:DATA_NAME] objectForKey:CPU_RESOURCE_NAME] objectForKey:RESOURCE_VALUE_NAME];
@@ -119,12 +121,12 @@
 		CGRect cpuValueFrame = CGRectMake(leftPadding + AF_BAR_WIDTH + 10, topPadding, 60, AF_BAR_HEIGHT);
 		UILabel* cpuValueView = [[UILabel alloc] initWithFrame:cpuValueFrame];
 		cpuValueView.text = [NSString stringWithFormat:@"%.1f %@", [cpuValue doubleValue], @"%"];
-		cpuValueView.font = [UIFont systemFontOfSize:9];
+		cpuValueView.font = [UIFont systemFontOfSize:DASHBOARD_TAB_NORMAL_FONT_SIZE];
 		
 		CGRect cpuTotalFrame = CGRectMake(leftPadding, topPadding + AF_BAR_HEIGHT, 300, AF_BAR_HEIGHT);
 		UILabel* cpuTotalView = [[UILabel alloc] initWithFrame:cpuTotalFrame];
 		cpuTotalView.text = [NSString stringWithFormat:@"Total: %@", cpuTotal];
-		cpuTotalView.font = [UIFont systemFontOfSize:9];
+		cpuTotalView.font = [UIFont systemFontOfSize:DASHBOARD_TAB_SMALL_FONT_SIZE];
 		
 		[viewContainer addSubview:emptyBarView];
 		[viewContainer addSubview:newView];
@@ -154,12 +156,12 @@
 		double leftPadding = 10;
 		double topPadding = 120;
 		
-		self.memoryLabel = [[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding, 35, 20)];
+		self.memoryLabel = [[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding, CPU_LABEL_WIDTH, 20)];
 		memoryLabel.text = [NSString stringWithFormat:@"Memory:"];
-		memoryLabel.font = [UIFont systemFontOfSize:10.0];
+		memoryLabel.font = [UIFont systemFontOfSize:DASHBOARD_TAB_NORMAL_FONT_SIZE];
 		[viewContainer addSubview:self.memoryLabel];
 		
-		leftPadding += 40;
+		leftPadding += (CPU_LABEL_WIDTH + 5);
 		
 				
 		CGRect emptyBarFrame = CGRectMake(leftPadding, topPadding, AF_BAR_WIDTH, AF_BAR_HEIGHT);
@@ -174,12 +176,12 @@
 		UILabel* valueView = [[UILabel alloc] initWithFrame:valueFrame];
 		valueView.text = [NSString stringWithFormat:@"%.1f %@", 
 							[memoryValue  doubleValue] / [memoryTotal doubleValue] * 100, @"%"];
-		valueView.font = [UIFont systemFontOfSize:9];
+		valueView.font = [UIFont systemFontOfSize:DASHBOARD_TAB_NORMAL_FONT_SIZE];
 		
 		CGRect totalFrame = CGRectMake(leftPadding, topPadding + AF_BAR_HEIGHT, 300, AF_BAR_HEIGHT);
 		UILabel* totalView = [[UILabel alloc] initWithFrame:totalFrame];
 		totalView.text = [NSString stringWithFormat:@"Total: %.0f MB", [memoryTotal doubleValue] / 1000000];
-		totalView.font = [UIFont systemFontOfSize:9];
+		totalView.font = [UIFont systemFontOfSize:DASHBOARD_TAB_SMALL_FONT_SIZE];
 		
 		
 		[viewContainer addSubview:emptyBarView];
@@ -200,47 +202,62 @@
 - (void) displayDiskValue {
 	if (detailData != nil) {
 		double leftPadding = 10;
-		double topPadding = 150;
+		double topPadding = 160;
 		
-		AFDiskLegendView* legendView = [[AFDiskLegendView alloc] initWithFrame:CGRectMake(leftPadding + 160, topPadding + 15, 200, 25)];
+		AFDiskLegendView* legendView = [[AFDiskLegendView alloc] initWithFrame:CGRectMake(leftPadding + 180, topPadding + 3, 200, 25)];
 		[viewContainer addSubview:legendView];
 		[legendView release];
 		
-		CGRect diskFrame = CGRectMake(leftPadding, topPadding, 200, 200);
+		self.diskLabel = [[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding, 160, 40)];
+		self.diskLabel.numberOfLines = 0;
+		diskLabel.font = [UIFont systemFontOfSize:DASHBOARD_TAB_NORMAL_FONT_SIZE];
+		//diskLabel.userInteractionEnabled = NO;
+		[self.viewContainer addSubview:self.diskLabel];
 		
-		AFDiskView* diskView = [[AFDiskView alloc] initWithFrame:diskFrame];
+		topPadding += 50;
 		
-		diskView.diskValues = [[[detailData objectForKey:DATA_NAME] objectForKey:DISK_RESOURCE_NAME] objectForKey:RESOURCE_VALUE_NAME];
-		diskView.diskTotals = [[[detailData objectForKey:DATA_NAME] objectForKey:DISK_RESOURCE_NAME] objectForKey:RESOURCE_TOTAL_NAME];
-		diskView.diskNames = [[[detailData objectForKey:DATA_NAME] objectForKey:DISK_RESOURCE_NAME] objectForKey:RESOURCE_NAME_NAME];
+		NSArray* diskValues = [[[detailData objectForKey:DATA_NAME] objectForKey:DISK_RESOURCE_NAME] objectForKey:RESOURCE_VALUE_NAME];
+		NSArray* diskTotals = [[[detailData objectForKey:DATA_NAME] objectForKey:DISK_RESOURCE_NAME] objectForKey:RESOURCE_TOTAL_NAME];
+		NSArray* diskNames =  [[[detailData objectForKey:DATA_NAME] objectForKey:DISK_RESOURCE_NAME] objectForKey:RESOURCE_NAME_NAME];
 		
-		
-		[viewContainer addSubview:diskView];
-		[diskView release];
 		
 		double valueSum = 0;
 		double totalSum = 0;
-		NSString *diskText = @"";
-		for (int i = 0; i < [diskView.diskNames count]; i++) {
-			double diskValue = [[diskView.diskValues objectAtIndex:i] doubleValue];
-			double diskTotal = [[diskView.diskTotals objectAtIndex:i] doubleValue];
+		
+		for (int i = 0; i < [diskNames count]; i++) {
+			
+			UILabel* diskDetail = [[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding , 250, 12)];
+			diskDetail.font = [UIFont systemFontOfSize:DASHBOARD_TAB_SMALL_FONT_SIZE];
+			
+			CGRect diskFrame = CGRectMake(leftPadding, topPadding, DISK_CHART_WIDTH, DISK_CHART_HEIGHT);
+			
+			AFDiskView* diskView = [[AFDiskView alloc] initWithFrame:diskFrame];
+			
+			double diskValue = [[diskValues objectAtIndex:i] doubleValue];
+			double diskTotal = [[diskTotals objectAtIndex:i] doubleValue];
 			
 			valueSum += diskValue;
 			totalSum += diskTotal;
 			
-			diskText = [NSString stringWithFormat:@"%@%@ (%.0fMB): %.0f%@ used\n", 
-						diskText, [diskView.diskNames objectAtIndex:i], diskTotal, 
+			diskDetail.text = [NSString stringWithFormat:@"%@ (total %.0f MB): %.0f%@ used\n", 
+						[diskNames objectAtIndex:i], diskTotal, 
 						diskValue / diskTotal * 100
 						, @"%"];
+			
+
+			[diskView.diskValues addObject:[diskValues objectAtIndex:i]]; 
+			[diskView.diskTotals addObject:[diskTotals objectAtIndex:i]]; 
+			
+			[self.viewContainer addSubview:diskDetail];
+			[self.viewContainer addSubview:diskView];
+			
+			[diskDetail release];
+			[diskView release];
+			topPadding += DISK_CHART_HEIGHT;
 		}
 		
-		diskText = [NSString stringWithFormat:@"Overall disk used: %.1f%@ \n%@", valueSum / totalSum * 100, @"%", diskText];
-		
-		self.diskLabel = [[UITextView alloc] initWithFrame: CGRectMake(150, 150, 154, 164)];
-		diskLabel.font = [UIFont systemFontOfSize:9.5];
-		diskLabel.text = diskText;
-		
-		[self.viewContainer addSubview:self.diskLabel];
+		diskLabel.text = [NSString stringWithFormat:@"Overall disk used: %.1f%@ (total %.0f MB)", valueSum / totalSum * 100, @"%", totalSum];
+		viewContainer.contentSize = CGSizeMake(self.bounds.width, topPadding + DISK_CHART_HEIGHT);
 	}
 }
 

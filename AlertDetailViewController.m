@@ -12,8 +12,8 @@
 
 
 @implementation AlertDetailViewController
-@synthesize alertName,lastTriggeredTime,alertTarget,alertValue,alertReset,alertTrigger,alertType,alertEnabled;
-@synthesize detailData;
+@synthesize alertName,lastTriggeredTime,alertTarget,alertValue,alertReset,alertTrigger,alertType,alertEnabled,alertEnabledLabel;
+@synthesize detailData, parentController;
 
 @synthesize viewContainer;
 @synthesize bounds;
@@ -72,33 +72,85 @@
     }
     else
     {
-        NSLog(@"Done leave editmode");
+		if (DEBUGGING) {
+			NSLog(@"Done leave editmode");
+		}
     }
 }
 
 
+
 - (void) viewWillAppear: (BOOL) animated {
 	[super viewWillAppear: animated] ;
-	viewContainer.contentSize = CGSizeMake(self.bounds.width, self.bounds.height);
+	//viewContainer.contentSize = CGSizeMake(self.bounds.width, self.bounds.height);
 	viewContainer.frame = CGRectMake(0, 0, self.bounds.height, self.bounds.width);
 	
-
+	int leftPadding = 10;
+	int topPadding = 0;
+	
+	self.alertName = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)] autorelease];
+	self.alertName.numberOfLines = 0;
+	self.alertName.text = [NSString stringWithFormat:@"Name: %@", [self.detailData objectForKey:ALERT_NAME]];
+	self.alertName.font = [UIFont boldSystemFontOfSize:15];
+	[self.viewContainer addSubview:self.alertName];
+	
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	self.alertTarget = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)] autorelease];
+	self.alertTarget.numberOfLines = 0;
 	self.alertTarget.text = [NSString stringWithFormat:@"Target: %@", [self.detailData objectForKey:ALERT_TARGET_NAME]];
+	self.alertTarget.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	[self.viewContainer addSubview:self.alertTarget];
+	
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	self.alertValue = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)] autorelease];
+	self.alertValue.numberOfLines = 0;
 	
 	if ([[NSString stringWithFormat:@"%@", [self.detailData objectForKey:ALERT_VALUE_NAME]] isEqualToString:@""] == NO) {
 		self.alertValue.text = [NSString stringWithFormat:@"Value: %@", [self.detailData objectForKey:ALERT_VALUE_NAME]];
 	} else {
 		self.alertValue.text = @"Value: N/A";
 	}
+	self.alertValue.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	[self.viewContainer addSubview:self.alertValue];
 	
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	self.alertReset = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)] autorelease];
+	self.alertReset.numberOfLines = 0;
+		
 	if ([[NSString stringWithFormat:@"%@", [self.detailData objectForKey:ALERT_RESET_NAME]] isEqualToString:@""] == NO) {
 		self.alertReset.text = [NSString stringWithFormat:@"Reset: %@", [self.detailData objectForKey:ALERT_RESET_NAME]];
 	} else {
 		self.alertReset.text = @"Reset: N/A";
 	}
+	self.alertReset.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	[self.viewContainer addSubview:self.alertReset];
+	
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	
+	self.alertTrigger = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)] autorelease];
+	self.alertTrigger.numberOfLines = 0;
 	
 	self.alertTrigger.text = [NSString stringWithFormat:@"Trigger: %@", [self.detailData  objectForKey:ALERT_TRIGGER_TYPE_NAME]];
+	self.alertTrigger.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	[self.viewContainer addSubview:self.alertTrigger];
+	
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	
+	self.alertType = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)] autorelease];
+	self.alertType.numberOfLines = 0;
 	self.alertType.text = [NSString stringWithFormat:@"Type: %@", [self.detailData objectForKey:ALERT_TYPE_NAME]];
+	self.alertType.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	[self.viewContainer addSubview:self.alertType];
+	
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	self.lastTriggeredTime = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)] autorelease];
+	self.lastTriggeredTime.numberOfLines = 0;
 	
 	if ([self.detailData objectForKey:AlERT_LAST_TRIGGER_NAME] != nil) {
 		NSDate *triggerTime = [NSDate dateWithTimeIntervalSince1970:[[self.detailData objectForKey:AlERT_LAST_TRIGGER_NAME] doubleValue]];
@@ -109,14 +161,31 @@
 	} else {
 		self.lastTriggeredTime.text = @"Last triggered: N/A";
 	}
+	self.lastTriggeredTime.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	[self.viewContainer addSubview:self.lastTriggeredTime];
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	self.alertEnabledLabel = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)] autorelease];
+	self.alertEnabledLabel.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	
 	
 	NSString* enabled = [NSString stringWithFormat:@"%@", [self.detailData objectForKey:ALERT_STATUS_NAME]];
 	
 	if ([enabled isEqualToString:@"True"]) {
-		self.alertEnabled.on = YES;
+		self.alertEnabledLabel.text = @"Enabled: YES";
+		//self.alertEnabled.on = YES;
 	} else {
-		self.alertEnabled.on = NO;
+		self.alertEnabledLabel.text = @"Enabled: NO";
+		//self.alertEnabled.on = NO;
 	}
+	//[self.viewContainer addSubview:self.alertEnabled];
+	
+	
+	[self.viewContainer addSubview:self.alertEnabledLabel];
+	
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	self.viewContainer.contentSize = CGSizeMake(self.bounds.width, topPadding + 50);
 	
 }
 
@@ -163,10 +232,12 @@
 	[alertTrigger release];
 	[alertType release];
 	[alertEnabled release];
-	
+	[alertEnabledLabel release];
+
+	[parentController release];
 	[detailData release];
 	[viewContainer release];
-	
+
 	
 	[availableCookies release];
 	[alertId release];

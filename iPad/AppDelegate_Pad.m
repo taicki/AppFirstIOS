@@ -72,7 +72,7 @@
 	[loginController.loginIndicator setNeedsDisplay];
 	
 	loginController.loginButton.enabled = NO;
-	
+	loginController.view.userInteractionEnabled = NO;
 	
 	// start the background queries of data
 	[self performSelectorInBackground:@selector(trySignIn:)
@@ -80,6 +80,8 @@
 	
 }
 
+
+/*
 - (void) finishLoading:(id)theJobToDo {
 	NSError *error;
 	
@@ -134,6 +136,8 @@
 	
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	NSURL *myWebserverURL = [NSURL URLWithString:self.loginUrl];
+	
+	
 	
 	NSString *post =[NSString stringWithFormat:@"username=%@&password=%@", 
 					self.loginController.usernameField.text , self.loginController.passwordField.text];
@@ -262,7 +266,7 @@
 	alertController.allData = dictionary;
 
 }
-
+*/
 
 /**
  Superclass implementation saves changes in the application's managed object context before the application terminates.

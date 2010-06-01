@@ -13,7 +13,7 @@
 	IBOutlet UILabel *nameLabel;
 	IBOutlet UILabel *cpuLabel;
 	IBOutlet UILabel *memoryLabel;
-	IBOutlet UITextView *diskLabel;
+	IBOutlet UILabel *diskLabel;
 	IBOutlet UILabel *timeLabel;
 
 	NSDictionary *detailData;
@@ -29,7 +29,7 @@
 @property (nonatomic, retain) UILabel *cpuLabel;
 @property (nonatomic, retain) UILabel *memoryLabel;
 @property (nonatomic, retain) UILabel *timeLabel;
-@property (nonatomic, retain) UITextView *diskLabel;
+@property (nonatomic, retain) UILabel *diskLabel;
 
 @property (nonatomic, retain) NSDictionary *detailData;
 @property (nonatomic, retain) NSString *name;

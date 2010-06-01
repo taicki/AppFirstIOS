@@ -15,6 +15,9 @@
 	NSArray* availableCookies;
 	NSString* queryUrl;
 	IBOutlet UIActivityIndicatorView* activityIndicator;
+	
+	NSMutableArray* collectorRunningServers;
+	NSMutableArray* collectorStoppingServers;
 }
 
 @property (nonatomic, retain) NSArray* servers;
@@ -23,7 +26,11 @@
 @property (nonatomic, retain) NSString* queryUrl;
 @property (nonatomic, retain) UIActivityIndicatorView* activityIndicator;
 
+@property (nonatomic, retain) NSMutableArray* collectorRunningServers;
+@property (nonatomic, retain) NSMutableArray* collectorStoppingServers;
+
+
 - (void) getServerListData: (BOOL)usingRefresh;
-- (void) finishLoading:(id)theJobToDo;
+- (void) finishLoading:(NSString*)theJobToDo;
 - (void) tryUpdating:(id)theJobtoDo;
 @end

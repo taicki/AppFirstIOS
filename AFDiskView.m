@@ -18,6 +18,11 @@
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
         [self setBackgroundColor:[UIColor clearColor]];
+		
+		if (self.diskValues == nil) {
+			self.diskValues = [[[NSMutableArray alloc] init] autorelease];
+			self.diskTotals = [[[NSMutableArray alloc] init] autorelease];
+		}
     }
     return self;
 }
@@ -26,9 +31,9 @@
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
-	double radius = 50;
-	double paddingLeft = 25;
-	double paddingTop = 20;
+	double radius = 40;
+	double paddingLeft = 10;
+	double paddingTop = 25;
 	
 	double valueSum = 0;
 	double totalSum = 0;
@@ -50,7 +55,7 @@
 	CGContextStrokeEllipseInRect(contextRef, CGRectMake(paddingLeft, paddingTop, radius * 2, radius * 2));
 	
 	 
-	for (int i = 0; i < [diskNames count]; i++) {
+	for (int i = 0; i < [diskTotals count]; i++) {
 		double diskValue = [[diskValues objectAtIndex:i] doubleValue];
 		double diskTotal = [[diskTotals objectAtIndex:i] doubleValue];
 		
@@ -61,9 +66,9 @@
 	}
 	
 	double currentRadius = 0;
-	double textMaxWidth = 70;
-	double textMaxHeight = 50;
-	for (int i = 0; i < [diskNames count]; i++) {
+	//double textMaxWidth = 70;
+	//double textMaxHeight = 50;
+	for (int i = 0; i < [diskValues count]; i++) {
 		double diskValue = [[diskValues objectAtIndex:i] doubleValue];
 		double diskTotal = [[diskTotals objectAtIndex:i] doubleValue];
 		double span = diskValue / totalSum * PI * 2;
@@ -86,20 +91,24 @@
 		
 		currentRadius += totalSpan;
 		
-		
+		/*
 		CGRect textFrame = CGRectMake(centerX + cos(currentRadius - totalSpan / 2)* radius * 1 - textMaxWidth / 2, 
 									  centerY + sin(currentRadius - totalSpan / 2) * radius * 1 - textMaxHeight / 2, textMaxWidth, textMaxHeight
 									  );
+		
+		
 		UILabel* diskView = [[UILabel alloc] initWithFrame:textFrame];
 		diskView.numberOfLines = 0;
 		diskView.text = [diskNames objectAtIndex:i];
 		diskView.font = [UIFont systemFontOfSize:9.0];
 		diskView.backgroundColor = [UIColor clearColor];
 		diskView.textAlignment = UITextAlignmentCenter;
+		
+		 
 		[self addSubview:diskView];
 		
 		[diskView release];
-		
+		*/
 	}
 	
 	

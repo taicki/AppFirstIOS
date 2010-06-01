@@ -56,5 +56,11 @@
 
 - (NSString *)applicationDocumentsDirectory;
 
+
+
+- (void) trySignIn:(id)theJobToDo;
+- (void) finishLoading:(id)theJobToDo;
+
+
 @end
 

@@ -71,9 +71,8 @@
 	
 	saveAlertPost.URL = [NSURL URLWithString:queryUrl];
 	
-	
-	NSLog(@"%@", self.alertId);
-	NSLog(@"%@", self.alertReset.text);
+	if ([self.alertReset.text isEqualToString:@""] || [self.alertReset.text isEqualToString:@"0"])
+		self.alertReset.text = @"1";
 	
 	NSString* alertEnabledString = @"True";
 	
@@ -99,15 +98,26 @@
 	controller.alertEnabled.on = self.alertEnabled.on;
 	controller.alertReset.text = self.alertReset.text;
 	
-	
 	NSString *jsonString = [[[NSString alloc] initWithData:data encoding: NSASCIIStringEncoding] autorelease];
-	NSLog(@"The server saw:\n%@", jsonString);
 	
-
+	if (DEBUGGING)
+		NSLog(@"The server saw:\n%@", jsonString);
+	
 	
 	[self dismissModalViewControllerAnimated:YES];
 	[self.delegate setEditing:NO];
-	//self.delegate = nil;
+	self.delegate.alertReset.text = [NSString stringWithFormat:@"Reset: %@ mins", self.alertReset.text];
+	self.delegate.parentController.needRefresh = YES;
+
+	
+	if (self.alertEnabled.on) {
+		self.delegate.alertEnabledLabel.text = @"Enabled: YES";
+	} else {
+		self.delegate.alertEnabledLabel.text = @"Enabled: NO";
+	}
+	
+	
+	self.delegate = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -183,39 +193,106 @@
 	// Initially the keyboard is hidden, so reset our variable 
 	keyboardVisible = NO; 
 	
-	self.alertName.text = [ NSString stringWithFormat:@"Alert Name: %@", 
-							[self.detailData objectForKey:ALERT_NAME]];
 	
+	int leftPadding = 10;
+	int topPadding = 0;
 	
+	self.alertName = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)];
+	self.alertName.numberOfLines = 0;
+	self.alertName.text = [NSString stringWithFormat:@"Name: %@", [self.detailData objectForKey:ALERT_NAME]];
+	self.alertName.font = [UIFont boldSystemFontOfSize:15];
+	[self.viewContainer addSubview:self.alertName];
+	
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	self.alertTarget = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)];
+	self.alertTarget.numberOfLines = 0;
 	self.alertTarget.text = [NSString stringWithFormat:@"Target: %@", [self.detailData objectForKey:ALERT_TARGET_NAME]];
+	self.alertTarget.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	[self.viewContainer addSubview:self.alertTarget];
 	
-
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	self.alertValue = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)];
+	self.alertValue.numberOfLines = 0;
+	
 	if ([[NSString stringWithFormat:@"%@", [self.detailData objectForKey:ALERT_VALUE_NAME]] isEqualToString:@""] == NO) {
 		self.alertValue.text = [NSString stringWithFormat:@"Value: %@", [self.detailData objectForKey:ALERT_VALUE_NAME]];
 	} else {
 		self.alertValue.text = @"Value: N/A";
 	}
+	self.alertValue.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	[self.viewContainer addSubview:self.alertValue];
+	
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	UILabel* resetLabel = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, 45, ALERT_CELL_HEIGHT)] autorelease];
+	resetLabel.text = @"Reset:";
+	resetLabel.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	[self.viewContainer addSubview:resetLabel];
+	
+	self.alertReset = [[[UITextField alloc] initWithFrame:CGRectMake(leftPadding + 45, topPadding + 10, 120, ALERT_CELL_HEIGHT / 2 )] autorelease];
+	[self.alertReset setBorderStyle:UITextBorderStyleRoundedRect];
 	
 	if ([[NSString stringWithFormat:@"%@", [self.detailData objectForKey:ALERT_RESET_NAME]] isEqualToString:@""] == NO) {
 		self.alertReset.text = [NSString stringWithFormat:@"%@", 
-								[[self.detailData objectForKey:ALERT_RESET_NAME] stringByReplacingOccurrencesOfString:@" mins" withString:@""]];
-
-		
+								[[[self.detailData objectForKey:ALERT_RESET_NAME] stringByReplacingOccurrencesOfString:@" mins" withString:@""] stringByReplacingOccurrencesOfString:@" min" withString:@""]];
 	} else {
 		self.alertReset.text = @"";
 	}
+	self.alertReset.keyboardType = UIKeyboardTypeNumberPad;
+	self.alertReset.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	[self.viewContainer addSubview:self.alertReset];
+	
+	UILabel* resetMinuteLabel = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding + 180, topPadding, 40, ALERT_CELL_HEIGHT)] autorelease];
+	resetMinuteLabel.text = @"mins";
+	resetMinuteLabel.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	[self.viewContainer addSubview:resetMinuteLabel];
+	
+	
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	
+	self.alertTrigger = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)];
+	self.alertTrigger.numberOfLines = 0;
 	
 	self.alertTrigger.text = [NSString stringWithFormat:@"Trigger: %@", [self.detailData  objectForKey:ALERT_TRIGGER_TYPE_NAME]];
+	self.alertTrigger.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	[self.viewContainer addSubview:self.alertTrigger];
+	
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	
+	self.alertType = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)];
+	self.alertType.numberOfLines = 0;
 	self.alertType.text = [NSString stringWithFormat:@"Type: %@", [self.detailData objectForKey:ALERT_TYPE_NAME]];
+	self.alertType.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	[self.viewContainer addSubview:self.alertType];
+	
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	self.lastTriggeredTime = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)];
+	self.lastTriggeredTime.numberOfLines = 0;
 	
 	if ([self.detailData objectForKey:AlERT_LAST_TRIGGER_NAME] != nil) {
 		NSDate *triggerTime = [NSDate dateWithTimeIntervalSince1970:[[self.detailData objectForKey:AlERT_LAST_TRIGGER_NAME] doubleValue]];
 		NSDateFormatter *format = [[NSDateFormatter alloc] init];
 		[format setDateFormat:@"MMM dd, yyyy HH:mm"];
 		self.lastTriggeredTime.text  = [NSString stringWithFormat:@"Last triggered: %@", [format stringFromDate:triggerTime]];
+		[format release];
 	} else {
 		self.lastTriggeredTime.text = @"Last triggered: N/A";
 	}
+	self.lastTriggeredTime.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	[self.viewContainer addSubview:self.lastTriggeredTime];
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	UILabel* enabledLabel = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding + 15, 65, 20)] autorelease];
+	enabledLabel.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
+	enabledLabel.text = @"Enabled:";
+	
+	
+	self.alertEnabled = [[[UISwitch alloc] initWithFrame:CGRectMake(leftPadding + 70, topPadding + 10, 100, ALERT_CELL_HEIGHT / 2)] autorelease];
 	
 	NSString* enabled = [NSString stringWithFormat:@"%@", [self.detailData objectForKey:ALERT_STATUS_NAME]];
 	
@@ -224,6 +301,14 @@
 	} else {
 		self.alertEnabled.on = NO;
 	}
+	
+	[self.viewContainer addSubview:self.alertEnabled];
+	[self.viewContainer addSubview:enabledLabel];
+	
+	topPadding += ALERT_CELL_HEIGHT;
+	
+	self.viewContainer.contentSize = CGSizeMake(self.bounds.width, topPadding + 50);
+	
 	
 }
 
