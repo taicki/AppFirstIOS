@@ -213,7 +213,7 @@
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Release;
 		activeExecutable = 3E82223311921499001F3644 /* AppFirst */;
-		activeSDKPreference = iphoneos3.2;
+		activeSDKPreference = iphonesimulator3.2;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* AppFirst */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* AppFirst */,
@@ -333,8 +333,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 297017235;
-			PBXWorkspaceStateSaveDate = 297017235;
+			PBXPerProjectTemplateStateSaveDate = 297092670;
+			PBXWorkspaceStateSaveDate = 297092670;
 		};
 		perUserProjectItems = {
 			3E16C50911B07112004481D2 = 3E16C50911B07112004481D2 /* PBXTextBookmark */;
@@ -392,14 +392,16 @@
 			3E8226CC11947D38001F3644 = 3E8226CC11947D38001F3644 /* PBXTextBookmark */;
 			3E8226CD11947D38001F3644 = 3E8226CD11947D38001F3644 /* PBXTextBookmark */;
 			3E9C398211AAFBF1005B8021 = 3E9C398211AAFBF1005B8021 /* PBXTextBookmark */;
-			3EA472F511B4212C0008FC3F /* PBXBookmark */ = 3EA472F511B4212C0008FC3F /* PBXBookmark */;
-			3EA472FE11B4279B0008FC3F /* PBXTextBookmark */ = 3EA472FE11B4279B0008FC3F /* PBXTextBookmark */;
-			3EA472FF11B4279B0008FC3F /* PBXBookmark */ = 3EA472FF11B4279B0008FC3F /* PBXBookmark */;
-			3EA4730011B4279B0008FC3F /* PBXTextBookmark */ = 3EA4730011B4279B0008FC3F /* PBXTextBookmark */;
-			3EA4730111B4279B0008FC3F /* PBXTextBookmark */ = 3EA4730111B4279B0008FC3F /* PBXTextBookmark */;
-			3EA4730211B4279B0008FC3F /* PBXTextBookmark */ = 3EA4730211B4279B0008FC3F /* PBXTextBookmark */;
-			3EA4730311B4279B0008FC3F /* PBXTextBookmark */ = 3EA4730311B4279B0008FC3F /* PBXTextBookmark */;
-			3EA4730811B4279B0008FC3F /* PlistBookmark */ = 3EA4730811B4279B0008FC3F /* PlistBookmark */;
+			3E9D7DD911B5466E00E399EE /* PBXTextBookmark */ = 3E9D7DD911B5466E00E399EE /* PBXTextBookmark */;
+			3E9D7DDC11B5466E00E399EE /* PlistBookmark */ = 3E9D7DDC11B5466E00E399EE /* PlistBookmark */;
+			3EA472F511B4212C0008FC3F = 3EA472F511B4212C0008FC3F /* PBXBookmark */;
+			3EA472FE11B4279B0008FC3F = 3EA472FE11B4279B0008FC3F /* PBXTextBookmark */;
+			3EA472FF11B4279B0008FC3F = 3EA472FF11B4279B0008FC3F /* PBXBookmark */;
+			3EA4730011B4279B0008FC3F = 3EA4730011B4279B0008FC3F /* PBXTextBookmark */;
+			3EA4730111B4279B0008FC3F = 3EA4730111B4279B0008FC3F /* PBXTextBookmark */;
+			3EA4730211B4279B0008FC3F = 3EA4730211B4279B0008FC3F /* PBXTextBookmark */;
+			3EA4730311B4279B0008FC3F = 3EA4730311B4279B0008FC3F /* PBXTextBookmark */;
+			3EA4730811B4279B0008FC3F = 3EA4730811B4279B0008FC3F /* PlistBookmark */;
 			3EB08D0111ADD5D8003054C2 = 3EB08D0111ADD5D8003054C2 /* PBXTextBookmark */;
 			3ED150D9119B032E00D4AB4E = 3ED150D9119B032E00D4AB4E /* PBXTextBookmark */;
 			3ED150DB119B032E00D4AB4E = 3ED150DB119B032E00D4AB4E /* PBXTextBookmark */;
@@ -1181,6 +1183,28 @@
 			sepNavWindowFrame = "{{442, 77}, {750, 558}}";
 		};
 	};
+	3E9D7DD911B5466E00E399EE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3EF1015911A5943C00C336FD /* SFHFKeychainUtils.m */;
+		name = "SFHFKeychainUtils.m: 16";
+		rLen = 0;
+		rLoc = 657;
+		rType = 0;
+		vrLen = 1155;
+		vrLoc = 4277;
+	};
+	3E9D7DDC11B5466E00E399EE /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* AppFirst-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			CFBundleInfoDictionaryVersion,
+		);
+		name = "/Users/joeng/mobile/mobile/IPhoneOS/trunk/AppFirst-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
 	3EA472F511B4212C0008FC3F /* PBXBookmark */ = {
 		isa = PBXBookmark;
 		fRef = 8D1107310486CEB800E47090 /* AppFirst-Info.plist */;
@@ -1249,7 +1273,7 @@
 		);
 		name = "/Users/joeng/Documents/AppFirst/AppFirst-Info.plist";
 		rLen = 0;
-		rLoc = 9223372036854775807;
+		rLoc = 9223372036854775808;
 	};
 	3EB08D0111ADD5D8003054C2 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -1511,9 +1535,9 @@
 	};
 	3EF1015911A5943C00C336FD /* SFHFKeychainUtils.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1105, 4901}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1321, 5174}}";
 			sepNavSelRange = "{657, 0}";
-			sepNavVisRange = "{0, 1707}";
+			sepNavVisRange = "{4277, 1155}";
 		};
 	};
 	3EF1019B11A5A97B00C336FD /* PBXBookmark */ = {
