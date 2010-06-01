@@ -11,15 +11,15 @@
 
 
 @interface AlertDetailViewController : UIViewController {
-	IBOutlet UILabel* alertName;
-	IBOutlet UILabel* lastTriggeredTime;
-	IBOutlet UILabel* alertTarget;
-	IBOutlet UILabel* alertValue;
-	IBOutlet UILabel* alertReset;
-	IBOutlet UILabel* alertTrigger;
-	IBOutlet UILabel* alertType;
-	IBOutlet UISwitch* alertEnabled;
-	IBOutlet UILabel* alertEnabledLabel;
+	UILabel* alertName;
+	UILabel* lastTriggeredTime;
+	UILabel* alertTarget;
+	UILabel* alertValue;
+	UILabel* alertReset;
+	UILabel* alertTrigger;
+	UILabel* alertType;
+
+	UILabel* alertEnabledLabel;
 	
 	
 	NSDictionary* detailData;
@@ -40,7 +40,6 @@
 @property (nonatomic, retain) UILabel* alertReset;
 @property (nonatomic, retain) UILabel* alertTrigger;
 @property (nonatomic, retain) UILabel* alertType;
-@property (nonatomic, retain) UISwitch* alertEnabled;
 @property (nonatomic, retain) NSDictionary* detailData;
 @property (nonatomic, retain) UIScrollView* viewContainer;
 @property (nonatomic, readwrite) CGSize bounds;

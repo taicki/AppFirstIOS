@@ -11,14 +11,14 @@
 
 
 @interface AlertEditViewController : UIViewController {
-	IBOutlet UILabel* alertName;
-	IBOutlet UILabel* lastTriggeredTime;
-	IBOutlet UILabel* alertTarget;
-	IBOutlet UILabel* alertValue;
-	IBOutlet UITextField* alertReset;
-	IBOutlet UILabel* alertTrigger;
-	IBOutlet UILabel* alertType;
-	IBOutlet UISwitch* alertEnabled;
+	UILabel* alertName;
+	UILabel* lastTriggeredTime;
+	UILabel* alertTarget;
+	UILabel* alertValue;
+	UITextField* alertReset;
+	UILabel* alertTrigger;
+	UILabel* alertType;
+	UISwitch* alertEnabled;
 	
 	NSDictionary* detailData;
 	NSArray* availableCookies;

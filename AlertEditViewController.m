@@ -95,7 +95,6 @@
 	
 	
 	AlertDetailViewController* controller = self.delegate;
-	controller.alertEnabled.on = self.alertEnabled.on;
 	controller.alertReset.text = self.alertReset.text;
 	
 	NSString *jsonString = [[[NSString alloc] initWithData:data encoding: NSASCIIStringEncoding] autorelease];

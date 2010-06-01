@@ -48,8 +48,8 @@
 
 
 - (void)dealloc {
-	[titleLabel release];
-	[timeLabel release];
+	[self.titleLabel release];
+	[self.timeLabel release];
     [super dealloc];
 }
 

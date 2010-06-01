@@ -12,7 +12,7 @@
 
 
 @implementation AlertDetailViewController
-@synthesize alertName,lastTriggeredTime,alertTarget,alertValue,alertReset,alertTrigger,alertType,alertEnabled,alertEnabledLabel;
+@synthesize alertName,lastTriggeredTime,alertTarget,alertValue,alertReset,alertTrigger,alertType,alertEnabledLabel;
 @synthesize detailData, parentController;
 
 @synthesize viewContainer;
@@ -82,6 +82,7 @@
 
 - (void) viewWillAppear: (BOOL) animated {
 	[super viewWillAppear: animated] ;
+	
 	//viewContainer.contentSize = CGSizeMake(self.bounds.width, self.bounds.height);
 	viewContainer.frame = CGRectMake(0, 0, self.bounds.height, self.bounds.width);
 	
@@ -231,7 +232,6 @@
 	[alertReset release];
 	[alertTrigger release];
 	[alertType release];
-	[alertEnabled release];
 	[alertEnabledLabel release];
 
 	[parentController release];

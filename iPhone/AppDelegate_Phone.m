@@ -44,8 +44,8 @@
 		}
 	}
 	
-	//self.loginController.usernameField.text = @"andrew@appfirst.com";
-	//self.loginController.passwordField.text = @"1AppFirst$";
+	self.loginController.usernameField.text = @"andrew@appfirst.com";
+	self.loginController.passwordField.text = @"1AppFirst$";
 	
 	
 	if (DEBUGGING == YES) {

@@ -55,12 +55,12 @@
 
 - (void) viewWillAppear: (BOOL) animated {
 	[super viewWillAppear: animated];
-	self.nameLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 10, 300, 20)];
+	self.nameLabel = [[[UILabel alloc] initWithFrame: CGRectMake(10, 10, 300, 20)] autorelease];
 	self.nameLabel.font = [UIFont boldSystemFontOfSize:16];
 	nameLabel.text = name;
 	[viewContainer addSubview:self.nameLabel];
 	
-	self.timeLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 35, 300, 20)];
+	self.timeLabel = [[[UILabel alloc] initWithFrame: CGRectMake(10, 35, 300, 20)] autorelease];
 	self.timeLabel.font = [UIFont systemFontOfSize:15];
 	timeLabel.text = timeLabelText;
 	[viewContainer addSubview:self.timeLabel];
@@ -98,7 +98,7 @@
 		double topPadding = 80;
 		
 		
-		self.cpuLabel = [[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding, CPU_LABEL_WIDTH, 20)];
+		self.cpuLabel = [[[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding, CPU_LABEL_WIDTH, 20)] autorelease];
 		cpuLabel.text = [NSString stringWithFormat:@"CPU:"];
 		cpuLabel.font = [UIFont systemFontOfSize:DASHBOARD_TAB_NORMAL_FONT_SIZE];
 		[viewContainer addSubview:self.cpuLabel];
@@ -156,7 +156,7 @@
 		double leftPadding = 10;
 		double topPadding = 120;
 		
-		self.memoryLabel = [[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding, CPU_LABEL_WIDTH, 20)];
+		self.memoryLabel = [[[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding, CPU_LABEL_WIDTH, 20)] autorelease];
 		memoryLabel.text = [NSString stringWithFormat:@"Memory:"];
 		memoryLabel.font = [UIFont systemFontOfSize:DASHBOARD_TAB_NORMAL_FONT_SIZE];
 		[viewContainer addSubview:self.memoryLabel];
@@ -208,7 +208,7 @@
 		[viewContainer addSubview:legendView];
 		[legendView release];
 		
-		self.diskLabel = [[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding, 160, 40)];
+		self.diskLabel = [[[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding, 160, 40)] autorelease];
 		self.diskLabel.numberOfLines = 0;
 		diskLabel.font = [UIFont systemFontOfSize:DASHBOARD_TAB_NORMAL_FONT_SIZE];
 		//diskLabel.userInteractionEnabled = NO;

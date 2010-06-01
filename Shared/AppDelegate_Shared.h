@@ -60,6 +60,7 @@
 
 - (void) trySignIn:(id)theJobToDo;
 - (void) finishLoading:(id)theJobToDo;
+- (void) loginFailed:(NSString*)message;
 
 
 @end

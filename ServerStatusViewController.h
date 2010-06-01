@@ -10,17 +10,17 @@
 
 
 @interface ServerStatusViewController : UIViewController {
-	IBOutlet UILabel *nameLabel;
-	IBOutlet UILabel *cpuLabel;
-	IBOutlet UILabel *memoryLabel;
-	IBOutlet UILabel *diskLabel;
-	IBOutlet UILabel *timeLabel;
+	UILabel *nameLabel;
+	UILabel *cpuLabel;
+	UILabel *memoryLabel;
+	UILabel *diskLabel;
+	UILabel *timeLabel;
 
 	NSDictionary *detailData;
 	NSString *name;
 	NSString *timeLabelText;
 	
-	IBOutlet UIScrollView* viewContainer;
+	UIScrollView* viewContainer;
 	
 	CGSize bounds;
 }

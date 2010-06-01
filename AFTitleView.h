@@ -10,8 +10,8 @@
 
 
 @interface AFTitleView : UIView {
-	IBOutlet UILabel* titleLabel;
-	IBOutlet UILabel* timeLabel;
+	UILabel* titleLabel;
+	UILabel* timeLabel;
 }
 
 @property (nonatomic, retain) UILabel* titleLabel;

@@ -85,7 +85,7 @@
 
 }
 
-- (void) loginFailed:(id)theJobToDo {
+- (void) loginFailed:(NSString*)message {
 	NSError *error;
 	
 	
@@ -93,6 +93,8 @@
 	loginController.invalidLoginLabel.hidden = NO;
 	[loginController.loginIndicator stopAnimating];
 	loginController.loginIndicator.hidden = YES;
+	loginController.invalidLoginLabel.text = message;
+	loginController.view.userInteractionEnabled = YES;
 	
 	// delete the password
 	[SFHFKeychainUtils storeUsername:self.loginController.usernameField.text andPassword:@""
@@ -124,6 +126,8 @@
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
 	
+	[request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
+	[request setTimeoutInterval:30];
 	[request setURL:myWebserverURL];
 	[request setHTTPMethod:@"POST"];
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];
@@ -141,17 +145,28 @@
 		NSLog(@"RESPONSE HEADERS: \n%@", [response allHeaderFields]);
 	}
 	
+	if (error) {
+		NSLog(@"%@", [error localizedDescription]);
+		[self performSelectorOnMainThread:@selector(loginFailed:)
+							   withObject:[error localizedDescription]
+							waitUntilDone:NO
+		 ];
+		//[error release];
+		[pool drain];
+		return;
+	}
+	
 	// If you want to get all of the cookies:
 	NSArray * all = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:[NSURL URLWithString:urlBase]];
 	
 	//loginController.loginIndicator.hidden = YES;
 	
-	if (error || all.count == 0) {
+	if ( all.count == 0) {
 		
-		NSLog(@"%@", [error localizedDescription]);
+		//NSLog(@"%@", [error localizedDescription]);
 		
 		[self performSelectorOnMainThread:@selector(loginFailed:)
-							   withObject:nil
+							   withObject:@"Invalid login."
 							waitUntilDone:NO
 		 ];
 		
