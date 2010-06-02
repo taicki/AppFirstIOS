@@ -93,7 +93,7 @@
 	[self.activityIndicator stopAnimating];
 	self.tableView.userInteractionEnabled = YES;
 	
-	AFTitleView* titleView = self.navigationItem.titleView;
+	AFTitleView* titleView = (AFTitleView*) self.navigationItem.titleView;
 	titleView.timeLabel.text = [NSString stringWithFormat:@"%@", theJobToDo];
 	
 	titleView.titleLabel.text = @"Alerts";
@@ -183,12 +183,24 @@
 		self.needRefresh = NO;
 	}
 	
-	if (self.otherAlerts != nil) {
-		return;
+	
+	NSMutableArray* tmpOtherAlerts = [[NSMutableArray alloc] init];
+	NSMutableArray* tmpNagiosAlerts = [[NSMutableArray alloc] init];
+	
+	if (self.otherAlerts == nil) {
+		self.otherAlerts = tmpOtherAlerts;
 	} else {
-		 self.otherAlerts = [[[NSMutableArray alloc] init] autorelease];
-		self.nagiosAlerts = [[[NSMutableArray alloc] init] autorelease];
+		[self setOtherAlerts:tmpOtherAlerts];
 	}
+	
+	if (self.nagiosAlerts == nil) {
+		self.nagiosAlerts = tmpNagiosAlerts;
+	} else {
+		[self setNagiosAlerts:tmpNagiosAlerts];
+	}
+	
+	[tmpOtherAlerts release];
+	[tmpNagiosAlerts release];
 	
 	
 	for(int cnt = 0; cnt < [self.alerts count]; cnt ++) {

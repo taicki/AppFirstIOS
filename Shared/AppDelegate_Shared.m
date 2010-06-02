@@ -75,11 +75,11 @@
 	[dateFormatter release];
 	
 	
-	AFTitleView* titleView = alertController.navigationItem.titleView;
+	AFTitleView* titleView = (AFTitleView*)alertController.navigationItem.titleView;
 	titleView.titleLabel.text = @"Alerts";
 	titleView.timeLabel.text = [NSString stringWithFormat:@"Updated at %@", currentTime];
 	
-	titleView = dashboardController.navigationItem.titleView;
+	titleView = (AFTitleView*)dashboardController.navigationItem.titleView;
 	titleView.titleLabel.text = @"Servers";
 	titleView.timeLabel.text = [NSString stringWithFormat:@"Updated at %@", currentTime];
 
@@ -135,9 +135,7 @@
 	[request setHTTPBody:postData];
 	
 	
-	//if (DEBUGGING == YES) {
-		[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
-	//}
+	[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
 	
 	[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];	
 	

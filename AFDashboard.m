@@ -37,18 +37,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	// right button: refresh
 	UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
 									  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)];
 	refreshButton.style = UIBarButtonItemStyleBordered;
-	
-	
 	self.navigationItem.rightBarButtonItem = refreshButton;
 	[refreshButton release];
 	
-	
+	// left button: refreshing indicator
 	CGRect frame = CGRectMake(0.0, 0.0, 25.0, 25.0);
-	self.activityIndicator = [[UIActivityIndicatorView alloc]
-							  initWithFrame:frame];
+	UIActivityIndicatorView* indicator = [[UIActivityIndicatorView alloc]
+										  initWithFrame:frame];
+	
+	self.activityIndicator = indicator;
+	[indicator release];
 	
 	[self.activityIndicator sizeToFit];
 	self.activityIndicator.autoresizingMask =
@@ -56,7 +58,6 @@
 	 UIViewAutoresizingFlexibleRightMargin |
 	 UIViewAutoresizingFlexibleTopMargin |
 	 UIViewAutoresizingFlexibleBottomMargin); 
-	//self.activityIndicator.hidden = NO;
 	
 	UIBarButtonItem *loadingView = [[UIBarButtonItem alloc] 
 									initWithCustomView:self.activityIndicator];
@@ -67,8 +68,6 @@
 	
 	AFTitleView* titleView = [[AFTitleView alloc] initWithFrame:CGRectMake(0, 0, 250, 30)];
 	self.navigationItem.titleView = titleView;
-	
-	//titleView.timeLabel.text = @"Servers";
 	
 	if (DEBUGGING) {
 		self.queryUrl = DEV_SERVER_IP;
@@ -87,7 +86,7 @@
 	[self.activityIndicator stopAnimating];
 	self.tableView.userInteractionEnabled = YES;
 	
-	AFTitleView* titleView = self.navigationItem.titleView;
+	AFTitleView* titleView = (AFTitleView*)self.navigationItem.titleView;
 	titleView.timeLabel.text = [NSString stringWithFormat:@"Updated at %@", theJobToDo];
 	
 	titleView.titleLabel.text = @"Servers";
@@ -111,7 +110,7 @@
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	[self getServerListData:YES];
 	
-	[pool release];
+	[pool drain];
 }
 
 
@@ -142,7 +141,7 @@
 	if (DEBUGGING)
 		NSLog(@"The server saw:\n%@", jsonString);
 	
-	NSDictionary *dictionary = [jsonString JSONValue];
+	NSDictionary *dictionary = (NSDictionary*)[jsonString JSONValue];
 	
 	
 	self.servers = dictionary.allKeys;
@@ -170,12 +169,23 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	
-	if (self.collectorRunningServers != nil) {
-		return;
+	NSMutableArray* runningServers = [[NSMutableArray alloc] init];
+	NSMutableArray* stoppingServers = [[NSMutableArray alloc] init];
+	
+	if (self.collectorRunningServers == nil) {
+		self.collectorRunningServers = runningServers;
 	} else {
-		self.collectorRunningServers = [[NSMutableArray alloc] init];
-		self.collectorStoppingServers = [[NSMutableArray alloc] init];
+		[self setCollectorRunningServers:runningServers];
 	}
+
+	if (self.collectorStoppingServers == nil) {
+		self.collectorStoppingServers = stoppingServers; 
+	} else {
+		[self setCollectorStoppingServers:stoppingServers];
+	}
+	
+	[runningServers release];
+	[stoppingServers release];
 	
 	
 	for(int cnt = 0; cnt < [self.servers count]; cnt ++) {

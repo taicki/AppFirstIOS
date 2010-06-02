@@ -196,7 +196,7 @@
 	int leftPadding = 10;
 	int topPadding = 0;
 	
-	self.alertName = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)];
+	self.alertName = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)] autorelease];
 	self.alertName.numberOfLines = 0;
 	self.alertName.text = [NSString stringWithFormat:@"Name: %@", [self.detailData objectForKey:ALERT_NAME]];
 	self.alertName.font = [UIFont boldSystemFontOfSize:15];
@@ -204,7 +204,7 @@
 	
 	topPadding += ALERT_CELL_HEIGHT;
 	
-	self.alertTarget = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)];
+	self.alertTarget = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)] autorelease];
 	self.alertTarget.numberOfLines = 0;
 	self.alertTarget.text = [NSString stringWithFormat:@"Target: %@", [self.detailData objectForKey:ALERT_TARGET_NAME]];
 	self.alertTarget.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
@@ -212,7 +212,7 @@
 	
 	topPadding += ALERT_CELL_HEIGHT;
 	
-	self.alertValue = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)];
+	self.alertValue = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)] autorelease];
 	self.alertValue.numberOfLines = 0;
 	
 	if ([[NSString stringWithFormat:@"%@", [self.detailData objectForKey:ALERT_VALUE_NAME]] isEqualToString:@""] == NO) {
@@ -252,7 +252,7 @@
 	topPadding += ALERT_CELL_HEIGHT;
 	
 	
-	self.alertTrigger = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)];
+	self.alertTrigger = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)] autorelease];
 	self.alertTrigger.numberOfLines = 0;
 	
 	self.alertTrigger.text = [NSString stringWithFormat:@"Trigger: %@", [self.detailData  objectForKey:ALERT_TRIGGER_TYPE_NAME]];
@@ -262,7 +262,7 @@
 	topPadding += ALERT_CELL_HEIGHT;
 	
 	
-	self.alertType = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)];
+	self.alertType = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)] autorelease];
 	self.alertType.numberOfLines = 0;
 	self.alertType.text = [NSString stringWithFormat:@"Type: %@", [self.detailData objectForKey:ALERT_TYPE_NAME]];
 	self.alertType.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
@@ -270,7 +270,7 @@
 	
 	topPadding += ALERT_CELL_HEIGHT;
 	
-	self.lastTriggeredTime = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)];
+	self.lastTriggeredTime = [[[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, ALERT_CELL_WIDTH, ALERT_CELL_HEIGHT)] autorelease];
 	self.lastTriggeredTime.numberOfLines = 0;
 	
 	if ([self.detailData objectForKey:AlERT_LAST_TRIGGER_NAME] != nil) {

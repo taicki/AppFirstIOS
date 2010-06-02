@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>3E5AB7A611B5BA27000ECCE1</string>
+						<string>3E5AB7EF11B6C83F000ECCE1</string>
 						<key>history</key>
 						<array>
 							<string>3E5AB6C211B586A8000ECCE1</string>
@@ -318,13 +318,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>40</integer>
+									<integer>47</integer>
 									<integer>19</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 257}, {252, 1086}}</string>
+							<string>{{0, 115}, {252, 1086}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -361,7 +361,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>AppDelegate_Shared.m</string>
+								<string>AFAlert.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -369,11 +369,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>AppDelegate_Shared.m</string>
+										<string>AFAlert.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>3E5AB7A511B5BA27000ECCE1</string>
+										<string>3E5AB7EE11B6C83F000ECCE1</string>
 										<key>history</key>
 										<array>
 											<string>3E8226C311947D38001F3644</string>
@@ -400,42 +400,42 @@
 											<string>3E17E21611AEE9C700EC68E8</string>
 											<string>3E17E2AB11AF07C200EC68E8</string>
 											<string>3EA472FF11B4279B0008FC3F</string>
-											<string>3E9D7DE711B556DF00E399EE</string>
 											<string>3E9D7DE811B556DF00E399EE</string>
 											<string>3E9D7DE911B556DF00E399EE</string>
 											<string>3E9D7E1B11B56D6900E399EE</string>
-											<string>3E5AB6DC11B58CF0000ECCE1</string>
 											<string>3E5AB6DD11B58CF0000ECCE1</string>
 											<string>3E5AB6DE11B58CF0000ECCE1</string>
-											<string>3E5AB6DF11B58CF0000ECCE1</string>
 											<string>3E5AB70511B597D6000ECCE1</string>
-											<string>3E5AB70611B597D6000ECCE1</string>
 											<string>3E5AB70711B597D6000ECCE1</string>
 											<string>3E5AB70811B597D6000ECCE1</string>
-											<string>3E5AB70911B597D6000ECCE1</string>
 											<string>3E5AB70A11B597D6000ECCE1</string>
 											<string>3E5AB70B11B597D6000ECCE1</string>
-											<string>3E5AB70C11B597D6000ECCE1</string>
-											<string>3E5AB70D11B597D6000ECCE1</string>
-											<string>3E5AB70E11B597D6000ECCE1</string>
 											<string>3E5AB71211B597D6000ECCE1</string>
-											<string>3E5AB76B11B5ADFD000ECCE1</string>
 											<string>3E5AB77611B5AFB3000ECCE1</string>
 											<string>3E5AB78411B5B043000ECCE1</string>
 											<string>3E5AB78511B5B043000ECCE1</string>
-											<string>3E5AB79811B5BA27000ECCE1</string>
-											<string>3E5AB79911B5BA27000ECCE1</string>
 											<string>3E5AB79A11B5BA27000ECCE1</string>
-											<string>3E5AB79B11B5BA27000ECCE1</string>
-											<string>3E5AB79C11B5BA27000ECCE1</string>
-											<string>3E5AB79D11B5BA27000ECCE1</string>
-											<string>3E5AB79E11B5BA27000ECCE1</string>
 											<string>3E5AB79F11B5BA27000ECCE1</string>
 											<string>3E5AB7A011B5BA27000ECCE1</string>
-											<string>3E5AB7A111B5BA27000ECCE1</string>
 											<string>3E5AB7A211B5BA27000ECCE1</string>
-											<string>3E5AB7A311B5BA27000ECCE1</string>
-											<string>3E5AB7A411B5BA27000ECCE1</string>
+											<string>3E5AB7A811B69138000ECCE1</string>
+											<string>3E5AB7BA11B6BAA8000ECCE1</string>
+											<string>3E5AB7DE11B6C83F000ECCE1</string>
+											<string>3E5AB7DF11B6C83F000ECCE1</string>
+											<string>3E5AB7E011B6C83F000ECCE1</string>
+											<string>3E5AB7E111B6C83F000ECCE1</string>
+											<string>3E5AB7E211B6C83F000ECCE1</string>
+											<string>3E5AB7E311B6C83F000ECCE1</string>
+											<string>3E5AB7E411B6C83F000ECCE1</string>
+											<string>3E5AB7E511B6C83F000ECCE1</string>
+											<string>3E5AB7E611B6C83F000ECCE1</string>
+											<string>3E5AB7E711B6C83F000ECCE1</string>
+											<string>3E5AB7E811B6C83F000ECCE1</string>
+											<string>3E5AB7E911B6C83F000ECCE1</string>
+											<string>3E5AB7EA11B6C83F000ECCE1</string>
+											<string>3E5AB7EB11B6C83F000ECCE1</string>
+											<string>3E5AB7EC11B6C83F000ECCE1</string>
+											<string>3E5AB7ED11B6C83F000ECCE1</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -633,12 +633,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>3E5AB7DB11B6C29E000ECCE1</string>
 		<string>3E5AB6ED11B58CF0000ECCE1</string>
 		<string>3E5AB6B811B58629000ECCE1</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>3E5AB6E911B58CF0000ECCE1</string>
-		<string>3E82223C119214A1001F3644</string>
 		<string>1C78EAAD065D492600B07095</string>
+		<string>3E82223C119214A1001F3644</string>
 		<string>/Users/joeng/mobile/mobile/IPhoneOS/trunk/AppFirst.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -680,6 +681,8 @@
 							<string>266pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
