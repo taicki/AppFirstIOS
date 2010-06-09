@@ -96,9 +96,13 @@
 	loginController.invalidLoginLabel.text = message;
 	loginController.view.userInteractionEnabled = YES;
 	
+	UIAlertView *networkError = [[UIAlertView alloc] initWithTitle: @"Could not login. " message: message delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
+	[networkError show];
+	[networkError release];
+	
 	// delete the password
-	[SFHFKeychainUtils storeUsername:self.loginController.usernameField.text andPassword:@""
-					  forServiceName:@"appfirst" updateExisting:YES error:&error];
+	//[SFHFKeychainUtils storeUsername:self.loginController.usernameField.text andPassword:@""
+	//				  forServiceName:@"appfirst" updateExisting:YES error:&error];
 }
 
 

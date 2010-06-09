@@ -25,6 +25,7 @@
 		3E17E28311AEFBE200EC68E8 /* AFTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E17E28211AEFBE200EC68E8 /* AFTitleView.m */; };
 		3E17E50E11B03C9C00EC68E8 /* unchecked_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E17E50D11B03C9C00EC68E8 /* unchecked_box.png */; };
 		3E17E51011B03CA800EC68E8 /* checked_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E17E50F11B03CA800EC68E8 /* checked_box.png */; };
+		3E5298D111BED63C0045A6CF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E5298D011BED63C0045A6CF /* Default.png */; };
 		3E82224711921574001F3644 /* af_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E82224611921574001F3644 /* af_icon.png */; };
 		3E82226111930FE8001F3644 /* AFDashboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E82226011930FE8001F3644 /* AFDashboard.m */; };
 		3E82226411931009001F3644 /* AFAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E82226311931009001F3644 /* AFAlert.m */; };
@@ -101,6 +102,7 @@
 		3E17E28211AEFBE200EC68E8 /* AFTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTitleView.m; sourceTree = "<group>"; };
 		3E17E50D11B03C9C00EC68E8 /* unchecked_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked_box.png; sourceTree = "<group>"; };
 		3E17E50F11B03CA800EC68E8 /* checked_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked_box.png; sourceTree = "<group>"; };
+		3E5298D011BED63C0045A6CF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3E5AB6A111B5824F000ECCE1 /* AppFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E82224611921574001F3644 /* af_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = af_icon.png; sourceTree = "<group>"; };
 		3E82225F11930FE8001F3644 /* AFDashboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDashboard.h; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				3E5298D011BED63C0045A6CF /* Default.png */,
 				3E16C58211B41F72004481D2 /* icon(ipad).png */,
 				3E17E50F11B03CA800EC68E8 /* checked_box.png */,
 				3E17E50D11B03C9C00EC68E8 /* unchecked_box.png */,
@@ -377,6 +380,7 @@
 				3E17E50E11B03C9C00EC68E8 /* unchecked_box.png in Resources */,
 				3E17E51011B03CA800EC68E8 /* checked_box.png in Resources */,
 				3E16C58311B41F72004481D2 /* icon(ipad).png in Resources */,
+				3E5298D111BED63C0045A6CF /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

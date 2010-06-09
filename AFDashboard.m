@@ -126,13 +126,16 @@
 	[serverListRequest setHTTPMethod:@"GET"];
 	[serverListRequest setAllHTTPHeaderFields:headers];
 	[serverListRequest setHTTPBody:nil];
+	[serverListRequest setTimeoutInterval:20];
 	
 	serverListRequest.URL = [NSURL URLWithString:self.queryUrl];
 	
 	
 	NSData * data = [NSURLConnection sendSynchronousRequest:serverListRequest returningResponse:&response error:&error];
 	if (error) {
-		NSLog(@"%@", [error localizedDescription]);
+		UIAlertView *networkError = [[UIAlertView alloc] initWithTitle: @"Could not refresh. " message: [error localizedDescription] delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
+		[networkError show];
+		[networkError release];
 		return;
 	}
 	

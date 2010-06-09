@@ -131,6 +131,7 @@
 	[alertListRequest setHTTPMethod:@"GET"];
 	[alertListRequest setAllHTTPHeaderFields:headers];
 	[alertListRequest setHTTPBody:nil];
+	[alertListRequest setTimeoutInterval:30];
 	
 	alertListRequest.URL = [NSURL URLWithString:self.queryUrl];
 	
@@ -138,7 +139,9 @@
 	
 	NSData * data = [NSURLConnection sendSynchronousRequest:alertListRequest returningResponse:&response error:&error];
 	if (error) {
-		NSLog(@"%@", [error localizedDescription]);
+		UIAlertView *networkError = [[UIAlertView alloc] initWithTitle: @"Could not refresh. " message: [error localizedDescription] delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
+		[networkError show];
+		[networkError release];
 		return;
 	}
 	
@@ -182,7 +185,6 @@
 		[self refresh:nil];
 		self.needRefresh = NO;
 	}
-	
 	
 	NSMutableArray* tmpOtherAlerts = [[NSMutableArray alloc] init];
 	NSMutableArray* tmpNagiosAlerts = [[NSMutableArray alloc] init];
