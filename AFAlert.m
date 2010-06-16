@@ -12,6 +12,7 @@
 #import "config.h"
 #import "JSON/JSON.h"
 #import "AFTitleView.h"
+#import "AppHelper.h"
 
 @implementation AFAlert
 
@@ -409,12 +410,8 @@
 	
 	if (!self.editing) {
 		AlertDetailViewController *detailViewController = [[AlertDetailViewController alloc] initWithNibName:@"AlertDetailViewController" bundle:nil];
+		detailViewController.bounds = [AppHelper getDeviceBound];
 		
-		if (self.view.bounds.size.width < 400) {
-			detailViewController.bounds = CGSizeMake(320, 480);
-		} else {
-			detailViewController.bounds = CGSizeMake(768, 1024);
-		}
 		
 		detailViewController.alertId = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];
 		detailViewController.detailData = [self.allData objectForKey:[[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"]];;
@@ -434,13 +431,7 @@
 		
 		UINavigationController *editController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
 		
-		
-		
-		if (self.view.bounds.size.width < 400) {
-			detailViewController.bounds = CGSizeMake(320, 480);
-		} else {
-			detailViewController.bounds = CGSizeMake(768, 1024);
-		}
+		detailViewController.bounds = [AppHelper getDeviceBound];
 		
 		detailViewController.alertId = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];
 		detailViewController.detailData = [self.allData objectForKey:[[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"]];;

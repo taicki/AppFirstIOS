@@ -179,14 +179,16 @@
 		self.alertEnabledLabel.text = @"Enabled: NO";
 		//self.alertEnabled.on = NO;
 	}
-	//[self.viewContainer addSubview:self.alertEnabled];
 	
 	
 	[self.viewContainer addSubview:self.alertEnabledLabel];
 	
 	topPadding += ALERT_CELL_HEIGHT;
 	
-	self.viewContainer.contentSize = CGSizeMake(self.bounds.width, topPadding + 50);
+	NSLog(@"%d", topPadding);
+	
+	
+	self.viewContainer.contentSize = CGSizeMake(self.bounds.width, topPadding + 100);
 	
 }
 

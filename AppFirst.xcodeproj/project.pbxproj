@@ -18,6 +18,7 @@
 		28AD733F0D9D9553002E5188 /* MainWindow_Pad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow_Pad.xib */; };
 		28EEBFDD1118E19E00187D67 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EEBFDC1118E19E00187D67 /* CoreData.framework */; };
 		28EEC04B1118E28000187D67 /* AppDelegate_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EEC04A1118E28000187D67 /* AppDelegate_Shared.m */; };
+		3E1024F311C7FCE6009326FF /* AppHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1024F211C7FCE6009326FF /* AppHelper.m */; };
 		3E16C58311B41F72004481D2 /* icon(ipad).png in Resources */ = {isa = PBXBuildFile; fileRef = 3E16C58211B41F72004481D2 /* icon(ipad).png */; };
 		3E17E20511AEE86C00EC68E8 /* active_dot_saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E17E20411AEE86C00EC68E8 /* active_dot_saved.png */; };
 		3E17E20911AEE9AD00EC68E8 /* active_dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E17E20811AEE9AD00EC68E8 /* active_dot.png */; };
@@ -94,6 +95,8 @@
 		28EEC04A1118E28000187D67 /* AppDelegate_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate_Shared.m; path = Shared/AppDelegate_Shared.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Shared/main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* AppFirst_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppFirst_Prefix.pch; sourceTree = "<group>"; };
+		3E1024F111C7FCE6009326FF /* AppHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppHelper.h; sourceTree = "<group>"; };
+		3E1024F211C7FCE6009326FF /* AppHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppHelper.m; sourceTree = "<group>"; };
 		3E16C58211B41F72004481D2 /* icon(ipad).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon(ipad).png"; sourceTree = "<group>"; };
 		3E17E20411AEE86C00EC68E8 /* active_dot_saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = active_dot_saved.png; path = Shared/active_dot_saved.png; sourceTree = "<group>"; };
 		3E17E20811AEE9AD00EC68E8 /* active_dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = active_dot.png; sourceTree = "<group>"; };
@@ -222,6 +225,8 @@
 				3ED1565E119C7B4500D4AB4E /* AlertDetailViewController.h */,
 				3ED1565F119C7B4500D4AB4E /* AlertDetailViewController.m */,
 				3ED15660119C7B4500D4AB4E /* AlertDetailViewController.xib */,
+				3E1024F111C7FCE6009326FF /* AppHelper.h */,
+				3E1024F211C7FCE6009326FF /* AppHelper.m */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -415,6 +420,7 @@
 				3EF1015A11A5943C00C336FD /* SFHFKeychainUtils.m in Sources */,
 				3E9C3AD011AC0552005B8021 /* AlertEditViewController.m in Sources */,
 				3E17E28311AEFBE200EC68E8 /* AFTitleView.m in Sources */,
+				3E1024F311C7FCE6009326FF /* AppHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

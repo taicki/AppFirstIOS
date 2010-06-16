@@ -10,6 +10,7 @@
 #import "AFTitleView.h"
 #import "ServerStatusViewController.h"
 #import "config.h"
+#import "AppHelper.h"
 
 @implementation AFDashboard
 
@@ -418,14 +419,8 @@
 		[format release];
 	}
 	
-	// temp solutions, should be better ways. 
 	
-	if (self.view.bounds.size.width < 400) {
-		detailViewController.bounds = CGSizeMake(320, 480);
-	} else {
-		detailViewController.bounds = CGSizeMake(768, 1024);
-	}
-	
+	detailViewController.bounds = [AppHelper getDeviceBound];	
 	detailViewController.name = serverName;
 	
 
