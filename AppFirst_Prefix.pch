@@ -1,8 +1,0 @@
-//
-// Prefix header for all source files of the 'AppFirst' target in the 'AppFirst' project
-//
-
-#ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-    #import <UIKit/UIKit.h>
-#endif
