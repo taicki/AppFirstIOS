@@ -39,41 +39,60 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-		
+- (void) _createRefreshButton {
 	UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
-		  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)];
+									  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
+									  target:self 
+									  action:@selector(asyncGetListData)];
 	refreshButton.style = UIBarButtonItemStyleBordered;
-	
-
 	self.navigationItem.rightBarButtonItem = refreshButton;
 	[refreshButton release];
+}
+
+- (void) _createRefreshIndicator {
+	
+	CGRect frame;
+	
+	if ([AppHelper isIPad]) {
+		frame = CGRectMake(0.0, 0.0, IPAD_LOADER_SIZE, IPAD_LOADER_SIZE);
+	} else {
+		frame = CGRectMake(0.0, 0.0, IPHONE_LOADER_SIZE, IPHONE_LOADER_SIZE);
+	}
 	
 	
-	CGRect frame = CGRectMake(0.0, 0.0, 25.0, 25.0);
-	self.activityIndicator = [[UIActivityIndicatorView alloc]
-							  initWithFrame:frame];
+	UIActivityIndicatorView* indicator = [[UIActivityIndicatorView alloc]
+										  initWithFrame:frame];
+	
+	self.activityIndicator = indicator;
+	[indicator release];
+	
 	[self.activityIndicator sizeToFit];
 	self.activityIndicator.autoresizingMask =
     (UIViewAutoresizingFlexibleLeftMargin |
 	 UIViewAutoresizingFlexibleRightMargin |
 	 UIViewAutoresizingFlexibleTopMargin |
-	 UIViewAutoresizingFlexibleBottomMargin);
-	
+	 UIViewAutoresizingFlexibleBottomMargin); 
 	
 	UIBarButtonItem *loadingView = [[UIBarButtonItem alloc] 
 									initWithCustomView:self.activityIndicator];
 	loadingView.target = self;
 	self.navigationItem.leftBarButtonItem = loadingView;
 	
-	AFTitleView* titleView = [[AFTitleView alloc] initWithFrame:CGRectMake(0, 0, 250, 30)];
-	self.navigationItem.titleView = titleView;
-	
-	
 	[loadingView release];
-	
+}
+
+- (void) _createNavigatorTitle {
+	AFTitleView* titleView;
+	if ([AppHelper isIPad]) {
+		titleView = [[AFTitleView alloc] initWithFrame:CGRectMake(0, 0, IPAD_NAVIGATION_TITLE_WIDTH, IPAD_NAVIGATION_TITLE_HEIGHT)];
+	} else {
+		titleView = [[AFTitleView alloc] initWithFrame:CGRectMake(0, 0, IPHONE_NAVIGATION_TITLE_WIDTH, IPHONE_NAVIGATION_TITLE_HEIGHT)];
+	}
+	self.navigationItem.titleView = titleView;
+	[titleView release];
+}
+
+- (void) _setQueryUrl {
 	if (DEBUGGING) {
 		self.queryUrl = DEV_SERVER_IP;
 	} else {
@@ -82,8 +101,75 @@
 	
 	self.queryUrl = [NSString stringWithFormat:@"%@%@", self.queryUrl, ALERT_LIST_API_STRING];
 	
-	[titleView release];
-	self.needRefresh = NO;
+}
+
+
+
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	[responseData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+	UIAlertView *errorView = [[UIAlertView alloc] initWithTitle: @"Couldn't refresh server list. " 
+														message: [error localizedDescription] 
+													   delegate: self 
+											  cancelButtonTitle: @"Ok" 
+											  otherButtonTitles: nil];
+	[errorView show];
+	[errorView release];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	
+	[connection release];
+	
+	NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+	[responseData release];
+	
+	
+	NSDictionary *dictionary = (NSDictionary*)[jsonString JSONValue];
+	
+	self.alerts = dictionary.allKeys;
+	self.allData = dictionary;
+	
+	[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
+}
+
+
+
+-(void) asyncGetListData {
+	
+	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:self.availableCookies];
+	responseData = [[NSMutableData data] retain];
+	
+	NSMutableURLRequest *serverListRequest = [[[NSMutableURLRequest alloc] init] autorelease];
+	[serverListRequest setHTTPMethod:@"GET"];
+	[serverListRequest setAllHTTPHeaderFields:headers];
+	[serverListRequest setHTTPBody:nil];
+	[serverListRequest setTimeoutInterval:20];
+	
+	serverListRequest.URL = [NSURL URLWithString:self.queryUrl];
+	[[NSURLConnection alloc] initWithRequest:serverListRequest delegate:self];
+	
+	
+	self.activityIndicator.hidden = NO;
+	[self.activityIndicator startAnimating];
+	[self.activityIndicator setNeedsDisplay];
+	self.tableView.userInteractionEnabled = NO;
+	
+}
+
+
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	
+	[self _createRefreshButton];
+	[self _createRefreshIndicator];
+	[self _createNavigatorTitle];
+	[self _setQueryUrl];
 }
 
 
@@ -102,24 +188,6 @@
 	[self.tableView reloadData];
 }
 
-- (void) refresh: (id)theJobToDo {
-	
-	self.activityIndicator.hidden = NO;
-	[self.activityIndicator startAnimating];
-	[self.activityIndicator setNeedsDisplay];
-	self.tableView.userInteractionEnabled = NO;
-	
-	[self performSelectorInBackground:@selector(tryUpdating:)
-						   withObject:nil];
-}
-
-- (void) tryUpdating: (id)theJobToDo {
-	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-	[self getAlertListData:YES];
-	
-	[pool release];
-	
-}
 
 - (void) getAlertListData: (BOOL)usingRefresh{
 	NSHTTPURLResponse *response;
@@ -157,19 +225,12 @@
 	self.allData = dictionary;
 	
 	
-	NSDate *today = [NSDate date];
-	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat:@"MMM dd, yyyy HH:mm"];
-	NSString *currentTime = [dateFormatter stringFromDate:today];
-	//self.navigationItem.title = [NSString stringWithFormat:@"Alerting (Updated at %@)", currentTime];
-	//NSLog(@"%@", [NSString stringWithFormat:@"Alerting (Updated at %@)", currentTime]);
 	
-	[dateFormatter release];
 	
 	
 	if (usingRefresh) {
 		[self performSelectorOnMainThread:@selector(finishLoading:)
-							   withObject:[NSString stringWithFormat:@"Updated at %@", currentTime]
+							   withObject:[NSString stringWithFormat:@"Updated at %@", [AppHelper formatDateString:[NSDate date]]]
 							waitUntilDone:NO
 		 ];
 	}
@@ -316,14 +377,12 @@
 	if ([[self.allData objectForKey:alertId] objectForKey:AlERT_LAST_TRIGGER_NAME] != nil) {
 	
 		NSDate *triggerTime = [NSDate dateWithTimeIntervalSince1970:[[[self.allData objectForKey:alertId] objectForKey:AlERT_LAST_TRIGGER_NAME] doubleValue]];
-		NSDateFormatter *format = [[NSDateFormatter alloc] init];
-		[format setDateFormat:@"MMM dd, yyyy HH:mm"];
+	
 	
 
 		cell.detailTextLabel.text = [NSString stringWithFormat:@"Last triggered: %@", 
-									 [format stringFromDate:triggerTime]];
+									 [AppHelper formatDateString:triggerTime]];
 		
-		[format release];
 	} else {
 		cell.detailTextLabel.text = @"Last triggered: N/A";
 	}

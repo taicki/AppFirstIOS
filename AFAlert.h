@@ -15,6 +15,7 @@
 	NSArray* availableCookies;
 	NSMutableArray* nagiosAlerts;
 	NSMutableArray* otherAlerts;
+	NSMutableData* responseData;
 	
 	NSString* queryUrl;
 	IBOutlet UIActivityIndicatorView* activityIndicator;
@@ -32,8 +33,14 @@
 @property (nonatomic, readwrite) BOOL needRefresh;
 
 
-- (void) getAlertListData:(BOOL)usingRefresh;
+- (void) getServerListData: (BOOL)usingRefresh;
 - (void) finishLoading:(NSString*)theJobToDo;
-- (void) tryUpdating:(id)theJobtoDo;
+- (void) asyncGetListData;
+
+- (void) _createRefreshButton;
+- (void)_createRefreshIndicator;
+- (void)  _createNavigatorTitle;
+- (void) _setQueryUrl;
+
 
 @end

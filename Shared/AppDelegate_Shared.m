@@ -116,9 +116,6 @@
 	NSError *error;
 	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
 	
-	
-	
-	
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	NSURL *myWebserverURL = [NSURL URLWithString:self.loginUrl];
 	
@@ -139,7 +136,7 @@
 	[request setHTTPBody:postData];
 	
 	
-	[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
+	//[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
 	
 	[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];	
 	
@@ -153,7 +150,8 @@
 							   withObject:[error localizedDescription]
 							waitUntilDone:NO
 		 ];
-		//[error release];
+		
+		
 		[pool drain];
 		return;
 	}

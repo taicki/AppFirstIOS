@@ -32,4 +32,35 @@
 	return ret;
 }
 
++ (BOOL) isIPad {
+	BOOL ret = NO;
+	
+	#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200 // for real device
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+			ret = YES;
+		} else {
+			ret = NO;
+		}
+	#else
+		if (self.view.bounds.size.width > 700) { // for simulator
+			ret = YES;
+		} else {
+			ret = NO;
+		}
+	#endif
+	
+	return ret;
+}
+
+
+
++ (NSString*) formatDateString:(NSDate*) date {
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"MMM dd, yyyy HH:mm"];
+	NSString *currentTime = [dateFormatter stringFromDate:date];
+	[dateFormatter release];
+	
+	return currentTime;
+}
+
 @end

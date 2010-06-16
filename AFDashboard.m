@@ -35,18 +35,27 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	
-	// right button: refresh
+- (void) _createRefreshButton {
 	UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
-									  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)];
+									  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
+									  target:self 
+									  action:@selector(asyncGetServerListData)];
 	refreshButton.style = UIBarButtonItemStyleBordered;
 	self.navigationItem.rightBarButtonItem = refreshButton;
 	[refreshButton release];
+}
+
+- (void) _createRefreshIndicator {
 	
-	// left button: refreshing indicator
-	CGRect frame = CGRectMake(0.0, 0.0, 25.0, 25.0);
+	CGRect frame;
+	
+	if ([AppHelper isIPad]) {
+		frame = CGRectMake(0.0, 0.0, IPAD_LOADER_SIZE, IPAD_LOADER_SIZE);
+	} else {
+		frame = CGRectMake(0.0, 0.0, IPHONE_LOADER_SIZE, IPHONE_LOADER_SIZE);
+	}
+
+	
 	UIActivityIndicatorView* indicator = [[UIActivityIndicatorView alloc]
 										  initWithFrame:frame];
 	
@@ -66,10 +75,20 @@
 	self.navigationItem.leftBarButtonItem = loadingView;
 	
 	[loadingView release];
-	
-	AFTitleView* titleView = [[AFTitleView alloc] initWithFrame:CGRectMake(0, 0, 250, 30)];
+}
+
+- (void) _createNavigatorTitle {
+	AFTitleView* titleView;
+	if ([AppHelper isIPad]) {
+		titleView = [[AFTitleView alloc] initWithFrame:CGRectMake(0, 0, IPAD_NAVIGATION_TITLE_WIDTH, IPAD_NAVIGATION_TITLE_HEIGHT)];
+	} else {
+		titleView = [[AFTitleView alloc] initWithFrame:CGRectMake(0, 0, IPHONE_NAVIGATION_TITLE_WIDTH, IPHONE_NAVIGATION_TITLE_HEIGHT)];
+	}
 	self.navigationItem.titleView = titleView;
-	
+	[titleView release];
+}
+
+- (void) _setQueryUrl {
 	if (DEBUGGING) {
 		self.queryUrl = DEV_SERVER_IP;
 	} else {
@@ -77,7 +96,6 @@
 	}
 	
 	self.queryUrl = [NSString stringWithFormat:@"%@%@", self.queryUrl, SERVER_LIST_API_STRING];
-	[titleView release];
 	
 }
 
@@ -92,30 +110,68 @@
 	
 	titleView.titleLabel.text = @"Servers";
 	[self.tableView reloadData];
-	
 }
 
-- (void) refresh: (id)theJobToDo {
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+	[responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	[responseData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+	UIAlertView *errorView = [[UIAlertView alloc] initWithTitle: @"Couldn't refresh server list. " 
+													message: [error localizedDescription] 
+													delegate: self 
+													cancelButtonTitle: @"Ok" 
+													otherButtonTitles: nil];
+	[errorView show];
+	[errorView release];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	
+	[connection release];
+	
+	NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+	[responseData release];
+	
+	
+	NSDictionary *dictionary = (NSDictionary*)[jsonString JSONValue];
+	
+	self.servers = dictionary.allKeys;
+	self.allData = dictionary;
+	
+	[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
+}
+
+
+
+-(void) asyncGetServerListData {
+	
+	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:self.availableCookies];
+	responseData = [[NSMutableData data] retain];
+	
+	NSMutableURLRequest *serverListRequest = [[[NSMutableURLRequest alloc] init] autorelease];
+	[serverListRequest setHTTPMethod:@"GET"];
+	[serverListRequest setAllHTTPHeaderFields:headers];
+	[serverListRequest setHTTPBody:nil];
+	[serverListRequest setTimeoutInterval:20];
+	
+	serverListRequest.URL = [NSURL URLWithString:self.queryUrl];
+	[[NSURLConnection alloc] initWithRequest:serverListRequest delegate:self];
+	
 	
 	self.activityIndicator.hidden = NO;
 	[self.activityIndicator startAnimating];
 	[self.activityIndicator setNeedsDisplay];
 	self.tableView.userInteractionEnabled = NO;
-	//[NSThread detachNewThreadSelector:@selector(tryUpdating) toTarget:self withObject:nil];  
 	
-	[self performSelectorInBackground:@selector(tryUpdating:)
-						   withObject:nil];
 }
-
-- (void) tryUpdating: (id)theJobToDo {
-	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-	[self getServerListData:YES];
-	
-	[pool drain];
-}
-
-
-
+																											
+																									
 - (void) getServerListData: (BOOL)usingRefresh{
 	NSHTTPURLResponse *response;
 	NSError *error;
@@ -151,16 +207,9 @@
 	self.servers = dictionary.allKeys;
 	self.allData = dictionary;
 	
-	NSDate *today = [NSDate date];
-	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat:@"MMM dd, yyyy HH:mm"];
-	NSString *currentTime = [dateFormatter stringFromDate:today];
-	[dateFormatter release];
-	
-	
 	if (usingRefresh) {
 		[self performSelectorOnMainThread:@selector(finishLoading:)
-							   withObject:[NSString stringWithFormat:@"%@", currentTime]
+							   withObject:[NSString stringWithFormat:@"%@", [AppHelper formatDateString:[NSDate date]]]
 							waitUntilDone:NO
 		 ];
 	}
@@ -168,6 +217,14 @@
 	
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	
+	[self _createRefreshButton];
+	[self _createRefreshIndicator];
+	[self _createNavigatorTitle];
+	[self _setQueryUrl];
+}
 
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -277,15 +334,6 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
 	
-	/*
-	NSObject* tmpDetailData = [self.allData objectForKey:[servers objectAtIndex:indexPath.row]];
-	
-	if ([tmpDetailData isKindOfClass:[NSDictionary class]] == YES) {
-		cell.textLabel.text = [self.servers objectAtIndex:indexPath.row];
-	} else {
-		cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [self.servers objectAtIndex:indexPath.row], @"(stopped)"];
-	}*/
-	
 	NSArray* dictionary;
 	if (indexPath.section == 0) {
 		dictionary = self.collectorRunningServers;
@@ -294,19 +342,15 @@
 	}
 	
 	NSString* serverName = [[dictionary objectAtIndex:indexPath.row] objectForKey: @"id"];
-	
-	
-	//NSDictionary* detailData = [self.allData objectForKey:[dictionary objectAtIndex:indexPath.row]];
+
 	cell.textLabel.text = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];//[detailData objectForKey:ALERT_NAME];
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	
 	if (indexPath.section == 1) {
-		double stopTime = [[[self.allData objectForKey:serverName] stringByReplacingOccurrencesOfString:@"stopped:" withString:@""] doubleValue];
-		NSDate *updateDate = [NSDate dateWithTimeIntervalSince1970:stopTime];
-		NSDateFormatter *format = [[NSDateFormatter alloc] init];
-		[format setDateFormat:@"MMM dd, yyyy HH:mm"];
-		NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Stopped at", [format stringFromDate:updateDate]];
-		[format release];
+		double stopTime = [[[self.allData	:serverName] stringByReplacingOccurrencesOfString:@"stopped:" withString:@""] doubleValue];
+		NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Stopped at", 
+							  [AppHelper formatDateString:[NSDate dateWithTimeIntervalSince1970:stopTime]]];
+		
 		cell.detailTextLabel.text = timeText;
 	} else if (indexPath.section == 0) {
 		NSDictionary* detailData = [self.allData objectForKey:serverName];
@@ -326,8 +370,6 @@
 		[NSString stringWithFormat:@"%.1f%@", [memoryValue  doubleValue] / [memoryTotal doubleValue] * 100, @"%"]];
 		
 	}
-    
-    // Configure the cell...
     
     return cell;
 }
@@ -397,35 +439,22 @@
 		detailViewController.detailData = tmpDetailData;
 		
 		NSDate *updateDate = [NSDate dateWithTimeIntervalSince1970:[[[tmpDetailData objectForKey:DATA_NAME] objectForKey:RESOURCE_TIME_NAME] doubleValue] / 1000];
-		NSDateFormatter *format = [[NSDateFormatter alloc] init];
-		[format setDateFormat:@"MMM dd, yyyy HH:mm"];
-		
-		NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Updated at", [format stringFromDate:updateDate]];
+		NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Updated at",  [AppHelper formatDateString:updateDate]];
 		detailViewController.timeLabelText = timeText;
-		[format release];
+		
 	} else {
 		
 		NSString* tmpDetailData = [self.allData objectForKey:serverName];
 		
 		double stopTime = [[tmpDetailData stringByReplacingOccurrencesOfString:@"stopped:" withString:@""] doubleValue];
-		NSDate *updateDate = [NSDate dateWithTimeIntervalSince1970:stopTime];
-		NSDateFormatter *format = [[NSDateFormatter alloc] init];
-		[format setDateFormat:@"MMM dd, yyyy HH:mm"];
-		
-		NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Stopped at", [format stringFromDate:updateDate]];
-		//NSLog(@"%@", timeText);
-		
+		NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Stopped at", 
+							  [AppHelper formatDateString:[NSDate dateWithTimeIntervalSince1970:stopTime]]];
 		detailViewController.timeLabelText = timeText;
-		[format release];
 	}
-	
 	
 	detailViewController.bounds = [AppHelper getDeviceBound];	
 	detailViewController.name = serverName;
-	
-
 	[self.navigationController pushViewController:detailViewController animated:YES];
-		
 	[detailViewController release];
 	 
 }

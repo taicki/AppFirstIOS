@@ -15,6 +15,7 @@
 	NSArray* availableCookies;
 	NSString* queryUrl;
 	IBOutlet UIActivityIndicatorView* activityIndicator;
+	NSMutableData* responseData;
 	
 	NSMutableArray* collectorRunningServers;
 	NSMutableArray* collectorStoppingServers;
@@ -32,5 +33,11 @@
 
 - (void) getServerListData: (BOOL)usingRefresh;
 - (void) finishLoading:(NSString*)theJobToDo;
-- (void) tryUpdating:(id)theJobtoDo;
+- (void) asyncGetServerListData;
+
+- (void) _createRefreshButton;
+- (void)_createRefreshIndicator;
+- (void)  _createNavigatorTitle;
+- (void) _setQueryUrl;
+
 @end

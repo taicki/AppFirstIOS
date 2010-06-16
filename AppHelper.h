@@ -13,5 +13,7 @@
 }
 
 + (CGSize)getDeviceBound;
++ (BOOL) isIPad;
++ (NSString*) formatDateString:(NSDate *)date;
 
 @end
