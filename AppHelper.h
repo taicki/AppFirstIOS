@@ -15,5 +15,7 @@
 + (CGSize)getDeviceBound;
 + (BOOL) isIPad;
 + (NSString*) formatDateString:(NSDate *)date;
-
++ (UIColor*) backgroundGradientColor2;
++ (UIColor*) backgroundGradientColor1;
++ (NSString*) formatMetricsValue:(NSString*) metric :(double) value;
 @end

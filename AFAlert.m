@@ -378,8 +378,6 @@
 	
 		NSDate *triggerTime = [NSDate dateWithTimeIntervalSince1970:[[[self.allData objectForKey:alertId] objectForKey:AlERT_LAST_TRIGGER_NAME] doubleValue]];
 	
-	
-
 		cell.detailTextLabel.text = [NSString stringWithFormat:@"Last triggered: %@", 
 									 [AppHelper formatDateString:triggerTime]];
 		

@@ -9,6 +9,7 @@
 #import "AFDashboard.h"
 #import "AFTitleView.h"
 #import "ServerStatusViewController.h"
+#import "ServerDetailViewPad.h"
 #import "config.h"
 #import "AppHelper.h"
 
@@ -429,34 +430,50 @@
 		dictionary = self.collectorStoppingServers;
 	}
 	
-	NSString* serverName = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];
-	ServerStatusViewController *detailViewController = [[ServerStatusViewController alloc] initWithNibName:@"ServerStatusViewController" bundle:nil];
-
-
-	if (indexPath.section == 0) {
-		NSDictionary* tmpDetailData = [self.allData objectForKey:serverName];
+	if ([AppHelper isIPad] == NO) {
+	
 		
-		detailViewController.detailData = tmpDetailData;
+		ServerStatusViewController *detailViewController = [[ServerStatusViewController alloc] initWithNibName:@"ServerStatusViewController" bundle:nil];
+
+		NSString* serverName = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];
 		
-		NSDate *updateDate = [NSDate dateWithTimeIntervalSince1970:[[[tmpDetailData objectForKey:DATA_NAME] objectForKey:RESOURCE_TIME_NAME] doubleValue] / 1000];
-		NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Updated at",  [AppHelper formatDateString:updateDate]];
-		detailViewController.timeLabelText = timeText;
+
+		if (indexPath.section == 0) {
+			NSDictionary* tmpDetailData = [self.allData objectForKey:serverName];
+		
+			detailViewController.detailData = tmpDetailData;
+		
+			NSDate *updateDate = [NSDate dateWithTimeIntervalSince1970:[[[tmpDetailData objectForKey:DATA_NAME] objectForKey:RESOURCE_TIME_NAME] doubleValue] / 1000];
+			NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Updated at",  [AppHelper formatDateString:updateDate]];
+			detailViewController.timeLabelText = timeText;
+		
+		} else {
+		
+			NSString* tmpDetailData = [self.allData objectForKey:serverName];
+		
+			double stopTime = [[tmpDetailData stringByReplacingOccurrencesOfString:@"stopped:" withString:@""] doubleValue];
+			NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Stopped at", 
+								  [AppHelper formatDateString:[NSDate dateWithTimeIntervalSince1970:stopTime]]];
+			detailViewController.timeLabelText = timeText;
+		}
+	
+		detailViewController.bounds = [AppHelper getDeviceBound];	
+		detailViewController.name = serverName;
+		
+		[self.navigationController pushViewController:detailViewController animated:YES];
+		[detailViewController release];
+
 		
 	} else {
-		
-		NSString* tmpDetailData = [self.allData objectForKey:serverName];
-		
-		double stopTime = [[tmpDetailData stringByReplacingOccurrencesOfString:@"stopped:" withString:@""] doubleValue];
-		NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Stopped at", 
-							  [AppHelper formatDateString:[NSDate dateWithTimeIntervalSince1970:stopTime]]];
-		detailViewController.timeLabelText = timeText;
+		ServerDetailViewPad* detailViewController = [[ServerDetailViewPad alloc] initWithNibName:@"ServerDetailViewPad" bundle:nil];
+		detailViewController.serverName = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];
+		detailViewController.detailData =  [self.allData objectForKey:detailViewController.serverName];
+		[self.navigationController pushViewController:detailViewController animated:YES];
+		[detailViewController release];
+
 	}
 	
-	detailViewController.bounds = [AppHelper getDeviceBound];	
-	detailViewController.name = serverName;
-	[self.navigationController pushViewController:detailViewController animated:YES];
-	[detailViewController release];
-	 
+		 
 }
 
 

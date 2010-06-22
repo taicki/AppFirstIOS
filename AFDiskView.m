@@ -31,9 +31,9 @@
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
-	double radius = 40;
-	double paddingLeft = 10;
-	double paddingTop = 25;
+	double radius = self.frame.size.height / 2.5;
+	double paddingLeft = 5;
+	double paddingTop = 5;
 	
 	double valueSum = 0;
 	double totalSum = 0;

@@ -63,4 +63,28 @@
 	return currentTime;
 }
 
++ (UIColor*) backgroundGradientColor1 {
+	return [UIColor colorWithRed:202 green:202 blue:202 alpha:0.9];
+}
+
++ (UIColor*) backgroundGradientColor2 {
+	return [UIColor colorWithRed:202 green:202 blue:202 alpha:0.9];
+}
+
++ (NSString*) formatMetricsValue:(NSString*) metric :(double) value {
+	NSString* ret = @"";
+	if ([metric isEqualToString:@"cpu"]) { 
+		ret =  [NSString stringWithFormat:@"CPU: %0.1f%@", value, @"%"]; 
+	} else if ([metric isEqualToString:@"disk"]) {
+		ret =  [NSString stringWithFormat:@"Disk: %0.1f%@", value, @"%"];
+
+	} else if ([metric isEqualToString:@"memory"]) {
+		ret =  [NSString stringWithFormat:@"Memory: %0.1f%@", value, @"MB"];
+	}
+	
+	return ret;
+}
+
+
+
 @end

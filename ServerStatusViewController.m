@@ -114,9 +114,9 @@
 		AFEmptyBarView* emptyBarView = [[AFEmptyBarView alloc] initWithFrame: emptyBarFrame];
 		
 		
-		CGRect teamLogoFrame = CGRectMake(leftPadding, topPadding, 
+		CGRect solidBarFrame = CGRectMake(leftPadding, topPadding, 
 										  [cpuValue doubleValue] * AF_BAR_WIDTH / 100, AF_BAR_HEIGHT);
-		AFBarView* newView = [[AFBarView alloc] initWithFrame: teamLogoFrame];
+		AFBarView* newView = [[AFBarView alloc] initWithFrame: solidBarFrame];
 		
 		CGRect cpuValueFrame = CGRectMake(leftPadding + AF_BAR_WIDTH + 10, topPadding, 60, AF_BAR_HEIGHT);
 		UILabel* cpuValueView = [[UILabel alloc] initWithFrame:cpuValueFrame];
