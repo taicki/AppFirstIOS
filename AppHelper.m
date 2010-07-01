@@ -73,14 +73,25 @@
 
 + (NSString*) formatMetricsValue:(NSString*) metric :(double) value {
 	NSString* ret = @"";
-	if ([metric isEqualToString:@"cpu"]) { 
-		ret =  [NSString stringWithFormat:@"CPU: %0.1f%@", value, @"%"]; 
-	} else if ([metric isEqualToString:@"disk"]) {
-		ret =  [NSString stringWithFormat:@"Disk: %0.1f%@", value, @"%"];
+	if ([metric isEqualToString:@"CPU"]) { 
+		ret =  [NSString stringWithFormat:@"%0.1f%@", value, @"%"]; 
+	} else if ([metric isEqualToString:@"Files"] ||
+			   [metric isEqualToString:@"Regs"] || 
+			   [metric isEqualToString:@"Net"] || 
+			   [metric isEqualToString:@"Threads"] || 
+			   [metric isEqualToString:@"PF"] || 
+			   [metric isEqualToString:@"IR"] || 
+			   [metric isEqualToString:@"CIR"]) {
+		ret =  [NSString stringWithFormat:@"%0.0f", value];
 
-	} else if ([metric isEqualToString:@"memory"]) {
-		ret =  [NSString stringWithFormat:@"Memory: %0.1f%@", value, @"MB"];
+	} else if ([metric isEqualToString:@"Mem"] || 
+			   [metric isEqualToString:@"In"] || 
+			   [metric isEqualToString:@"Out"] || 
+			   [metric isEqualToString:@"FR"] || 
+			   [metric isEqualToString:@"FW"]) {
+		ret =  [NSString stringWithFormat:@"%0.0f%@", value/1000, @"KB"];
 	}
+	
 	
 	return ret;
 }

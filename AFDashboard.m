@@ -79,6 +79,8 @@
 }
 
 - (void) _createNavigatorTitle {
+	
+	return;
 	AFTitleView* titleView;
 	if ([AppHelper isIPad]) {
 		titleView = [[AFTitleView alloc] initWithFrame:CGRectMake(0, 0, IPAD_NAVIGATION_TITLE_WIDTH, IPAD_NAVIGATION_TITLE_HEIGHT)];
@@ -104,13 +106,71 @@
 	
 	self.activityIndicator.hidden = YES;
 	[self.activityIndicator stopAnimating];
-	self.tableView.userInteractionEnabled = YES;
 	
+	
+	/*
 	AFTitleView* titleView = (AFTitleView*)self.navigationItem.titleView;
 	titleView.timeLabel.text = [NSString stringWithFormat:@"Updated at %@", theJobToDo];
-	
 	titleView.titleLabel.text = @"Servers";
+	*/
+	self.navigationItem.title = [NSString stringWithFormat:@"Servers (%@)", theJobToDo];
+	
+	
+	NSMutableArray* runningServers = [[NSMutableArray alloc] init];
+	NSMutableArray* stoppingServers = [[NSMutableArray alloc] init];
+	
+	if (self.collectorRunningServers == nil) {
+		self.collectorRunningServers = runningServers;
+	} else {
+		[self setCollectorRunningServers:runningServers];
+	}
+	
+	if (self.collectorStoppingServers == nil) {
+		self.collectorStoppingServers = stoppingServers; 
+	} else {
+		[self setCollectorStoppingServers:stoppingServers];
+	}
+	
+	[runningServers release];
+	[stoppingServers release];
+	
+	NSArray* runningObjects = [[self.allData objectForKey:@"data"] objectForKey:@"running"];
+	NSArray* stoppingObjects = [[self.allData objectForKey:@"data"] objectForKey:@"stopped"];
+	NSArray* runningKeys = [[self.allData objectForKey:@"columns"] objectForKey:@"running"];
+	NSArray* stoppedKeys = [[self.allData objectForKey:@"columns"] objectForKey:@"stopped"];
+	
+	
+	for (int i = 0; i < [runningObjects count]; i++) {
+		NSMutableDictionary* serverObject = [[[NSMutableDictionary alloc] init] autorelease];
+		for (int j= 0; j < [runningKeys count]; j++) {
+			[serverObject setValue: [[runningObjects objectAtIndex:i] objectAtIndex:j] forKey:[runningKeys objectAtIndex: j]];
+		}
+		[self.collectorRunningServers addObject:serverObject];
+	}
+	
+	for (int i = 0; i < [stoppingObjects count]; i++) {
+		NSMutableDictionary* serverObject = [[[NSMutableDictionary alloc] init] autorelease];
+		
+		for (int j=0; j < [stoppedKeys count]; j++) {
+			[serverObject setValue: [[stoppingObjects objectAtIndex:i] objectAtIndex:j] forKey: [stoppedKeys objectAtIndex:j]];
+		}
+		
+		[self.collectorStoppingServers addObject:serverObject];
+	}
+	
+	
+	
+	
+	NSSortDescriptor *nameSorter = [[NSSortDescriptor alloc] 
+									initWithKey: @"Server" ascending: YES selector: @selector(caseInsensitiveCompare
+																						  : ) ] ;
+    [collectorRunningServers sortUsingDescriptors: [NSArray arrayWithObject: nameSorter] ] ;
+	[collectorStoppingServers sortUsingDescriptors: [NSArray arrayWithObject: nameSorter] ] ;
+    [nameSorter release] ;
+	
 	[self.tableView reloadData];
+	
+	self.tableView.userInteractionEnabled = YES;
 }
 
 
@@ -137,25 +197,42 @@
 	[connection release];
 	
 	NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+	if (DEBUGGING)
+		NSLog(@"%@", jsonString);
 	[responseData release];
 	
 	
 	NSDictionary *dictionary = (NSDictionary*)[jsonString JSONValue];
 	
-	self.servers = dictionary.allKeys;
+	//self.servers = dictionary.allKeys;
 	self.allData = dictionary;
+
 	
 	[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
 }
 
 
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
+	return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+	if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+		[challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+	
+	[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+}
+
 
 -(void) asyncGetServerListData {
+	self.navigationItem.title = @"Updating...";
+	
 	
 	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:self.availableCookies];
 	responseData = [[NSMutableData data] retain];
 	
 	NSMutableURLRequest *serverListRequest = [[[NSMutableURLRequest alloc] init] autorelease];
+			
 	[serverListRequest setHTTPMethod:@"GET"];
 	[serverListRequest setAllHTTPHeaderFields:headers];
 	[serverListRequest setHTTPBody:nil];
@@ -173,50 +250,6 @@
 }
 																											
 																									
-- (void) getServerListData: (BOOL)usingRefresh{
-	NSHTTPURLResponse *response;
-	NSError *error;
-	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:self.availableCookies];
-	
-	
-	NSMutableURLRequest *serverListRequest = [[[NSMutableURLRequest alloc] init] autorelease];
-	// we are just recycling the original request
-	[serverListRequest setHTTPMethod:@"GET"];
-	[serverListRequest setAllHTTPHeaderFields:headers];
-	[serverListRequest setHTTPBody:nil];
-	[serverListRequest setTimeoutInterval:20];
-	
-	serverListRequest.URL = [NSURL URLWithString:self.queryUrl];
-	
-	
-	NSData * data = [NSURLConnection sendSynchronousRequest:serverListRequest returningResponse:&response error:&error];
-	if (error) {
-		UIAlertView *networkError = [[UIAlertView alloc] initWithTitle: @"Could not refresh. " message: [error localizedDescription] delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
-		[networkError show];
-		[networkError release];
-		return;
-	}
-	
-	NSString *jsonString = [[[NSString alloc] initWithData:data encoding: NSASCIIStringEncoding] autorelease];
-	
-	if (DEBUGGING)
-		NSLog(@"The server saw:\n%@", jsonString);
-	
-	NSDictionary *dictionary = (NSDictionary*)[jsonString JSONValue];
-	
-	
-	self.servers = dictionary.allKeys;
-	self.allData = dictionary;
-	
-	if (usingRefresh) {
-		[self performSelectorOnMainThread:@selector(finishLoading:)
-							   withObject:[NSString stringWithFormat:@"%@", [AppHelper formatDateString:[NSDate date]]]
-							waitUntilDone:NO
-		 ];
-	}
-	
-	
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -225,57 +258,22 @@
 	[self _createRefreshIndicator];
 	[self _createNavigatorTitle];
 	[self _setQueryUrl];
+	[self asyncGetServerListData];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	
-	NSMutableArray* runningServers = [[NSMutableArray alloc] init];
-	NSMutableArray* stoppingServers = [[NSMutableArray alloc] init];
-	
-	if (self.collectorRunningServers == nil) {
-		self.collectorRunningServers = runningServers;
-	} else {
-		[self setCollectorRunningServers:runningServers];
-	}
-
-	if (self.collectorStoppingServers == nil) {
-		self.collectorStoppingServers = stoppingServers; 
-	} else {
-		[self setCollectorStoppingServers:stoppingServers];
-	}
-	
-	[runningServers release];
-	[stoppingServers release];
-	
-	
-	for(int cnt = 0; cnt < [self.servers count]; cnt ++) {
 		
-		NSObject* tmpDetailData = [self.allData objectForKey:[self.servers objectAtIndex:cnt]];
-		
-		if ([tmpDetailData isKindOfClass:[NSDictionary class]] == YES) {
-			[self.collectorRunningServers addObject:[NSDictionary dictionaryWithObjectsAndKeys: [self.servers objectAtIndex:cnt], @"id", nil]];
-		} else {
-			[self.collectorStoppingServers addObject:[NSDictionary dictionaryWithObjectsAndKeys: [self.servers objectAtIndex:cnt], @"id", nil]];
-		}
-	}
-	
-	NSSortDescriptor *nameSorter = [[NSSortDescriptor alloc] 
-									initWithKey: @"id" ascending: YES selector: @selector(caseInsensitiveCompare
-																							   : ) ] ;
-    [collectorRunningServers sortUsingDescriptors: [NSArray arrayWithObject: nameSorter] ] ;
-	[collectorStoppingServers sortUsingDescriptors: [NSArray arrayWithObject: nameSorter] ] ;
-    [nameSorter release] ;
-	
 	
 }
 
-/*
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
-*/
+
 /*
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -342,35 +340,49 @@
 		dictionary = self.collectorStoppingServers;
 	}
 	
-	NSString* serverName = [[dictionary objectAtIndex:indexPath.row] objectForKey: @"id"];
+	NSString* serverName = [[dictionary objectAtIndex:indexPath.row] objectForKey: @"pk"];
 
-	cell.textLabel.text = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];//[detailData objectForKey:ALERT_NAME];
-	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	cell.textLabel.text = [[dictionary objectAtIndex:indexPath.row] objectForKey:SERVER_KEY_NAME];
 	
 	if (indexPath.section == 1) {
-		double stopTime = [[[self.allData	:serverName] stringByReplacingOccurrencesOfString:@"stopped:" withString:@""] doubleValue];
-		NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Stopped at", 
+	
+		@try{	
+			double stopTime = [[[dictionary	objectAtIndex:indexPath.row] objectForKey:@"Down Since"] doubleValue] / 1000;
+			NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Stopped at", 
 							  [AppHelper formatDateString:[NSDate dateWithTimeIntervalSince1970:stopTime]]];
-		
-		cell.detailTextLabel.text = timeText;
+			
+			cell.detailTextLabel.text = timeText;
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		}
+		@catch (NSException* exception) {
+			NSLog(@"main: Caught %@: %@", [exception name], [exception reason]);
+			cell.detailTextLabel.text = @"N/A";
+		}
 	} else if (indexPath.section == 0) {
-		NSDictionary* detailData = [self.allData objectForKey:serverName];
+		// only able to select on running collectors
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		
-		NSArray *cpuValues = [[[detailData objectForKey:DATA_NAME] objectForKey:CPU_RESOURCE_NAME] objectForKey:RESOURCE_VALUE_NAME];
-		NSDecimalNumber *cpuValue = [cpuValues objectAtIndex:0];
-		
-		NSArray *memoryValues = [[[detailData objectForKey:DATA_NAME] 
-								  objectForKey:MEMORY_RESOURCE_NAME] objectForKey:RESOURCE_VALUE_NAME];
-		NSDecimalNumber *memoryTotal = [[[detailData objectForKey:DATA_NAME] 
-										 objectForKey:MEMORY_RESOURCE_NAME] objectForKey:RESOURCE_TOTAL_NAME];
-		NSDecimalNumber *memoryValue = [memoryValues objectAtIndex:0];
-		
-		cell.detailTextLabel.text = [NSString stringWithFormat:@"CPU: %@  Memory: %@", 
-		
-		[NSString stringWithFormat:@"%.1f%@", [cpuValue doubleValue], @"%"], 
-		[NSString stringWithFormat:@"%.1f%@", [memoryValue  doubleValue] / [memoryTotal doubleValue] * 100, @"%"]];
-		
+		cell.textLabel.text = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"Server"];
+		cell.detailTextLabel.text = [NSString stringWithFormat:@"CPU: %@%@  Memory: %@%@ Disk: %@%@",
+									 [[dictionary objectAtIndex:indexPath.row] objectForKey:@"CPU"], @"%", 
+									 [[dictionary objectAtIndex:indexPath.row] objectForKey:@"Memory"], @"%",
+									 [[dictionary objectAtIndex:indexPath.row] objectForKey:@"Disk"], @"%"];
 	}
+	
+	
+	UIImage* theImage;
+	NSString* path;
+	NSString* osType = [[dictionary objectAtIndex:indexPath.row] objectForKey:OS_TYPE_NAME];
+	
+	if ([osType isEqualToString:@"Linux"]) {
+		path = [[NSBundle mainBundle] pathForResource:@"linux-icon-small" ofType:@"png"];
+		theImage = [UIImage imageWithContentsOfFile:path];
+	} else {
+		path = [[NSBundle mainBundle] pathForResource:@"windows-icon-small" ofType:@"png"];
+		theImage = [UIImage imageWithContentsOfFile:path];
+	}
+	
+	cell.imageView.image = theImage;
     
     return cell;
 }
@@ -444,36 +456,46 @@
 			detailViewController.detailData = tmpDetailData;
 		
 			NSDate *updateDate = [NSDate dateWithTimeIntervalSince1970:[[[tmpDetailData objectForKey:DATA_NAME] objectForKey:RESOURCE_TIME_NAME] doubleValue] / 1000];
-			NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Updated at",  [AppHelper formatDateString:updateDate]];
+			NSString *timeText = [NSString stringWithFormat:@"%@(%@)", @"Servers",  [AppHelper formatDateString:updateDate]];
 			detailViewController.timeLabelText = timeText;
+			
+			detailViewController.bounds = [AppHelper getDeviceBound];	
+			detailViewController.name = serverName;
+			
+			[self.navigationController pushViewController:detailViewController animated:YES];
+			[detailViewController release];
+			
 		
 		} else {
 		
 			NSString* tmpDetailData = [self.allData objectForKey:serverName];
 		
-			double stopTime = [[tmpDetailData stringByReplacingOccurrencesOfString:@"stopped:" withString:@""] doubleValue];
-			NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Stopped at", 
+			@try{
+				double stopTime = [[tmpDetailData stringByReplacingOccurrencesOfString:@"stopped:" withString:@""] doubleValue];
+				NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Stopped at", 
 								  [AppHelper formatDateString:[NSDate dateWithTimeIntervalSince1970:stopTime]]];
-			detailViewController.timeLabelText = timeText;
+				detailViewController.timeLabelText = timeText;
+			} 
+			@catch (NSException* exception) {
+				NSLog(@"main: Caught %@: %@", [exception name], [exception reason]);
+			}
+			@finally {
+				detailViewController.timeLabelText = @"N/A";
+			}
 		}
-	
-		detailViewController.bounds = [AppHelper getDeviceBound];	
-		detailViewController.name = serverName;
-		
-		[self.navigationController pushViewController:detailViewController animated:YES];
-		[detailViewController release];
-
-		
 	} else {
-		ServerDetailViewPad* detailViewController = [[ServerDetailViewPad alloc] initWithNibName:@"ServerDetailViewPad" bundle:nil];
-		detailViewController.serverName = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];
-		detailViewController.detailData =  [self.allData objectForKey:detailViewController.serverName];
-		[self.navigationController pushViewController:detailViewController animated:YES];
-		[detailViewController release];
-
+		if (indexPath.section == 0) {
+			ServerDetailViewPad* detailViewController = [[ServerDetailViewPad alloc] initWithNibName:@"ServerDetailViewPad" bundle:nil];
+			NSString* serverName = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"Server"];
+			detailViewController.serverName = serverName;
+			detailViewController.serverPK = [[dictionary objectAtIndex:indexPath.row] objectForKey:DB_KEY_NAME];
+			detailViewController.osType = [[dictionary objectAtIndex:indexPath.row] objectForKey:OS_TYPE_NAME];
+			[self.navigationController pushViewController:detailViewController animated:YES];
+			[detailViewController release];
+		} else {
+			return;
+		}
 	}
-	
-		 
 }
 
 

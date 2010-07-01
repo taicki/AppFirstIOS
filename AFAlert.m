@@ -12,6 +12,7 @@
 #import "config.h"
 #import "JSON/JSON.h"
 #import "AFTitleView.h"
+#import "AFAlertDetailTableViewController.h"
 #import "AppHelper.h"
 
 @implementation AFAlert
@@ -82,6 +83,7 @@
 }
 
 - (void) _createNavigatorTitle {
+	
 	AFTitleView* titleView;
 	if ([AppHelper isIPad]) {
 		titleView = [[AFTitleView alloc] initWithFrame:CGRectMake(0, 0, IPAD_NAVIGATION_TITLE_WIDTH, IPAD_NAVIGATION_TITLE_HEIGHT)];
@@ -134,6 +136,46 @@
 	self.allData = dictionary;
 	
 	[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
+	
+	NSMutableArray* tmpOtherAlerts = [[NSMutableArray alloc] init];
+	NSMutableArray* tmpNagiosAlerts = [[NSMutableArray alloc] init];
+	
+	if (self.otherAlerts == nil) {
+		self.otherAlerts = tmpOtherAlerts;
+	} else {
+		[self setOtherAlerts:tmpOtherAlerts];
+	}
+	
+	if (self.nagiosAlerts == nil) {
+		self.nagiosAlerts = tmpNagiosAlerts;
+	} else {
+		[self setNagiosAlerts:tmpNagiosAlerts];
+	}
+	
+	[tmpOtherAlerts release];
+	[tmpNagiosAlerts release];
+	
+	
+	for(int cnt = 0; cnt < [self.alerts count]; cnt ++) {
+		if ([[[self.allData objectForKey:[self.alerts objectAtIndex:cnt]]  objectForKey:ALERT_TYPE_NAME] isEqualToString:@"Polled Data"]) {
+			[self.nagiosAlerts addObject:[NSDictionary dictionaryWithObjectsAndKeys: [self.alerts objectAtIndex:cnt], @"id", 
+										  [[self.allData objectForKey:[self.alerts objectAtIndex:cnt]] objectForKey:ALERT_NAME], ALERT_NAME, nil]];
+		}
+		else {
+			[self.otherAlerts addObject:[NSDictionary dictionaryWithObjectsAndKeys: [self.alerts objectAtIndex:cnt], @"id", 
+										 [[self.allData objectForKey:[self.alerts objectAtIndex:cnt]] objectForKey:ALERT_NAME], ALERT_NAME, nil]];
+		}
+	}
+	
+	NSSortDescriptor *nameSorter = [[NSSortDescriptor alloc] 
+									initWithKey: ALERT_NAME ascending: YES selector: @selector(caseInsensitiveCompare
+																							   : ) ] ;
+    [nagiosAlerts sortUsingDescriptors: [NSArray arrayWithObject: nameSorter] ] ;
+	[otherAlerts sortUsingDescriptors: [NSArray arrayWithObject: nameSorter] ] ;
+    [nameSorter release] ;
+
+	[self.tableView reloadData];
+	
 }
 
 
@@ -143,11 +185,13 @@
 	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:self.availableCookies];
 	responseData = [[NSMutableData data] retain];
 	
+	[self.navigationItem setTitle:@"Updating..."];
+	
 	NSMutableURLRequest *serverListRequest = [[[NSMutableURLRequest alloc] init] autorelease];
 	[serverListRequest setHTTPMethod:@"GET"];
 	[serverListRequest setAllHTTPHeaderFields:headers];
 	[serverListRequest setHTTPBody:nil];
-	[serverListRequest setTimeoutInterval:20];
+	[serverListRequest setTimeoutInterval:40];
 	
 	serverListRequest.URL = [NSURL URLWithString:self.queryUrl];
 	[[NSURLConnection alloc] initWithRequest:serverListRequest delegate:self];
@@ -168,8 +212,10 @@
 	
 	[self _createRefreshButton];
 	[self _createRefreshIndicator];
-	[self _createNavigatorTitle];
 	[self _setQueryUrl];
+	
+	[self asyncGetListData];
+	[self setNeedRefresh:NO];
 }
 
 
@@ -180,10 +226,11 @@
 	[self.activityIndicator stopAnimating];
 	self.tableView.userInteractionEnabled = YES;
 	
-	AFTitleView* titleView = (AFTitleView*) self.navigationItem.titleView;
-	titleView.timeLabel.text = [NSString stringWithFormat:@"%@", theJobToDo];
+	//AFTitleView* titleView = (AFTitleView*) self.navigationItem.titleView;
+	//titleView.timeLabel.text = [NSString stringWithFormat:@"%@", theJobToDo];
+	//titleView.titleLabel.text = @"Alerts";
 	
-	titleView.titleLabel.text = @"Alerts";
+	self.navigationItem.title = [NSString stringWithFormat:@"Alerts (%@)", theJobToDo];
 	
 	[self.tableView reloadData];
 }
@@ -193,6 +240,8 @@
 	NSHTTPURLResponse *response;
 	NSError *error;
 	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:self.availableCookies];
+	
+	
 	
 	
 	NSMutableURLRequest *alertListRequest = [[[NSMutableURLRequest alloc] init] autorelease];
@@ -242,57 +291,18 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	
-	
 	if (self.needRefresh) {
-		[self refresh:nil];
-		self.needRefresh = NO;
+		[self asyncGetListData];
+		[self setNeedRefresh:NO];
 	}
-	
-	NSMutableArray* tmpOtherAlerts = [[NSMutableArray alloc] init];
-	NSMutableArray* tmpNagiosAlerts = [[NSMutableArray alloc] init];
-	
-	if (self.otherAlerts == nil) {
-		self.otherAlerts = tmpOtherAlerts;
-	} else {
-		[self setOtherAlerts:tmpOtherAlerts];
-	}
-	
-	if (self.nagiosAlerts == nil) {
-		self.nagiosAlerts = tmpNagiosAlerts;
-	} else {
-		[self setNagiosAlerts:tmpNagiosAlerts];
-	}
-	
-	[tmpOtherAlerts release];
-	[tmpNagiosAlerts release];
-	
-	
-	for(int cnt = 0; cnt < [self.alerts count]; cnt ++) {
-		if ([[[self.allData objectForKey:[self.alerts objectAtIndex:cnt]]  objectForKey:ALERT_TRIGGER_TYPE_NAME] isEqualToString:@"Nagios"]) {
-			[self.nagiosAlerts addObject:[NSDictionary dictionaryWithObjectsAndKeys: [self.alerts objectAtIndex:cnt], @"id", 
-									  [[self.allData objectForKey:[self.alerts objectAtIndex:cnt]] objectForKey:ALERT_NAME], ALERT_NAME, nil]];
-		}
-		else {
-			[self.otherAlerts addObject:[NSDictionary dictionaryWithObjectsAndKeys: [self.alerts objectAtIndex:cnt], @"id", 
-									 [[self.allData objectForKey:[self.alerts objectAtIndex:cnt]] objectForKey:ALERT_NAME], ALERT_NAME, nil]];
-		}
-	}
-	
-	NSSortDescriptor *nameSorter = [[NSSortDescriptor alloc] 
-									initWithKey: ALERT_NAME ascending: YES selector: @selector(caseInsensitiveCompare
-																						: ) ] ;
-    [nagiosAlerts sortUsingDescriptors: [NSArray arrayWithObject: nameSorter] ] ;
-	[otherAlerts sortUsingDescriptors: [NSArray arrayWithObject: nameSorter] ] ;
-    [nameSorter release] ;
-	
+}
+
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 	
 }
 
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
 /*
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -463,8 +473,18 @@
 		dictionary = self.nagiosAlerts;
 	}
 
+	AFAlertDetailTableViewController *detailViewController = [[AFAlertDetailTableViewController alloc] initWithNibName:@"AFAlertDetailTableViewController" bundle:nil];
+	detailViewController.alertName = [NSString stringWithFormat:@"%@", [[dictionary objectAtIndex:indexPath.row] objectForKey:ALERT_NAME]];
+	detailViewController.detailData = [self.allData objectForKey:[[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"]];
+	detailViewController.alertID = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];
+	//detailViewController.parentController = self;
+	
+	[self.navigationController pushViewController:detailViewController animated:YES];
 	
 	
+	[detailViewController release];
+	
+	/*
 	if (!self.editing) {
 		AlertDetailViewController *detailViewController = [[AlertDetailViewController alloc] initWithNibName:@"AlertDetailViewController" bundle:nil];
 		detailViewController.bounds = [AppHelper getDeviceBound];
@@ -504,7 +524,7 @@
 		[detailViewController release];
 		[editController release];
 		
-	}
+	}*/
 }
 
 

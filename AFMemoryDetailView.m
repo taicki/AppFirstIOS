@@ -25,9 +25,9 @@
         // Initialization code
     }
 	
-	self.memoryStatus = @"Total: 4GB";
-	self.memoryValue = 139;
-	self.memoryTotal = 200;
+	//self.memoryStatus = @"Total: 4GB";
+	//self.memoryValue = 139;
+	//self.memoryTotal = 200;
     return self;
 }
 
@@ -35,13 +35,13 @@
 	double rowHeight = 15;
 	double usageLabelWidth = 40;
 	double titleRowHeight = 20;
-	double spacing = 2.0;
+	double spacing = 4.0;
 	double leftPadding = 5;
 	
 	UILabel* memoryWidgetTitle = [[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding, self.frame.size.width, titleRowHeight)];
 	memoryWidgetTitle.font = [UIFont systemFontOfSize:IPAD_TITLE_NORMAL_FONTSIZE];
 	[memoryWidgetTitle setBackgroundColor:[UIColor clearColor]];
-	memoryWidgetTitle.text = self.memoryStatus;
+	memoryWidgetTitle.text = [NSString stringWithFormat:@"Total: %.0f MB", memoryTotal / 1024 / 1024];
 	
 	topPadding += titleRowHeight;
 	UILabel* memoryOverallLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, usageLabelWidth, rowHeight)];

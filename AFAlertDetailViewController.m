@@ -1,20 +1,21 @@
     //
-//  AFPollDataController.m
+//  AFAlertDetailViewController.m
 //  AppFirst
 //
-//  Created by appfirst on 6/21/10.
+//  Created by appfirst on 6/23/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "AFPollDataController.h"
+#import "AFAlertDetailViewController.h"
 #import "AFWidgetBaseView.h"
-#import "AppDelegate_Shared.h"
 #import "AppHelper.h"
+#import "AppDelegate_Shared.h"
 #import "config.h"
 
-@implementation AFPollDataController
+
+@implementation AFAlertDetailViewController
 @synthesize tableController;
-@synthesize queryUrl, serverPK, responseData, detailData, titleLabel;
+@synthesize queryUrl, serverPK, responseData, detailData;
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -24,28 +25,10 @@
     return self;
 }
 */
-- (id) initWithPk:(NSString*) pk {
-	if ((self = [super init])) {
-        // Custom initialization
-		self.serverPK = pk;
-    }
-	
-	return self;
-}
 
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-	AFWidgetBaseView* aView = [[AFWidgetBaseView alloc] initWithFrame:CGRectMake(270, 400, 500, 350)];
-	aView.clipsToBounds = YES;
-	//[aView setBackgroundColor:[UIColor blackColor]];
-	self.view = aView;
-	[aView release];
-}
 
 - (void) asyncGetServerData
 {
-	
-	self.titleLabel.text = @"Polled Data (updating...)";
 	AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
 	
 	
@@ -56,6 +39,17 @@
 	[request setHTTPMethod:@"GET"];
 	[request setAllHTTPHeaderFields:headers];
 	[request setTimeoutInterval:20];
+	
+	NSString *paramString =[NSString stringWithFormat:@"pk=%@", 
+							self.serverPK];
+	
+	NSData *paramData = [paramString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+	NSString *paramLength = [NSString stringWithFormat:@"%d", [paramData length]];
+	[request setValue:paramLength forHTTPHeaderField:@"Content-Length"];
+	[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+	[request setHTTPBody:paramData];
+	
+	
 	request.URL = [NSURL URLWithString:self.queryUrl];
 	[[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
@@ -68,29 +62,12 @@
 		self.queryUrl = PROD_SERVER_IP;
 	}
 	
-	self.queryUrl = [NSString stringWithFormat:@"%@%@?pk=%@", self.queryUrl, SERVER_POLLDATA_API_STRING, self.serverPK];
-	NSLog(@"%@", self.queryUrl);
+	self.queryUrl = [NSString stringWithFormat:@"%@%@", self.queryUrl, SERVER_DETAIL_API_STRING];
 	
 }
 
 - (void) finishLoading:(NSString*)theJobToDo {
-	
-	NSArray* objects = [self.detailData objectForKey:LIST_QUERY_DATA_NAME];
-	NSArray* keys = [self.detailData objectForKey:LIST_QUERY_COLUMN_NAME];
-	
-	self.tableController.pollData = [[NSMutableArray alloc] init];
-	
-	for (int i = 0; i < [objects count]; i++) {
-		NSMutableDictionary* dictObject = [[[NSMutableDictionary alloc] init] autorelease];
-		for (int j= 0; j < [keys count]; j++) {
-			[dictObject setValue: [[objects objectAtIndex:i] objectAtIndex:j] forKey:[keys objectAtIndex: j]];
-		}
-		[self.tableController.pollData addObject:dictObject];
-	}
-	
-	[self.tableController.tableView reloadData];
-	self.titleLabel.text = @"Polled Data";
-	
+	self.navigationItem.title = [NSString stringWithFormat:@"Updated at: %@", [AppHelper formatDateString:[NSDate date]]];
 }
 
 
@@ -141,33 +118,36 @@
 //*/
 
 
+// Implement loadView to create a view hierarchy programmatically, without using a nib.
+- (void)loadView {
+	AFWidgetBaseView* aView = [[AFWidgetBaseView alloc] initWithFrame:CGRectMake(270, 400, 500, 350)];
+	aView.clipsToBounds = YES;
+	//[aView setBackgroundColor:[UIColor blackColor]];
+	self.view = aView;
+	[aView release];
+}
+
+
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-
 	double titleSectionHeight = 20;
-	//double sortButtonWidth = 100;
-	
 	UIView* titleSection = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, titleSectionHeight)];
 	[titleSection setBackgroundColor:[UIColor clearColor]];
 	
 	UILabel* sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(IPAD_WIDGET_INTERNAL_PADDING, 2, 200, titleSectionHeight)];
 	[sectionLabel setBackgroundColor:[UIColor clearColor]];
-	//sectionLabel.text = @"Poll Data";
+	sectionLabel.text = @"Alerts";
 	[titleSection addSubview:sectionLabel];
-	self.titleLabel = sectionLabel;
 	[sectionLabel release];
 	
 	[self.view addSubview:titleSection];
 	[titleSection release];
 	
-	self.tableController = [[[AFPollDataTableViewController alloc] initWithNibName:@"AFPollDataTableViewController" bundle:nil] autorelease];
+	self.tableController = [[[AFAlertTableViewController alloc] initWithNibName:@"AFAlertTableViewController" bundle:nil] autorelease];
 	[self.view addSubview:self.tableController.view];
-	
-	[self _setQueryUrl];
-	[self asyncGetServerData];
 }
-
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -196,7 +176,7 @@
 	[serverPK release];
 	[queryUrl release];
 	[detailData release];
-	[titleLabel release];
+	
     [super dealloc];
 }
 

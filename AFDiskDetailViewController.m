@@ -21,9 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-	diskValues = [dataSource objectForKey:RESOURCE_VALUE_NAME];
-	diskTotals = [dataSource objectForKey:RESOURCE_TOTAL_NAME];
-	diskNames =  [dataSource objectForKey:RESOURCE_NAME_NAME];
+	
+	
 	
 	self.tableView.rowHeight = 60;
 	
@@ -36,11 +35,13 @@
 }
 
 
-/*
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	
+	
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

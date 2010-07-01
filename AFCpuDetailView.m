@@ -27,7 +27,7 @@
 	// mock up the data for test
 	self.cpuDetail = @"4 cores at 2400 MHZ";
 	self.cpuValue = 40;
-	self.cpuLoadArray = [[NSArray alloc] initWithObjects: [NSNumber numberWithInt:30], [NSNumber numberWithInt:40], [NSNumber numberWithInt:30], [NSNumber numberWithInt:80], nil];
+	self.cpuLoadArray = [[NSArray alloc] initWithObjects: [NSNumber numberWithInt:30], [NSNumber numberWithInt:40], [NSNumber numberWithInt:30], [NSNumber numberWithInt:100], nil];
 	
     return self;
 }
@@ -36,7 +36,7 @@
 	double rowHeight = 15;
 	double usageLabelWidth = 40;
 	double titleRowHeight = 20;
-	double spacing = 2.0;
+	double spacing = 4.0;
 	double leftPadding = 5;
 	
 	UILabel* cpuWidgetTitle = [[UILabel alloc] initWithFrame: CGRectMake(leftPadding, topPadding, self.frame.size.width, titleRowHeight)];
@@ -83,25 +83,26 @@
 - (void) createCpuCoreDetailView: (double) offset {
 	double cpuCoreWidth = self.frame.size.width / [self.cpuLoadArray count];
 	double rowHeight = 15;
+	double padding = 5;
 	
 	for (int i = 0; i < [self.cpuLoadArray count]; i++) {
 		double coreValue = [[self.cpuLoadArray objectAtIndex:i] doubleValue];
-		double topPadding = (100 - coreValue) * AF_VERTICAL_BAR_HEIGHT / 100 + offset;
+		double topPadding = (100 - coreValue) * AF_VERTICAL_BAR_HEIGHT / 100 + offset + padding;
 		double leftPadding = cpuCoreWidth * i;
 
-		UILabel* coreValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding - rowHeight, cpuCoreWidth, rowHeight)];
+		UILabel* coreValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, topPadding, cpuCoreWidth, rowHeight)];
 		coreValueLabel.text = [NSString stringWithFormat:@"%0.0f%@", coreValue, @"%"];
 		coreValueLabel.font = [UIFont systemFontOfSize:IPAD_TEXT_NORMAL_FONTSIZE];
 		coreValueLabel.textAlignment = UITextAlignmentCenter;
 		[coreValueLabel setBackgroundColor:[UIColor clearColor]];
 		
-		CGRect solidBarFrame = CGRectMake(leftPadding, topPadding, cpuCoreWidth, 
+		CGRect solidBarFrame = CGRectMake(leftPadding, topPadding + rowHeight, cpuCoreWidth, 
 										  coreValue * AF_VERTICAL_BAR_HEIGHT / 100 );
 		AFVerticalBarView* solidBarView = [[AFVerticalBarView alloc] initWithFrame: solidBarFrame];
 		
 		
 		
-		UILabel* coreNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, AF_VERTICAL_BAR_HEIGHT + offset, cpuCoreWidth, rowHeight)];
+		UILabel* coreNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftPadding, AF_VERTICAL_BAR_HEIGHT + offset + rowHeight + padding, cpuCoreWidth, rowHeight)];
 		coreNameLabel.text = [NSString stringWithFormat:@"core%d", i];
 		coreNameLabel.font = [UIFont systemFontOfSize:IPAD_TEXT_NORMAL_FONTSIZE];
 		coreNameLabel.textAlignment = UITextAlignmentCenter;
@@ -156,24 +157,13 @@
     CGContextStrokePath(contextRef);
 	
 	CGContextSetShadow(contextRef, CGSizeMake(4, 4), 5);
-	/*
-	CGPoint addLines[] =
-    {
-        CGPointMake(IPad_WIDGET_INTERNAL_PADDING, topPadding),
-        CGPointMake(self.frame.size.width - IPad_WIDGET_INTERNAL_PADDING, topPadding),
-    };
-	
-	
-	
-	CGContextAddLines(contextRef, addLines, 2);
-	*/
-	
+		
 	topPadding += (IPAD_WIDGET_INTERNAL_PADDING / 2);
 	
 	[self createCpuOverview:topPadding];
 	topPadding += (30 + IPAD_WIDGET_INTERNAL_PADDING);
 	
-	[self createCpuCoreDetailView:topPadding];
+	//[self createCpuCoreDetailView:topPadding];
 }
 
 

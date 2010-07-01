@@ -31,16 +31,36 @@
 	
 	[self.layer insertSublayer:gradient atIndex:0];
 	
+	
+	UIImage* theImage;
+	NSString* path;
+
+	
+	if ([self.osType isEqualToString:@"Linux"]) {
+		path = [[NSBundle mainBundle] pathForResource:@"linux-icon" ofType:@"png"];
+		theImage = [UIImage imageWithContentsOfFile:path];
+	} else {
+		path = [[NSBundle mainBundle] pathForResource:@"windows-icon" ofType:@"png"];
+		theImage = [UIImage imageWithContentsOfFile:path];
+	}
+	
+	UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_WIDGET_INTERNAL_PADDING, IPAD_WIDGET_INTERNAL_PADDING, 35, 35)];
+	imageview.image = theImage;
+	[self addSubview:imageview];  
+	[imageview release];
+		
 	self.layer.cornerRadius = 5;
 	self.layer.masksToBounds = YES;
 	
-	UILabel* serverNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(IPAD_WIDGET_INTERNAL_PADDING, 
+	UILabel* serverNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(IPAD_WIDGET_INTERNAL_PADDING * 2 + 35, 
 																		  IPAD_WIDGET_INTERNAL_PADDING, self.frame.size.width - 
-																		  IPAD_WIDGET_INTERNAL_PADDING * 2,
-																		  (self.frame.size.height - IPAD_WIDGET_INTERNAL_PADDING) / 2)];
+																		  IPAD_WIDGET_INTERNAL_PADDING * 3 - 35,
+																		  (self.frame.size.height - IPAD_WIDGET_INTERNAL_PADDING * 2))];
+	serverNameLabel.font = [UIFont systemFontOfSize:15];
+	serverNameLabel.numberOfLines = 0;
 	//serverNameLabel.textAlignment = UITextAlignmentCenter;
 	[serverNameLabel setBackgroundColor: [UIColor clearColor]];
-	serverNameLabel.text = self.serverName;
+	serverNameLabel.text = [NSString stringWithFormat:@"%@",  self.serverName];
 	[self addSubview:serverNameLabel];
 	[serverNameLabel release];
 	

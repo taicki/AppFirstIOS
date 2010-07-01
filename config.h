@@ -1,7 +1,10 @@
 #define APPLICATION_NAME @"appfirst"
 #define DEFAULT_USER_NAME_KEY @"AppFirstDefaultUserName"
 
+#define SERVER_KEY_NAME @"Server"
+#define DB_KEY_NAME @"pk"
 #define DATA_NAME @"data"
+#define OS_TYPE_NAME @"OS"
 
 #define CPU_RESOURCE_NAME @"cpu"
 #define MEMORY_RESOURCE_NAME @"mem"
@@ -21,11 +24,12 @@
 #define ALERT_NAME @"Name"
 #define ALERT_VALUE_NAME @"Value"
 #define ALERT_RESET_NAME @"Reset"
+#define ALERT_RECIPIENTS_NAME @"Recipients"
 
 #define AF_BAR_WIDTH 160.0
-#define AF_BAR_HEIGHT 15.0
+#define AF_BAR_HEIGHT 12.0
 
-#define AF_VERTICAL_BAR_HEIGHT 95.0
+#define AF_VERTICAL_BAR_HEIGHT 60.0
 #define AF_VERTICAL_BAR_WIDTH 20.0
 
 #define AF_LEGEND_HEIGHT 10.0
@@ -58,9 +62,12 @@
 #define IPHONE_TITLE_NORMAL_FONTSIZE 9
 
 #define MATRICS_TABLE_WIDTH 250
-#define PROCESS_TABLE_HEIGHT 310
-#define IPAD_SECOND_TABLE_PORTRAIT_HEIGHT 581
-#define IPAD_SECOND_TABLE_LANDSCAPE_HEIGHT 325
+#define PROCESS_TABLE_LANDSCAPE_HEIGHT 320
+#define PROCESS_TABLE_PORTRAIT_HEIGHT 455
+#define IPAD_POLL_DATA_TABLE_PORTRAIT_HEIGHT 455//300
+#define IPAD_ALERT_DATA_TABLE_PORTRAIT_HEIGHT 350//300
+#define IPAD_POLL_DATA_TABLE_LANDSCAPE_HEIGHT 320//175
+#define IPAD_ALERT_DATA_TABLE_LANDSCAPE_HEIGHT 350//170
 
 
 #define DISK_CHART_WIDTH 120
@@ -81,7 +88,15 @@
 #define PROD_SERVER_IP @"https://wwws.appfirst.com"
 
 #define LOGIN_API_STRING @"/api/iphone/login/"
-#define SERVER_LIST_API_STRING @"/api/topology/data/node/"
+#define SERVER_LIST_API_STRING @"/widget/server_widget/api/iphone/data/preview/"
+#define SERVER_DETAIL_API_STRING @"/widget/server_widget/api/iphone/data/system/"
+#define SERVER_PROCESS_LIST_API_STRING @"/widget/server_widget/api/iphone/data/processes/"
+#define SERVER_POLLDATA_API_STRING @"/widget/polled_data/api/iphone/data/"
+#define SERVER_ALERT_API_STRING @"/widget/poll_data/iphone/data/preview/"
+
+#define LIST_QUERY_COLUMN_NAME @"columns"
+#define LIST_QUERY_DATA_NAME @"data"
+
 #define ALERT_LIST_API_STRING @"/api/iphone/alertlist/"
 #define ALERT_EDIT_API_STRING @"/api/iphone/alert/edit/"
 

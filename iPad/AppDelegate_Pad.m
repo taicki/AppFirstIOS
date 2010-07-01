@@ -23,13 +23,16 @@
 		
 	NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
 	NSError* error;
+	[[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
+	NSString* password;
 	
 	if (standardUserDefaults) {
 		self.loginController.usernameField.text = [standardUserDefaults objectForKey:DEFAULT_USER_NAME_KEY];
 		
 		@try {
-			self.loginController.passwordField.text = [SFHFKeychainUtils getPasswordForUsername:self.loginController.usernameField.text andServiceName:@"appfirst" error:&error];
-			NSLog(@"password: %@", [SFHFKeychainUtils getPasswordForUsername:self.loginController.usernameField.text andServiceName:@"appfirst" error:&error]);
+			password = [SFHFKeychainUtils getPasswordForUsername:self.loginController.usernameField.text andServiceName:@"appfirst" error:&error];
+			self.loginController.passwordField.text = password ;
+			NSLog(@"password: %@",password);
 		}
 		
 		@catch (NSException * e) {
@@ -54,8 +57,10 @@
 	
 	
 	[window addSubview:[loginController view]];
-    
 	[window makeKeyAndVisible];
+	
+	if (password != nil) 
+		[self trySignIn:nil];
 	
 	return YES;
 }

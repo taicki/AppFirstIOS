@@ -7,6 +7,7 @@
 //
 
 #import "AFPollDataTableViewController.h"
+#import "AppHelper.h"
 #import "config.h"
 
 
@@ -24,10 +25,15 @@
 */
 
 
+
+
+
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	/*
 	self.pollData = [[NSMutableArray alloc] init];
 	[self.pollData addObject:[NSDictionary dictionaryWithObjectsAndKeys: 
 								  @"check_total_procs", @"service", 
@@ -44,7 +50,7 @@
 							  @"CRITICAL", @"status",
 							  @"DISK CRITICAL - /dev/hda1 is not accessible: No such file or directory", @"last message", 
 							  [NSNumber numberWithDouble: 1277134440000], @"updateTime", nil]];
-	
+	*/
 	
 }
 
@@ -134,23 +140,23 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	cell.textLabel.text = [[pollData objectAtIndex:indexPath.row] objectForKey:@"service"];
+	cell.textLabel.text = [NSString stringWithFormat:@"%@ at %@", [[pollData objectAtIndex:indexPath.row] objectForKey:@"Service"],
+						   [AppHelper formatDateString: [NSDate dateWithTimeIntervalSince1970:[[[pollData objectAtIndex:indexPath.row] objectForKey:@"Last Run"] doubleValue] / 1000]]];
 	cell.textLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_BIG_FONTSIZE];
     // Configure the cell...
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@ %@", 
-								 [[pollData objectAtIndex:indexPath.row] objectForKey:@"status"]
-								 ,[[pollData objectAtIndex:indexPath.row] objectForKey:@"last message"],
-								 [[pollData objectAtIndex:indexPath.row] objectForKey:@"updateTime"]];
+	//cell.detailTextLabel.numberOfLines = 0;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", 
+								 [[pollData objectAtIndex:indexPath.row] objectForKey:@"Last Message"]];
 	cell.detailTextLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_NORMAL_FONTSIZE];
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
 	UIImage* theImage;
 	NSString* path;
 	
-	if ([[[pollData objectAtIndex:indexPath.row] objectForKey:@"status"] isEqualToString:@"OK"]) {
+	if ([[[pollData objectAtIndex:indexPath.row] objectForKey:@"Status"] doubleValue] == 0) {
 		path = [[NSBundle mainBundle] pathForResource:@"green_status" ofType:@"png"];
 		theImage = [UIImage imageWithContentsOfFile:path];
-	} else if ([[[pollData objectAtIndex:indexPath.row] objectForKey:@"status"] isEqualToString:@"CRITICAL"]){
+	} else if ([[[pollData objectAtIndex:indexPath.row] objectForKey:@"Status"] doubleValue] == 1){
 		path = [[NSBundle mainBundle] pathForResource:@"red_status" ofType:@"png"];
 		theImage = [UIImage imageWithContentsOfFile:path];
 	} else {

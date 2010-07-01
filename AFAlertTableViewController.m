@@ -1,35 +1,31 @@
 //
-//  AFMetricsPicker.m
+//  AFAlertTableViewController.m
 //  AppFirst
 //
-//  Created by appfirst on 6/19/10.
+//  Created by appfirst on 6/23/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "AFMetricsPicker.h"
-#import "AFSortableTableViewController.h"
+#import "AFAlertTableViewController.h"
 
 
-@implementation AFMetricsPicker
-@synthesize metrics;
-@synthesize parentViewController;
+@implementation AFAlertTableViewController
+
 
 #pragma mark -
 #pragma mark View lifecycle
 
-
+/*
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-	
-	
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-
+*/
 
 /*
 - (void)viewWillAppear:(BOOL)animated {
@@ -53,13 +49,6 @@
 */
 
 
- - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
- 
-	 return @"Sort by metrics";
- }
-
-
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Override to allow orientations other than the default portrait orientation.
     return YES;
@@ -77,7 +66,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [self.metrics count];
+    return 0;
 }
 
 
@@ -88,11 +77,9 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-	
-	cell.textLabel.text = [[metrics objectAtIndex:indexPath.row] objectAtIndex:0];
-    cell.detailTextLabel.text = [[metrics objectAtIndex:indexPath.row] objectAtIndex:1];
+    
     // Configure the cell...
     
     return cell;
@@ -151,9 +138,6 @@
 	 [self.navigationController pushViewController:detailViewController animated:YES];
 	 [detailViewController release];
 	 */
-	AFSortableTableViewController* sortableTable = (AFSortableTableViewController*) self.parentViewController;
-	[sortableTable reorderTableByMetric:[[metrics objectAtIndex:indexPath.row] objectAtIndex:0]];
-	
 }
 
 
@@ -174,8 +158,6 @@
 
 
 - (void)dealloc {
-	[metrics release];
-	[parentViewController release];
     [super dealloc];
 }
 

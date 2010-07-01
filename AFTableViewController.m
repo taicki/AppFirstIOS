@@ -23,7 +23,9 @@
     [super viewDidLoad];
 	
 	//mockup data
-	processNames = [[NSMutableArray alloc] init];
+	//processNames = [[NSMutableArray alloc] init];
+	
+	/*
 	[self.processNames addObject:[NSDictionary dictionaryWithObjectsAndKeys: 
 								@"python", @"pid", 
 								  [NSNumber numberWithDouble:42.0], @"memory",
@@ -39,6 +41,8 @@
 								  [NSNumber numberWithDouble:24.0], @"memory",
 								  [NSNumber numberWithDouble: 33.0], @"cpu", 
 								  [NSNumber numberWithDouble: 98.0], @"disk", nil]];
+	 
+	 */
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
 	
@@ -103,7 +107,7 @@
     
 	NSDictionary* processData = [processNames objectAtIndex:indexPath.row];
 	
-	cell.textLabel.text = [processData objectForKey:@"pid"];
+	cell.textLabel.text = [NSString stringWithFormat:@"%@", [processData objectForKey:@"Name"]];
 	cell.textLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_BIG_FONTSIZE];
     // Configure the cell...
 	/*
@@ -113,18 +117,15 @@
 								 [[processNames objectAtIndex:indexPath.row] objectForKey:@"memory"]];
 	*/
 	
-	NSString* detailText = [NSString stringWithFormat:@"%@ ", [AppHelper formatMetricsValue:self.sortKey :[[processData objectForKey:self.sortKey] doubleValue]]];
+	NSString* detailText = [NSString stringWithFormat:@"%@:%@",self.sortKey,  [AppHelper formatMetricsValue:self.sortKey :[[processData objectForKey:self.sortKey] doubleValue]]];
 	NSString* key; 
 	for (key in processData) {
-		if (key == nil || [key isEqualToString:self.sortKey] || [key isEqualToString:@"pid"])
+		if (key == nil || [key isEqualToString:self.sortKey] || [key isEqualToString:@"pk"] ||  [key isEqualToString:@"Name"] || [key isEqualToString:@"args"])
 			continue;
 		
-		
-		detailText = [detailText stringByAppendingFormat:[AppHelper formatMetricsValue:key :[[processData objectForKey: key] doubleValue]]];
-		detailText = [detailText stringByAppendingFormat:@" "];
-		//NSLog(@"English: %@, Latin: %@", key, [processData valueForKey:key]);
-		
+		detailText = [NSString stringWithFormat:@"%@ %@:%@", detailText, key, [AppHelper formatMetricsValue:key :[[processData objectForKey: key] doubleValue]]];
 	}
+	
 	cell.detailTextLabel.text = detailText;
 	
 	

@@ -86,7 +86,6 @@
 }
 
 - (void) loginFailed:(NSString*)message {
-	NSError *error;
 	
 	
 	loginController.loginButton.enabled = YES;
@@ -136,7 +135,7 @@
 	[request setHTTPBody:postData];
 	
 	
-	//[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
+	[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
 	
 	[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];	
 	
@@ -185,10 +184,10 @@
 		
 		
 		dashboardController.availableCookies = self.availableCookies;
-		[self.dashboardController getServerListData:NO];
+		//[self.dashboardController getServerListData:NO];
 		
 		alertController.availableCookies = self.availableCookies;
-		[self.alertController getAlertListData:NO];
+		//[self.alertController getAlertListData:NO];
 		
 		
 		[self performSelectorOnMainThread:@selector(finishLoading:)
