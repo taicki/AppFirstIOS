@@ -105,6 +105,20 @@
 }
 
 
+- (void) trySignOut {
+	
+	NSError *error;
+	[SFHFKeychainUtils storeUsername:self.loginController.usernameField.text andPassword:@""
+					  forServiceName:@"appfirst" updateExisting:YES error:&error];
+	
+	loginController.usernameField.text = @"andrew@appfirst.com";
+	loginController.passwordField.text = @"1AppFirst$";
+	[tabcontroller.view removeFromSuperview];
+	[window addSubview:loginController.view];
+	loginController.view.userInteractionEnabled = YES;
+
+}
+
 - (void) trySignIn:(id)theJobToDo {
 	
 	
@@ -135,7 +149,7 @@
 	[request setHTTPBody:postData];
 	
 	
-	[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
+	//[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
 	
 	[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];	
 	

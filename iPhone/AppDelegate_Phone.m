@@ -21,19 +21,19 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
 	
     // Override point for customization after application launch
-	
+
 	NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
 	NSError* error;
+	[[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
+	NSString* password;
 	
 	if (standardUserDefaults) {
 		self.loginController.usernameField.text = [standardUserDefaults objectForKey:DEFAULT_USER_NAME_KEY];
 		
 		@try {
-			self.loginController.passwordField.text = [SFHFKeychainUtils getPasswordForUsername:self.loginController.usernameField.text andServiceName:@"appfirst" error:&error];
-			
-			if (DEBUGGING) {
-				NSLog(@"password: %@", [SFHFKeychainUtils getPasswordForUsername:self.loginController.usernameField.text andServiceName:@"appfirst" error:&error]);
-			}
+			password = [SFHFKeychainUtils getPasswordForUsername:self.loginController.usernameField.text andServiceName:@"appfirst" error:&error];
+			self.loginController.passwordField.text = password ;
+			NSLog(@"password: %@",password);
 		}
 		
 		@catch (NSException * e) {
@@ -44,26 +44,27 @@
 		}
 	}
 	
-	self.loginController.usernameField.text = @"andrew@appfirst.com";
-	self.loginController.passwordField.text = @"1AppFirst$";
-	
 	
 	if (DEBUGGING == YES) {
 		self.urlBase = DEV_SERVER_IP;
-	} else {
+	}else {
 		self.urlBase = PROD_SERVER_IP;
 	}
-
+	
 	
 	self.loginUrl = [NSString stringWithFormat:@"%@%@", urlBase, LOGIN_API_STRING];
 	self.serverListUrl = [NSString stringWithFormat:@"%@%@", urlBase, SERVER_LIST_API_STRING];
 	self.alertListUrl = [NSString stringWithFormat:@"%@%@", urlBase, ALERT_LIST_API_STRING];
 	
 	
-	[window addSubview:[loginController view]];
-    
-	[window makeKeyAndVisible];
 	
+	if (password != nil && (![password isEqualToString:@""])) {
+		[window makeKeyAndVisible];
+		[self trySignIn:nil];
+	} else {
+		[window addSubview:[loginController view]];
+		[window makeKeyAndVisible];
+	}	
 	return YES;
 }
 

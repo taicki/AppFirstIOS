@@ -56,13 +56,33 @@
 	self.alertListUrl = [NSString stringWithFormat:@"%@%@", urlBase, ALERT_LIST_API_STRING];
 	
 	
-	[window addSubview:[loginController view]];
-	[window makeKeyAndVisible];
 	
-	if (password != nil) 
+	
+	
+	//[[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+	
+	if (password != nil && (![password isEqualToString:@""])) {
+		[window makeKeyAndVisible];
 		[self trySignIn:nil];
+	} else {
+		[window addSubview:[loginController view]];
+		[window makeKeyAndVisible];
+	}
 	
 	return YES;
+}
+
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
+	// Registration was successful so we'll
+	// set up our device token etc.
+	
+	NSLog(@"devToken=%@",devToken);
+    //self.registered = YES;
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+	// This is expected on the emulator so that's fine
+    NSLog(@"Error in registration. Error: %@", err);
 }
 
 
@@ -76,7 +96,7 @@
 	[loginController.loginIndicator startAnimating];
 	[loginController.loginIndicator setNeedsDisplay];
 	
-	loginController.loginButton.enabled = NO;
+	//loginController.loginButton.enabled = NO;
 	loginController.view.userInteractionEnabled = NO;
 	
 	// start the background queries of data
