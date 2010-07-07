@@ -52,7 +52,7 @@
 #define IPAD_SPLITTER_DIV_WIDTH 15
 #define IPAD_WIDGET_SECTION_TITLE_HEIGHT 20
 
-
+#define IPHONE_TABLE_FONTSIZE 10
 #define IPHONE_SCREEN_WIDTH 320
 #define IPHONE_SCREEN_HEIGHT 480
 #define IPHONE_LOADER_SIZE 25
@@ -60,6 +60,8 @@
 #define IPHONE_NAVIGATION_TITLE_HEIGHT 30
 #define IPHONE_TITLE_BIG_FONTSIZE 20
 #define IPHONE_TITLE_NORMAL_FONTSIZE 9
+#define IPHONE_SERVER_DETAIL_VIEW_WIDTH 320
+#define IPHONE_WIDGET_PADDING 3
 
 #define MATRICS_TABLE_WIDTH 250
 #define PROCESS_TABLE_LANDSCAPE_HEIGHT 320
@@ -93,6 +95,7 @@
 #define SERVER_PROCESS_LIST_API_STRING @"/widget/server_widget/api/iphone/data/processes/"
 #define SERVER_POLLDATA_API_STRING @"/widget/polled_data/api/iphone/data/"
 #define SERVER_ALERT_API_STRING @"/widget/poll_data/iphone/data/preview/"
+#define NOTIFICATION_API_STRING @"/widget/alert_history/api/iphone/data/"
 
 #define LIST_QUERY_COLUMN_NAME @"columns"
 #define LIST_QUERY_DATA_NAME @"data"
@@ -102,7 +105,7 @@
 
 #define PI 3.14159265358979323846
 
-#define DEBUGGING NO
+#define DEBUGGING YES
 
 //UIColor backgroundGradientColor1 = [UIColor colorWithRed:202 green:202 blue:202 alpha:0.9] ;
 //UIColor backgroundGradientColor2 = [UIColor colorWithRed:239 green:239 blue:239 alpha:1];

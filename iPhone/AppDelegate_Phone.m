@@ -23,7 +23,7 @@
     // Override point for customization after application launch
 
 	NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-	NSError* error;
+	NSError* error = nil;
 	[[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
 	NSString* password;
 	
@@ -34,6 +34,10 @@
 			password = [SFHFKeychainUtils getPasswordForUsername:self.loginController.usernameField.text andServiceName:@"appfirst" error:&error];
 			self.loginController.passwordField.text = password ;
 			NSLog(@"password: %@",password);
+			
+			if (error) {
+				NSLog(@"%@", error);
+			}
 		}
 		
 		@catch (NSException * e) {
@@ -56,6 +60,8 @@
 	self.serverListUrl = [NSString stringWithFormat:@"%@%@", urlBase, SERVER_LIST_API_STRING];
 	self.alertListUrl = [NSString stringWithFormat:@"%@%@", urlBase, ALERT_LIST_API_STRING];
 	
+	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
 	
 	
 	if (password != nil && (![password isEqualToString:@""])) {
@@ -68,6 +74,20 @@
 	return YES;
 }
 
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
+	// Registration was successful so we'll
+	// set up our device token etc.
+	
+	NSLog(@"devToken=%@",devToken);
+    //self.registered = YES;
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+	// This is expected on the emulator so that's fine
+    NSLog(@"Error in registration. Error: %@", err);
+}
+
+
 
 - (IBAction) login: (id) sender
 {
@@ -79,7 +99,7 @@
 	[loginController.loginIndicator startAnimating];
 	[loginController.loginIndicator setNeedsDisplay];
 	
-	loginController.loginButton.enabled = NO;
+	//loginController.loginButton.enabled = NO;
 	loginController.view.userInteractionEnabled = NO;
 	
 	// start the background queries of data

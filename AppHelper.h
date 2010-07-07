@@ -11,7 +11,7 @@
 @interface AppHelper : NSObject {
 	
 }
-
++ (NSString*) formatShortDateString:(NSDate*) date;
 + (CGSize)getDeviceBound;
 + (BOOL) isIPad;
 + (NSString*) formatDateString:(NSDate *)date;

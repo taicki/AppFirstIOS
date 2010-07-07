@@ -8,6 +8,7 @@
 
 #import "AFSettingsViewController.h"
 #import "AppDelegate_Shared.h"
+#import "AppHelper.h"
 
 @implementation AFSettingsViewController
 
@@ -39,6 +40,7 @@
 	NSLog(@"log out");
 	AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
 	[appDelegate trySignOut];
+	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 
@@ -66,6 +68,9 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Override to allow orientations other than the default portrait orientation.
+	if ([AppHelper isIPad] == NO)
+		return interfaceOrientation == UIDeviceOrientationPortrait;
+	
     return YES;
 }
 
@@ -94,9 +99,14 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
+	
+	
+	
+	AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
+	cell.textLabel.text = appDelegate.loginController.usernameField.text;
     
     // Configure the cell...
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

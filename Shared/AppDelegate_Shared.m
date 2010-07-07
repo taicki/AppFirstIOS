@@ -82,6 +82,9 @@
 	titleView = (AFTitleView*)dashboardController.navigationItem.titleView;
 	titleView.titleLabel.text = @"Servers";
 	titleView.timeLabel.text = [NSString stringWithFormat:@"Updated at %@", currentTime];
+	
+	[dashboardController asyncGetServerListData];
+	[alertController asyncGetListData];
 
 }
 
@@ -98,6 +101,9 @@
 	UIAlertView *networkError = [[UIAlertView alloc] initWithTitle: @"Could not login. " message: message delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
 	[networkError show];
 	[networkError release];
+	
+	if (loginController.view.superview == nil)
+		[window addSubview:loginController.view];
 	
 	// delete the password
 	//[SFHFKeychainUtils storeUsername:self.loginController.usernameField.text andPassword:@""
@@ -126,11 +132,12 @@
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	
 	NSHTTPURLResponse *response;
-	NSError *error;
+	NSError *error = nil;
 	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
 	
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	NSURL *myWebserverURL = [NSURL URLWithString:self.loginUrl];
+	
 	
 	//self.loginController.passwordField.text = @"1AppFirst$";
 	
@@ -148,8 +155,8 @@
 	[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
 	[request setHTTPBody:postData];
 	
-	
-	//[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
+	if (DEBUGGING)
+		[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
 	
 	[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];	
 	
@@ -157,8 +164,10 @@
 		NSLog(@"RESPONSE HEADERS: \n%@", [response allHeaderFields]);
 	}
 	
+	
 	if (error) {
 		NSLog(@"%@", [error localizedDescription]);
+		
 		[self performSelectorOnMainThread:@selector(loginFailed:)
 							   withObject:[error localizedDescription]
 							waitUntilDone:NO
@@ -195,13 +204,11 @@
 		}
 		self.availableCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:urlBase]];
 		
-		
+		NSLog(@"%@", self.availableCookies);
 		
 		dashboardController.availableCookies = self.availableCookies;
-		//[self.dashboardController getServerListData:NO];
-		
 		alertController.availableCookies = self.availableCookies;
-		//[self.alertController getAlertListData:NO];
+		
 		
 		
 		[self performSelectorOnMainThread:@selector(finishLoading:)

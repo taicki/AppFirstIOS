@@ -107,20 +107,19 @@
     
 	NSDictionary* processData = [processNames objectAtIndex:indexPath.row];
 	
-	cell.textLabel.text = [NSString stringWithFormat:@"%@", [processData objectForKey:@"Name"]];
+	cell.textLabel.text = [NSString stringWithFormat:@"%@ (pid: %@)", [processData objectForKey:@"Name"],[processData objectForKey:@"pid"]];
 	cell.textLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_BIG_FONTSIZE];
-    // Configure the cell...
-	/*
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@ %@", 
-									[[processNames objectAtIndex:indexPath.row] objectForKey:@"cpu"]
-								 ,[[processNames objectAtIndex:indexPath.row] objectForKey:@"disk"],
-								 [[processNames objectAtIndex:indexPath.row] objectForKey:@"memory"]];
-	*/
+   
+	
 	
 	NSString* detailText = [NSString stringWithFormat:@"%@:%@",self.sortKey,  [AppHelper formatMetricsValue:self.sortKey :[[processData objectForKey:self.sortKey] doubleValue]]];
 	NSString* key; 
 	for (key in processData) {
-		if (key == nil || [key isEqualToString:self.sortKey] || [key isEqualToString:@"pk"] ||  [key isEqualToString:@"Name"] || [key isEqualToString:@"args"])
+		if (key == nil || [key isEqualToString:self.sortKey] || 
+			[key isEqualToString:@"pk"] ||  
+			[key isEqualToString:@"Name"] || 
+			[key isEqualToString:@"args"] || 
+			[key isEqualToString:@"pid"])
 			continue;
 		
 		detailText = [NSString stringWithFormat:@"%@ %@:%@", detailText, key, [AppHelper formatMetricsValue:key :[[processData objectForKey: key] doubleValue]]];
@@ -131,9 +130,25 @@
 	
 	
 	cell.detailTextLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_NORMAL_FONTSIZE];
+	
+	if (![AppHelper isIPad]) {
+		cell.detailTextLabel.numberOfLines = 0;
+		cell.detailTextLabel.font = [UIFont systemFontOfSize:IPHONE_TABLE_FONTSIZE];
+	}
+	
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if ([AppHelper isIPad])
+		return 42;
+	else {
+		return 63;
+	}
+}
+
 
 /*
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {

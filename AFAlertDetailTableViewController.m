@@ -54,7 +54,7 @@
     else
     {
 		NSHTTPURLResponse *response;
-		NSError *error = [[[NSError alloc] init] autorelease];
+		NSError *error = nil;
 		
 		AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
 		

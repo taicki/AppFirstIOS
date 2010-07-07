@@ -104,11 +104,12 @@
 	[self.tableController.tableView reloadData];
 	
 
+	if ([AppHelper isIPad]) {
 	
-	self.metricsController.metrics = [[NSMutableArray alloc] init];
-	[self.metricsController setMetrics:keys];
-	[self.metricsController.tableView reloadData];
-	
+		self.metricsController.metrics = [[NSMutableArray alloc] init];
+		[self.metricsController setMetrics:keys];
+		[self.metricsController.tableView reloadData];
+	}
 }
 
 
@@ -179,24 +180,29 @@
 	titleLabel = sectionLabel;
 	[sectionLabel release];
 	
-	self.sortButton = [[UIButton buttonWithType:UIButtonTypeInfoDark] autorelease];//[[UIButton alloc] initWithFrame:CGRectMake(300, 0, 100, 18)];
-	self.sortButton.frame = CGRectMake(self.view.frame.size.width - sortButtonWidth, 0, 20, titleSectionHeight);
-	[self.sortButton addTarget:self action:@selector(changeMetricsViewDisplay:) forControlEvents:UIControlEventTouchUpInside];
-	[self.view addSubview:self.sortButton];
+	if ([AppHelper isIPad]) {
 	
+		self.sortButton = [[UIButton buttonWithType:UIButtonTypeInfoDark] autorelease];//[[UIButton alloc] initWithFrame:CGRectMake(300, 0, 100, 18)];
+		self.sortButton.frame = CGRectMake(self.view.frame.size.width - sortButtonWidth, 0, 20, titleSectionHeight);
+		[self.sortButton addTarget:self action:@selector(changeMetricsViewDisplay:) forControlEvents:UIControlEventTouchUpInside];
+		[self.view addSubview:self.sortButton];
+	}
 	
 	[self.view addSubview:titleSection];
 	[titleSection release];
 	
-	self.metricsController = [[AFMetricsPicker alloc]  initWithNibName:@"AFMetricsPicker" bundle:nil];
-	self.metricsController.parentViewController = self;
 	
-	UIView* viewBounder = [[UIView alloc] initWithFrame:CGRectMake(250, titleSectionHeight, 250, 300 - titleSectionHeight)];
-	viewBounder.clipsToBounds = YES;
-	self.metricsViewBounder = viewBounder;
-	[self.view addSubview:viewBounder];
-	[viewBounder release];
+	if ([AppHelper isIPad]) {
+		self.metricsController = [[AFMetricsPicker alloc]  initWithNibName:@"AFMetricsPicker" bundle:nil];
+		self.metricsController.parentViewController = self;
 	
+		UIView* viewBounder = [[UIView alloc] initWithFrame:CGRectMake(250, titleSectionHeight, 250, 300 - titleSectionHeight)];
+		viewBounder.clipsToBounds = YES;
+		self.metricsViewBounder = viewBounder;
+		[self.view addSubview:viewBounder];
+		[viewBounder release];
+	}
+		
 	self.tableController = [[[AFTableViewController alloc] init] autorelease];
 	[self.view addSubview:self.tableController.view];
 	

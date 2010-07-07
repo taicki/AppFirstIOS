@@ -8,6 +8,7 @@
 
 #import "AFDiskDetailViewController.h"
 #import "AFDiskView.h"
+#import "AppHelper.h"
 #import "config.h"
 
 @implementation AFDiskDetailViewController
@@ -101,7 +102,14 @@
 								 , @"%", diskTotal];
 	cell.detailTextLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_NORMAL_FONTSIZE];
 	
-	CGRect diskFrame = CGRectMake(170, 0, IPAD_DISK_PIE_WIDTH, IPAD_DISK_PIE_HEIGHT);
+	CGRect diskFrame;
+	
+	if ([AppHelper isIPad]) {
+		diskFrame = CGRectMake(170, 0, IPAD_DISK_PIE_WIDTH, IPAD_DISK_PIE_HEIGHT);
+	} else {
+		diskFrame = CGRectMake(230, 0, IPAD_DISK_PIE_WIDTH, IPAD_DISK_PIE_HEIGHT);
+	}
+	
 	AFDiskView* diskView = [[AFDiskView alloc] initWithFrame:diskFrame];
 	[diskView.diskValues addObject:[diskValues objectAtIndex:indexPath.row]]; 
 	[diskView.diskTotals addObject:[diskTotals objectAtIndex:indexPath.row]]; 

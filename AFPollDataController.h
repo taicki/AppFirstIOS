@@ -20,6 +20,7 @@
 	
 }
 - (void) asyncGetServerData;
+- (id) initWithPk:(NSString*) pk;
 
 @property (nonatomic, retain) AFPollDataTableViewController* tableController;
 @property (nonatomic, retain) NSMutableData* responseData;

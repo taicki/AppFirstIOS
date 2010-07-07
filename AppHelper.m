@@ -56,12 +56,28 @@
 
 + (NSString*) formatDateString:(NSDate*) date {
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat:@"MMM dd, yyyy HH:mm"];
+	
+	if ([AppHelper isIPad]) {
+		[dateFormatter setDateFormat:@"MMM dd, yyyy HH:mm"];
+	} else {
+		[dateFormatter setDateFormat:@"MMM dd, HH:mm"];
+	}
 	NSString *currentTime = [dateFormatter stringFromDate:date];
 	[dateFormatter release];
 	
 	return currentTime;
 }
+
+
++ (NSString*) formatShortDateString:(NSDate*) date {
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"MMM dd, HH:mm"];
+	NSString *currentTime = [dateFormatter stringFromDate:date];
+	[dateFormatter release];
+	
+	return currentTime;
+}
+
 
 + (UIColor*) backgroundGradientColor1 {
 	return [UIColor colorWithRed:202 green:202 blue:202 alpha:0.9];

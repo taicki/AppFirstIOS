@@ -41,4 +41,5 @@
 - (IBAction) changeMetricsViewDisplay: (id) sender;
 - (void) reorderTableByMetric: (NSString*) metric;
 - (id) initWithPk:(NSString*) pk;
+- (void) asyncGetServerData;
 @end

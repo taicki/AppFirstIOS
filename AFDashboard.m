@@ -10,6 +10,7 @@
 #import "AFTitleView.h"
 #import "ServerStatusViewController.h"
 #import "ServerDetailViewPad.h"
+#import "AFPageViewController.h"
 #import "config.h"
 #import "AppHelper.h"
 
@@ -208,7 +209,11 @@
 	self.allData = dictionary;
 
 	
-	[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
+	if ([AppHelper isIPad]) 
+		[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
+	else {
+		[self finishLoading:[AppHelper formatShortDateString:[NSDate date]]];
+	}
 }
 
 
@@ -258,7 +263,7 @@
 	[self _createRefreshIndicator];
 	[self _createNavigatorTitle];
 	[self _setQueryUrl];
-	[self asyncGetServerListData];
+	//[self asyncGetServerListData];
 }
 
 
@@ -288,6 +293,9 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Override to allow orientations other than the default portrait orientation.
+	if ([AppHelper isIPad] == NO)
+		return interfaceOrientation == UIDeviceOrientationPortrait;
+	
     return YES;
 }
 
@@ -345,7 +353,7 @@
 	cell.textLabel.text = [[dictionary objectAtIndex:indexPath.row] objectForKey:SERVER_KEY_NAME];
 	
 	if (indexPath.section == 1) {
-	
+		cell.accessoryType = UITableViewCellAccessoryNone;
 		@try{	
 			double stopTime = [[[dictionary	objectAtIndex:indexPath.row] objectForKey:@"Down Since"] doubleValue] / 1000;
 			NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Stopped at", 
@@ -375,10 +383,10 @@
 	NSString* osType = [[dictionary objectAtIndex:indexPath.row] objectForKey:OS_TYPE_NAME];
 	
 	if ([osType isEqualToString:@"Linux"]) {
-		path = [[NSBundle mainBundle] pathForResource:@"linux-icon-small" ofType:@"png"];
+		path = [[NSBundle mainBundle] pathForResource:@"linux-icon" ofType:@"png"];
 		theImage = [UIImage imageWithContentsOfFile:path];
 	} else {
-		path = [[NSBundle mainBundle] pathForResource:@"windows-icon-small" ofType:@"png"];
+		path = [[NSBundle mainBundle] pathForResource:@"windows-icon" ofType:@"png"];
 		theImage = [UIImage imageWithContentsOfFile:path];
 	}
 	
@@ -443,46 +451,20 @@
 	}
 	
 	if ([AppHelper isIPad] == NO) {
-	
-		
-		ServerStatusViewController *detailViewController = [[ServerStatusViewController alloc] initWithNibName:@"ServerStatusViewController" bundle:nil];
-
-		NSString* serverName = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];
-		
-
 		if (indexPath.section == 0) {
-			NSDictionary* tmpDetailData = [self.allData objectForKey:serverName];
-		
-			detailViewController.detailData = tmpDetailData;
-		
-			NSDate *updateDate = [NSDate dateWithTimeIntervalSince1970:[[[tmpDetailData objectForKey:DATA_NAME] objectForKey:RESOURCE_TIME_NAME] doubleValue] / 1000];
-			NSString *timeText = [NSString stringWithFormat:@"%@(%@)", @"Servers",  [AppHelper formatDateString:updateDate]];
-			detailViewController.timeLabelText = timeText;
-			
-			detailViewController.bounds = [AppHelper getDeviceBound];	
-			detailViewController.name = serverName;
-			
+			AFPageViewController* detailViewController = [[AFPageViewController alloc] initWithNibName:@"AFPageViewController" bundle:nil];
+			NSString* serverName = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"Server"];
+			detailViewController.serverName = serverName;
+			detailViewController.serverPK = [[dictionary objectAtIndex:indexPath.row] objectForKey:DB_KEY_NAME];
+			detailViewController.osType = [[dictionary objectAtIndex:indexPath.row] objectForKey:OS_TYPE_NAME];
 			[self.navigationController pushViewController:detailViewController animated:YES];
 			[detailViewController release];
-			
-		
-		} else {
-		
-			NSString* tmpDetailData = [self.allData objectForKey:serverName];
-		
-			@try{
-				double stopTime = [[tmpDetailData stringByReplacingOccurrencesOfString:@"stopped:" withString:@""] doubleValue];
-				NSString *timeText = [NSString stringWithFormat:@"%@: %@", @"Stopped at", 
-								  [AppHelper formatDateString:[NSDate dateWithTimeIntervalSince1970:stopTime]]];
-				detailViewController.timeLabelText = timeText;
-			} 
-			@catch (NSException* exception) {
-				NSLog(@"main: Caught %@: %@", [exception name], [exception reason]);
-			}
-			@finally {
-				detailViewController.timeLabelText = @"N/A";
-			}
 		}
+		else {
+			return;
+		}
+
+			
 	} else {
 		if (indexPath.section == 0) {
 			ServerDetailViewPad* detailViewController = [[ServerDetailViewPad alloc] initWithNibName:@"ServerDetailViewPad" bundle:nil];

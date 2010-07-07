@@ -135,7 +135,12 @@
 	self.alerts = dictionary.allKeys;
 	self.allData = dictionary;
 	
-	[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
+	if ([AppHelper isIPad]) 
+		[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
+	else {
+		[self finishLoading:[AppHelper formatShortDateString:[NSDate date]]];
+	}
+
 	
 	NSMutableArray* tmpOtherAlerts = [[NSMutableArray alloc] init];
 	NSMutableArray* tmpNagiosAlerts = [[NSMutableArray alloc] init];
@@ -214,7 +219,7 @@
 	[self _createRefreshIndicator];
 	[self _setQueryUrl];
 	
-	[self asyncGetListData];
+	//[self asyncGetListData];
 	[self setNeedRefresh:NO];
 }
 
@@ -317,6 +322,10 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Override to allow orientations other than the default portrait orientation.
+	if (![AppHelper isIPad])
+		return interfaceOrientation == UIDeviceOrientationPortrait;
+	
+	
     return YES;
 }
 

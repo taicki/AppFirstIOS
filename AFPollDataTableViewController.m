@@ -150,6 +150,11 @@
 	cell.detailTextLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_NORMAL_FONTSIZE];
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
+	if (![AppHelper isIPad]) {
+		cell.detailTextLabel.numberOfLines = 0;
+		cell.detailTextLabel.font = [UIFont systemFontOfSize:IPHONE_TABLE_FONTSIZE];
+	}
+	
 	UIImage* theImage;
 	NSString* path;
 	
@@ -166,9 +171,24 @@
 	
 	cell.imageView.image = theImage;
 	
-	
     return cell;
 }
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if ([AppHelper isIPad])
+		return 45;
+	else {
+		float height = [[[pollData objectAtIndex:indexPath.row] objectForKey:@"Last Message"] length] / 40 * 15 + 30;
+		
+		if (height < 45)
+			height = 45;
+		return height;
+	}
+}
+
+
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
