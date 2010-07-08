@@ -87,7 +87,7 @@
 		[saveAlertPost setHTTPMethod:@"POST"];
 		[saveAlertPost setAllHTTPHeaderFields:headers];
 		
-		NSData * data = [NSURLConnection sendSynchronousRequest:saveAlertPost returningResponse:&response error:&error];
+		[NSURLConnection sendSynchronousRequest:saveAlertPost returningResponse:&response error:&error];
 		if (error) {
 			UIAlertView *errorView = [[UIAlertView alloc] initWithTitle: @"Could not save alert. " 
 																message: [error localizedDescription] delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];

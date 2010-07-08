@@ -11,6 +11,7 @@
 #import "AFAlert.h"
 #import "AFDashboard.h"
 #import "LoginViewController.h"
+#import "AFAlertHistoryViewController.h"
 
 @interface AppDelegate_Shared : NSObject <UIApplicationDelegate> {
     
@@ -23,6 +24,8 @@
 	LoginViewController *loginController;
 	AFAlert *alertController;
 	AFDashboard *dashboardController;
+	AFAlertHistoryViewController* notificationController;
+	NSString* UUID;
 	
 	NSArray *availableCookies;
 	
@@ -45,8 +48,10 @@
 
 @property (nonatomic, retain) IBOutlet AFAlert *alertController;
 @property (nonatomic, retain) IBOutlet AFDashboard *dashboardController;
+@property (nonatomic, retain) IBOutlet AFAlertHistoryViewController* notificationController;
 
 @property (nonatomic, retain) NSArray* availableCookies;
+@property (nonatomic, retain) NSString* UUID;
 
 @property (nonatomic, retain) NSString* urlBase;
 @property (nonatomic, retain) NSString* loginUrl;
@@ -62,6 +67,7 @@
 - (void) finishLoading:(id)theJobToDo;
 - (void) loginFailed:(NSString*)message;
 - (void) trySignOut;
+- (void) trySubmitUUID;
 
 @end
 

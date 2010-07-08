@@ -50,13 +50,10 @@
 			self.urlBase = PROD_SERVER_IP;
 	}
 
-	
 	self.loginUrl = [NSString stringWithFormat:@"%@%@", urlBase, LOGIN_API_STRING];
 	self.serverListUrl = [NSString stringWithFormat:@"%@%@", urlBase, SERVER_LIST_API_STRING];
 	self.alertListUrl = [NSString stringWithFormat:@"%@%@", urlBase, ALERT_LIST_API_STRING];
 	
-	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
 	
 	if (password != nil && (![password isEqualToString:@""])) {
 		[window makeKeyAndVisible];
@@ -69,18 +66,7 @@
 	return YES;
 }
 
-- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
-	// Registration was successful so we'll
-	// set up our device token etc.
-	
-	NSLog(@"devToken=%@",devToken);
-    //self.registered = YES;
-}
 
-- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
-	// This is expected on the emulator so that's fine
-    NSLog(@"Error in registration. Error: %@", err);
-}
 
 
 - (IBAction) login: (id) sender

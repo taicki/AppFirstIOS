@@ -89,6 +89,7 @@
 #define DEV_SERVER_IP @"https://192.168.1.102"
 #define PROD_SERVER_IP @"https://wwws.appfirst.com"
 
+
 #define LOGIN_API_STRING @"/api/iphone/login/"
 #define SERVER_LIST_API_STRING @"/widget/server_widget/api/iphone/data/preview/"
 #define SERVER_DETAIL_API_STRING @"/widget/server_widget/api/iphone/data/system/"
@@ -96,6 +97,8 @@
 #define SERVER_POLLDATA_API_STRING @"/widget/polled_data/api/iphone/data/"
 #define SERVER_ALERT_API_STRING @"/widget/poll_data/iphone/data/preview/"
 #define NOTIFICATION_API_STRING @"/widget/alert_history/api/iphone/data/"
+#define BADGE_SET_API_STRING @"/api/iphone/badge/set/"
+#define UUID_SET_API_STRING @"/api/iphone/uid/set/"
 
 #define LIST_QUERY_COLUMN_NAME @"columns"
 #define LIST_QUERY_DATA_NAME @"data"

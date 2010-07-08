@@ -16,9 +16,9 @@
 
 @synthesize window;
 @synthesize tabcontroller, loginController;
-@synthesize alertController, dashboardController;
+@synthesize alertController, dashboardController, notificationController;
 @synthesize availableCookies, usernames;
-@synthesize alertListUrl, serverListUrl, urlBase, loginUrl;
+@synthesize alertListUrl, serverListUrl, urlBase, loginUrl, UUID;
 
 
 /**
@@ -43,9 +43,61 @@
 }
 
 
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
+	// Registration was successful so we'll
+	// set up our device token etc.
+	
+	NSLog(@"devToken=%@",devToken);
+	self.UUID = [NSString stringWithFormat:@"%@", devToken];
+	
+	NSHTTPURLResponse *response;
+	NSError *error = nil;
+	
+	AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
+	
+	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:appDelegate.availableCookies];
+	NSMutableURLRequest *postRequest = [[[NSMutableURLRequest alloc] init] autorelease];
+	
+	NSString *queryUrl;
+	
+	if (DEBUGGING == YES) {
+		queryUrl = [NSString stringWithFormat:@"%@%@", DEV_SERVER_IP, UUID_SET_API_STRING];
+	} else {
+		queryUrl = [NSString stringWithFormat:@"%@%@", PROD_SERVER_IP, UUID_SET_API_STRING];
+	}
+	
+	
+	postRequest.URL = [NSURL URLWithString:queryUrl];
+	
+	NSString *postData = [NSString stringWithFormat:@"uid=%@", devToken];
+	NSString *length = [NSString stringWithFormat:@"%d", [postData length]];
+	
+	[postRequest setValue:length forHTTPHeaderField:@"Content-Length"];
+	[postRequest setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding]];
+	[postRequest setHTTPMethod:@"POST"];
+	[postRequest setAllHTTPHeaderFields:headers];
+	
+	[NSURLConnection sendSynchronousRequest:postRequest returningResponse:&response error:&error];
+	
+	UINavigationController* navigationController = [self.tabcontroller.viewControllers objectAtIndex:2];
+	navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", [UIApplication sharedApplication].applicationIconBadgeNumber];
+	
+	//return;
+	
+	
+	
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+	// This is expected on the emulator so that's fine
+    NSLog(@"Error in registration. Error: %@", err);
+}
+
 
 - (void) finishLoading:(id)theJobToDo {
 	NSError *error;
+	
+	[self trySubmitUUID];
 	
 	if (self.loginController.savePassword.on == YES) {
 		// now remember the password if login is successful
@@ -117,8 +169,8 @@
 	[SFHFKeychainUtils storeUsername:self.loginController.usernameField.text andPassword:@""
 					  forServiceName:@"appfirst" updateExisting:YES error:&error];
 	
-	loginController.usernameField.text = @"andrew@appfirst.com";
-	loginController.passwordField.text = @"1AppFirst$";
+	//loginController.usernameField.text = @"andrew@appfirst.com";
+	//loginController.passwordField.text = @"1AppFirst$";
 	[tabcontroller.view removeFromSuperview];
 	[window addSubview:loginController.view];
 	loginController.view.userInteractionEnabled = YES;
@@ -204,12 +256,9 @@
 		}
 		self.availableCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:urlBase]];
 		
-		NSLog(@"%@", self.availableCookies);
 		
 		dashboardController.availableCookies = self.availableCookies;
 		alertController.availableCookies = self.availableCookies;
-		
-		
 		
 		[self performSelectorOnMainThread:@selector(finishLoading:)
 							   withObject:nil
@@ -219,6 +268,12 @@
 	}
 	
 	[pool drain];
+	
+}
+
+
+- (void) trySubmitUUID {
+	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
 	
 }
 
@@ -321,6 +376,7 @@
 	
 	[alertController release];
 	[dashboardController release];
+	[notificationController release];
 	
 	[availableCookies release];
 	[serverListUrl release];
@@ -328,6 +384,7 @@
 	[alertListUrl release];
 	[urlBase release];
 	[usernames release];
+	[UUID release];
 	
 	[super dealloc];
 }

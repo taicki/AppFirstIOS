@@ -7,6 +7,7 @@
 //
 
 #import "AFAlertHistoryViewController.h"
+#import "AFWebViewController.h"
 #import "AppHelper.h"
 #import "AppDelegate_Shared.h"
 #import "config.h"
@@ -101,16 +102,15 @@
 		for (int j= 0; j < [keys count]; j++) {
 			[newObject setValue: [[objects objectAtIndex:i] objectAtIndex:j] forKey:[keys objectAtIndex: j]];
 		}
-		NSLog(@"%@", newObject);
 		[self.notifications addObject:newObject];
 	}
 		
 	
-	NSSortDescriptor *nameSorter = [[NSSortDescriptor alloc] 
-									initWithKey: @"Alert" ascending: YES selector: @selector(caseInsensitiveCompare
-																							  : ) ] ;
-    [self.notifications sortUsingDescriptors: [NSArray arrayWithObject: nameSorter] ] ;
-	[nameSorter release] ;
+	//NSSortDescriptor *nameSorter = [[NSSortDescriptor alloc] 
+	//								initWithKey: @"Alert" ascending: YES selector: @selector(caseInsensitiveCompare
+	//																						  : ) ] ;
+    //[self.notifications sortUsingDescriptors: [NSArray arrayWithObject: nameSorter] ] ;
+	//[nameSorter release] ;
 	
 	[self.tableView reloadData];
 	
@@ -206,16 +206,59 @@
 }
 
 
-/*
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 }
-*/
-/*
+
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+
+	[self resetBadgeValue];
+
 }
-*/
+
+
+- (void) resetBadgeValue {
+	NSHTTPURLResponse *response;
+	NSError *error = nil;
+	AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
+	
+	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:appDelegate.availableCookies];
+	NSMutableURLRequest *postRequest = [[[NSMutableURLRequest alloc] init] autorelease];
+	
+	NSString *url;
+	
+	if (DEBUGGING == YES) {
+		url = [NSString stringWithFormat:@"%@%@", DEV_SERVER_IP, BADGE_SET_API_STRING];
+	} else {
+		url = [NSString stringWithFormat:@"%@%@", PROD_SERVER_IP, BADGE_SET_API_STRING];
+	}
+	
+	
+	postRequest.URL = [NSURL URLWithString:url];
+	
+	NSString *postData = [NSString stringWithFormat:@"uid=%@&badge=%d", appDelegate.UUID, 0];
+	NSLog(@"%@", postData);
+	NSString *length = [NSString stringWithFormat:@"%d", [postData length]];
+	
+	[postRequest setValue:length forHTTPHeaderField:@"Content-Length"];
+	[postRequest setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding]];
+	[postRequest setHTTPMethod:@"POST"];
+	[postRequest setAllHTTPHeaderFields:headers];
+	
+	[NSURLConnection sendSynchronousRequest:postRequest returningResponse:&response error:&error];
+	
+	if (error) {
+		NSLog(@"%@", [error localizedDescription]);
+	}
+	
+	UINavigationController* navigationController = [appDelegate.tabcontroller.viewControllers objectAtIndex:2];
+	navigationController.tabBarItem.badgeValue = nil;
+	[UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+}
+
 /*
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -268,7 +311,7 @@
 	cell.textLabel.text = [NSString stringWithFormat:@"Alert '%@' on %@", [[self.notifications objectAtIndex:indexPath.row] objectForKey: @"Alert"], 
 						   [[self.notifications objectAtIndex:indexPath.row] objectForKey: @"Target"]];
     // Configure the cell...
-    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -318,13 +361,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
+	
+	AFWebViewController *detailViewController = [[AFWebViewController alloc] initWithNibName:@"AFWebViewController" bundle:nil];
+	
+	NSString* aUrl;
+	if (DEBUGGING) {
+		aUrl = DEV_SERVER_IP;
+	} else {
+		aUrl = PROD_SERVER_IP;
+	}
+	
+	
+	aUrl = [NSString stringWithFormat:@"%@%@", aUrl, [[self.notifications objectAtIndex:indexPath.row] objectForKey:@"url"]];
+	
+	detailViewController.queryUrl = aUrl;
+	// ...
      // Pass the selected object to the new view controller.
 	 [self.navigationController pushViewController:detailViewController animated:YES];
 	 [detailViewController release];
-	 */
+	 
 }
 
 

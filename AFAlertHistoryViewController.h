@@ -34,5 +34,6 @@
 - (void) _createRefreshIndicator;
 - (void) _createNavigatorTitle;
 - (void) _setQueryUrl;
+- (void) resetBadgeValue;
 
 @end
