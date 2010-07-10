@@ -8,6 +8,8 @@
 
 #import "AFPollDataTableViewController.h"
 #import "AppHelper.h"
+#import "AFGraphViewController.h"
+#import "AppDelegate_Shared.h"
 #import "config.h"
 
 
@@ -113,6 +115,39 @@
 	 [self.navigationController pushViewController:detailViewController animated:YES];
 	 [detailViewController release];
 	 */
+	
+	NSString* queryString;
+	if (DEBUGGING) {
+		queryString = DEV_SERVER_IP;
+	} else {
+		queryString = PROD_SERVER_IP;
+	}
+	
+	queryString = [NSString stringWithFormat:@"%@%@?hostname=%@&script=%@&secs=%d", queryString, POLLDATA_GRAPH_API_STRING,
+				   [[pollData objectAtIndex:indexPath.row] objectForKey: @"Server"], 
+				   [[pollData objectAtIndex:indexPath.row] objectForKey: @"Service"], 3600];
+	
+	
+	AFGraphViewController* aGraphController = [[AFGraphViewController alloc] init];
+	aGraphController.queryString = queryString;
+	
+	
+	// Create a Navigation controller
+	UINavigationController *navController = [[UINavigationController alloc]
+											 initWithRootViewController:aGraphController];
+	
+	
+	// show the navigation controller modally
+	AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
+	
+	[[appDelegate.tabcontroller.viewControllers objectAtIndex:0] presentModalViewController:navController animated:YES];
+	
+	// Clean up resources
+	[navController release];
+	[aGraphController release];
+	
+	
+	
 }
 
 
@@ -140,6 +175,7 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
+	
 	cell.textLabel.text = [NSString stringWithFormat:@"%@ at %@", [[pollData objectAtIndex:indexPath.row] objectForKey:@"Service"],
 						   [AppHelper formatDateString: [NSDate dateWithTimeIntervalSince1970:[[[pollData objectAtIndex:indexPath.row] objectForKey:@"Last Run"] doubleValue] / 1000]]];
 	cell.textLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_BIG_FONTSIZE];

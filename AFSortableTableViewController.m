@@ -52,7 +52,8 @@
 - (void) asyncGetServerData
 {
 	
-	titleLabel.text = @"Running Processes (updating...)";
+	titleLabel.text = @"Running Processes (loading...)";
+	self.view.userInteractionEnabled = NO;
 
 	AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
 	
@@ -104,12 +105,13 @@
 	[self.tableController.tableView reloadData];
 	
 
-	if ([AppHelper isIPad]) {
 	
-		self.metricsController.metrics = [[NSMutableArray alloc] init];
-		[self.metricsController setMetrics:keys];
-		[self.metricsController.tableView reloadData];
-	}
+	
+	self.metricsController.metrics = [[NSMutableArray alloc] init];
+	[self.metricsController setMetrics:keys];
+	[self.metricsController.tableView reloadData];
+	
+	self.view.userInteractionEnabled = YES;
 }
 
 
@@ -174,49 +176,55 @@
 	[titleSection setBackgroundColor:[UIColor clearColor]];
 	
 	UILabel* sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(IPAD_WIDGET_INTERNAL_PADDING, 2, 250, titleSectionHeight)];
-	//sectionLabel.text = 
 	[sectionLabel setBackgroundColor:[UIColor clearColor]];
 	[titleSection addSubview:sectionLabel];
 	titleLabel = sectionLabel;
 	[sectionLabel release];
-	
-	if ([AppHelper isIPad]) {
-	
-		self.sortButton = [[UIButton buttonWithType:UIButtonTypeInfoDark] autorelease];//[[UIButton alloc] initWithFrame:CGRectMake(300, 0, 100, 18)];
-		self.sortButton.frame = CGRectMake(self.view.frame.size.width - sortButtonWidth, 0, 20, titleSectionHeight);
-		[self.sortButton addTarget:self action:@selector(changeMetricsViewDisplay:) forControlEvents:UIControlEventTouchUpInside];
-		[self.view addSubview:self.sortButton];
-	}
-	
+
 	[self.view addSubview:titleSection];
 	[titleSection release];
 	
 	
-	if ([AppHelper isIPad]) {
-		self.metricsController = [[AFMetricsPicker alloc]  initWithNibName:@"AFMetricsPicker" bundle:nil];
-		self.metricsController.parentViewController = self;
+	self.metricsController = [[AFMetricsPicker alloc]  initWithNibName:@"AFMetricsPicker" bundle:nil];
+	self.metricsController.parentViewController = self;
 	
-		UIView* viewBounder = [[UIView alloc] initWithFrame:CGRectMake(250, titleSectionHeight, 250, 300 - titleSectionHeight)];
-		viewBounder.clipsToBounds = YES;
-		self.metricsViewBounder = viewBounder;
-		[self.view addSubview:viewBounder];
-		[viewBounder release];
-	}
+	UIView* viewBounder = [[UIView alloc] initWithFrame:CGRectMake(250, titleSectionHeight, 250, 300 - titleSectionHeight)];
+	viewBounder.clipsToBounds = YES;
+	self.metricsViewBounder = viewBounder;
+	
+	
+	
+	if ([AppHelper isIPad]) {
 		
+		self.sortButton = [[UIButton buttonWithType:UIButtonTypeInfoDark] autorelease];
+		self.sortButton.frame = CGRectMake(self.view.frame.size.width - sortButtonWidth, 0, 20, titleSectionHeight);
+		[self.sortButton addTarget:self action:@selector(changeMetricsViewDisplay:) forControlEvents:UIControlEventTouchUpInside];
+		[self.view addSubview:self.sortButton];
+		[self.view addSubview:viewBounder];
+	} else {
+		self.sortButton = [[UIButton buttonWithType:UIButtonTypeInfoDark] autorelease];
+		[self.sortButton addTarget:self action:@selector(changeMetricsViewDisplayIphone:) forControlEvents:UIControlEventTouchUpInside];
+		[self.view addSubview:self.sortButton];
+		[self.metricsViewBounder addSubview:self.metricsController.view];
+		[self.metricsViewBounder setBackgroundColor:[UIColor whiteColor]];
+	}
+	
+	[viewBounder release];
+	
 	self.tableController = [[[AFTableViewController alloc] init] autorelease];
 	[self.view addSubview:self.tableController.view];
 	
-	
-	
 	[self _setQueryUrl];
 	[self asyncGetServerData];
-	
-	
-	
-	
 }
 
-
+- (IBAction) changeMetricsViewDisplayIphone: (id) sender {
+	if (self.metricsViewBounder.superview == nil) {
+		[self.view addSubview:self.metricsViewBounder];
+	} else {
+		[self.metricsViewBounder removeFromSuperview];
+	}
+}
 
 
 
@@ -233,7 +241,6 @@
 									 
 									 initWithContentViewController:self.metricsController];
 	aPopover.popoverContentSize = CGSizeMake(self.metricsViewBounder.frame.size.width, self.metricsViewBounder.frame.size.height - 40);
-	//aPopover.popoverArrowDirection = UIPopoverArrowDirectionUp;
 	
 	self.popoverController = aPopover;
 	[aPopover release];
@@ -250,8 +257,13 @@
     [self.tableController.processNames sortUsingDescriptors: [NSArray arrayWithObject: nameSorter] ] ;
 	
 	[self.tableController.tableView reloadData];
-	self.metricsViewBounder.hidden = YES;
 	
+	if ([AppHelper isIPad]) {
+		self.metricsViewBounder.hidden = YES;
+	} else {
+		[self.metricsViewBounder removeFromSuperview];
+	}
+
 }
 
 

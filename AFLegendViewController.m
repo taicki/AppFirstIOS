@@ -1,19 +1,16 @@
 //
-//  AFTableViewController.m
+//  AFLegendViewController.m
 //  AppFirst
 //
-//  Created by appfirst on 6/18/10.
+//  Created by appfirst on 7/10/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "AFTableViewController.h"
-#import "AppDelegate_Shared.h"
-#import "config.h"
-#import "AppHelper.h"
+#import "AFLegendViewController.h"
 
-@implementation AFTableViewController
-@synthesize processNames;
-@synthesize sortKey;
+
+@implementation AFLegendViewController
+@synthesize legendNames;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -21,47 +18,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	[self.view setBackgroundColor:[UIColor blackColor]];
 	
-	//mockup data
-	//processNames = [[NSMutableArray alloc] init];
-	
-	/*
-	[self.processNames addObject:[NSDictionary dictionaryWithObjectsAndKeys: 
-								@"python", @"pid", 
-								  [NSNumber numberWithDouble:42.0], @"memory",
-								  [NSNumber numberWithDouble: 15.0], @"cpu", 
-								  [NSNumber numberWithDouble: 33.0], @"disk", nil]];
-	[self.processNames addObject:[NSDictionary dictionaryWithObjectsAndKeys: 
-								  @"httpd", @"pid", 
-								  [NSNumber numberWithDouble:18.0], @"memory",
-								  [NSNumber numberWithDouble: 49.0], @"cpu", 
-								  [NSNumber numberWithDouble: 82.0], @"disk", nil]];
-	[self.processNames addObject:[NSDictionary dictionaryWithObjectsAndKeys: 
-								  @"vim", @"pid", 
-								  [NSNumber numberWithDouble:24.0], @"memory",
-								  [NSNumber numberWithDouble: 33.0], @"cpu", 
-								  [NSNumber numberWithDouble: 98.0], @"disk", nil]];
-	 
-	 */
     // Uncomment the following line to preserve selection between presentations.
-    self.clearsSelectionOnViewWillAppear = NO;
-	
-	self.sortKey = @"cpu";
-	
-	
+    // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 
-
+/*
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	
-	
 }
-
+*/
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -89,13 +60,14 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 1;
+    // Return the number of sections.
+    return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	
-	return [processNames count];
+    // Return the number of rows in the section.
+    return 1;
 }
 
 
@@ -106,59 +78,13 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	NSDictionary* processData = [processNames objectAtIndex:indexPath.row];
-	
-	cell.textLabel.text = [NSString stringWithFormat:@"%@ (pid: %@)", [processData objectForKey:@"Name"],[processData objectForKey:@"pid"]];
-	cell.textLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_BIG_FONTSIZE];
-   
-	
-	
-	NSString* detailText = [NSString stringWithFormat:@"%@:%@",self.sortKey,  [AppHelper formatMetricsValue:self.sortKey :[[processData objectForKey:self.sortKey] doubleValue]]];
-	NSString* key; 
-	for (key in processData) {
-		if (key == nil || [key isEqualToString:self.sortKey] || 
-			[key isEqualToString:@"pk"] ||  
-			[key isEqualToString:@"Name"] || 
-			[key isEqualToString:@"args"] || 
-			[key isEqualToString:@"pid"])
-			continue;
-		
-		detailText = [NSString stringWithFormat:@"%@ %@:%@", detailText, key, [AppHelper formatMetricsValue:key :[[processData objectForKey: key] doubleValue]]];
-	}
-	
-	cell.detailTextLabel.text = detailText;
-	
-	
-	
-	cell.detailTextLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_NORMAL_FONTSIZE];
-	
-	if (![AppHelper isIPad]) {
-		cell.detailTextLabel.numberOfLines = 0;
-		cell.detailTextLabel.font = [UIFont systemFontOfSize:IPHONE_TABLE_FONTSIZE];
-	}
-	
-	cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    // Configure the cell...
+    
     return cell;
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	if ([AppHelper isIPad])
-		return 42;
-	else {
-		return 63;
-	}
-}
-
-
-/*
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	
-	return @"top running processes";
-}*/
 
 
 /*
@@ -213,30 +139,7 @@
 	 [self.navigationController pushViewController:detailViewController animated:YES];
 	 [detailViewController release];
 	 */
-	
-	/*
-	if ([AppHelper isIPad]) {
-		AFGraphViewController* aGraphController = [[AFGraphViewController alloc] init];
-		
-		UIPopoverController* aPopover = [[UIPopoverController alloc]
-										 
-										 initWithContentViewController:aGraphController];
-		aPopover.popoverContentSize = CGSizeMake(640, 640);
-		
-		[aPopover presentPopoverFromRect:CGRectZero inView:self.view.superview.superview permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-		
-		self.graphController = aGraphController;
-		self.popoverController = aPopover;
-		
-		[aPopover release];
-		[aGraphController release];
-	}*/
-	
-	
 }
-
-
-
 
 
 #pragma mark -
@@ -256,8 +159,7 @@
 
 
 - (void)dealloc {
-	[sortKey release];
-	[processNames release];
+	[legendNames release];
     [super dealloc];
 }
 

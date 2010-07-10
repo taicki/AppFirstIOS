@@ -99,6 +99,7 @@
 #define NOTIFICATION_API_STRING @"/widget/alert_history/api/iphone/data/"
 #define BADGE_SET_API_STRING @"/api/iphone/badge/set/"
 #define UUID_SET_API_STRING @"/api/iphone/uid/set/"
+#define POLLDATA_GRAPH_API_STRING @"/widget/polled_data/api/iphone/graph/"
 
 #define LIST_QUERY_COLUMN_NAME @"columns"
 #define LIST_QUERY_DATA_NAME @"data"

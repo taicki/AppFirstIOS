@@ -169,7 +169,7 @@
 
 
 -(void) asyncGetServerListData {
-	self.navigationItem.title = @"Updating...";
+	self.navigationItem.title = @"Loading...";
 	AppDelegate_Shared *application = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
 	
 	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:application.availableCookies];
@@ -301,7 +301,8 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
-    
+	
+	
 	NSDate *triggerTime = [NSDate dateWithTimeIntervalSince1970:[[[self.notifications objectAtIndex:indexPath.row] objectForKey: @"Time"] doubleValue] /1000];
 	
 	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ at %@", 
@@ -311,7 +312,7 @@
 	cell.textLabel.text = [NSString stringWithFormat:@"Alert '%@' on %@", [[self.notifications objectAtIndex:indexPath.row] objectForKey: @"Alert"], 
 						   [[self.notifications objectAtIndex:indexPath.row] objectForKey: @"Target"]];
     // Configure the cell...
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 

@@ -55,7 +55,7 @@
 
  - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
  
-	 return @"Sort by metrics";
+	 return @"Sort by metrics ↓";
  }
 
 

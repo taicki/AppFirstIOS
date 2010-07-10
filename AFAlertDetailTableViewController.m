@@ -190,10 +190,10 @@
 				self.alertEnabled.on = NO;
 			}
 		} else {
-			cell.textLabel.text = @"Reset:                               mins";
+			cell.textLabel.text = @"Reset:                       mins";
 			
 			
-			self.alertReset = [[[UITextField alloc] initWithFrame:CGRectMake(75, 10, 130, 25 )] autorelease];
+			self.alertReset = [[[UITextField alloc] initWithFrame:CGRectMake(75, 10, 100, 25 )] autorelease];
 			[self.alertReset setBorderStyle:UITextBorderStyleRoundedRect];
 			
 			if ([[NSString stringWithFormat:@"%@", [self.detailData objectForKey:ALERT_RESET_NAME]] isEqualToString:@""] == NO) {

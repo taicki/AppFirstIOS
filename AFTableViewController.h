@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface AFTableViewController : UITableViewController {
 	NSMutableArray* processNames;
 	NSString* sortKey;
@@ -16,6 +15,8 @@
 
 @property (nonatomic, retain) NSMutableArray* processNames;
 @property (nonatomic, retain) NSString* sortKey;
+
+
 
 
 - (void) asyncGetServerData;

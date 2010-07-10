@@ -44,10 +44,6 @@
 
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
-	// Registration was successful so we'll
-	// set up our device token etc.
-	
-	NSLog(@"devToken=%@",devToken);
 	self.UUID = [NSString stringWithFormat:@"%@", devToken];
 	
 	NSHTTPURLResponse *response;
@@ -80,12 +76,10 @@
 	[NSURLConnection sendSynchronousRequest:postRequest returningResponse:&response error:&error];
 	
 	UINavigationController* navigationController = [self.tabcontroller.viewControllers objectAtIndex:2];
-	navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", [UIApplication sharedApplication].applicationIconBadgeNumber];
 	
-	//return;
-	
-	
-	
+	if ([UIApplication sharedApplication].applicationIconBadgeNumber > 0) {
+		navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", [UIApplication sharedApplication].applicationIconBadgeNumber];
+	} 
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
@@ -169,8 +163,7 @@
 	[SFHFKeychainUtils storeUsername:self.loginController.usernameField.text andPassword:@""
 					  forServiceName:@"appfirst" updateExisting:YES error:&error];
 	
-	//loginController.usernameField.text = @"andrew@appfirst.com";
-	//loginController.passwordField.text = @"1AppFirst$";
+
 	[tabcontroller.view removeFromSuperview];
 	[window addSubview:loginController.view];
 	loginController.view.userInteractionEnabled = YES;

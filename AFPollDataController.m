@@ -45,7 +45,7 @@
 - (void) asyncGetServerData
 {
 	
-	self.titleLabel.text = @"Polled Data (updating...)";
+	self.titleLabel.text = @"Polled Data (loading...)";
 	AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
 	
 	
