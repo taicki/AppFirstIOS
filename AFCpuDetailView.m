@@ -27,7 +27,7 @@
 	// mock up the data for test
 	self.cpuDetail = @"4 cores at 2400 MHZ";
 	self.cpuValue = 40;
-	self.cpuLoadArray = [[NSArray alloc] initWithObjects: [NSNumber numberWithInt:30], [NSNumber numberWithInt:40], [NSNumber numberWithInt:30], [NSNumber numberWithInt:100], nil];
+	self.cpuLoadArray = [[[NSArray alloc] initWithObjects: [NSNumber numberWithInt:30], [NSNumber numberWithInt:40], [NSNumber numberWithInt:30], [NSNumber numberWithInt:100], nil] autorelease];
 	
     return self;
 }

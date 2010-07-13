@@ -35,6 +35,7 @@
 //  
 
 #import "S7GraphView.h"
+#import "AppHelper.h"
 
 
 @interface S7GraphView (PrivateMethods)
@@ -45,38 +46,9 @@
 
 @implementation S7GraphView
 @synthesize legendController;
+@synthesize legendNames;
 
-+ (UIColor *)colorByIndex:(NSInteger)index {
-	
-	UIColor *color;
-	
-	switch (index) {
-		case 0: color = RGB(5, 141, 191);
-			break;
-		case 1: color = RGB(80, 180, 50);
-			break;		
-		case 2: color = RGB(255, 102, 0);
-			break;
-		case 3: color = RGB(255, 158, 1);
-			break;
-		case 4: color = RGB(252, 210, 2);
-			break;
-		case 5: color = RGB(248, 255, 1);
-			break;
-		case 6: color = RGB(176, 222, 9);
-			break;
-		case 7: color = RGB(106, 249, 196);
-			break;
-		case 8: color = RGB(178, 222, 255);
-			break;
-		case 9: color = RGB(4, 210, 21);
-			break;
-		default: color = RGB(204, 204, 204);
-			break;
-	}
-	
-	return color;
-}
+
 
 @synthesize dataSource = _dataSource, xValuesFormatter = _xValuesFormatter, yValuesFormatter = _yValuesFormatter;
 @synthesize drawAxisX = _drawAxisX, drawAxisY = _drawAxisY, drawGridX = _drawGridX, drawGridY = _drawGridY;
@@ -118,6 +90,7 @@
 	[_infoColor release];
 	
 	[legendController release];
+	[legendNames release];
 	
 	[super dealloc];
 }
@@ -154,6 +127,9 @@
 		NSArray *values = [self.dataSource graphView:self yValuesForPlot:plotIndex];
 		
 		for (NSUInteger valueIndex = 0; valueIndex < values.count; valueIndex++) {
+			if ([values objectAtIndex:valueIndex] == [NSNull null]) {
+				continue;
+			}
 			
 			if ([[values objectAtIndex:valueIndex] floatValue] > maxY) {
 				maxY = [[values objectAtIndex:valueIndex] floatValue];
@@ -216,6 +192,10 @@
 				valueString = [valueToFormat stringValue];
 			}
 			
+			if ([valueString length] > 5) {
+				valueString = [AppHelper formatYLabel:value];
+			}
+			
 			[self.yValuesColor set];
 			CGRect valueStringRect = CGRectMake(0.0f, self.frame.size.height - y - offsetY - legendDivHeight, 50.0f, 20.0f);
 			
@@ -229,15 +209,25 @@
 	
 	NSUInteger xValuesCount = xValues.count;
 	
-	if (xValuesCount > 5) {
+	int xStepCount = 5;
+	
+	if ([AppHelper isIPad] == NO) {
+		xStepCount = 2;
+	}
+	
+	if (xValuesCount > xStepCount) {
 		
-		NSUInteger stepCount = 5;
+		NSUInteger stepCount = xStepCount;
 		NSUInteger count = xValuesCount - 1;
 		
 		for (NSUInteger i = 4; i < 8; i++) {
 			if (count % i == 0) {
 				stepCount = i;
 			}
+		}
+		
+		if ([AppHelper isIPad] == NO) {
+			stepCount = 2;
 		}
 		
 		step = xValuesCount / stepCount;
@@ -318,9 +308,16 @@
 			shouldFill = [self.dataSource graphView:self shouldFillPlot:plotIndex];
 		}
 		
-		CGColorRef plotColor = [S7GraphView colorByIndex:plotIndex].CGColor;
+		CGColorRef plotColor = [AppHelper colorByIndex:plotIndex].CGColor;
 		
 		for (NSUInteger valueIndex = 0; valueIndex < values.count - 1; valueIndex++) {
+			
+			
+			if ([values objectAtIndex:valueIndex] == [NSNull null] || 
+				[values objectAtIndex:valueIndex + 1] == [NSNull null]) {
+				continue;
+			}
+			
 			
 			NSUInteger x = valueIndex * stepX;
 			NSUInteger y = [[values objectAtIndex:valueIndex] intValue] * stepY;
@@ -364,9 +361,17 @@
 	}
 	
 	self.legendController = [[[AFLegendViewController alloc] initWithNibName:@"AFLegendViewController" bundle:nil] autorelease];
-	UIView* viewBounder =[[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - offsetY - legendDivHeight + 25, self.frame.size.width, legendDivHeight - 25)];
+	UIView* viewBounder =[[UIView alloc] initWithFrame:CGRectMake(15, self.frame.size.height - legendDivHeight, self.frame.size.width - 30, legendDivHeight)];
+	viewBounder.clipsToBounds = YES;
+	self.legendController.legendNames = self.legendNames;
+	self.legendController.view.frame = CGRectMake(0, 0, viewBounder.frame.size.width, viewBounder.frame.size.height);
 	[viewBounder addSubview:self.legendController.view];
 	[self addSubview:viewBounder];
+	[self.legendController.view setNeedsDisplay];
+	[viewBounder setNeedsDisplay];
+	[viewBounder release];
+	
+	[self.legendController.tableView reloadData];
 }
 
 - (void)reloadData {

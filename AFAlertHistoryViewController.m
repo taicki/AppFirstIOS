@@ -140,13 +140,14 @@
 	
 	[connection release];
 	
-	NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+	NSString *jsonString = [[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding] autorelease];
 	[responseData release];
 	
 	
 	NSDictionary *dictionary = (NSDictionary*)[jsonString JSONValue];
 	
 	self.allData = dictionary;
+	
 	
 	if ([AppHelper isIPad]) 
 		[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
@@ -155,7 +156,7 @@
 	}
 }
 
-
+/*
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
 	return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
 }
@@ -165,7 +166,7 @@
 		[challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
 	
 	[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
-}
+}*/
 
 
 -(void) asyncGetServerListData {
@@ -240,7 +241,10 @@
 	postRequest.URL = [NSURL URLWithString:url];
 	
 	NSString *postData = [NSString stringWithFormat:@"uid=%@&badge=%d", appDelegate.UUID, 0];
-	NSLog(@"%@", postData);
+	
+	if (DEBUGGING) {
+		NSLog(@"%@", postData);
+	}
 	NSString *length = [NSString stringWithFormat:@"%d", [postData length]];
 	
 	[postRequest setValue:length forHTTPHeaderField:@"Content-Length"];
@@ -257,6 +261,8 @@
 	UINavigationController* navigationController = [appDelegate.tabcontroller.viewControllers objectAtIndex:2];
 	navigationController.tabBarItem.badgeValue = nil;
 	[UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+	
+	[NSURLConnection release];
 }
 
 /*
@@ -309,10 +315,14 @@
 								 [[self.notifications objectAtIndex:indexPath.row] objectForKey: @"Trigger"],
 								 [AppHelper formatDateString:triggerTime]];
 	
-	cell.textLabel.text = [NSString stringWithFormat:@"Alert '%@' on %@", [[self.notifications objectAtIndex:indexPath.row] objectForKey: @"Alert"], 
+	cell.textLabel.text = [NSString stringWithFormat:@"'%@' on %@", [[self.notifications objectAtIndex:indexPath.row] objectForKey: @"Alert"], 
 						   [[self.notifications objectAtIndex:indexPath.row] objectForKey: @"Target"]];
     // Configure the cell...
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	
+	if ([AppHelper isIPad] == NO) {
+		cell.textLabel.font = [UIFont boldSystemFontOfSize:IPHONE_TABLE_TITLESIZE];
+	}
     return cell;
 }
 

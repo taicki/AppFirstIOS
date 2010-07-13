@@ -18,4 +18,8 @@
 + (UIColor*) backgroundGradientColor2;
 + (UIColor*) backgroundGradientColor1;
 + (NSString*) formatMetricsValue:(NSString*) metric :(double) value;
++ (NSString*) formatYLabel:(NSUInteger) value;
+
+/** Returns a different color for the first 10 plots. */
++ (UIColor *)colorByIndex:(NSInteger)index;
 @end

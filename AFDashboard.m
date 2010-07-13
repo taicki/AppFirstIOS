@@ -208,7 +208,7 @@
 	//self.servers = dictionary.allKeys;
 	self.allData = dictionary;
 
-	
+	[jsonString release];
 	if ([AppHelper isIPad]) 
 		[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
 	else {
@@ -216,7 +216,7 @@
 	}
 }
 
-
+/*
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
 	return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
 }
@@ -227,7 +227,7 @@
 	
 	[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
 }
-
+*/
 
 -(void) asyncGetServerListData {
 	self.navigationItem.title = @"Updating...";
@@ -391,6 +391,10 @@
 	}
 	
 	cell.imageView.image = theImage;
+	
+	if ([AppHelper isIPad] == NO) {
+		cell.textLabel.font = [UIFont boldSystemFontOfSize:IPHONE_TABLE_TITLESIZE];
+	}
     
     return cell;
 }

@@ -9,6 +9,7 @@
 #import "AFSettingsViewController.h"
 #import "AppDelegate_Shared.h"
 #import "AppHelper.h"
+#import "config.h"
 
 @implementation AFSettingsViewController
 
@@ -37,7 +38,9 @@
 }
 
 - (void)_logout {
-	NSLog(@"log out");
+	if (DEBUGGING) {
+		NSLog(@"log out");
+	}
 	AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
 	[appDelegate trySignOut];
 	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];

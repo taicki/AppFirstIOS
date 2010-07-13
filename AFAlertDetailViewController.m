@@ -100,6 +100,8 @@
 	NSDictionary *dictionary = (NSDictionary*)[jsonString JSONValue];
 	
 	self.detailData = dictionary;	
+	
+	[jsonString release];
 	[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
 }
 

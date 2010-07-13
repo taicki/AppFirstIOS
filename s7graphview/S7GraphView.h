@@ -96,12 +96,14 @@
 
 	
 @private
+	AFLegendViewController* legendController;
+	NSMutableArray* legendNames;
 	
 	id<S7GraphViewDataSource> _dataSource;
 	
 	NSFormatter *_xValuesFormatter;
 	NSFormatter *_yValuesFormatter;
-	AFLegendViewController* legendController;
+	
 	
 	BOOL _drawAxisX;
 	BOOL _drawAxisY;
@@ -119,8 +121,7 @@
 	UIColor *_infoColor;
 }
 
-/** Returns a different color for the first 10 plots. */
-+ (UIColor *)colorByIndex:(NSInteger)index;
+
 
 @property (nonatomic, assign) IBOutlet id<S7GraphViewDataSource> dataSource;
 
@@ -142,6 +143,7 @@
 @property (nonatomic, copy) NSString *info;
 @property (nonatomic, retain) UIColor *infoColor;
 @property (nonatomic, retain) AFLegendViewController* legendController;
+@property (nonatomic, retain) NSMutableArray* legendNames;
 
 - (void)reloadData;
 

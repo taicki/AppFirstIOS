@@ -94,8 +94,13 @@
 	double diskValue = [[diskValues objectAtIndex:indexPath.row] doubleValue];
 	double diskTotal = [[diskTotals objectAtIndex:indexPath.row] doubleValue];
 	
+	NSString* diskName = [diskNames objectAtIndex:indexPath.row];
+	if ([diskName length] > 15) {
+		NSArray* listItems = [diskName componentsSeparatedByString:@"/"];
+		diskName = [listItems objectAtIndex:([listItems count] - 1)];
+	}
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
-	cell.textLabel.text = [diskNames objectAtIndex:indexPath.row];
+	cell.textLabel.text = diskName;
 	cell.textLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_BIG_FONTSIZE];
 	cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f%@ used of %.0f MB", 
 								 diskValue / diskTotal * 100

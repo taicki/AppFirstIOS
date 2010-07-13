@@ -31,8 +31,10 @@
 		
 		@try {
 			password = [SFHFKeychainUtils getPasswordForUsername:self.loginController.usernameField.text andServiceName:@"appfirst" error:&error];
-			self.loginController.passwordField.text = password ;
-			NSLog(@"password: %@",password);
+			self.loginController.passwordField.text = password;
+			if (DEBUGGING) {
+				NSLog(@"password: %@",password);
+			}
 		}
 		
 		@catch (NSException * e) {

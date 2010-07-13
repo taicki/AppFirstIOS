@@ -135,6 +135,8 @@
 	self.alerts = dictionary.allKeys;
 	self.allData = dictionary;
 	
+	[jsonString release];
+	
 	if ([AppHelper isIPad]) 
 		[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
 	else {
@@ -245,9 +247,6 @@
 	NSHTTPURLResponse *response;
 	NSError *error;
 	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:self.availableCookies];
-	
-	
-	
 	
 	NSMutableURLRequest *alertListRequest = [[[NSMutableURLRequest alloc] init] autorelease];
 	// we are just recycling the original request
@@ -389,6 +388,10 @@
 	
 	//NSDictionary* detailData = [self.allData objectForKey:[dictionary objectAtIndex:indexPath.row]];
 	cell.textLabel.text = [[dictionary objectAtIndex:indexPath.row] objectForKey:ALERT_NAME];//[detailData objectForKey:ALERT_NAME];
+	
+	if ([AppHelper isIPad] == NO) {
+		cell.textLabel.font = [UIFont boldSystemFontOfSize:IPHONE_TABLE_TITLESIZE];
+	}
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	
 	NSString* alertId = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];

@@ -17,6 +17,7 @@
 	NSMutableArray* xValues;
 	NSMutableArray* yValues;
 	NSArray* labels;
+	NSString* graphTitle;
 }
 	
 @property (nonatomic, retain) S7GraphView *graphView;
@@ -27,6 +28,8 @@
 @property (nonatomic, retain) NSMutableArray* xValues;
 @property (nonatomic, retain) NSMutableArray* yValues;
 @property (nonatomic, retain) NSArray* labels;
+
+@property (nonatomic, retain) NSString* graphTitle;
 
 - (void) dismissView;
 - (void) asyncGetServerData;

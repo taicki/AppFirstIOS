@@ -41,7 +41,21 @@
 	[webView loadRequest:requestObj];
 }
 
-
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
+{
+	
+	NSURL *loadURL = [[request URL]retain];
+	//change next line to whatever condition you need, e.g.
+	//[[loadURL relativeString]  ....] contains a certain substring 
+	//or starts with certain letter or ...
+	if([[loadURL absoluteString] isEqualToString: self.queryUrl])
+	{
+		[loadURL release]; 
+		return TRUE;
+	}
+	[loadURL release];
+	return FALSE;
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Overriden to allow any orientation.

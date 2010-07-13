@@ -15,6 +15,7 @@
 @implementation AFGraphViewController
 
 @synthesize graphView;
+@synthesize graphTitle;
 @synthesize queryString;
 @synthesize allData;
 @synthesize responseData;
@@ -65,7 +66,7 @@
 	self.graphView.gridYColor = [UIColor whiteColor];
 	
 	self.graphView.drawInfo = YES;
-	self.graphView.info = @"Load";
+	self.graphView.info = self.graphTitle;
 	self.graphView.infoColor = [UIColor whiteColor];
 	
 	//When you need to update the data, make this call:
@@ -89,7 +90,7 @@
 
 - (void) asyncGetServerData
 {
-	
+	self.navigationItem.title = @"Loading...";
 	
 	AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
 	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:appDelegate.availableCookies];
@@ -98,9 +99,13 @@
 	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
 	[request setHTTPMethod:@"GET"];
 	[request setAllHTTPHeaderFields:headers];
-	[request setTimeoutInterval:20];
+	[request setTimeoutInterval:30];
 	request.URL = [NSURL URLWithString:self.queryString];
-	NSLog(@"%@", self.queryString);
+	
+	if (DEBUGGING) {
+		NSLog(@"%@", self.queryString);
+	}
+	
 	[[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
@@ -120,12 +125,22 @@
 		[yValues addObject:dictionary];
 	}
 	
-	NSLog(@"%@", data);
-	NSLog(@"%@", xValues);
-	NSLog(@"%@", yValues);
+	if (DEBUGGING) {
+		NSLog(@"%@", data);
+		NSLog(@"%@", xValues);
+		NSLog(@"%@", yValues);
+	}
 	
+	self.graphView.legendNames = [[[NSMutableArray alloc] init] autorelease];
+	
+	for (int cnt = 0; cnt < [self.labels count]; cnt ++) 
+		[self.graphView.legendNames addObject:[self.labels objectAtIndex:cnt]];
+	
+	self.navigationItem.title = @"";
 	[self.graphView reloadData];
-
+	sleep(1);
+	[self.graphView.legendController.tableView reloadData];
+	
 }
 
 
@@ -138,7 +153,7 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-	UIAlertView *errorView = [[UIAlertView alloc] initWithTitle: @"Can't update server detail. " 
+	UIAlertView *errorView = [[UIAlertView alloc] initWithTitle: @"Can't update poll data history. " 
 														message: [error localizedDescription] 
 													   delegate: self 
 											  cancelButtonTitle: @"Ok" 
@@ -159,10 +174,10 @@
 	NSDictionary *dictionary = (NSDictionary*)[jsonString JSONValue];
 	
 	self.allData = dictionary;	
-	NSLog(@"%@", dictionary);
+	[jsonString release];
 	[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
 }
-
+/*
 ///* comment these two methods for release
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
 	return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
@@ -174,7 +189,7 @@
 	
 	[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
 }
-
+*/
 
 
 
@@ -227,6 +242,7 @@
 	[xValues release];
 	[yValues release];
 	[labels release];
+	[graphTitle release];
 	graphView = nil;
 	
     [super dealloc];
@@ -244,18 +260,13 @@
 	 The number of elements should be equal to the number of points you have for every plot. */
 	
 	return xValues;
-	NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:101];
-	for ( int i = -50 ; i <= 50 ; i ++ ) {
-		[array addObject:[NSNumber numberWithInt:i * 60 + 1278601751]];	
-	}
-	return array;
 }
 
 - (NSArray *)graphView:(S7GraphView *)graphView yValuesForPlot:(NSUInteger)plotIndex {
 	/* Return the values for a specific graph. Each plot is meant to have equal number of points.
 	 And this amount should be equal to the amount of elements you return from graphViewXValues: method. */
 	
-	NSMutableArray *array = [[NSMutableArray alloc] init];
+	NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
 	
 	for ( int i = 0 ; i < [yValues count] ; i ++ ) {
 		[array addObject:[[yValues objectAtIndex:i] objectAtIndex:plotIndex]];	// y = x*x		

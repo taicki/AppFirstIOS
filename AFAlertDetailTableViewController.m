@@ -74,12 +74,31 @@
 		if ([self.alertReset.text isEqualToString:@""] || [self.alertReset.text isEqualToString:@"0"])
 			self.alertReset.text = @"1";
 		
+		NSDecimalNumber* newReset = nil;
+		
+		@try {
+			newReset = [NSDecimalNumber decimalNumberWithString:self.alertReset.text];
+			
+			if (newReset == [NSDecimalNumber notANumber]) {
+				UIAlertView *errorView = [[UIAlertView alloc] initWithTitle: @"Invalid number format for reset value." 
+																	message: self.alertReset.text delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
+				[errorView show];
+				[errorView release];
+				return;
+			}
+			
+		}
+		@catch (NSException * e) {
+			return;
+		}
+		
+		
 		NSString* alertEnabledString = @"True";
 		
 		if (self.alertEnabled.on == NO)
 			alertEnabledString = @"False";
 		
-		NSString *postData = [NSString stringWithFormat:@"alert=%@&interval=%@&enabled=%@", self.alertID, self.alertReset.text, alertEnabledString];
+		NSString *postData = [NSString stringWithFormat:@"alert=%@&interval=%@&enabled=%@", self.alertID, newReset, alertEnabledString];
 		NSString *length = [NSString stringWithFormat:@"%d", [postData length]];
 		
 		[saveAlertPost setValue:length forHTTPHeaderField:@"Content-Length"];
@@ -175,10 +194,11 @@
 			cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", 
 								   [self.detailData objectForKey:ALERT_TYPE_NAME]
 								   , [self.detailData objectForKey:ALERT_TARGET_NAME]];
+			cell.textLabel.numberOfLines = 0;
 			
 		} else if (indexPath.row == 1) {
 			cell.textLabel.text = @"Enabled:";
-			self.alertEnabled = [[[UISwitch alloc] initWithFrame:CGRectMake(110, 10, 100, ALERT_CELL_HEIGHT / 2)] autorelease];
+			self.alertEnabled = [[[UISwitch alloc] initWithFrame:CGRectMake(130, 10, 100, ALERT_CELL_HEIGHT / 2)] autorelease];
 			[cell.contentView addSubview:self.alertEnabled];
 			self.alertEnabled.userInteractionEnabled = NO;
 			
@@ -190,10 +210,10 @@
 				self.alertEnabled.on = NO;
 			}
 		} else {
-			cell.textLabel.text = @"Reset:                       mins";
+			cell.textLabel.text = @"Reset (in minutes):";
 			
 			
-			self.alertReset = [[[UITextField alloc] initWithFrame:CGRectMake(75, 10, 100, 25 )] autorelease];
+			self.alertReset = [[[UITextField alloc] initWithFrame:CGRectMake(130, 10, 100, 25 )] autorelease];
 			[self.alertReset setBorderStyle:UITextBorderStyleRoundedRect];
 			
 			if ([[NSString stringWithFormat:@"%@", [self.detailData objectForKey:ALERT_RESET_NAME]] isEqualToString:@""] == NO) {
@@ -224,6 +244,8 @@
 		cell.textLabel.text = [NSString stringWithFormat:@"%@", [self.recipients objectAtIndex: indexPath.row]];
 	}
 	
+	cell.textLabel.font = [UIFont systemFontOfSize:13];
+	
 	
     // Configure the cell...
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -238,7 +260,7 @@
 	else if (section == 1) 
 		return @"Trigger";
 	else
-		return @"Receipients";
+		return @"Recipients";
 }
 
 /*

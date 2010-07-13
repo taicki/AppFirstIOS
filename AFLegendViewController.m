@@ -7,6 +7,7 @@
 //
 
 #import "AFLegendViewController.h"
+#import "AppHelper.h"
 
 
 @implementation AFLegendViewController
@@ -67,7 +68,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 1;
+    return [legendNames count];
 }
 
 
@@ -75,14 +76,33 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
+	
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
+	
+	//cell.contentView clear
+	
+	//double legendWidth = 25;
+	
+	UIView* legend = [[UIView alloc] initWithFrame:CGRectMake(5, 5, 15, 15)];
+	[legend setBackgroundColor: [AppHelper colorByIndex:indexPath.row]];
+	[cell.contentView addSubview:legend];
+	[legend release];
+	
+	UILabel* textLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, cell.contentView.frame.size.width - 50, 15)];
+	[textLabel setBackgroundColor:[UIColor blackColor]];
     
-    // Configure the cell...
-    
+	textLabel.text = [NSString stringWithFormat:@"%@", [legendNames objectAtIndex:indexPath.row] ];
+	textLabel.textColor = [UIColor whiteColor];
+	textLabel.font = [UIFont systemFontOfSize:11];
+	[cell.contentView addSubview:textLabel];
+	[textLabel release];
+	
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	
     return cell;
 }
 

@@ -130,7 +130,9 @@
 	
 	AFGraphViewController* aGraphController = [[AFGraphViewController alloc] init];
 	aGraphController.queryString = queryString;
-	
+	aGraphController.graphTitle = [NSString stringWithFormat:@"%@ on %@", 
+								   [[pollData objectAtIndex:indexPath.row] objectForKey: @"Service"],
+	[[pollData objectAtIndex:indexPath.row] objectForKey: @"Server"]];
 	
 	// Create a Navigation controller
 	UINavigationController *navController = [[UINavigationController alloc]
@@ -184,7 +186,7 @@
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", 
 								 [[pollData objectAtIndex:indexPath.row] objectForKey:@"Last Message"]];
 	cell.detailTextLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_NORMAL_FONTSIZE];
-	cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	//cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
 	if (![AppHelper isIPad]) {
 		cell.detailTextLabel.numberOfLines = 0;

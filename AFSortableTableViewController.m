@@ -78,7 +78,9 @@
 	}
 	
 	self.queryUrl = [NSString stringWithFormat:@"%@%@?pk=%@", self.queryUrl, SERVER_PROCESS_LIST_API_STRING, self.serverPK];
-	NSLog(@"%@", self.queryUrl);
+	if (DEBUGGING) {
+		NSLog(@"%@", self.queryUrl);
+	}
 }
 
 - (void) finishLoading:(NSString*)theJobToDo {
@@ -88,7 +90,7 @@
 	NSArray* objects = [self.detailData objectForKey:LIST_QUERY_DATA_NAME];
 	NSMutableArray* keys = [self.detailData objectForKey:LIST_QUERY_COLUMN_NAME];
 	
-	self.tableController.processNames = [[NSMutableArray alloc] init];
+	self.tableController.processNames = [[[NSMutableArray alloc] init] autorelease];
 	
 	for (int i = 0; i < [objects count]; i++) {
 		NSMutableDictionary* dictObject = [[[NSMutableDictionary alloc] init] autorelease];
@@ -107,7 +109,7 @@
 
 	
 	
-	self.metricsController.metrics = [[NSMutableArray alloc] init];
+	self.metricsController.metrics = [[[NSMutableArray alloc] init] autorelease];
 	[self.metricsController setMetrics:keys];
 	[self.metricsController.tableView reloadData];
 	
@@ -145,9 +147,12 @@
 	
 	self.detailData = dictionary;
 	
+	[jsonString release];
+	
 	[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
 }
 
+/*
 ///* comment these two methods for release
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
 	return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
@@ -161,7 +166,6 @@
 }
 
 //*/
-
 
 
 
@@ -249,8 +253,9 @@
 }
 
 - (void) reorderTableByMetric: (NSString*) metric {
-
-	NSLog(@"%@", self.tableController.processNames);
+	if (DEBUGGING) {
+		NSLog(@"%@", self.tableController.processNames);
+	}
 	self.tableController.sortKey = metric;
 	NSSortDescriptor *nameSorter = [[NSSortDescriptor alloc] 
 									initWithKey: metric ascending: NO];// selector: @selector(compare://caseInsensitiveCompare: ) ] ;
@@ -263,7 +268,7 @@
 	} else {
 		[self.metricsViewBounder removeFromSuperview];
 	}
-
+	[nameSorter release];
 }
 
 

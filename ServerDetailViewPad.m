@@ -197,11 +197,13 @@
 		return;
 	}
 	
-	
+	[jsonString release];
 	
 	[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
 	
 }
+
+/*
 
 ///* comment these two methods for release
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {

@@ -69,8 +69,10 @@
 	}
 	
 	self.queryUrl = [NSString stringWithFormat:@"%@%@?pk=%@", self.queryUrl, SERVER_POLLDATA_API_STRING, self.serverPK];
-	NSLog(@"%@", self.queryUrl);
 	
+	if (DEBUGGING) {
+		NSLog(@"%@", self.queryUrl);
+	}
 }
 
 - (void) finishLoading:(NSString*)theJobToDo {
@@ -78,14 +80,15 @@
 	NSArray* objects = [self.detailData objectForKey:LIST_QUERY_DATA_NAME];
 	NSArray* keys = [self.detailData objectForKey:LIST_QUERY_COLUMN_NAME];
 	
-	self.tableController.pollData = [[NSMutableArray alloc] init];
+	self.tableController.pollData = [[[NSMutableArray alloc] init] autorelease];
 	
 	for (int i = 0; i < [objects count]; i++) {
-		NSMutableDictionary* dictObject = [[[NSMutableDictionary alloc] init] autorelease];
+		NSMutableDictionary* dictObject = [[NSMutableDictionary alloc] init];
 		for (int j= 0; j < [keys count]; j++) {
 			[dictObject setValue: [[objects objectAtIndex:i] objectAtIndex:j] forKey:[keys objectAtIndex: j]];
 		}
 		[self.tableController.pollData addObject:dictObject];
+		[dictObject release];
 	}
 	
 	[self.tableController.tableView reloadData];
@@ -123,9 +126,11 @@
 	NSDictionary *dictionary = (NSDictionary*)[jsonString JSONValue];
 	
 	self.detailData = dictionary;	
+	[jsonString release];
 	[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
 }
 
+/*
 ///* comment these two methods for release
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
 	return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
