@@ -3,7 +3,7 @@
 //  AppFirst
 //
 //  Created by appfirst on 5/6/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 AppFirst Inc. All rights reserved.
 //
 
 #import "AFAlert.h"
@@ -249,7 +249,7 @@
 	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:self.availableCookies];
 	
 	NSMutableURLRequest *alertListRequest = [[[NSMutableURLRequest alloc] init] autorelease];
-	// we are just recycling the original request
+	// we are just recycling the original request.00000000021
 	[alertListRequest setHTTPMethod:@"GET"];
 	[alertListRequest setAllHTTPHeaderFields:headers];
 	[alertListRequest setHTTPBody:nil];

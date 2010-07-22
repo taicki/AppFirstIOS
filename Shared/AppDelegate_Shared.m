@@ -3,7 +3,7 @@
 //  AppFirst
 //
 //  Created by appfirst on 5/5/10.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//  Copyright AppFirst Inc 2010. All rights reserved.
 //
 
 #import "AppDelegate_Shared.h"

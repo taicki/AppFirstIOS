@@ -3,7 +3,7 @@
 //  AppFirst
 //
 //  Created by appfirst on 7/7/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 AppFirst Inc. All rights reserved.
 //
 
 #import "AFAlertHistoryViewController.h"
@@ -230,6 +230,10 @@
 	NSMutableURLRequest *postRequest = [[[NSMutableURLRequest alloc] init] autorelease];
 	
 	NSString *url;
+	
+	if ([UIApplication sharedApplication].applicationIconBadgeNumber == 0) 
+		return;
+	
 	
 	if (DEBUGGING == YES) {
 		url = [NSString stringWithFormat:@"%@%@", DEV_SERVER_IP, BADGE_SET_API_STRING];
