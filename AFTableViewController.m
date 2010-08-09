@@ -111,12 +111,13 @@
     
 	NSDictionary* processData = [processNames objectAtIndex:indexPath.row];
 	
+	//cell.textLabel.numberOfLines = 2;
 	cell.textLabel.text = [NSString stringWithFormat:@"%@ (pid: %@)", [processData objectForKey:@"Name"],[processData objectForKey:@"pid"]];
 	cell.textLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_BIG_FONTSIZE];
    
 	
 	
-	NSString* detailText = [NSString stringWithFormat:@"%@:%@",self.sortKey,  [AppHelper formatMetricsValue:self.sortKey :[[processData objectForKey:self.sortKey] doubleValue]]];
+	NSString* detailText = [NSString stringWithFormat:@"%@ \n%@:%@",[processData objectForKey:@"args"], self.sortKey,  [AppHelper formatMetricsValue:self.sortKey :[[processData objectForKey:self.sortKey] doubleValue]]];
 	NSString* key; 
 	for (key in processData) {
 		if (key == nil || [key isEqualToString:self.sortKey] || 
@@ -135,10 +136,10 @@
 	
 	cell.detailTextLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_NORMAL_FONTSIZE];
 	
-	if (![AppHelper isIPad]) {
+	//if (![AppHelper isIPad]) {
 		cell.detailTextLabel.numberOfLines = 0;
 		cell.detailTextLabel.font = [UIFont systemFontOfSize:IPHONE_TABLE_FONTSIZE];
-	}
+	//}
 	
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -146,11 +147,40 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if ([AppHelper isIPad])
-		return 42;
-	else {
-		return 63;
+	
+	NSString*	text = nil;
+	CGFloat		width = 0;
+	CGFloat		tableViewWidth;
+	CGRect		bounds = [UIScreen mainScreen].bounds;
+		
+	if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation))
+		tableViewWidth = bounds.size.width;
+	else
+		tableViewWidth = bounds.size.height;
+		
+	width = tableViewWidth;		// fudge factor, 115 isn't quite right
+	text = [[processNames objectAtIndex:indexPath.row] objectForKey:@"args"];
+		
+	if (text)
+	{
+		// The notes can be of any height
+		// This needs to work for both portrait and landscape orientations.
+		// Calls to the table view to get the current cell and the rect for the 
+		// current row are recursive and call back this method.
+		CGSize		textSize = { width, 20000};		// width and height of text area
+		CGSize		size = [text sizeWithFont:[UIFont systemFontOfSize:IPHONE_TABLE_FONTSIZE] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
+			
+		
+		if (![AppHelper isIPad]) {
+			size.height += 65.0f;
+		}  else {
+			size.height += 60.0f;
+		}
+			
+		return size.height;
 	}
+		
+	return 44;
 }
 
 

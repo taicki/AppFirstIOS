@@ -228,14 +228,9 @@
 
 - (void) finishLoading:(NSString*)theJobToDo {
 	
-
 	self.activityIndicator.hidden = YES;
 	[self.activityIndicator stopAnimating];
 	self.tableView.userInteractionEnabled = YES;
-	
-	//AFTitleView* titleView = (AFTitleView*) self.navigationItem.titleView;
-	//titleView.timeLabel.text = [NSString stringWithFormat:@"%@", theJobToDo];
-	//titleView.titleLabel.text = @"Alerts";
 	
 	self.navigationItem.title = [NSString stringWithFormat:@"Alerts (%@)", theJobToDo];
 	
@@ -276,10 +271,6 @@
 	
 	self.alerts = dictionary.allKeys;
 	self.allData = dictionary;
-	
-	
-	
-	
 	
 	if (usingRefresh) {
 		[self performSelectorOnMainThread:@selector(finishLoading:)
