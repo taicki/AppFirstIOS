@@ -111,7 +111,8 @@
 			   [metric isEqualToString:@"Threads"] || 
 			   [metric isEqualToString:@"PF"] || 
 			   [metric isEqualToString:@"IR"] || 
-			   [metric isEqualToString:@"CIR"]) {
+			   [metric isEqualToString:@"CIR"]
+			   ) {
 		ret =  [NSString stringWithFormat:@"%0.0f", value];
 
 	} else if ([metric isEqualToString:@"Mem"] || 
@@ -120,6 +121,8 @@
 			   [metric isEqualToString:@"FR"] || 
 			   [metric isEqualToString:@"FW"]) {
 		ret =  [NSString stringWithFormat:@"%0.0f%@", value/1000, @"KB"];
+	} else if ([metric isEqualToString:@"ART"]) {
+		ret =  [NSString stringWithFormat:@"%0.0f%@", value, @"µs"];
 	}
 	
 	
