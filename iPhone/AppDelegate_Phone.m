@@ -63,6 +63,14 @@
 	self.serverListUrl = [NSString stringWithFormat:@"%@%@", urlBase, SERVER_LIST_API_STRING];
 	self.alertListUrl = [NSString stringWithFormat:@"%@%@", urlBase, ALERT_LIST_API_STRING];
 	
+	UIDevice* device = [UIDevice currentDevice];
+	BOOL backgroundSupported = NO;
+	if ([device respondsToSelector:@selector(isMultitaskingSupported)])
+		backgroundSupported = device.multitaskingSupported;
+	
+	if (backgroundSupported == YES) 
+		NSLog(@"true");
+	
 	
 	
 	
