@@ -21,5 +21,8 @@
 + (NSString*) formatYLabel:(NSUInteger) value;
 
 /** Returns a different color for the first 10 plots. */
-+ (UIColor *)colorByIndex:(NSInteger)index;
++ (UIColor *) colorByIndex:(NSInteger)index;
++ (NSString *) base64Encoding:(NSString*) userLogin;
++ (NSString *)encodeBase64WithData:(NSData *)objData;
++ (NSData *)decodeBase64WithString:(NSString *)strBase64;
 @end

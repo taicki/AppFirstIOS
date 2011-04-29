@@ -11,6 +11,15 @@
 #import "JSON/JSON.h"
 #import "config.h"
 #import "AFTitleView.h"
+#import "AppHelper.h"
+#import "AM_Server.h"
+#import "AppStrings.h"
+#import "AppComm.h"
+#import "AM_PolledData.h"
+#import "AM_Alert.h"
+#import "AM_AlertHistory.h"
+#import "AM_Application.h"
+#import "AV_IphoneRootView.h"
 
 @implementation AppDelegate_Shared
 
@@ -19,6 +28,56 @@
 @synthesize alertController, dashboardController, notificationController;
 @synthesize availableCookies, usernames;
 @synthesize alertListUrl, serverListUrl, urlBase, loginUrl, UUID;
+
+- (void) setApplicaitonList:(NSMutableArray *)newData {
+    [newData retain];
+    [applicationList release];
+    applicationList = newData;
+}
+
+- (void) setAlertList:(NSMutableArray *)newData {
+    [newData retain];
+    [alertList release];
+    alertList = newData;
+}
+
+- (void) setPolledDataList:(NSMutableArray *)newData {
+    [newData retain];
+    [polledDataList release];
+    polledDataList = newData;
+}
+
+- (void) setServerList:(NSMutableArray *)newData {
+    [newData retain];
+    [serverList release];
+    serverList = newData;
+}
+
+- (void) setAlertHistoryList:(NSMutableArray *)newData {
+    [newData retain];
+    [alertHistoryList release];
+    alertHistoryList = newData;
+}
+
+- (NSMutableArray*) alertList {
+    return alertList;
+}
+
+- (NSMutableArray*) alertHistoryList {
+    return alertHistoryList;
+}
+
+- (NSMutableArray*) serverList {
+    return serverList;
+}
+
+- (NSMutableArray*) applicaitonList {
+    return applicationList;
+}
+
+- (NSMutableArray*) polledDataList {
+    return polledDataList;
+}
 
 
 /**
@@ -126,6 +185,31 @@
     NSLog(@"Error in registration. Error: %@", err);
 }
 
+- (void) addRootViewData:(NSMutableArray*)items WithName:(NSString*) name withCount:(int) count {
+    NSMutableDictionary* newItem = [[[NSMutableDictionary alloc] init] autorelease];
+    [newItem setValue:name forKey:@"name"];
+    [newItem setValue:[NSNumber numberWithInt:count] forKey:@"count"];
+    [items addObject:newItem];
+}
+
+- (void) presentAppFirstRootView {
+    AV_IphoneRootView* detailViewController = [[AV_IphoneRootView alloc] initWithNibName:@"AV_IphoneRootView" bundle:nil];
+    // init data
+    NSLog(@"%d", [serverList count]);
+    
+    NSMutableArray* items = [[NSMutableArray alloc]init];
+    [self addRootViewData:items WithName:@"Server" withCount:[serverList count]];
+    [self addRootViewData:items WithName:@"Alert" withCount:[alertList count]];
+    [self addRootViewData:items WithName:@"PolledData" withCount:[polledDataList count]];
+    [self addRootViewData:items WithName:@"Application" withCount:[applicationList count]];
+    [self addRootViewData:items WithName:@"AlertHistory" withCount:[alertHistoryList count]];
+    
+    [detailViewController setItems:items];
+    [items release];
+    [window addSubview:[detailViewController view]];
+
+}
+
 
 - (void) finishLoading:(id)theJobToDo {
 	NSError *error;
@@ -145,8 +229,14 @@
 		
 		[error release];
 	}
+    
+    [loginController.loginIndicator stopAnimating];
+	loginController.loginIndicator.hidden = YES;
+	[loginController.view removeFromSuperview];
+    [self presentAppFirstRootView];
+        //[detailViewController release];
 	
-	
+	/*
 	[loginController.loginIndicator stopAnimating];
 	loginController.loginIndicator.hidden = YES;
 	[loginController.view removeFromSuperview];
@@ -170,6 +260,7 @@
 	
 	[dashboardController asyncGetServerListData];
 	[alertController asyncGetListData];
+     */
 
 }
 
@@ -209,10 +300,110 @@
 
 }
 
+- (void) loadPolledDataList {
+    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings polledDataListUrl]];
+    NSData* responseData = [AppComm makeGetRequest:urlString];
+	
+    
+    if (responseData != NULL) {
+        NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+        NSArray *dictionary = (NSArray*)[jsonString JSONValue];
+        if ([dictionary count] > 0) {
+            NSLog(@"count of polled data: %d", [dictionary count]);
+        }
+        for (int i=0; i < [dictionary count]; i++) {
+            AM_PolledData* item = [[[AM_PolledData alloc] initWithJSONObject:[dictionary objectAtIndex:i]] autorelease];
+            [polledDataList addObject:item];
+        }
+    }
+}
+
+- (void) loadAlertList {
+    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings alertListUrl]];
+    NSData* responseData = [AppComm makeGetRequest:urlString];
+	
+    if (responseData != NULL) {
+        NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+        NSArray *dictionary = (NSArray*)[jsonString JSONValue];
+        if ([dictionary count] > 0) {
+            NSLog(@"count of alert: %d", [dictionary count]);
+        }
+        for (int i=0; i < [dictionary count]; i++) {
+            AM_Alert* item = [[AM_Alert alloc] initWithJSONObject:[dictionary objectAtIndex:i]];
+            NSLog(@"name: %@", [item name]);
+            [alertList addObject:item];
+        }
+    } 
+}
+
+- (void) loadAlertHistoryList {
+    
+    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings alertHistoryUrl]];
+    NSData* responseData = [AppComm makeGetRequest:urlString];
+	
+    if (responseData != NULL) {
+        NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+        NSArray *dictionary = (NSArray*)[jsonString JSONValue];
+        if ([dictionary count] > 0) {
+            NSLog(@"count of alertHistory: %d", [dictionary count]);
+        }
+        for (int i=0; i < [dictionary count]; i++) {
+            AM_AlertHistory* item = [[[AM_AlertHistory alloc] initWithJSONObject:[dictionary objectAtIndex:i]] autorelease];
+            NSLog(@"name: %@", [item subject]);
+            [alertHistoryList addObject:item];
+        }
+    }    
+}
+
+- (void) loadApplicationList {
+    
+    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings applicationListUrl]];
+    NSData* responseData = [AppComm makeGetRequest:urlString];
+	
+    if (responseData != NULL) {
+        NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+        NSArray *dictionary = (NSArray*)[jsonString JSONValue];
+        if ([dictionary count] > 0) {
+            NSLog(@"count of application: %d", [dictionary count]);
+        }
+        for (int i=0; i < [dictionary count]; i++) {
+            AM_Application* item = [[[AM_Application alloc] initWithJSONObject:[dictionary objectAtIndex:i]] autorelease];
+            NSLog(@"name: %@", [item name]);
+            [applicationList addObject:item];
+        }
+    }    
+}
+
+- (void) loadServerList {
+    
+    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings serverListUrl]];
+    NSData* responseData = [AppComm makeGetRequest:urlString];
+	
+    if (responseData != NULL) {
+        NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+        NSArray *dictionary = (NSArray*)[jsonString JSONValue];
+        if ([dictionary count] > 0) {
+            NSLog(@"count of server: %d", [dictionary count]);
+        }
+        for (int i=0; i < [dictionary count]; i++) {
+            AM_Server* item = [[[AM_Server alloc] initWithJSONObject:[dictionary objectAtIndex:i]] autorelease];
+            NSLog(@"name: %@", [item hostname]);
+            [serverList addObject:item];
+        }
+    }    
+}
+
+- (void) initDataArrays {
+    polledDataList = [[NSMutableArray alloc] init];
+    alertList = [[NSMutableArray alloc] init];
+    serverList = [[NSMutableArray alloc] init];
+    applicationList = [[NSMutableArray alloc] init];
+    alertHistoryList = [[NSMutableArray alloc] init];
+}
+
+
 - (void) trySignIn:(id)theJobToDo {
-	
-	
-	
+    
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	
 	NSHTTPURLResponse *response;
@@ -221,9 +412,15 @@
 	
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	NSURL *myWebserverURL = [NSURL URLWithString:self.loginUrl];
-	
-	
-	//self.loginController.passwordField.text = @"1AppFirst$";
+    [AppComm setAuthStringWith:self.loginController.usernameField.text andPassword:self.loginController.passwordField.text];
+    [self initDataArrays];
+	[self loadServerList];
+    [self loadAlertList];
+    [self loadAlertHistoryList];
+    [self loadApplicationList];
+    [self loadPolledDataList];
+
+    
 	
 	NSString *post =[NSString stringWithFormat:@"username=%@&password=%@", 
 					self.loginController.usernameField.text , self.loginController.passwordField.text];
@@ -417,6 +614,12 @@
 	[urlBase release];
 	[usernames release];
 	[UUID release];
+    
+    [alertHistoryList release];
+    [serverList release];
+    [applicationList release];
+    [alertList release];
+    [polledDataList release];
 	
 	[super dealloc];
 }

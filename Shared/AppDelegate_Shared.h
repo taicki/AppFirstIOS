@@ -35,6 +35,12 @@
 	NSString *alertListUrl;
 	
 	NSMutableArray *usernames;
+    
+    NSMutableArray *serverList;
+    NSMutableArray *alertList;
+    NSMutableArray *polledDataList;
+    NSMutableArray *applicationList;
+    NSMutableArray *alertHistoryList;
 }
 
 
@@ -61,7 +67,26 @@
 
 - (NSString *)applicationDocumentsDirectory;
 
+- (void) setServerList:(NSMutableArray*) newData;
+- (void) setAlertList:(NSMutableArray*) newData;
+- (void) setApplicaitonList:(NSMutableArray*) newData;
+- (void) setPolledDataList:(NSMutableArray*) newData;
+- (void) setAlertHistoryList: (NSMutableArray*) newData;
 
+- (NSMutableArray*) serverList;
+- (NSMutableArray*) alertList;
+- (NSMutableArray*) applicaitonList;
+- (NSMutableArray*) polledDataList;
+- (NSMutableArray*) alertHistoryList;
+
+- (void) loadApplicationList;
+- (void) loadAlertList;
+- (void) loadServerList;
+- (void) loadAlertHistoryList;
+- (void) loadPolledDataList;
+
+- (void) addRootViewData:(NSMutableArray*)items WithName:(NSString*) name withCount:(int) count;
+- (void) presentAppFirstRootView;
 
 - (void) trySignIn:(id)theJobToDo;
 - (void) finishLoading:(id)theJobToDo;
