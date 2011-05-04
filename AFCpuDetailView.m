@@ -134,7 +134,6 @@
 	self.layer.masksToBounds = YES;
 	
 	double topPadding = IPAD_WIDGET_INTERNAL_PADDING;
-	
 	double labelHeight = 18;
 	
 	UILabel* widgetNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(IPAD_WIDGET_INTERNAL_PADDING, IPAD_WIDGET_INTERNAL_PADDING, 

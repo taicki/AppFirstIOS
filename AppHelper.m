@@ -121,6 +121,36 @@ static const short _base64DecodingTable[256] = {
 	return [UIColor colorWithRed:202 green:202 blue:202 alpha:0.9];
 }
 
++ (NSString*) formatResourceValue:(NSString*) metric value:(double) value {
+	NSString* ret = @"";
+	if ([metric isEqualToString:CPU_DISPLAY_TEXT]) { 
+		ret =  [NSString stringWithFormat:@"%0.1f%@", value, @"%"]; 
+	} else if ([metric isEqualToString:FILE_NUM_DISPLAY_TEXT] ||
+			   [metric isEqualToString:REGISTRY_NUM_DISPLAY_TEXT] || 
+			   [metric isEqualToString:SOCKET_NUM_DISPLAY_TEXT] || 
+			   [metric isEqualToString:THREAD_NUM_DISPLAY_TEXT] || 
+			   [metric isEqualToString:PAGE_FAULT_DISPLAY_TEXT] || 
+			   [metric isEqualToString:CRITICAL_INCIDENT_REPORT_DISPLAY_TEXT] || 
+			   [metric isEqualToString:INCIDENT_REPORT_DISPLAY_TEXT] ||
+               [metric isEqualToString:RESPONSE_NUM_DISPLAY_TEXT] 
+			   ) {
+		ret =  [NSString stringWithFormat:@"%0.0f", value];
+        
+	} else if ([metric isEqualToString:MEMORY_DISPLAY_TEXT] || 
+			   [metric isEqualToString:SOCKET_READ_DISPLAY_TEXT] || 
+			   [metric isEqualToString:SOCKET_WRITE_DISPLAY_TEXT] || 
+			   [metric isEqualToString:FILE_READ_DISPLAY_TEXT] || 
+			   [metric isEqualToString:FILE_WRITE_DISPLAY_TEXT]) {
+		ret =  [NSString stringWithFormat:@"%0.0f%@", value/1000, @"KB"];
+	} else if ([metric isEqualToString:AVG_RESPONSE_TIME_DISPLAY_TEXT]) {
+		ret =  [NSString stringWithFormat:@"%0.0f%@", value, @"µs"];
+	}
+	
+	
+	return ret;
+}
+
+
 + (NSString*) formatMetricsValue:(NSString*) metric :(double) value {
 	NSString* ret = @"";
 	if ([metric isEqualToString:@"CPU"]) { 
@@ -336,6 +366,15 @@ static const short _base64DecodingTable[256] = {
 	free(objResult);
 	return objData;
 }
+
++ (void) sortArrayByKey: (NSString *) sortKey dictionary: (NSMutableArray *) array  {
+    NSSortDescriptor *nameSorter = [[NSSortDescriptor alloc] 
+                                    initWithKey: sortKey ascending: YES selector: @selector(caseInsensitiveCompare
+                                                                                            : ) ] ;
+    [array sortUsingDescriptors: [NSArray arrayWithObject: nameSorter] ] ;
+    
+}
+
 
 
 @end

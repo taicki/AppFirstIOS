@@ -18,16 +18,23 @@
             [self release];
             return  nil;
         } else {
+            
             [self setCapacity_cpu_num:[[jsonObject objectForKey:@"capacity_cpu_num"] intValue]];
             [self setUid:[[jsonObject objectForKey:@"id"] intValue]];
             [self setCreated:[[jsonObject objectForKey:@"created"] longValue]];
             [self setRunning:[[jsonObject objectForKey:@"running"] boolValue]];
             [self setCapacity_cpu_freq:[[jsonObject objectForKey:@"capacity_cpu_freq"] longValue]];
-            [self setCapacity_mem:[[jsonObject objectForKey:@"capacity_mem"] longValue]];
+            [self setCapacity_mem:[[jsonObject objectForKey:@"capacity_mem"] longLongValue]];
             [self setHostname:[jsonObject objectForKey:@"hostname"]];
             [self setOS:[jsonObject objectForKey:@"os"]];
             [self setCapacity_disks: [jsonObject objectForKey:@"capacity_disks"]];
             
+            NSArray* keyArray = [capacity_disks allKeys];
+            for (int cnt = 0; cnt < [keyArray count]; cnt ++) {
+                NSString* key = [keyArray objectAtIndex:cnt];
+                int capacity = [[capacity_disks objectForKey:key] intValue];
+                total_disk += capacity;
+            }
         }
         
     }
@@ -51,7 +58,7 @@
     return capacity_cpu_num;
 }
 
-- (long) capacity_mem {
+- (long long) capacity_mem {
     return  capacity_mem;
 }
 
@@ -63,7 +70,7 @@
     return created;
 }
 
-- (long) total_disk {
+- (long long) total_disk {
     return total_disk;
 }
 
@@ -105,11 +112,11 @@
     running = newRunning;
 }
 
-- (void) setTotal_Disk:(long)newTotal_disk {
+- (void) setTotal_Disk:(long long)newTotal_disk {
     total_disk = newTotal_disk;
 }
 
-- (void) setCapacity_mem:(long)newCapacity_mem {
+- (void) setCapacity_mem:(long long)newCapacity_mem {
     capacity_mem = newCapacity_mem;
 }
 

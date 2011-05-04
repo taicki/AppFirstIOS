@@ -13,7 +13,7 @@
 @implementation AFPageViewController
 @synthesize scrollView, pageControl;
 @synthesize sortableTableController, pollDataController, serverDetailController;
-@synthesize serverPK, serverName, osType;
+@synthesize server;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -99,14 +99,15 @@
     if (page < 0) return;
     if (page >= 3) return;
 	
+    NSString* serverPk = [NSString stringWithFormat:@"%d", [server uid]];
 	if (page == 1) {
-		self.pollDataController = [[AFPollDataController alloc] initWithPk:self.serverPK];
+		self.pollDataController = [[AFPollDataController alloc] initWithPk: serverPk];
 
 		
 		CGRect frame = scrollView.frame;
 		frame.origin.x = frame.size.width * page + IPHONE_WIDGET_PADDING;
-		frame.origin.y = 95;
-		frame.size.height = frame.size.height -	112;
+		frame.origin.y = 45;
+		frame.size.height = frame.size.height -	62;
 		frame.size.width = frame.size.width - IPHONE_WIDGET_PADDING * 2;
 		self.pollDataController.view.frame = frame;
         
@@ -119,12 +120,12 @@
 		
 
     } else if (page == 2){
-		self.sortableTableController = [[AFSortableTableViewController alloc] initWithPk:self.serverPK];
+		self.sortableTableController = [[AFSortableTableViewController alloc] initWithPk:serverPk];
 		CGRect frame = scrollView.frame;
 		frame.origin.x = frame.size.width * page + IPHONE_WIDGET_PADDING;
-		frame.origin.y = 95;
+		frame.origin.y = 45;
 		frame.size.width = frame.size.width - IPHONE_WIDGET_PADDING * 2;
-		frame.size.height = frame.size.height -	112;
+		frame.size.height = frame.size.height -	62;
 		self.sortableTableController.view.frame = frame;
 		self.sortableTableController.sortButton.frame =  CGRectMake(self.view.frame.size.width - 35, 0, 20, 20);
 		self.sortableTableController.tableController.view.frame = CGRectMake(IPAD_WIDGET_INTERNAL_PADDING, 
@@ -136,18 +137,15 @@
 		self.sortableTableController.metricsViewBounder.frame = self.sortableTableController.tableController.view.frame;
 		
 	} else {
-		self.serverDetailController = [[AFServerDetailViewController alloc]  initWithPk:self.serverPK];
-			
-			
+		self.serverDetailController = [[AFServerDetailViewController alloc]  initWithNibName:@"AFServerDetailViewController" bundle:nil];
+        [serverDetailController setServer:server];
 		CGRect frame = scrollView.frame;
 		frame.origin.x = frame.size.width * page;
-		frame.origin.y = 95;
-		frame.size.height = frame.size.height -	112;
+		frame.origin.y = 45;
+		frame.size.height = frame.size.height -	62;
 		self.serverDetailController.view.frame = frame;
-		self.serverDetailController.osType = self.osType;
-		self.serverDetailController.serverName = self.serverName;
-		
 		[scrollView addSubview:self.serverDetailController.view];
+        [self.serverDetailController viewWillAppear:YES];
 	}
 
 }
@@ -190,9 +188,6 @@
 - (void)dealloc {
 	[scrollView release];
 	[pageControl release];
-	[serverPK release];
-	[serverName release];
-	[osType release];
 	[serverDetailController release];
 	[pollDataController release];
 	[sortableTableController release];

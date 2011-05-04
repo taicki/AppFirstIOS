@@ -10,7 +10,9 @@
 
 
 @interface AFBarView : UIView {
-
+    double resourceValue;
 }
+
+@property (nonatomic, assign) double resourceValue;
 
 @end

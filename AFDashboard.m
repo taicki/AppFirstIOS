@@ -456,13 +456,7 @@
 	
 	if ([AppHelper isIPad] == NO) {
 		if (indexPath.section == 0) {
-			AFPageViewController* detailViewController = [[AFPageViewController alloc] initWithNibName:@"AFPageViewController" bundle:nil];
-			NSString* serverName = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"Server"];
-			detailViewController.serverName = serverName;
-			detailViewController.serverPK = [[dictionary objectAtIndex:indexPath.row] objectForKey:DB_KEY_NAME];
-			detailViewController.osType = [[dictionary objectAtIndex:indexPath.row] objectForKey:OS_TYPE_NAME];
-			[self.navigationController pushViewController:detailViewController animated:YES];
-			[detailViewController release];
+			
 		}
 		else {
 			return;
@@ -471,13 +465,13 @@
 			
 	} else {
 		if (indexPath.section == 0) {
-			ServerDetailViewPad* detailViewController = [[ServerDetailViewPad alloc] initWithNibName:@"ServerDetailViewPad" bundle:nil];
+		/*	ServerDetailViewPad* detailViewController = [[ServerDetailViewPad alloc] initWithNibName:@"ServerDetailViewPad" bundle:nil];
 			NSString* serverName = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"Server"];
 			detailViewController.serverName = serverName;
 			detailViewController.serverPK = [[dictionary objectAtIndex:indexPath.row] objectForKey:DB_KEY_NAME];
 			detailViewController.osType = [[dictionary objectAtIndex:indexPath.row] objectForKey:OS_TYPE_NAME];
 			[self.navigationController pushViewController:detailViewController animated:YES];
-			[detailViewController release];
+			[detailViewController release];*/
 		} else {
 			return;
 		}

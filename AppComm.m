@@ -12,6 +12,7 @@
 
 @implementation AppComm
 
+static NSString* authString;
 + (NSData *)makeGetRequest:(NSString *)url {
     NSHTTPURLResponse *response;
     NSError *error = nil;
@@ -39,10 +40,13 @@
     NSString* loginString = [NSString stringWithFormat:@"%@:%@", 
                              username , password];
     NSString* encodedString = [AppHelper base64Encoding:loginString];
-    [encodedString retain];
-    [authString release];
-	authString = [NSString stringWithFormat:@"Basic %@", [encodedString stringByTrimmingCharactersInSet:
+    authString = [NSString stringWithFormat:@"Basic %@", [encodedString stringByTrimmingCharactersInSet:
                                                           [NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+    [authString retain];
+}
+
++ (NSString*) authString {
+    return authString;
 }
 
 

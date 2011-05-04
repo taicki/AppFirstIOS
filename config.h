@@ -87,6 +87,8 @@
 #define DASHBOARD_TAB_NORMAL_FONT_SIZE 12
 #define DASHBOARD_TAB_SMALL_FONT_SIZE 10.5
 
+#define IPHONE_TABLE_ROW_HEIGHT 25
+
 #define DEV_SERVER_IP @"https://192.168.1.102"
 #define PROD_SERVER_IP @"https://wwws.appfirst.com"
 
@@ -111,6 +113,30 @@
 #define PI 3.14159265358979323846
 
 #define DEBUGGING NO
+
+#define CPU_DISPLAY_TEXT @"CPU"
+#define MEMORY_DISPLAY_TEXT @"Memory"
+#define DISK_PERCENT_DISPLAY_TEXT @"Disk percentage"
+#define PAGE_FAULT_DISPLAY_TEXT @"Page faults"
+#define THREAD_NUM_DISPLAY_TEXT @"Thread count"
+#define PROCESS_NUM_DISPLAY_TEXT @"Running processes"
+#define DISK_BUSY_DISPLAY_TEXT @"Disk busy"
+
+#define SOCKET_NUM_DISPLAY_TEXT @"Network connections"
+#define SOCKET_READ_DISPLAY_TEXT @"Inbound network traffic"
+#define SOCKET_WRITE_DISPLAY_TEXT @"Outbound network traffic"
+
+#define FILE_NUM_DISPLAY_TEXT @"File accessed"
+#define FILE_READ_DISPLAY_TEXT @"File read (bytes)"
+#define FILE_WRITE_DISPLAY_TEXT @"File write (bytes)"
+
+#define INCIDENT_REPORT_DISPLAY_TEXT @"Incidents report"
+#define CRITICAL_INCIDENT_REPORT_DISPLAY_TEXT @"Critical incident resport"
+
+#define REGISTRY_NUM_DISPLAY_TEXT @"Registry accessed"
+#define AVG_RESPONSE_TIME_DISPLAY_TEXT @"Average response time"
+#define RESPONSE_NUM_DISPLAY_TEXT @"Socket responses"
+
 
 
 //UIColor backgroundGradientColor1 = [UIColor colorWithRed:202 green:202 blue:202 alpha:0.9] ;

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "AM_Server.h"
 
 @interface AM_SystemData : NSObject {
     long time;
@@ -30,6 +30,7 @@
 - (void) setMemory: (double) newMemory;
 - (void) setDisk_percent: (double) newDisk_percent;
 - (void) setThread_num: (int) newThread_num;
+- (void) setProcess_num: (int) newProcess_num;
 - (void) setPage_faults: (int) newPage_faults;
 - (void) setDisk: (NSDictionary*) newDisk;
 - (void) setCpu_cores: (NSDictionary*) newCpu_cores;
@@ -41,10 +42,13 @@
 - (double) memory;
 - (double) disk_percent;
 - (int) thread_num;
+- (int) process_num;
 - (int) page_faults;
 - (NSDictionary*) disk;
 - (NSDictionary*) cpu_cores;
 - (NSDictionary*) disk_busy;
 - (NSDictionary*) disk_percent_part;
+
+- (void) generateResourceArray: (NSMutableArray*) newList server: (AM_Server*) server;
 
 @end

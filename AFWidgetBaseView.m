@@ -40,6 +40,7 @@
 																		   self.frame.size.width - IPAD_WIDGET_INTERNAL_PADDING * 2, 
 																		   labelHeight)];
 	[aWidgetNameLabel setBackgroundColor:[UIColor clearColor]];
+    [aWidgetNameLabel setFont:[UIFont systemFontOfSize:IPAD_TABLE_CELL_BIG_FONTSIZE]];
 	[self addSubview:aWidgetNameLabel];
 	self.widgetNameLabel = aWidgetNameLabel;
 	self.widgetNameLabel.text = widgetNameLabelText;

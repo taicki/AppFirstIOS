@@ -65,5 +65,5 @@
 - (void) setFile_num: (long) newFile_num;
 
 
-
+- (void) generateResourceArray: (NSMutableArray*) newList;
 @end

@@ -19,8 +19,8 @@
             return  nil;
         } else {
             [self setUid:[[jsonObject objectForKey:@"id"] intValue]];
-            [self setAlert_uid:[[jsonObject objectForKey:@"alert_id"] intValue]];
-            [self setServer_uid:[[jsonObject objectForKey:@"server_id"]intValue]];
+            [self setAlert_uid:[[jsonObject objectForKey:@"alert"] intValue]];
+            [self setServer_uid:[[jsonObject objectForKey:@"server"]intValue]];
             [self setName:[jsonObject objectForKey:@"name"]];
         }
     }

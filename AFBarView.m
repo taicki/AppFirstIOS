@@ -11,6 +11,7 @@
 
 
 @implementation AFBarView
+@synthesize resourceValue;
 
 
 - (id)initWithFrame:(CGRect)frame {
@@ -25,10 +26,13 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextSetRGBFillColor(context, 88.0/255.0, 164.0/255.0, 59.0/255.0, 1);// green color, half transparent
-	CGContextFillRect(context, CGRectMake(0, 0, AF_BAR_WIDTH, AF_BAR_HEIGHT));
+    if (resourceValue > 90) {
+        CGContextSetRGBFillColor(context, 255.0/255.0, 0.0/255.0, 0.0/255.0, 1);// green color, half transparent
+    } else {
+        CGContextSetRGBFillColor(context, 88.0/255.0, 164.0/255.0, 59.0/255.0, 1);// green color, half transparent
+    }
+	CGContextFillRect(context, CGRectMake(0, 0, self.frame.size.width, AF_BAR_HEIGHT));
 }
-
 
 - (void)dealloc {
     [super dealloc];

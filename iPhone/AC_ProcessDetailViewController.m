@@ -1,15 +1,15 @@
 //
-//  AV_NavigatorRoot.m
+//  AC_ProcessDetailViewController.m
 //  AppFirst
 //
-//  Created by appfirst on 4/29/11.
+//  Created by appfirst on 5/3/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "AV_NavigatorRoot.h"
+#import "AC_ProcessDetailViewController.h"
 
 
-@implementation AV_NavigatorRoot
+@implementation AC_ProcessDetailViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -51,7 +51,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-	return YES;
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 @end

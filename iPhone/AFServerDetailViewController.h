@@ -9,28 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "AFCpuDetailView.h"
 #import "AFDiskDetailViewController.h"
+#import "AM_Server.h"
 
 @interface AFServerDetailViewController : UIViewController {
-	AFDiskDetailViewController* diskViewController;
-	NSDictionary *detailData;
+	AM_Server* server;
 	NSMutableData* responseData;
-	NSString* queryUrl;
-	NSString* serverPK;
-	NSString* serverName;
-	NSString* osType;
 }
 
-
-
-@property (nonatomic, retain) NSDictionary *detailData;
 @property (nonatomic, retain) NSMutableData* responseData;
-@property (nonatomic, retain) AFDiskDetailViewController *diskViewController;
-@property (nonatomic, retain) NSString* queryUrl;
-@property (nonatomic, retain) NSString* serverPK;
-@property (nonatomic, retain) NSString* serverName;
-@property (nonatomic, retain) NSString* osType;
-
-- (void) asyncGetServerData;
-- (id) initWithPk:(NSString*)pk;
+@property (nonatomic, retain) AM_Server* server;
 
 @end

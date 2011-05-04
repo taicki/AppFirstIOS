@@ -10,25 +10,21 @@
 #import "AFPollDataController.h"
 #import "AFSortableTableViewController.h"
 #import "AFServerDetailViewController.h"
+#import "AM_Server.h"
 
 
 @interface AFPageViewController : UIViewController <UIScrollViewDelegate> {
 	IBOutlet UIScrollView *scrollView;
 	IBOutlet UIPageControl *pageControl;
 	BOOL pageControlUsed;
-	NSString* serverPK;
-	NSString* serverName;
-	NSString* osType;
+	AM_Server* server;
 	
 	AFServerDetailViewController* serverDetailController;
 	AFPollDataController* pollDataController;
 	AFSortableTableViewController* sortableTableController;
 }
 
-@property (nonatomic, retain) NSString* serverPK;
-@property (nonatomic, retain) NSString* serverName;
-@property (nonatomic, retain) NSString* osType;
-
+@property (nonatomic, retain) AM_Server* server;
 
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) UIPageControl *pageControl;

@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-static NSString* authString;
+
 @interface AppComm : NSObject {
     
 }
 
 +(NSData*) makeGetRequest:(NSString*)url;
++(NSString*) authString;
 +(void) setAuthStringWith:(NSString*) username andPassword: (NSString*) password;
 
 @end

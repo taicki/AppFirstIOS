@@ -133,6 +133,7 @@
 	aGraphController.graphTitle = [NSString stringWithFormat:@"%@ on %@", 
 								   [[pollData objectAtIndex:indexPath.row] objectForKey: @"Service"],
 	[[pollData objectAtIndex:indexPath.row] objectForKey: @"Server"]];
+    NSLog(@"herere");
 	
 	// Create a Navigation controller
 	UINavigationController *navController = [[UINavigationController alloc]
@@ -142,7 +143,7 @@
 	// show the navigation controller modally
 	AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
 	
-	[[appDelegate.tabcontroller.viewControllers objectAtIndex:0] presentModalViewController:navController animated:YES];
+	[[appDelegate navigationController] presentModalViewController:navController animated:YES];
 	
 	// Clean up resources
 	[navController release];

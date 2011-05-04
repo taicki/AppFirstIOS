@@ -26,9 +26,9 @@
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
 	CGContextSetRGBFillColor(context, 217.0/255.0, 238.0/255.0, 208.0/255.0, 1);// green color, half transparent
-	CGContextFillRect(context, CGRectMake(0, 0, AF_BAR_WIDTH, AF_BAR_HEIGHT));
+	CGContextFillRect(context, CGRectMake(0, 0, self.frame.size.width, AF_BAR_HEIGHT));
 	CGContextSetRGBStrokeColor(context, 168/255, 168/255, 168/255, 0.3);
-	CGContextStrokeRect(context, CGRectMake(0, 0, AF_BAR_WIDTH, AF_BAR_HEIGHT));
+	CGContextStrokeRect(context, CGRectMake(0, 0, self.frame.size.width, AF_BAR_HEIGHT));
 }
 
 

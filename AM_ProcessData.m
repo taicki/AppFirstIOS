@@ -7,6 +7,9 @@
 //
 
 #import "AM_ProcessData.h"
+#import "AM_ResourceCell.h"
+#import "config.h"
+#import "AppHelper.h"
 
 
 @implementation AM_ProcessData
@@ -167,6 +170,139 @@
 
 - (void) setFile_num:(long)newFile_num {
     file_num = newFile_num;
+}
+
+
+
+- (void) generateResourceCell: (NSString *) name 
+                         type: (NSString *) type 
+                        value: (NSNumber *) value 
+                       detail: (NSString *) detail
+                       option: (AM_ResourceCellOption) option 
+                      newList: (NSMutableArray *) newList   {
+    AM_ResourceCell* cell = [[AM_ResourceCell alloc] init];
+    [cell setResourceName:name];
+    [cell setResourceType:type];
+    [cell setResourceDetail:detail];
+    [cell setResourceValue:value];
+    [cell setRenderOption:option];
+    [newList addObject:cell];
+}
+
+- (void) generateResourceCell: (NSString *) name 
+                         type: (NSString *) type 
+                        value: (NSNumber *) value 
+                       detail: (NSString *) detail
+                       option: (AM_ResourceCellOption) option
+                        extra: (NSDictionary*) extra
+                  graphOption: (AM_ResourceGraphOption) graphOption
+                      newList: (NSMutableArray *) newList
+{
+    AM_ResourceCell* cell = [[AM_ResourceCell alloc] init];
+    [cell setResourceName:name];
+    [cell setResourceType:type];
+    [cell setResourceDetail:detail];
+    [cell setResourceValue:value];
+    [cell setRenderOption:option];
+    [cell setGraphOption:graphOption];
+    [cell setExtra:extra];
+    [newList addObject:cell];
+}
+
+
+
+- (void) generateResourceArray: (NSMutableArray*) newList {
+    [self generateResourceCell: CPU_DISPLAY_TEXT 
+                          type: @"double" 
+                         value: 0 
+                        detail: [AppHelper formatResourceValue:CPU_DISPLAY_TEXT value:cpu] 
+                        option:AF_NormalCell 
+                       newList: newList];
+    [self generateResourceCell: MEMORY_DISPLAY_TEXT 
+                          type: @"double" 
+                         value: 0 
+                        detail: [AppHelper formatResourceValue:MEMORY_DISPLAY_TEXT value:memory] 
+                        option:AF_NormalCell 
+                       newList: newList];
+    [self generateResourceCell:  PAGE_FAULT_DISPLAY_TEXT
+                          type: @"long" 
+                         value: 0 
+                        detail: [AppHelper formatResourceValue:PAGE_FAULT_DISPLAY_TEXT value:page_faults] 
+                        option:AF_NormalCell 
+                       newList: newList];
+    [self generateResourceCell: THREAD_NUM_DISPLAY_TEXT 
+                          type: @"long" 
+                         value: 0 
+                        detail: [AppHelper formatResourceValue:THREAD_NUM_DISPLAY_TEXT value:thread_num] 
+                        option:AF_NormalCell 
+                       newList: newList];
+    [self generateResourceCell: SOCKET_NUM_DISPLAY_TEXT 
+                          type: @"long" 
+                         value: 0 
+                        detail: [AppHelper formatResourceValue:SOCKET_NUM_DISPLAY_TEXT value:socket_num] 
+                        option:AF_NormalCell 
+                       newList: newList];
+    [self generateResourceCell: SOCKET_READ_DISPLAY_TEXT 
+                          type: @"long" 
+                         value: 0 
+                        detail: [AppHelper formatResourceValue:SOCKET_READ_DISPLAY_TEXT value:socket_read] 
+                        option:AF_NormalCell 
+                       newList: newList];
+    [self generateResourceCell: SOCKET_WRITE_DISPLAY_TEXT 
+                          type: @"long" 
+                         value: 0 
+                        detail: [AppHelper formatResourceValue:SOCKET_WRITE_DISPLAY_TEXT value:socket_write] 
+                        option:AF_NormalCell 
+                       newList: newList];
+    [self generateResourceCell: FILE_NUM_DISPLAY_TEXT 
+                          type: @"long" 
+                         value: 0 
+                        detail: [AppHelper formatResourceValue:FILE_NUM_DISPLAY_TEXT value:file_num] 
+                        option:AF_NormalCell 
+                       newList: newList];
+    [self generateResourceCell: FILE_READ_DISPLAY_TEXT 
+                          type: @"long" 
+                         value: 0 
+                        detail: [AppHelper formatResourceValue:FILE_READ_DISPLAY_TEXT value:file_read] 
+                        option:AF_NormalCell 
+                       newList: newList];
+    [self generateResourceCell: FILE_WRITE_DISPLAY_TEXT 
+                          type: @"long" 
+                         value: 0 
+                        detail: [AppHelper formatResourceValue:FILE_WRITE_DISPLAY_TEXT value:file_write] 
+                        option:AF_NormalCell 
+                       newList: newList];
+    [self generateResourceCell: RESPONSE_NUM_DISPLAY_TEXT 
+                          type: @"long" 
+                         value: 0 
+                        detail: [AppHelper formatResourceValue:RESPONSE_NUM_DISPLAY_TEXT value:response_num] 
+                        option:AF_NormalCell 
+                       newList: newList];
+    [self generateResourceCell: AVG_RESPONSE_TIME_DISPLAY_TEXT 
+                          type: @"double" 
+                         value: 0 
+                        detail: [AppHelper formatResourceValue:AVG_RESPONSE_TIME_DISPLAY_TEXT value:avg_response_time] 
+                        option:AF_NormalCell 
+                       newList: newList];
+    [self generateResourceCell: INCIDENT_REPORT_DISPLAY_TEXT 
+                          type: @"long" 
+                         value: 0 
+                        detail: [AppHelper formatResourceValue:INCIDENT_REPORT_DISPLAY_TEXT value:total_log] 
+                        option:AF_NormalCell 
+                       newList: newList];
+    [self generateResourceCell: CRITICAL_INCIDENT_REPORT_DISPLAY_TEXT 
+                          type: @"long" 
+                         value: 0 
+                        detail: [AppHelper formatResourceValue:CRITICAL_INCIDENT_REPORT_DISPLAY_TEXT value:critical_log] 
+                        option:AF_NormalCell 
+                       newList: newList];
+    [self generateResourceCell: REGISTRY_NUM_DISPLAY_TEXT 
+                          type: @"long" 
+                         value: 0 
+                        detail: [AppHelper formatResourceValue:REGISTRY_NUM_DISPLAY_TEXT value:registry_num] 
+                        option:AF_NormalCell 
+                       newList: newList];
+    
 }
 
 

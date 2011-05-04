@@ -12,6 +12,7 @@
 #import "AFDashboard.h"
 #import "LoginViewController.h"
 #import "AFAlertHistoryViewController.h"
+#import "AV_NavigatorRootController.h"
 
 @interface AppDelegate_Shared : NSObject <UIApplicationDelegate> {
     
@@ -29,6 +30,7 @@
 	
 	NSArray *availableCookies;
 	
+    
 	NSString *urlBase;
 	NSString *loginUrl;
 	NSString *serverListUrl;
@@ -36,11 +38,16 @@
 	
 	NSMutableArray *usernames;
     
+    
+    // new code
     NSMutableArray *serverList;
     NSMutableArray *alertList;
     NSMutableArray *polledDataList;
     NSMutableArray *applicationList;
     NSMutableArray *alertHistoryList;
+    
+    UINavigationController* navigationViewController;
+    AV_NavigatorRootController* homeViewController;
 }
 
 
@@ -67,6 +74,10 @@
 
 - (NSString *)applicationDocumentsDirectory;
 
+
+@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, retain) IBOutlet AV_NavigatorRootController* homeViewController;
+
 - (void) setServerList:(NSMutableArray*) newData;
 - (void) setAlertList:(NSMutableArray*) newData;
 - (void) setApplicaitonList:(NSMutableArray*) newData;
@@ -75,7 +86,7 @@
 
 - (NSMutableArray*) serverList;
 - (NSMutableArray*) alertList;
-- (NSMutableArray*) applicaitonList;
+- (NSMutableArray*) applicationList;
 - (NSMutableArray*) polledDataList;
 - (NSMutableArray*) alertHistoryList;
 

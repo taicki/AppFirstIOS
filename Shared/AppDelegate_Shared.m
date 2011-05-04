@@ -19,7 +19,7 @@
 #import "AM_Alert.h"
 #import "AM_AlertHistory.h"
 #import "AM_Application.h"
-#import "AV_IphoneRootView.h"
+#import "AppHelper.h"
 
 @implementation AppDelegate_Shared
 
@@ -28,6 +28,7 @@
 @synthesize alertController, dashboardController, notificationController;
 @synthesize availableCookies, usernames;
 @synthesize alertListUrl, serverListUrl, urlBase, loginUrl, UUID;
+@synthesize navigationController, homeViewController;
 
 - (void) setApplicaitonList:(NSMutableArray *)newData {
     [newData retain];
@@ -71,7 +72,7 @@
     return serverList;
 }
 
-- (NSMutableArray*) applicaitonList {
+- (NSMutableArray*) applicationList {
     return applicationList;
 }
 
@@ -104,39 +105,39 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
 	/*
-    UIApplication*    app = [UIApplication sharedApplication];
-	
-    // Request permission to run in the background. Provide an
-    // expiration handler in case the task runs long.
-    NSAssert(bgTask == UIBackgroundTaskInvalid, nil);
-	
-    bgTask = [app beginBackgroundTaskWithExpirationHandler:{
-        // Synchronize the cleanup call on the main thread in case
-        // the task actually finishes at around the same time.
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (bgTask != UIBackgroundTaskInvalid)
-            {
-                [app endBackgroundTask:bgTask];
-                bgTask = UIBackgroundTaskInvalid;
-            }
-        });
-    }];
-	
-    // Start the long-running task and return immediately.
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-		
-        // Do the work associated with the task.
-		
-        // Synchronize the cleanup call on the main thread in case
-        // the expiration handler is fired at the same time.
-        dispatch_async(dispatch_get_main_queue(), {
-            if (bgTask != UIBackgroundTaskInvalid)
-            {
-                [app endBackgroundTask:bgTask];
-                bgTask = UIBackgroundTaskInvalid;
-            }
-        });
-    });
+     UIApplication*    app = [UIApplication sharedApplication];
+     
+     // Request permission to run in the background. Provide an
+     // expiration handler in case the task runs long.
+     NSAssert(bgTask == UIBackgroundTaskInvalid, nil);
+     
+     bgTask = [app beginBackgroundTaskWithExpirationHandler:{
+     // Synchronize the cleanup call on the main thread in case
+     // the task actually finishes at around the same time.
+     dispatch_async(dispatch_get_main_queue(), ^{
+     if (bgTask != UIBackgroundTaskInvalid)
+     {
+     [app endBackgroundTask:bgTask];
+     bgTask = UIBackgroundTaskInvalid;
+     }
+     });
+     }];
+     
+     // Start the long-running task and return immediately.
+     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+     
+     // Do the work associated with the task.
+     
+     // Synchronize the cleanup call on the main thread in case
+     // the expiration handler is fired at the same time.
+     dispatch_async(dispatch_get_main_queue(), {
+     if (bgTask != UIBackgroundTaskInvalid)
+     {
+     [app endBackgroundTask:bgTask];
+     bgTask = UIBackgroundTaskInvalid;
+     }
+     });
+     });
 	 */
 }
 
@@ -173,11 +174,12 @@
 	
 	[NSURLConnection sendSynchronousRequest:postRequest returningResponse:&response error:&error];
 	
+    /*
 	UINavigationController* navigationController = [self.tabcontroller.viewControllers objectAtIndex:2];
 	
 	if ([UIApplication sharedApplication].applicationIconBadgeNumber > 0) {
 		navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", [UIApplication sharedApplication].applicationIconBadgeNumber];
-	} 
+	} */
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
@@ -193,21 +195,15 @@
 }
 
 - (void) presentAppFirstRootView {
-    AV_IphoneRootView* detailViewController = [[AV_IphoneRootView alloc] initWithNibName:@"AV_IphoneRootView" bundle:nil];
+    homeViewController = [[AV_NavigatorRootController alloc] init];
     // init data
-    NSLog(@"%d", [serverList count]);
     
-    NSMutableArray* items = [[NSMutableArray alloc]init];
-    [self addRootViewData:items WithName:@"Server" withCount:[serverList count]];
-    [self addRootViewData:items WithName:@"Alert" withCount:[alertList count]];
-    [self addRootViewData:items WithName:@"PolledData" withCount:[polledDataList count]];
-    [self addRootViewData:items WithName:@"Application" withCount:[applicationList count]];
-    [self addRootViewData:items WithName:@"AlertHistory" withCount:[alertHistoryList count]];
     
-    [detailViewController setItems:items];
-    [items release];
-    [window addSubview:[detailViewController view]];
-
+    [window addSubview:navigationController.view];
+    
+    //[self.navigationController pushViewController:homeViewController animated:YES];
+    //[window addSubview:[detailViewController view]];
+    
 }
 
 
@@ -234,34 +230,35 @@
 	loginController.loginIndicator.hidden = YES;
 	[loginController.view removeFromSuperview];
     [self presentAppFirstRootView];
-        //[detailViewController release];
+    
+    //[detailViewController release];
 	
 	/*
-	[loginController.loginIndicator stopAnimating];
-	loginController.loginIndicator.hidden = YES;
-	[loginController.view removeFromSuperview];
-	[window addSubview:tabcontroller.view];
-	
-	
-	NSDate *today = [NSDate date];
-	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat:@"MMM dd, yyyy HH:mm"];
-	NSString *currentTime = [dateFormatter stringFromDate:today];
-	[dateFormatter release];
-	
-	
-	AFTitleView* titleView = (AFTitleView*)alertController.navigationItem.titleView;
-	titleView.titleLabel.text = @"Alerts";
-	titleView.timeLabel.text = [NSString stringWithFormat:@"Updated at %@", currentTime];
-	
-	titleView = (AFTitleView*)dashboardController.navigationItem.titleView;
-	titleView.titleLabel.text = @"Servers";
-	titleView.timeLabel.text = [NSString stringWithFormat:@"Updated at %@", currentTime];
-	
-	[dashboardController asyncGetServerListData];
-	[alertController asyncGetListData];
+     [loginController.loginIndicator stopAnimating];
+     loginController.loginIndicator.hidden = YES;
+     [loginController.view removeFromSuperview];
+     [window addSubview:tabcontroller.view];
+     
+     
+     NSDate *today = [NSDate date];
+     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+     [dateFormatter setDateFormat:@"MMM dd, yyyy HH:mm"];
+     NSString *currentTime = [dateFormatter stringFromDate:today];
+     [dateFormatter release];
+     
+     
+     AFTitleView* titleView = (AFTitleView*)alertController.navigationItem.titleView;
+     titleView.titleLabel.text = @"Alerts";
+     titleView.timeLabel.text = [NSString stringWithFormat:@"Updated at %@", currentTime];
+     
+     titleView = (AFTitleView*)dashboardController.navigationItem.titleView;
+     titleView.titleLabel.text = @"Servers";
+     titleView.timeLabel.text = [NSString stringWithFormat:@"Updated at %@", currentTime];
+     
+     [dashboardController asyncGetServerListData];
+     [alertController asyncGetListData];
      */
-
+    
 }
 
 - (void) loginFailed:(NSString*)message {
@@ -293,11 +290,11 @@
 	[SFHFKeychainUtils storeUsername:self.loginController.usernameField.text andPassword:@""
 					  forServiceName:@"appfirst" updateExisting:YES error:&error];
 	
-
+    
 	[tabcontroller.view removeFromSuperview];
 	[window addSubview:loginController.view];
 	loginController.view.userInteractionEnabled = YES;
-
+    
 }
 
 - (void) loadPolledDataList {
@@ -307,9 +304,11 @@
     
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        NSArray *dictionary = (NSArray*)[jsonString JSONValue];
+        NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
         if ([dictionary count] > 0) {
             NSLog(@"count of polled data: %d", [dictionary count]);
+            NSString* sortKey = @"name";
+            [AppHelper sortArrayByKey: sortKey dictionary: dictionary];
         }
         for (int i=0; i < [dictionary count]; i++) {
             AM_PolledData* item = [[[AM_PolledData alloc] initWithJSONObject:[dictionary objectAtIndex:i]] autorelease];
@@ -324,13 +323,14 @@
 	
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        NSArray *dictionary = (NSArray*)[jsonString JSONValue];
+        NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
         if ([dictionary count] > 0) {
             NSLog(@"count of alert: %d", [dictionary count]);
+            NSString* sortKey = @"name";
+            [AppHelper sortArrayByKey: sortKey dictionary: dictionary];
         }
         for (int i=0; i < [dictionary count]; i++) {
             AM_Alert* item = [[AM_Alert alloc] initWithJSONObject:[dictionary objectAtIndex:i]];
-            NSLog(@"name: %@", [item name]);
             [alertList addObject:item];
         }
     } 
@@ -343,13 +343,14 @@
 	
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        NSArray *dictionary = (NSArray*)[jsonString JSONValue];
+        NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
         if ([dictionary count] > 0) {
             NSLog(@"count of alertHistory: %d", [dictionary count]);
+            NSString* sortKey = @"name";
+            [AppHelper sortArrayByKey: sortKey dictionary: dictionary];
         }
         for (int i=0; i < [dictionary count]; i++) {
             AM_AlertHistory* item = [[[AM_AlertHistory alloc] initWithJSONObject:[dictionary objectAtIndex:i]] autorelease];
-            NSLog(@"name: %@", [item subject]);
             [alertHistoryList addObject:item];
         }
     }    
@@ -362,17 +363,20 @@
 	
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        NSArray *dictionary = (NSArray*)[jsonString JSONValue];
+        NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
         if ([dictionary count] > 0) {
             NSLog(@"count of application: %d", [dictionary count]);
+            NSString* sortKey = @"name";
+            [AppHelper sortArrayByKey: sortKey dictionary: dictionary];
         }
         for (int i=0; i < [dictionary count]; i++) {
             AM_Application* item = [[[AM_Application alloc] initWithJSONObject:[dictionary objectAtIndex:i]] autorelease];
-            NSLog(@"name: %@", [item name]);
             [applicationList addObject:item];
         }
     }    
 }
+
+
 
 - (void) loadServerList {
     
@@ -381,13 +385,16 @@
 	
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        NSArray *dictionary = (NSArray*)[jsonString JSONValue];
+        NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
         if ([dictionary count] > 0) {
+            
             NSLog(@"count of server: %d", [dictionary count]);
+            NSString* sortKey = @"hostname";
+            [AppHelper sortArrayByKey: sortKey dictionary: dictionary];
+
         }
         for (int i=0; i < [dictionary count]; i++) {
             AM_Server* item = [[[AM_Server alloc] initWithJSONObject:[dictionary objectAtIndex:i]] autorelease];
-            NSLog(@"name: %@", [item hostname]);
             [serverList addObject:item];
         }
     }    
@@ -419,12 +426,12 @@
     [self loadAlertHistoryList];
     [self loadApplicationList];
     [self loadPolledDataList];
-
+    
     
 	
 	NSString *post =[NSString stringWithFormat:@"username=%@&password=%@", 
-					self.loginController.usernameField.text , self.loginController.passwordField.text];
-					 
+                     self.loginController.usernameField.text , self.loginController.passwordField.text];
+    
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
 	
@@ -547,9 +554,9 @@
 /**
  Returns the persistent store coordinator for the application.
  If the coordinator doesn't already exist, it is created and the application's store added to it.
-
+ 
  Conditionalize for the current platform, or override in the platform-specific subclass if appropriate.
-*/
+ */
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
 	
     if (persistentStoreCoordinator != nil) {
@@ -620,7 +627,9 @@
     [applicationList release];
     [alertList release];
     [polledDataList release];
-	
+    
+    [navigationController release];
+	[homeViewController release];
 	[super dealloc];
 }
 

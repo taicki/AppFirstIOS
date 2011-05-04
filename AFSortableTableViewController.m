@@ -51,7 +51,6 @@
 
 - (void) asyncGetServerData
 {
-	
 	titleLabel.text = @"Running Processes (loading...)";
 	self.view.userInteractionEnabled = NO;
 
@@ -84,9 +83,6 @@
 }
 
 - (void) finishLoading:(NSString*)theJobToDo {
-	
-	
-	
 	NSArray* objects = [self.detailData objectForKey:LIST_QUERY_DATA_NAME];
 	NSMutableArray* keys = [self.detailData objectForKey:LIST_QUERY_COLUMN_NAME];
 	

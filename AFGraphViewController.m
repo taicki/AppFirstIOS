@@ -9,6 +9,7 @@
 #import "AFGraphViewController.h"
 #import "AppDelegate_Shared.h"
 #import "AppHelper.h"
+#import "JSON.h"
 #import "config.h"
 
 
@@ -110,6 +111,7 @@
 }
 
 
+
 - (void) finishLoading:(NSString*)theJobToDo {
 
 	NSDictionary *data = (NSDictionary*)[[self.allData objectForKey:@"data"] JSONValue];
@@ -124,12 +126,13 @@
 		[xValues addObject:key];
 		[yValues addObject:dictionary];
 	}
+
 	
-	if (DEBUGGING) {
-		NSLog(@"%@", data);
+	//if (DEBUGGING) {
+	//	NSLog(@"%@", data);
 		NSLog(@"%@", xValues);
 		NSLog(@"%@", yValues);
-	}
+	//}
 	
 	self.graphView.legendNames = [[[NSMutableArray alloc] init] autorelease];
 	

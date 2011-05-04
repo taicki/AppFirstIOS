@@ -13,10 +13,10 @@
     NSString* os;
     NSString* hostname;
     NSMutableDictionary* capacity_disks;
-    long capacity_mem; 
+    long long capacity_mem; 
     long capacity_cpu_freq;
     long created;
-    long total_disk;
+    long long total_disk;
     int capacity_cpu_num;
     int uid;
     bool running;
@@ -29,9 +29,9 @@
 - (void) setCapacity_cpu_num: (int) newCapacity_cpu_num;
 - (void) setHostname: (NSString*) newHostname;
 - (void) setCapacity_disks: (NSMutableDictionary*) newCapacity_disk;
-- (void) setTotal_Disk: (long) newTotal_disk;
+- (void) setTotal_Disk: (long long) newTotal_disk;
 - (void) setCreated: (long) newCreated;
-- (void) setCapacity_mem: (long) newCapacity_mem;
+- (void) setCapacity_mem: (long long) newCapacity_mem;
 - (void) setCapacity_cpu_freq: (long) newCapacity_cpu_freq;
 - (void) setRunning: (bool) newRunning;
 
@@ -41,9 +41,9 @@
 - (int) uid;
 - (int) capacity_cpu_num;
 - (bool) isRunning;
-- (long) capacity_mem;
+- (long long) capacity_mem;
 - (long) capacity_cpu_freq;
 - (long) created;
-- (long) total_disk;
+- (long long) total_disk;
 
 @end
