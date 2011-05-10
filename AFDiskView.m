@@ -1,10 +1,18 @@
-//
-//  AFDiskView.m
-//  AppFirst
-//
-//  Created by appfirst on 5/12/10.
-//  Copyright 2010 AppFirst Inc. All rights reserved.
-//
+/*
+ * Copyright 2009-2011 AppFirst, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "AFDiskView.h"
 #import "config.h"
@@ -34,17 +42,13 @@
 	double radius = self.frame.size.height / 2.5;
 	double paddingLeft = 5;
 	double paddingTop = 5;
-	
 	double valueSum = 0;
 	double totalSum = 0;
-	
 	double centerX = paddingLeft + radius ;
 	double centerY = paddingTop + radius ;
 	
 	
     CGContextRef contextRef = UIGraphicsGetCurrentContext();
-	
-	
 	CGContextSetRGBFillColor(contextRef,217.0/255.0, 238.0/255.0, 208.0/255.0, 1);
 	CGContextSetRGBStrokeColor(contextRef, 168/255, 168/255, 168/255, 0.3);
 	
@@ -54,64 +58,32 @@
 	// Draw a circle (border only)
 	CGContextStrokeEllipseInRect(contextRef, CGRectMake(paddingLeft, paddingTop, radius * 2, radius * 2));
 	
-	 
-	for (int i = 0; i < [diskTotals count]; i++) {
+    for (int i = 0; i < [diskTotals count]; i++) {
 		double diskValue = [[diskValues objectAtIndex:i] doubleValue];
 		double diskTotal = [[diskTotals objectAtIndex:i] doubleValue];
-		
 		valueSum += diskValue;
 		totalSum += diskTotal;
-		
-		
 	}
 	
 	double currentRadius = 0;
-	//double textMaxWidth = 70;
-	//double textMaxHeight = 50;
 	for (int i = 0; i < [diskValues count]; i++) {
 		double diskValue = [[diskValues objectAtIndex:i] doubleValue];
 		double diskTotal = [[diskTotals objectAtIndex:i] doubleValue];
 		double span = diskValue / totalSum * PI * 2;
 		
-		
 		CGContextSetRGBStrokeColor(contextRef, 1, 1, 1, 1);
 		CGContextMoveToPoint(contextRef, centerX, centerY);
 		CGContextAddLineToPoint(contextRef, centerX + cos(currentRadius)* radius, centerY + sin(currentRadius) * radius);     
 		CGContextStrokePath(contextRef);
-		
-		
 		CGContextSetRGBFillColor(contextRef, 88.0/255.0, 164.0/255.0, 59.0/255.0, 1);
 		CGContextMoveToPoint(contextRef, centerX, centerY);
 		CGContextAddArc(contextRef, centerX, centerY, radius, currentRadius, currentRadius + span, 0);
-		
 		CGContextClosePath(contextRef); 
 		CGContextFillPath(contextRef);
 		
 		double totalSpan = (diskTotal / totalSum) * 2 * PI;
-		
 		currentRadius += totalSpan;
-		
-		/*
-		CGRect textFrame = CGRectMake(centerX + cos(currentRadius - totalSpan / 2)* radius * 1 - textMaxWidth / 2, 
-									  centerY + sin(currentRadius - totalSpan / 2) * radius * 1 - textMaxHeight / 2, textMaxWidth, textMaxHeight
-									  );
-		
-		
-		UILabel* diskView = [[UILabel alloc] initWithFrame:textFrame];
-		diskView.numberOfLines = 0;
-		diskView.text = [diskNames objectAtIndex:i];
-		diskView.font = [UIFont systemFontOfSize:9.0];
-		diskView.backgroundColor = [UIColor clearColor];
-		diskView.textAlignment = UITextAlignmentCenter;
-		
-		 
-		[self addSubview:diskView];
-		
-		[diskView release];
-		*/
 	}
-	
-	
 }
 
 

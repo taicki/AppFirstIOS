@@ -1,10 +1,18 @@
-    //
-//  ServerDetailViewPad.m
-//  AppFirst
-//
-//  Created by appfirst on 6/18/10.
-//  Copyright 2010 AppFirst Inc. All rights reserved.
-//
+/*
+ * Copyright 2009-2011 AppFirst, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "ServerDetailViewPad.h"
 #import "AFServerNameView.h"
@@ -12,15 +20,14 @@
 #import "AFMemoryDetailView.h"
 #import "AFVerticalSeparator.h"
 #import "JSON.h"
+#import "AppComm.h"
+#import "AppStrings.h"
 #import "AppHelper.h"
 #import "config.h"
 
 
 @implementation ServerDetailViewPad
-@synthesize sortableTableView;
-@synthesize pollDataController, diskViewController, alertViewController, indicatorController;
-@synthesize serverName, queryUrl, serverPK, osType;
-@synthesize detailData, responseData;
+@synthesize pollDataController, processController, serverController, server;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -46,166 +53,22 @@
 }
 
 - (void) _freshViewData {
-	[self asyncGetServerData];
 	[self.pollDataController asyncGetServerData];
-	[self.sortableTableView asyncGetServerData];
+	//[self.sortableTableView asyncGetServerData];
 }
 
-
-- (void) asyncGetServerData
-{
-	AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
-
-	
-	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:appDelegate.availableCookies];
-	responseData = [[NSMutableData data] retain];
-	
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
-	[request setHTTPMethod:@"GET"];
-	[request setAllHTTPHeaderFields:headers];
-	[request setTimeoutInterval:20];
-	
-	
-	request.URL = [NSURL URLWithString:self.queryUrl];
-	[[NSURLConnection alloc] initWithRequest:request delegate:self];
-}
-
-
-- (void) _setQueryUrl {
-	if (DEBUGGING) {
-		self.queryUrl = DEV_SERVER_IP;
-	} else {
-		self.queryUrl = PROD_SERVER_IP;
-	}
-	
-	
-	self.queryUrl = [NSString stringWithFormat:@"%@%@?pk=%@", self.queryUrl, SERVER_DETAIL_API_STRING, self.serverPK];
-	
-}
 
 - (void) finishLoading:(NSString*)theJobToDo {
-	self.navigationItem.title = [NSString stringWithFormat:@"Updated at: %@", [AppHelper formatDateString:[NSDate date]]];
-	
-	
-	
-	double serverNameViewHeight = 50;
-	double memoryViewHeight = 70;
-	double cpuViewHeight = 70; // 160;
-	double diskViewHeight = 300;
-	
 		
-	double topPadding = IPAD_DETAIL_VIEW_MARGIN;
-	
-	AFServerNameView* serverNameView = [[AFServerNameView alloc] initWithFrame:CGRectMake(IPAD_DETAIL_VIEW_MARGIN, 
-																						  topPadding, 
-																						  IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH, serverNameViewHeight)];
-	serverNameView.serverName = self.serverName;
-	serverNameView.osType = self.osType;
-	[self.view addSubview:serverNameView];
-	[serverNameView release];
-	
-	topPadding += (serverNameViewHeight + IPAD_DETAIL_VIEW_SEPARATION_DIV_WIDTH);
-	
-	
-	AFCpuDetailView* cpuDetailView = [[AFCpuDetailView alloc] initWithFrame:CGRectMake(IPAD_DETAIL_VIEW_MARGIN, 
-																					   topPadding, 
-																					   IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH, cpuViewHeight)];
-	NSArray *cpuValues = [[[detailData objectForKey:DATA_NAME] objectForKey:CPU_RESOURCE_NAME] objectForKey:RESOURCE_VALUE_NAME];
-	cpuDetailView.cpuDetail = [[[detailData objectForKey:DATA_NAME] objectForKey:CPU_RESOURCE_NAME] objectForKey:RESOURCE_TOTAL_NAME];
-	cpuDetailView.cpuValue = [[cpuValues objectAtIndex:0] doubleValue];
-	[self.view addSubview:cpuDetailView];
-	[cpuDetailView release];
-	
-	topPadding += (cpuViewHeight + IPAD_DETAIL_VIEW_SEPARATION_DIV_WIDTH);
-	
-	AFMemoryDetailView* memoryDetailView = [[AFMemoryDetailView alloc] initWithFrame:CGRectMake(IPAD_DETAIL_VIEW_MARGIN, 
-																								topPadding, 
-																								IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH, memoryViewHeight)];
-	
-	memoryDetailView.memoryValue = [[[[[detailData objectForKey:DATA_NAME] 
-							   objectForKey:MEMORY_RESOURCE_NAME] objectForKey:RESOURCE_VALUE_NAME] objectAtIndex:0] doubleValue];
-	memoryDetailView.memoryTotal = [[[[detailData objectForKey:DATA_NAME] 
-									 objectForKey:MEMORY_RESOURCE_NAME] objectForKey:RESOURCE_TOTAL_NAME] doubleValue];
-	
-	
-	[self.view addSubview:memoryDetailView];
-	[memoryDetailView release];
-	
-	topPadding += (memoryViewHeight + IPAD_DETAIL_VIEW_SEPARATION_DIV_WIDTH);
-	
-	AFWidgetBaseView* diskViewContainer = [[AFWidgetBaseView alloc] initWithFrame:CGRectMake(IPAD_DETAIL_VIEW_MARGIN, topPadding, IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH, diskViewHeight)];
-	diskViewContainer.widgetNameLabelText = @"Disk";
-	
-	self.diskViewController = [[[AFDiskDetailViewController alloc] init] autorelease];
-	diskViewController.view.frame = CGRectMake(IPAD_WIDGET_INTERNAL_PADDING, 
-											   IPAD_WIDGET_INTERNAL_PADDING + IPAD_WIDGET_SECTION_TITLE_HEIGHT, 
-											   IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH - IPAD_WIDGET_INTERNAL_PADDING * 2, 
-											   diskViewHeight - IPAD_WIDGET_SECTION_TITLE_HEIGHT  - IPAD_WIDGET_INTERNAL_PADDING * 2);
-	
-	diskViewController.diskValues = [[[detailData objectForKey:DATA_NAME] objectForKey:DISK_RESOURCE_NAME] objectForKey:RESOURCE_VALUE_NAME];
-	diskViewController.diskTotals = [[[detailData objectForKey:DATA_NAME] objectForKey:DISK_RESOURCE_NAME] objectForKey:RESOURCE_TOTAL_NAME];
-	diskViewController.diskNames = [[[detailData objectForKey:DATA_NAME] objectForKey:DISK_RESOURCE_NAME] objectForKey:RESOURCE_NAME_NAME];
-	
-	[diskViewContainer addSubview:diskViewController.view];
-	[self.view addSubview:diskViewContainer];
-	[diskViewContainer release];
-	[diskViewController.tableView reloadData];
-	
-	AFVerticalSeparator* separator = [[AFVerticalSeparator alloc] initWithFrame:CGRectMake(IPAD_DETAIL_VIEW_MARGIN + IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH, 
-																						   0, IPAD_SPLITTER_DIV_WIDTH, IPAD_SCREEN_HEIGHT)];
-	[self.view addSubview:separator];
-	[separator release];
-	
-	[self.navigationItem.leftBarButtonItem setTitle:@"back"];
-	
 	//[self.indicatorController.view removeFromSuperview];
 	
 }
 
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-	[responseData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-	[responseData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-	UIAlertView *errorView = [[UIAlertView alloc] initWithTitle: @"Can't update server detail. " 
-														message: [error localizedDescription] 
-													   delegate: self 
-											  cancelButtonTitle: @"Ok" 
-											  otherButtonTitles: nil];
-	[errorView show];
-	[errorView release];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	
-	[connection release];
-	
-	NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-	[responseData release];
-	
-	@try {
-		NSDictionary *dictionary = (NSDictionary*)[jsonString JSONValue];
-		self.detailData = dictionary;
-	}
-	@catch (NSException * e) {
-		NSLog(@"main: Caught %@: %@", [e name], [e reason]);
-		return;
-	}
-	
-	[jsonString release];
-	
-	[self finishLoading:[AppHelper formatDateString:[NSDate date]]];
-	
-}
 
 /*
 
-///* comment these two methods for release
+/* comment these two methods for release
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
 	return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
 }
@@ -224,32 +87,49 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = [NSString stringWithFormat:@"Updated at: %@", [AppHelper formatDateString:[NSDate date]]];
 	
+	self.serverController = [[AFServerDetailViewController alloc]  initWithNibName:@"AFServerDetailViewController" bundle:nil];
+    [serverController setServer:server];
+    self.serverController.view.frame = CGRectMake(0, 0, IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH, self.view.frame.size.height);
+    [self.view addSubview:self.serverController.view];
+    
 	
-	
-	[self _createRefreshButton];
-	[self _setQueryUrl];
+	[self.navigationItem.leftBarButtonItem setTitle:@"back"];
 
 	
+    AFVerticalSeparator* separator = [[AFVerticalSeparator alloc] initWithFrame:CGRectMake( IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH - 2, 
+																						   0, IPAD_SPLITTER_DIV_WIDTH, IPAD_SCREEN_HEIGHT)];
+	[self.view addSubview:separator];
+	[separator release];
 	
 	
-	[self asyncGetServerData];
-	
-	
-	self.sortableTableView = [[[AFSortableTableViewController alloc] initWithPk:self.serverPK] autorelease];
-	self.sortableTableView.view.frame = CGRectMake(270, 10, 500, 350);
-	
-	[self.view addSubview:self.sortableTableView.view];
-	
-	
-	self.pollDataController = [[[AFPollDataController alloc] initWithPk:self.serverPK] autorelease];
-	[self.view addSubview:self.pollDataController.view];
-	
-	self.alertViewController = [[[AFAlertDetailViewController alloc] init] autorelease];
-	//[self.view addSubview:self.alertViewController.view];
-	
-	
-	
+	self.processController = [[AC_ProcessListContainerViewController alloc]  initWithNibName:@"AC_ProcessListContainerViewController" bundle:nil];
+    NSString* urlString = [NSString stringWithFormat:@"%@%@/%d/processes/", 
+                           [AppStrings appfirstServerAddress], 
+                           [AppStrings serverListUrl], 
+                           [server uid]];
+    [[self processController] setResourceUrl:urlString];
+    processController.view.frame = CGRectMake(IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH, 
+                                              0, self.view.frame.size.width - IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH, self.view.frame.size.height);
+    [self.view addSubview:self.processController.view];
+    
+    
+    NSString* serverPk = [NSString stringWithFormat:@"%d", [server uid]];
+    self.pollDataController = [[AFPollDataController alloc] initWithPk: serverPk];
+        
+    self.pollDataController.view.frame = CGRectMake(IPAD_DETAIL_VIEW_MARGIN + IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH, 400, 300, 300);
+        
+    self.pollDataController.tableController.view.frame = CGRectMake(IPAD_WIDGET_INTERNAL_PADDING, 
+                                                                        20 + IPAD_WIDGET_INTERNAL_PADDING, 
+                                                                        self.pollDataController.view.frame.size.width - IPAD_WIDGET_INTERNAL_PADDING* 2, 
+                                                                        self.pollDataController.view.frame.size.height - 20 - IPAD_WIDGET_INTERNAL_PADDING * 2);
+		
+    //[self.view addSubview:self.pollDataController.view];
+
+    
+    
+    
 	
 }
 
@@ -272,18 +152,16 @@
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	
+    return NO;
 	double titleSectionHeight = IPAD_WIDGET_SECTION_TITLE_HEIGHT;
-	double sortButtonWidth = 20;
-	double left = IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH + IPAD_SPLITTER_DIV_WIDTH + IPAD_DETAIL_VIEW_MARGIN;
-	double landscapeTableWidth = IPAD_SCREEN_HEIGHT - IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH - IPAD_SPLITTER_DIV_WIDTH - IPAD_DETAIL_VIEW_MARGIN * 2;
-	double portraitTableWidth = IPAD_SCREEN_WIDTH - IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH - IPAD_SPLITTER_DIV_WIDTH - IPAD_DETAIL_VIEW_MARGIN * 2;
+	double left = IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH + IPAD_SPLITTER_DIV_WIDTH;
+	double landscapeTableWidth = IPAD_SCREEN_HEIGHT - IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH - IPAD_SPLITTER_DIV_WIDTH - IPAD_DETAIL_VIEW_MARGIN;
+	double portraitTableWidth = IPAD_SCREEN_WIDTH - IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH - IPAD_SPLITTER_DIV_WIDTH - IPAD_DETAIL_VIEW_MARGIN ;
 	
 	
 	    // Overriden to allow any orientation.
     if ((interfaceOrientation == UIDeviceOrientationLandscapeRight)) {
-		//NSLog(@"%f 1", self.view.frame.size.width);
-		self.sortableTableView.view.frame = CGRectMake(left, 
+		self.processController.view.frame = CGRectMake(left - IPAD_DETAIL_VIEW_MARGIN, 
 													   IPAD_DETAIL_VIEW_MARGIN, 
 													   landscapeTableWidth, 
 													   PROCESS_TABLE_LANDSCAPE_HEIGHT);
@@ -293,17 +171,9 @@
 														landscapeTableWidth, 
 														IPAD_POLL_DATA_TABLE_LANDSCAPE_HEIGHT);
 		
-		/*
-		self.alertViewController.view.frame = CGRectMake(left, 
-														 IPAD_DETAIL_VIEW_MARGIN * 3 + PROCESS_TABLE_HEIGHT + IPAD_POLL_DATA_TABLE_LANDSCAPE_HEIGHT, 
-														 landscapeTableWidth, 
-														 IPAD_ALERT_DATA_TABLE_LANDSCAPE_HEIGHT);
-		*/
-		
 	}
 	else if ((interfaceOrientation == UIDeviceOrientationLandscapeLeft))	{
-		//NSLog(@"%f 2", self.view.frame.size.width);
-		self.sortableTableView.view.frame = CGRectMake(left
+		self.processController.view.frame = CGRectMake(left - IPAD_DETAIL_VIEW_MARGIN
 													   , IPAD_DETAIL_VIEW_MARGIN, 
 													   landscapeTableWidth
 													   , PROCESS_TABLE_LANDSCAPE_HEIGHT);
@@ -312,35 +182,24 @@
 														IPAD_DETAIL_VIEW_MARGIN * 2 + PROCESS_TABLE_LANDSCAPE_HEIGHT, 
 														landscapeTableWidth, 
 														IPAD_POLL_DATA_TABLE_LANDSCAPE_HEIGHT);
-		/*
-		self.alertViewController.view.frame = CGRectMake(left, 
-														 IPAD_DETAIL_VIEW_MARGIN * 3 + PROCESS_TABLE_HEIGHT + IPAD_POLL_DATA_TABLE_LANDSCAPE_HEIGHT, 
-														 landscapeTableWidth, 
-														 IPAD_ALERT_DATA_TABLE_LANDSCAPE_HEIGHT);
-		*/
+		
 	}
 	else if ((interfaceOrientation == UIDeviceOrientationPortrait))	{
-		self.sortableTableView.view.frame = CGRectMake(left
-													   , IPAD_DETAIL_VIEW_MARGIN, 
-													   portraitTableWidth
-													   , PROCESS_TABLE_PORTRAIT_HEIGHT);
+        
+		self.processController.view.frame = CGRectMake(left - IPAD_DETAIL_VIEW_MARGIN - 2
+													   , 0, 
+													   portraitTableWidth + IPAD_DETAIL_VIEW_MARGIN
+													   , PROCESS_TABLE_PORTRAIT_HEIGHT + IPAD_DETAIL_VIEW_MARGIN * 2);
 		
-		self.pollDataController.view.frame = CGRectMake(left, 
+		self.pollDataController.view.frame = CGRectMake(left - IPAD_DETAIL_VIEW_MARGIN, 
 														IPAD_DETAIL_VIEW_MARGIN * 2 + PROCESS_TABLE_PORTRAIT_HEIGHT, 
 														portraitTableWidth, 
 														IPAD_POLL_DATA_TABLE_PORTRAIT_HEIGHT);
 		
-		/*
-		self.alertViewController.view.frame = CGRectMake(left, 
-														IPAD_DETAIL_VIEW_MARGIN * 3 + PROCESS_TABLE_HEIGHT + IPAD_POLL_DATA_TABLE_PORTRAIT_HEIGHT, 
-														portraitTableWidth, 
-														IPAD_ALERT_DATA_TABLE_PORTRAIT_HEIGHT);
-		
-		*/
 		
 		
 	} else {
-		self.sortableTableView.view.frame = CGRectMake(left
+		self.processController.view.frame = CGRectMake(left - IPAD_DETAIL_VIEW_MARGIN
 													   , IPAD_DETAIL_VIEW_MARGIN, 
 													   portraitTableWidth
 													   , PROCESS_TABLE_PORTRAIT_HEIGHT);
@@ -350,41 +209,19 @@
 														portraitTableWidth, 
 														IPAD_POLL_DATA_TABLE_PORTRAIT_HEIGHT);
 		
-		/*
-		self.alertViewController.view.frame = CGRectMake(left, 
-														IPAD_DETAIL_VIEW_MARGIN * 3 + PROCESS_TABLE_HEIGHT + IPAD_POLL_DATA_TABLE_PORTRAIT_HEIGHT, 
-														portraitTableWidth, 
-														IPAD_ALERT_DATA_TABLE_PORTRAIT_HEIGHT);
-		*/
 	}
 	
-	self.sortableTableView.tableController.view.frame = CGRectMake(IPAD_WIDGET_INTERNAL_PADDING, 
+    
+	self.processController.processListController.view.frame = CGRectMake(IPAD_WIDGET_INTERNAL_PADDING, 
 																   titleSectionHeight + IPAD_WIDGET_INTERNAL_PADDING, 
-																   self.sortableTableView.view.frame.size.width - IPAD_WIDGET_INTERNAL_PADDING * 2, 
-																   self.sortableTableView.view.frame.size.height - titleSectionHeight - IPAD_WIDGET_INTERNAL_PADDING * 2);
+																   self.processController.view.frame.size.width - IPAD_WIDGET_INTERNAL_PADDING * 2, 
+																   self.processController.view.frame.size.height - titleSectionHeight - IPAD_WIDGET_INTERNAL_PADDING * 2);
 	
-	
-	self.sortableTableView.sortButton.frame = CGRectMake(self.sortableTableView.view.frame.size.width - sortButtonWidth - IPAD_WIDGET_INTERNAL_PADDING, 
-														 0, 
-														 sortButtonWidth, 
-														 titleSectionHeight);
-	
-	
-	self.sortableTableView.metricsViewBounder.frame = CGRectMake(self.sortableTableView.view.frame.size.width - MATRICS_TABLE_WIDTH, 
-																 titleSectionHeight, 
-																 MATRICS_TABLE_WIDTH, 
-																 self.sortableTableView.view.frame.size.height - titleSectionHeight);
 	self.pollDataController.tableController.view.frame = CGRectMake(IPAD_WIDGET_INTERNAL_PADDING, 
 																titleSectionHeight + IPAD_WIDGET_INTERNAL_PADDING, 
 																self.pollDataController.view.frame.size.width - IPAD_WIDGET_INTERNAL_PADDING* 2, 
 																self.pollDataController.view.frame.size.height - titleSectionHeight - IPAD_WIDGET_INTERNAL_PADDING * 2);
 	
-	/*
-	self.alertViewController.tableController.view.frame = CGRectMake(IPAD_WIDGET_INTERNAL_PADDING, 
-																	titleSectionHeight + IPAD_WIDGET_INTERNAL_PADDING, 
-																	self.alertViewController.view.frame.size.width - IPAD_WIDGET_INTERNAL_PADDING* 2, 
-																	self.alertViewController.view.frame.size.height - titleSectionHeight - IPAD_WIDGET_INTERNAL_PADDING * 2);
-	*/
 	return YES;
 }
 
@@ -405,17 +242,10 @@
 
 
 - (void)dealloc {
-	[serverName release];
-	[detailData release];
-	//[responseData release];
-	[queryUrl release];
-	[osType release];
 	[pollDataController release];
-	[sortableTableView release];
-	[diskViewController release];
-	[alertViewController release];
-	[indicatorController release];
-	[serverPK release];
+	[server release];
+    [processController release];
+    [serverController release];
     [super dealloc];
 }
 

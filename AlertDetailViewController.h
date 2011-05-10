@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AFAlert.h"
+
 
 
 @interface AlertDetailViewController : UIViewController {
@@ -30,7 +30,6 @@
 	NSArray* availableCookies;
 	NSString* alertId;
 	
-	AFAlert* parentController;
 }
 
 @property (nonatomic, retain) UILabel* alertName;
@@ -46,7 +45,6 @@
 @property (nonatomic, retain) NSArray* availableCookies;
 @property (nonatomic, retain) NSString* alertId;
 @property (nonatomic, retain) UILabel* alertEnabledLabel;
-@property (nonatomic, retain) AFAlert* parentController;
 
 
 @end

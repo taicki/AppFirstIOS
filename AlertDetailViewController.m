@@ -13,7 +13,7 @@
 
 @implementation AlertDetailViewController
 @synthesize alertName,lastTriggeredTime,alertTarget,alertValue,alertReset,alertTrigger,alertType,alertEnabledLabel;
-@synthesize detailData, parentController;
+@synthesize detailData;
 
 @synthesize viewContainer;
 @synthesize bounds;
@@ -236,7 +236,6 @@
 	[alertType release];
 	[alertEnabledLabel release];
 
-	[parentController release];
 	[detailData release];
 	[viewContainer release];
 

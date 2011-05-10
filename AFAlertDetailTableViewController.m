@@ -1,18 +1,28 @@
-//
-//  AFAlertDetailTableViewController.m
-//  AppFirst
-//
-//  Created by appfirst on 6/30/10.
-//  Copyright 2010 AppFirst Inc. All rights reserved.
-//
+/*
+ * Copyright 2009-2011 AppFirst, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "AFAlertDetailTableViewController.h"
 #import "AppDelegate_Shared.h"
 #import "AppHelper.h"
+#import "AppStrings.h"
 #import "config.h"
+#import "AppComm.h"
 
 @implementation AFAlertDetailTableViewController
-@synthesize alertName, detailData, recipients, alertID;
+@synthesize alert;
 @synthesize alertEnabled, alertReset;
 
 
@@ -26,7 +36,7 @@
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
 	
-	self.navigationItem.title = self.alertName;
+	self.navigationItem.title = [alert name];
  
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
@@ -58,54 +68,29 @@
 		
 		AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
 		
-		NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:appDelegate.availableCookies];
 		NSMutableURLRequest *saveAlertPost = [[[NSMutableURLRequest alloc] init] autorelease];
 		
-		NSString *queryUrl;
-		if (DEBUGGING == YES) {
-			queryUrl = [NSString stringWithFormat:@"%@%@", DEV_SERVER_IP, ALERT_EDIT_API_STRING];
-		} else {
-			queryUrl = [NSString stringWithFormat:@"%@%@", PROD_SERVER_IP, ALERT_EDIT_API_STRING];
-		}
+		NSString* urlString = [NSString stringWithFormat:@"%@%@/%d/", 
+                               [AppStrings appfirstServerAddress], 
+                               [AppStrings alertListUrl], 
+                               [alert uid]];
 		
 		
-		saveAlertPost.URL = [NSURL URLWithString:queryUrl];
-		
-		if ([self.alertReset.text isEqualToString:@""] || [self.alertReset.text isEqualToString:@"0"])
-			self.alertReset.text = @"1";
-		
-		NSDecimalNumber* newReset = nil;
-		
-		@try {
-			newReset = [NSDecimalNumber decimalNumberWithString:self.alertReset.text];
-			
-			if (newReset == [NSDecimalNumber notANumber]) {
-				UIAlertView *errorView = [[UIAlertView alloc] initWithTitle: @"Invalid number format for reset value." 
-																	message: self.alertReset.text delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
-				[errorView show];
-				[errorView release];
-				return;
-			}
-			
-		}
-		@catch (NSException * e) {
-			return;
-		}
-		
-		
-		NSString* alertEnabledString = @"True";
+		saveAlertPost.URL = [NSURL URLWithString:urlString];
+
+		NSString* alertEnabledString = @"true";
 		
 		if (self.alertEnabled.on == NO)
-			alertEnabledString = @"False";
+			alertEnabledString = @"false";
 		
-		NSString *postData = [NSString stringWithFormat:@"alert=%@&interval=%@&enabled=%@", self.alertID, newReset, alertEnabledString];
+		NSString *postData = [NSString stringWithFormat:@"id=%d&active=%@", [alert uid], alertEnabledString];
 		NSString *length = [NSString stringWithFormat:@"%d", [postData length]];
 		
 		[saveAlertPost setValue:length forHTTPHeaderField:@"Content-Length"];
 		[saveAlertPost setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding]];
-		[saveAlertPost setHTTPMethod:@"POST"];
-		[saveAlertPost setAllHTTPHeaderFields:headers];
-		
+		[saveAlertPost setHTTPMethod:@"PUT"];
+		[saveAlertPost setValue:[AppComm authString] forHTTPHeaderField:@"Authorization"];
+        
 		[NSURLConnection sendSynchronousRequest:saveAlertPost returningResponse:&response error:&error];
 		if (error) {
 			UIAlertView *errorView = [[UIAlertView alloc] initWithTitle: @"Could not save alert. " 
@@ -122,7 +107,6 @@
 		
 		self.alertEnabled.userInteractionEnabled = NO;
 		self.alertReset.userInteractionEnabled = NO;
-		appDelegate.alertController.needRefresh = YES;
     }
 }
 
@@ -130,7 +114,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	[self setRecipients:[self.detailData objectForKey:ALERT_RECIPIENTS_NAME]];
+	//[self setRecipients:[self.detailData objectForKey:ALERT_RECIPIENTS_NAME]];
 }
 
 
@@ -162,19 +146,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 3;
+    return 2;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     if (section == 0) {
-		return 3;
+		return 2;
 	} else if (section == 1){
 		return 2;
-	} else {
-		return [self.recipients count];
 	}
+    return 0;
 }
 
 
@@ -192,8 +175,8 @@
 		if (indexPath.row == 0) {
 		
 			cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", 
-								   [self.detailData objectForKey:ALERT_TYPE_NAME]
-								   , [self.detailData objectForKey:ALERT_TARGET_NAME]];
+								   [alert name]
+								   , [alert target]];
 			cell.textLabel.numberOfLines = 0;
 			
 		} else if (indexPath.row == 1) {
@@ -202,14 +185,13 @@
 			[cell.contentView addSubview:self.alertEnabled];
 			self.alertEnabled.userInteractionEnabled = NO;
 			
-			NSString* enabled = [NSString stringWithFormat:@"%@", [self.detailData objectForKey:ALERT_STATUS_NAME]];
-			
-			if ([enabled isEqualToString:@"True"]) {
+			if ([alert isActive]) {
 				self.alertEnabled.on = YES;
 			} else {
 				self.alertEnabled.on = NO;
 			}
 		} else {
+            /*
 			cell.textLabel.text = @"Reset (in minutes):";
 			
 			
@@ -226,22 +208,22 @@
 			//self.alertReset.font = [UIFont systemFontOfSize:ALERT_TAB_NORMAL_FONT_SIZE];
 			alertReset.userInteractionEnabled = NO;
 			[cell.contentView addSubview:self.alertReset];
-			
+			*/
 		}
 
 	} else if (indexPath.section == 1) {
 		if (indexPath.row == 0) {
-			cell.textLabel.text = [NSString stringWithFormat:@"%@", [self.detailData objectForKey:ALERT_TRIGGER_TYPE_NAME]];
+			cell.textLabel.text = [NSString stringWithFormat:@"%@", [alert type]];
 		} else if (indexPath.row == 1) {
-			if ([self.detailData objectForKey:AlERT_LAST_TRIGGER_NAME] != nil) {
-				NSDate *triggerTime = [NSDate dateWithTimeIntervalSince1970:[[self.detailData objectForKey:AlERT_LAST_TRIGGER_NAME] doubleValue]];
+			if ([alert last_triggered] > 0) {
+				NSDate *triggerTime = [NSDate dateWithTimeIntervalSince1970:[alert last_triggered]];
 				cell.textLabel.text = [NSString stringWithFormat:@"Last triggered: %@", [AppHelper formatDateString:triggerTime]];
 			} else {
 				cell.textLabel.text = @"Last triggered: N/A";
 			}	
 		} 
 	} else {
-		cell.textLabel.text = [NSString stringWithFormat:@"%@", [self.recipients objectAtIndex: indexPath.row]];
+		//cell.textLabel.text = [NSString stringWithFormat:@"%@", [self.recipients objectAtIndex: indexPath.row]];
 	}
 	
 	cell.textLabel.font = [UIFont systemFontOfSize:13];
@@ -335,12 +317,9 @@
 
 
 - (void)dealloc {
-	[alertName release];
-	[detailData release];
 	[alertEnabled release];
 	[alertReset release];
-	[recipients release];
-	[alertID release];
+	[alert release];
     [super dealloc];
 }
 

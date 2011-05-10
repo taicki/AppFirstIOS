@@ -291,6 +291,10 @@
     [super dealloc];
 }
 
+-(void) asyncGetServerData {
+    
+}
+
 
 @end
 

@@ -1,15 +1,25 @@
-//
-//  AC_ApplicationListViewController.m
-//  AppFirst
-//
-//  Created by appfirst on 4/30/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/*
+ * Copyright 2009-2011 AppFirst, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "AC_ApplicationListViewController.h"
 #import "AppDelegate_Shared.h"
-#import "AC_ApplicationDetailViewController.h"
+#import "AC_ApplicationPageViewController.h"
 #import "AM_Application.h"
+#import "AC_ApplicationDetailPad.h"
+#import "AppHelper.h"
 
 @implementation AC_ApplicationListViewController
 
@@ -44,34 +54,49 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void) reloadView {
+    AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
+    NSMutableArray* list = [appDelegate applicationList];
+    [self setApplications:list];
+    [self.tableView reloadData];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@", [AppHelper formatShortDateString:[NSDate date]]];
+}
+
+- (void) refreshData {
+    AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
+    self.navigationItem.title = @"Updating...";
+    self.tableView.userInteractionEnabled = NO;
+    [appDelegate loadApplicationList];
+    [self reloadView];
+    self.tableView.userInteractionEnabled = YES;
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
+									  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
+									  target:self 
+									  action:@selector(refreshData)];
+	refreshButton.style = UIBarButtonItemStyleBordered;
+	self.navigationItem.rightBarButtonItem = refreshButton;
+	[refreshButton release];
+    
 }
 
 - (void)viewDidUnload
 {
     [applications release];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self reloadView];
     
-    AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
-    NSMutableArray* list = [appDelegate applicationList];
-    [self setApplications:list];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -168,11 +193,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AC_ApplicationDetailViewController* detailViewController = [[AC_ApplicationDetailViewController alloc] initWithNibName:@"AC_ApplicationDetailViewController" bundle:nil];
-    AM_Application* application = [applications objectAtIndex:indexPath.row];
-    [detailViewController setApplication:application];
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
+    if (![AppHelper isIPad]) {
+        AC_ApplicationPageViewController* detailViewController = [[AC_ApplicationPageViewController alloc] initWithNibName:@"AC_ApplicationPageViewController" bundle:nil];
+        AM_Application* application = [applications objectAtIndex:indexPath.row];
+        [detailViewController setApplication:application];
+        [self.navigationController pushViewController:detailViewController animated:YES];
+        [detailViewController release];
+        
+    } else {
+        AC_ApplicationDetailPad* detailViewController = [[AC_ApplicationDetailPad alloc] initWithNibName:@"AC_ApplicationDetailPad" bundle:nil];
+        AM_Application* application = [applications objectAtIndex:indexPath.row];
+        [detailViewController setApplication:application];
+        [self.navigationController pushViewController:detailViewController animated:YES];
+        [detailViewController release];
+    }
     
 }
 

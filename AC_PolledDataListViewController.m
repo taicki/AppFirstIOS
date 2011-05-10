@@ -12,6 +12,7 @@
 #import "AppHelper.h"
 #import "AM_Alert.h"
 #import "config.h"
+#import "AC_PolledDataDetailViewController.h"
 
 
 @implementation AC_PolledDataListViewController
@@ -52,30 +53,7 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
+- (void) reloadView {
     AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
     NSMutableArray* list = [appDelegate polledDataList];
     NSMutableArray* newHealthyPolledData = [[NSMutableArray alloc] init];
@@ -101,6 +79,44 @@
     [newUnhealthyPolledData release];
     [newHealthyPolledData release];
     [healthyDict release];
+    [self.tableView reloadData];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@", [AppHelper formatShortDateString:[NSDate date]]];
+}
+
+- (void) refreshData {
+    AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
+    self.navigationItem.title = @"Updating...";
+    self.tableView.userInteractionEnabled = NO;
+    [appDelegate loadPolledDataList];
+    [self reloadView];
+    self.tableView.userInteractionEnabled = YES;
+}
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
+									  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
+									  target:self 
+									  action:@selector(refreshData)];
+	refreshButton.style = UIBarButtonItemStyleBordered;
+	self.navigationItem.rightBarButtonItem = refreshButton;
+	[refreshButton release];
+    
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self reloadView];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -144,7 +160,11 @@
 }
 
 - (void) setCellText: (AM_PolledData *) polledData cell: (UITableViewCell *) cell  {
-    cell.textLabel.text = [polledData name];
+    NSString* uid = [NSString stringWithFormat:@"%d", [polledData server_uid]];
+    AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
+    NSString* hostname = [[appDelegate serverIdHostNameMap] objectForKey:uid];
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)", [polledData name], hostname];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if ([AppHelper isIPad] == NO) {
 		cell.textLabel.font = [UIFont boldSystemFontOfSize:IPHONE_TABLE_TITLESIZE];
@@ -184,7 +204,6 @@
     
     [self setCellText: polledData cell: cell];
     [self setCellIcon: indexPath cell: cell];
-    
     
     // Configure the cell...
     
@@ -242,14 +261,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    AM_PolledData* polledData;
+    if (indexPath.section == 0) {
+        polledData = [unhealthyPolledData objectAtIndex:indexPath.row];
+    } else {
+        polledData = [healthyPolledData objectAtIndex:indexPath.row];
+    }
+    
+    AC_PolledDataDetailViewController* detailViewController = [[AC_PolledDataDetailViewController alloc] initWithNibName:@"AC_PolledDataDetailViewController" bundle:nil];
+    [detailViewController setPolledData:polledData];
+    [[self navigationController] pushViewController:detailViewController animated:NO];
+    [detailViewController release];
+    
 }
 
 @end

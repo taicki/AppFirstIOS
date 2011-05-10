@@ -1,10 +1,18 @@
-//
-//  AV_GenericTableCell.m
-//  AppFirst
-//
-//  Created by appfirst on 5/2/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/*
+ * Copyright 2009-2011 AppFirst, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "AV_GenericTableCell.h"
 #import "AFEmptyBarView.h"
@@ -164,9 +172,9 @@
     
     if ([[data resourceValue] doubleValue] > 0) {
         if ([data renderOption] == AF_GraphCell) {
-            [self createResourceBarRow: @"All" paddingTop: currentHeight + 10 resourceValue: [[data resourceValue] doubleValue]];
+            [self createResourceBarRow: @"AVG" paddingTop: currentHeight + 10 resourceValue: [[data resourceValue] doubleValue]];
         } else if ([data renderOption] == AF_ExtendedGraphCell) {
-            [self createResourceBarRow: @"All" paddingTop: currentHeight + 10 resourceValue: [[data resourceValue] doubleValue]];
+            [self createResourceBarRow: @"AVG" paddingTop: currentHeight + 10 resourceValue: [[data resourceValue] doubleValue]];
         }
         
         currentHeight += IPHONE_TABLE_ROW_HEIGHT;
@@ -177,7 +185,6 @@
         
         for (int cnt = 0; cnt < [keys count]; cnt++) {
             NSString* key = [keys objectAtIndex:cnt];
-            NSLog(@"%@", key);
             if ([data graphOption] == AF_Bar) {
                 [self createResourceBarRow: key paddingTop: currentHeight + 10 resourceValue: [[[data extra] objectForKey:key] doubleValue]];
                 currentHeight += IPHONE_TABLE_ROW_HEIGHT;

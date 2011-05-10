@@ -1,47 +1,40 @@
-//
-//  ServerDetailViewPad.h
-//  AppFirst
-//
-//  Created by appfirst on 6/18/10.
-//  Copyright 2010 AppFirst Inc. All rights reserved.
-//
+/*
+ * Copyright 2009-2011 AppFirst, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import <UIKit/UIKit.h>
-#import "AFCpuDetailView.h"
-#import "AFSortableTableViewController.h"
 #import "AFPollDataController.h"
-#import "AFDiskDetailViewController.h"
-#import "AFAlertDetailViewController.h"
 #import "AFLoadingViewController.h"
+#import "AFServerDetailViewController.h"
+#import "AC_ProcessListContainerViewController.h"
+#import "AM_Server.h"
 
 @interface ServerDetailViewPad : UIViewController {
-	AFSortableTableViewController* sortableTableView;
+	AC_ProcessListContainerViewController* processController;
+    AFServerDetailViewController* serverController;
 	AFPollDataController* pollDataController;
-	AFDiskDetailViewController* diskViewController;
-	AFAlertDetailViewController* alertViewController;
-	AFLoadingViewController* indicatorController;
-	NSString* serverName;
-	NSString* osType;
-	NSDictionary *detailData;
-	NSMutableData* responseData;
-	NSString* queryUrl;
-	NSString* serverPK;
+    AM_Server* server;
+
 }
 
-@property (nonatomic, retain) AFSortableTableViewController* sortableTableView;
 @property (nonatomic, retain) AFPollDataController* pollDataController;
-@property (nonatomic, retain) NSString* serverName;
-@property (nonatomic, retain) NSDictionary *detailData;
-@property (nonatomic, retain) NSMutableData* responseData;
-@property (nonatomic, retain) AFDiskDetailViewController *diskViewController;
-@property (nonatomic, retain) AFAlertDetailViewController *alertViewController;
-@property (nonatomic, retain) AFLoadingViewController* indicatorController;
-@property (nonatomic, retain) NSString* queryUrl;
-@property (nonatomic, retain) NSString* serverPK;
-@property (nonatomic, retain) NSString* osType;
+@property (nonatomic, retain) AM_Server* server;
+@property (nonatomic, retain) AFServerDetailViewController *serverController;
+@property (nonatomic, retain) AC_ProcessListContainerViewController* processController;
 
 - (void) _createRefreshButton;
-- (void) asyncGetServerData;
 - (void) _freshViewData;
 
 @end

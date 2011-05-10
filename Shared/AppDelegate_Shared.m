@@ -25,8 +25,8 @@
 
 @synthesize window;
 @synthesize tabcontroller, loginController;
-@synthesize alertController, dashboardController, notificationController;
-@synthesize availableCookies, usernames;
+@synthesize notificationController;
+@synthesize availableCookies, usernames, serverIdHostNameMap;
 @synthesize alertListUrl, serverListUrl, urlBase, loginUrl, UUID;
 @synthesize navigationController, homeViewController;
 
@@ -200,10 +200,6 @@
     
     
     [window addSubview:navigationController.view];
-    
-    //[self.navigationController pushViewController:homeViewController animated:YES];
-    //[window addSubview:[detailViewController view]];
-    
 }
 
 
@@ -261,6 +257,8 @@
     
 }
 
+
+
 - (void) loginFailed:(NSString*)message {
 	
 	
@@ -310,6 +308,7 @@
             NSString* sortKey = @"name";
             [AppHelper sortArrayByKey: sortKey dictionary: dictionary];
         }
+        [polledDataList removeAllObjects];
         for (int i=0; i < [dictionary count]; i++) {
             AM_PolledData* item = [[[AM_PolledData alloc] initWithJSONObject:[dictionary objectAtIndex:i]] autorelease];
             [polledDataList addObject:item];
@@ -329,6 +328,7 @@
             NSString* sortKey = @"name";
             [AppHelper sortArrayByKey: sortKey dictionary: dictionary];
         }
+        [alertList removeAllObjects];
         for (int i=0; i < [dictionary count]; i++) {
             AM_Alert* item = [[AM_Alert alloc] initWithJSONObject:[dictionary objectAtIndex:i]];
             [alertList addObject:item];
@@ -338,7 +338,7 @@
 
 - (void) loadAlertHistoryList {
     
-    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings alertHistoryUrl]];
+    NSString* urlString = [NSString stringWithFormat:@"%@%@?num=50", [AppStrings appfirstServerAddress], [AppStrings alertHistoryUrl]];
     NSData* responseData = [AppComm makeGetRequest:urlString];
 	
     if (responseData != NULL) {
@@ -349,6 +349,7 @@
             NSString* sortKey = @"name";
             [AppHelper sortArrayByKey: sortKey dictionary: dictionary];
         }
+        [alertHistoryList removeAllObjects];
         for (int i=0; i < [dictionary count]; i++) {
             AM_AlertHistory* item = [[[AM_AlertHistory alloc] initWithJSONObject:[dictionary objectAtIndex:i]] autorelease];
             [alertHistoryList addObject:item];
@@ -369,6 +370,7 @@
             NSString* sortKey = @"name";
             [AppHelper sortArrayByKey: sortKey dictionary: dictionary];
         }
+        [applicationList removeAllObjects];
         for (int i=0; i < [dictionary count]; i++) {
             AM_Application* item = [[[AM_Application alloc] initWithJSONObject:[dictionary objectAtIndex:i]] autorelease];
             [applicationList addObject:item];
@@ -382,6 +384,7 @@
     
     NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings serverListUrl]];
     NSData* responseData = [AppComm makeGetRequest:urlString];
+    serverIdHostNameMap = [[NSMutableDictionary alloc] init];
 	
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
@@ -393,8 +396,10 @@
             [AppHelper sortArrayByKey: sortKey dictionary: dictionary];
 
         }
+        [serverList removeAllObjects];
         for (int i=0; i < [dictionary count]; i++) {
             AM_Server* item = [[[AM_Server alloc] initWithJSONObject:[dictionary objectAtIndex:i]] autorelease];
+            [serverIdHostNameMap setValue:[item hostname] forKey:[NSString stringWithFormat:@"%d", [item uid]]];
             [serverList addObject:item];
         }
     }    
@@ -491,10 +496,6 @@
 				NSLog(@"Name: %@ : Value: %@, Expires: %@", cookie.name, cookie.value, cookie.expiresDate); 
 		}
 		self.availableCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:urlBase]];
-		
-		
-		dashboardController.availableCookies = self.availableCookies;
-		alertController.availableCookies = self.availableCookies;
 		
 		[self performSelectorOnMainThread:@selector(finishLoading:)
 							   withObject:nil
@@ -610,8 +611,6 @@
 	[tabcontroller release];
 	[loginController release];
 	
-	[alertController release];
-	[dashboardController release];
 	[notificationController release];
 	
 	[availableCookies release];
@@ -630,6 +629,8 @@
     
     [navigationController release];
 	[homeViewController release];
+    
+    [serverIdHostNameMap release];
 	[super dealloc];
 }
 

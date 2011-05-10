@@ -1,28 +1,30 @@
-//
-//  AFAlertDetailTableViewController.h
-//  AppFirst
-//
-//  Created by appfirst on 6/30/10.
-//  Copyright 2010 AppFirst Inc. All rights reserved.
-//
+/*
+ * Copyright 2009-2011 AppFirst, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import <UIKit/UIKit.h>
-
+#import "AM_Alert.h"
 
 @interface AFAlertDetailTableViewController : UITableViewController {
-	NSString* alertName;
-	NSDictionary* detailData;
-	NSMutableArray* recipients;
+    AM_Alert* alert;
 	UISwitch* alertEnabled;
 	UITextField* alertReset;
-	NSString* alertID;
 }
 
-@property (nonatomic, retain) NSString* alertName;
-@property (nonatomic, retain) NSDictionary* detailData;
+@property (nonatomic, retain) AM_Alert* alert;
 @property (nonatomic, retain) UISwitch* alertEnabled;
 @property (nonatomic, retain) UITextField* alertReset;
-@property (nonatomic, retain) NSMutableArray* recipients;
-@property (nonatomic, retain) NSString* alertID;
 
 @end

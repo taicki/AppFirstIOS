@@ -1,10 +1,18 @@
-//
-//  AV_NavigatorRootController.m
-//  AppFirst
-//
-//  Created by appfirst on 4/29/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/*
+ * Copyright 2009-2011 AppFirst, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "AV_NavigatorRootController.h"
 #import "AppDelegate_Shared.h"
@@ -55,9 +63,27 @@
 
 #pragma mark - View lifecycle
 
+
+- (void) _createLogoutButton {
+	UIBarButtonItem* logoutButton = [[UIBarButtonItem alloc]
+                                     initWithTitle:@"Sign out"
+                                     style:UIBarButtonItemStyleBordered
+									 target:self
+                                     action:@selector(_logout)];
+	self.navigationItem.rightBarButtonItem = logoutButton;
+	[logoutButton release];
+}
+
+- (void)_logout {
+	AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
+	[appDelegate trySignOut];
+	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self _createLogoutButton];
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -84,7 +110,7 @@
     [self addRootViewData:items WithName:@"Alert" withCount:[[appDelegate alertList] count]];
     [self addRootViewData:items WithName:@"PolledData" withCount:[[appDelegate polledDataList] count]];
     [self addRootViewData:items WithName:@"Application" withCount:[[appDelegate applicationList] count]];
-    [self addRootViewData:items WithName:@"AlertHistory" withCount:[[appDelegate alertHistoryList] count]];
+    [self addRootViewData:items WithName:@"Recent alerts" withCount:[[appDelegate alertHistoryList] count]];
     [self.tableView reloadData];
 
 }

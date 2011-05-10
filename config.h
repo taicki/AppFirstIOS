@@ -1,3 +1,19 @@
+/*
+ * Copyright 2009-2011 AppFirst, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #define APPLICATION_NAME @"appfirst"
 #define DEFAULT_USER_NAME_KEY @"AppFirstDefaultUserName"
 
@@ -46,7 +62,7 @@
 #define IPAD_TITLE_NORMAL_FONTSIZE 11
 #define IPAD_TEXT_NORMAL_FONTSIZE 10
 #define IPAD_DETAIL_VIEW_MARGIN 5
-#define IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH 250
+#define IPAD_DETAIL_VIEW_FIRST_COLUMN_WIDTH 320
 #define IPAD_DETAIL_VIEW_SEPARATION_DIV_WIDTH 5
 #define IPAD_WIDGET_INTERNAL_PADDING 5
 #define IPAD_SPLITTER_DIV_WIDTH 15
@@ -67,7 +83,7 @@
 #define MATRICS_TABLE_WIDTH 250
 #define PROCESS_TABLE_LANDSCAPE_HEIGHT 320
 #define PROCESS_TABLE_PORTRAIT_HEIGHT 455
-#define IPAD_POLL_DATA_TABLE_PORTRAIT_HEIGHT 455//300
+#define IPAD_POLL_DATA_TABLE_PORTRAIT_HEIGHT 465//300
 #define IPAD_ALERT_DATA_TABLE_PORTRAIT_HEIGHT 350//300
 #define IPAD_POLL_DATA_TABLE_LANDSCAPE_HEIGHT 320//175
 #define IPAD_ALERT_DATA_TABLE_LANDSCAPE_HEIGHT 350//170
@@ -127,8 +143,8 @@
 #define SOCKET_WRITE_DISPLAY_TEXT @"Outbound network traffic"
 
 #define FILE_NUM_DISPLAY_TEXT @"File accessed"
-#define FILE_READ_DISPLAY_TEXT @"File read (bytes)"
-#define FILE_WRITE_DISPLAY_TEXT @"File write (bytes)"
+#define FILE_READ_DISPLAY_TEXT @"File read"
+#define FILE_WRITE_DISPLAY_TEXT @"File write"
 
 #define INCIDENT_REPORT_DISPLAY_TEXT @"Incidents report"
 #define CRITICAL_INCIDENT_REPORT_DISPLAY_TEXT @"Critical incident resport"
@@ -137,8 +153,4 @@
 #define AVG_RESPONSE_TIME_DISPLAY_TEXT @"Average response time"
 #define RESPONSE_NUM_DISPLAY_TEXT @"Socket responses"
 
-
-
-//UIColor backgroundGradientColor1 = [UIColor colorWithRed:202 green:202 blue:202 alpha:0.9] ;
-//UIColor backgroundGradientColor2 = [UIColor colorWithRed:239 green:239 blue:239 alpha:1];
 

@@ -1,10 +1,18 @@
-//
-//  AC_ProcessResourceListViewController.m
-//  AppFirst
-//
-//  Created by appfirst on 5/4/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/*
+ * Copyright 2009-2011 AppFirst, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "AC_ProcessResourceListViewController.h"
 #import "AM_ProcessData.h"
@@ -59,12 +67,6 @@
 {
     [super viewDidLoad];
     [self getData];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
@@ -160,8 +162,6 @@
 	[connection release];
 	
 	NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-	[responseData release];
-    
 	
 	@try {
         NSMutableArray* newDataArray = (NSMutableArray*)[jsonString JSONValue];

@@ -1,10 +1,18 @@
-//
-//  AFWidgetBaseView.m
-//  AppFirst
-//
-//  Created by appfirst on 6/21/10.
-//  Copyright 2010 AppFirst Inc. All rights reserved.
-//
+/*
+ * Copyright 2009-2011 AppFirst, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "AFWidgetBaseView.h"
 #import <QuartzCore/QuartzCore.h>
@@ -25,7 +33,11 @@
 
 - (void)initBackground {
 	CAGradientLayer *gradient = [CAGradientLayer layer];
-	gradient.frame = CGRectMake(0, 0, IPAD_SCREEN_WIDTH, IPAD_SCREEN_WIDTH);
+    float frameHeight = IPAD_SCREEN_WIDTH;
+    if (self.frame.size.height > IPAD_SCREEN_WIDTH) {
+        frameHeight = self.frame.size.height;
+    }
+	gradient.frame = CGRectMake(0, 0, IPAD_SCREEN_WIDTH, frameHeight);
 	gradient.colors = [NSArray arrayWithObjects:(id)[[AppHelper backgroundGradientColor1] CGColor], (id)[[AppHelper backgroundGradientColor2] CGColor], nil];
 	
 	[self.layer insertSublayer:gradient atIndex:0];
@@ -47,8 +59,6 @@
 	[aWidgetNameLabel release];
 	
 	topPadding += (labelHeight + IPAD_WIDGET_INTERNAL_PADDING / 2);
-	
-	
 	
 	CGContextRef contextRef = UIGraphicsGetCurrentContext();
 	CGContextSetRGBStrokeColor(contextRef, 0.9, 0.9, 0.9, 0.9);

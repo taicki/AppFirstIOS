@@ -1,10 +1,18 @@
-//
-//  AFGraphViewController.m
-//  AppFirst
-//
-//  Created by appfirst on 7/9/10.
-//  Copyright 2010 AppFirst Inc. All rights reserved.
-//
+/*
+ * Copyright 2009-2011 AppFirst, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "AC_GraphViewController.h"
 #import "AppDelegate_Shared.h"
@@ -69,25 +77,17 @@
 	self.graphView.info = self.graphTitle;
 	self.graphView.infoColor = [UIColor whiteColor];
 	
-	//When you need to update the data, make this call:
-	
-	//[self.graphView reloadData];
-	
-	
 	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                target:self
                                                action:@selector(dismissView)] autorelease];
-	//xValues = [[NSMutableArray alloc] init];
-	//yValues = [[NSMutableArray alloc] init];
-	//[self asyncGetServerData];
     
     self.graphView.legendNames = [[[NSMutableArray alloc] init] autorelease];
 	
 	for (int cnt = 0; cnt < [labels count]; cnt ++) 
 		[self.graphView.legendNames addObject:[labels objectAtIndex:cnt]];
 	
-    self.navigationItem.title = @"";
+    self.navigationItem.title = @"Last hour";
     [self.graphView reloadData];
     [self.graphView.legendController.tableView reloadData];
     
@@ -156,11 +156,6 @@
 		[yValues addObject:dictionary];
 	}
 	
-	if (DEBUGGING) {
-		NSLog(@"%@", data);
-		NSLog(@"%@", xValues);
-		NSLog(@"%@", yValues);
-	}
 	
 	self.graphView.legendNames = [[[NSMutableArray alloc] init] autorelease];
 	
@@ -285,7 +280,16 @@
 	NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
 	
 	for ( int i = 0 ; i < [yValues count] ; i ++ ) {
-		[array addObject:[[yValues objectAtIndex:i] objectAtIndex:plotIndex]];	// y = x*x		
+        @try {
+            [array addObject:[[yValues objectAtIndex:i] objectAtIndex:plotIndex]];
+        }
+        @catch (NSException *exception) {
+            [array addObject:[NSNumber numberWithInt:0]];
+        }
+        @finally {
+            
+        }
+			// y = x*x		
 	}
 	
 	return array;

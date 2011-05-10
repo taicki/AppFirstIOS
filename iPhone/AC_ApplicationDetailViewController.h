@@ -13,9 +13,15 @@
 @interface AC_ApplicationDetailViewController : UIViewController {
     AM_Application* application;
     NSMutableData* responseData;
+    UIButton* detailButton;
+    long long dataTime;
 }
 
+@property (nonatomic, assign) long long dataTime;
 @property (nonatomic, retain) AM_Application* application;
 @property (nonatomic, retain) NSMutableData* responseData;
+@property (nonatomic, retain) UIButton* detailButton;
+
+-(void) showDetailView: (id) sender;
 
 @end

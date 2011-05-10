@@ -1,13 +1,22 @@
-//
-//  AC_AlertListViewController.m
-//  AppFirst
-//
-//  Created by appfirst on 4/29/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/*
+ * Copyright 2009-2011 AppFirst, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "AC_AlertListViewController.h"
 #import "AppDelegate_Shared.h"
+#import "AFAlertDetailTableViewController.h"
 #import "AM_Alert.h"
 #import "AppHelper.h"
 #import "config.h"
@@ -41,37 +50,7 @@
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
+- (void) reloadView {
     AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
     NSMutableArray* list = [appDelegate alertList];
     NSMutableArray* newInIncidentAlerts = [[NSMutableArray alloc] init];
@@ -88,6 +67,58 @@
     [self setNormalAlerts:newNormalAlerts];
     [newNormalAlerts release];
     [newInIncidentAlerts release];
+    [[self tableView] reloadData];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@", [AppHelper formatShortDateString:[NSDate date]]];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
+
+- (void) refreshData {
+    AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
+    self.navigationItem.title = @"Updating...";
+    self.tableView.userInteractionEnabled = NO;
+    [appDelegate loadAlertList];
+    [self reloadView];
+    self.tableView.userInteractionEnabled = YES;
+}
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
+									  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
+									  target:self 
+									  action:@selector(refreshData)];
+	refreshButton.style = UIBarButtonItemStyleBordered;
+	self.navigationItem.rightBarButtonItem = refreshButton;
+	[refreshButton release];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self reloadView];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -228,6 +259,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    AM_Alert* alert;
+    if (indexPath.section == 0) {
+        alert = [inIncidentAlerts objectAtIndex:indexPath.row];
+    } else {
+        alert = [normalAlerts objectAtIndex:indexPath.row];
+    }
+    AFAlertDetailTableViewController *detailViewController = [[AFAlertDetailTableViewController alloc] initWithNibName:@"AFAlertDetailTableViewController" bundle:nil];
+	//detailViewController.alertName = [NSString stringWithFormat:@"%@", [[dictionary objectAtIndex:indexPath.row] objectForKey:ALERT_NAME]];
+	//detailViewController.detailData = [self.allData objectForKey:[[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"]];
+	//detailViewController.alertID = [[dictionary objectAtIndex:indexPath.row] objectForKey:@"id"];
+	//detailViewController.parentController = self;
+    [detailViewController setAlert:alert];
+	
+	[self.navigationController pushViewController:detailViewController animated:YES];
+	
+	
+	[detailViewController release];
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];

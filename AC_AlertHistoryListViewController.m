@@ -1,14 +1,25 @@
-//
-//  AC_AlertHistoryListViewController.m
-//  AppFirst
-//
-//  Created by appfirst on 5/1/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/*
+ * Copyright 2009-2011 AppFirst, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "AC_AlertHistoryListViewController.h"
 #import "AM_AlertHistory.h"
+#import "config.h"
+#import "AC_AlertHistoryDetailViewController.h"
 #import "AppDelegate_Shared.h"
+#import "AppHelper.h"
 
 
 @implementation AC_AlertHistoryListViewController
@@ -44,16 +55,40 @@
 
 #pragma mark - View lifecycle
 
+- (void) reloadView {
+    
+    AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
+    NSMutableArray* list = [appDelegate alertHistoryList];
+    [self setAlertHistories:list];
+    [self.tableView reloadData];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@", [AppHelper formatShortDateString:[NSDate date]]];
+}
+
+
+- (void) refreshData {
+    AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
+    self.navigationItem.title = @"Updating...";
+    self.tableView.userInteractionEnabled = NO;
+    [appDelegate loadAlertHistoryList];
+    [self reloadView];
+    self.tableView.userInteractionEnabled = YES;
+}
+
+#pragma mark - View lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
+									  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
+									  target:self 
+									  action:@selector(refreshData)];
+	refreshButton.style = UIBarButtonItemStyleBordered;
+	self.navigationItem.rightBarButtonItem = refreshButton;
+	[refreshButton release];
+    
 }
+
 
 - (void)viewDidUnload
 {
@@ -62,13 +97,43 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void) resetBadgeValue {
+	NSHTTPURLResponse *response;
+	NSError *error = nil;
+	AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
+	
+	NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:appDelegate.availableCookies];
+	NSMutableURLRequest *postRequest = [[[NSMutableURLRequest alloc] init] autorelease];
+	
+	NSString *url = [NSString stringWithFormat:@"%@%@", PROD_SERVER_IP, BADGE_SET_API_STRING];
+	
+	if ([UIApplication sharedApplication].applicationIconBadgeNumber == 0) 
+		return;
+	
+	postRequest.URL = [NSURL URLWithString:url];
+	
+	NSString *postData = [NSString stringWithFormat:@"uid=%@&badge=%d", appDelegate.UUID, 0];
+	
+	NSString *length = [NSString stringWithFormat:@"%d", [postData length]];
+	
+	[postRequest setValue:length forHTTPHeaderField:@"Content-Length"];
+	[postRequest setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding]];
+	[postRequest setHTTPMethod:@"POST"];
+	[postRequest setAllHTTPHeaderFields:headers];
+	
+	[NSURLConnection sendSynchronousRequest:postRequest returningResponse:&response error:&error];
+	
+	if (error) {
+		NSLog(@"%@", [error localizedDescription]);
+	}
+	
+	[NSURLConnection release];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
-    NSMutableArray* list = [appDelegate alertHistoryList];
-    [self setAlertHistories:list];
+    [self reloadView];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -117,6 +182,7 @@
     
     AM_AlertHistory* alertHistory = [alertHistories objectAtIndex:indexPath.row];
     cell.textLabel.text = [alertHistory subject];
+    cell.textLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_BIG_FONTSIZE];
     
     return cell;
 }
@@ -164,14 +230,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    AC_AlertHistoryDetailViewController* detailViewController = [[AC_AlertHistoryDetailViewController alloc] initWithNibName:@"AC_AlertHistoryDetailViewController" bundle:nil];
+    AM_AlertHistory* history = [alertHistories objectAtIndex:indexPath.row];
+    [detailViewController setAlert_history:history];
+    [self.navigationController pushViewController:detailViewController animated:YES];
+    [detailViewController release];
 }
 
 @end

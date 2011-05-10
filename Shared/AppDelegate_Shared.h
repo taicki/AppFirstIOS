@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "AFAlert.h"
-#import "AFDashboard.h"
 #import "LoginViewController.h"
 #import "AFAlertHistoryViewController.h"
 #import "AV_NavigatorRootController.h"
@@ -23,8 +21,6 @@
     UIWindow *window;
 	UITabBarController *tabcontroller;
 	LoginViewController *loginController;
-	AFAlert *alertController;
-	AFDashboard *dashboardController;
 	AFAlertHistoryViewController* notificationController;
 	NSString* UUID;
 	
@@ -46,6 +42,8 @@
     NSMutableArray *applicationList;
     NSMutableArray *alertHistoryList;
     
+    NSMutableDictionary *serverIdHostnameMap;
+    
     UINavigationController* navigationViewController;
     AV_NavigatorRootController* homeViewController;
 }
@@ -59,8 +57,7 @@
 @property (nonatomic, retain) IBOutlet UITabBarController *tabcontroller;
 @property (nonatomic, retain) IBOutlet LoginViewController *loginController;
 
-@property (nonatomic, retain) IBOutlet AFAlert *alertController;
-@property (nonatomic, retain) IBOutlet AFDashboard *dashboardController;
+
 @property (nonatomic, retain) IBOutlet AFAlertHistoryViewController* notificationController;
 
 @property (nonatomic, retain) NSArray* availableCookies;
@@ -71,6 +68,7 @@
 @property (nonatomic, retain) NSString* serverListUrl;
 @property (nonatomic, retain) NSString* alertListUrl;
 @property (nonatomic, retain) NSMutableArray* usernames;
+@property (nonatomic, retain) NSMutableDictionary* serverIdHostNameMap;
 
 - (NSString *)applicationDocumentsDirectory;
 

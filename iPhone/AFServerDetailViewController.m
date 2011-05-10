@@ -41,6 +41,7 @@
 - (void) createResourceListView: (double) topPadding resources:(NSMutableArray*) resources systemData:(AM_SystemData*) systemData {
     int resourceViewContainerWidth = IPHONE_SERVER_DETAIL_VIEW_WIDTH - IPHONE_WIDGET_PADDING * 2;
     int resourceViewContainerHeight = self.view.frame.size.height - topPadding - IPHONE_WIDGET_PADDING;
+    NSLog(@"%d", resourceViewContainerHeight);
     AFWidgetBaseView* resourceViewContainer = [[AFWidgetBaseView alloc] initWithFrame:CGRectMake(IPHONE_WIDGET_PADDING, topPadding, 
 																							 resourceViewContainerWidth,resourceViewContainerHeight 
 																							 )];
@@ -82,7 +83,6 @@
 	[connection release];
 	
 	NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-	[responseData release];
     NSMutableArray* resources = [[NSMutableArray alloc] init];
 	
 	@try {
