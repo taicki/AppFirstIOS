@@ -116,8 +116,6 @@
 		3E8D494211E5333B00CBC3D2 /* speechmedia.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8D494111E5333B00CBC3D2 /* speechmedia.png */; };
 		3E8D497C11E6114000CBC3D2 /* AFWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8D497A11E6114000CBC3D2 /* AFWebViewController.m */; };
 		3E8D497D11E6114000CBC3D2 /* AFWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8D497B11E6114000CBC3D2 /* AFWebViewController.xib */; };
-		3E9C3AD011AC0552005B8021 /* AlertEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9C3ACE11AC0552005B8021 /* AlertEditViewController.m */; };
-		3E9C3AD111AC0553005B8021 /* AlertEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E9C3ACF11AC0552005B8021 /* AlertEditViewController.xib */; };
 		3EAC94EE11DB9BAD009FA6C2 /* AFAlertDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAC94EC11DB9BAD009FA6C2 /* AFAlertDetailTableViewController.m */; };
 		3EAC94EF11DB9BAD009FA6C2 /* AFAlertDetailTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EAC94ED11DB9BAD009FA6C2 /* AFAlertDetailTableViewController.xib */; };
 		3EAC96A711DD30A0009FA6C2 /* windows-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EAC96A611DD30A0009FA6C2 /* windows-icon.png */; };
@@ -136,8 +134,6 @@
 		3ED15111119B142E00D4AB4E /* AFEmptyBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED15110119B142E00D4AB4E /* AFEmptyBarView.m */; };
 		3ED151DA119B2FEA00D4AB4E /* AFDiskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED151D9119B2FEA00D4AB4E /* AFDiskView.m */; };
 		3ED154F8119B768A00D4AB4E /* AFDiskLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED154F7119B768A00D4AB4E /* AFDiskLegendView.m */; };
-		3ED15661119C7B4500D4AB4E /* AlertDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1565F119C7B4500D4AB4E /* AlertDetailViewController.m */; };
-		3ED15662119C7B4500D4AB4E /* AlertDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED15660119C7B4500D4AB4E /* AlertDetailViewController.xib */; };
 		3ED197D51373181B00A871A9 /* AC_IncidentsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED197D31373181900A871A9 /* AC_IncidentsListViewController.m */; };
 		3ED197D61373181B00A871A9 /* AC_IncidentsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED197D41373181A00A871A9 /* AC_IncidentsListViewController.xib */; };
 		3ED197DA1373182E00A871A9 /* AC_RegistryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED197D81373182C00A871A9 /* AC_RegistryListViewController.m */; };
@@ -365,9 +361,6 @@
 		3E8D497911E6114000CBC3D2 /* AFWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFWebViewController.h; sourceTree = "<group>"; };
 		3E8D497A11E6114000CBC3D2 /* AFWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFWebViewController.m; sourceTree = "<group>"; };
 		3E8D497B11E6114000CBC3D2 /* AFWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AFWebViewController.xib; sourceTree = "<group>"; };
-		3E9C3ACD11AC0552005B8021 /* AlertEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertEditViewController.h; sourceTree = "<group>"; };
-		3E9C3ACE11AC0552005B8021 /* AlertEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertEditViewController.m; sourceTree = "<group>"; };
-		3E9C3ACF11AC0552005B8021 /* AlertEditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertEditViewController.xib; sourceTree = "<group>"; };
 		3EAC94EB11DB9BAD009FA6C2 /* AFAlertDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAlertDetailTableViewController.h; sourceTree = "<group>"; };
 		3EAC94EC11DB9BAD009FA6C2 /* AFAlertDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAlertDetailTableViewController.m; sourceTree = "<group>"; };
 		3EAC94ED11DB9BAD009FA6C2 /* AFAlertDetailTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AFAlertDetailTableViewController.xib; sourceTree = "<group>"; };
@@ -397,9 +390,6 @@
 		3ED151D9119B2FEA00D4AB4E /* AFDiskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDiskView.m; sourceTree = "<group>"; };
 		3ED154F6119B768A00D4AB4E /* AFDiskLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDiskLegendView.h; sourceTree = "<group>"; };
 		3ED154F7119B768A00D4AB4E /* AFDiskLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDiskLegendView.m; sourceTree = "<group>"; };
-		3ED1565E119C7B4500D4AB4E /* AlertDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertDetailViewController.h; sourceTree = "<group>"; };
-		3ED1565F119C7B4500D4AB4E /* AlertDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertDetailViewController.m; sourceTree = "<group>"; };
-		3ED15660119C7B4500D4AB4E /* AlertDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertDetailViewController.xib; sourceTree = "<group>"; };
 		3ED197D21373181800A871A9 /* AC_IncidentsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AC_IncidentsListViewController.h; sourceTree = "<group>"; };
 		3ED197D31373181900A871A9 /* AC_IncidentsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AC_IncidentsListViewController.m; sourceTree = "<group>"; };
 		3ED197D41373181A00A871A9 /* AC_IncidentsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AC_IncidentsListViewController.xib; sourceTree = "<group>"; };
@@ -732,9 +722,6 @@
 				3EE9A436119856B8007D3E14 /* LoginViewController.h */,
 				3EE9A437119856B8007D3E14 /* LoginViewController.m */,
 				3EE9A438119856B8007D3E14 /* LoginViewController.xib */,
-				3ED1565E119C7B4500D4AB4E /* AlertDetailViewController.h */,
-				3ED1565F119C7B4500D4AB4E /* AlertDetailViewController.m */,
-				3ED15660119C7B4500D4AB4E /* AlertDetailViewController.xib */,
 				3E10284511CBFDCB009326FF /* AFSortableTableViewController.h */,
 				3E10284611CBFDCB009326FF /* AFSortableTableViewController.m */,
 				3E10287D11CC12D2009326FF /* AFTableViewController.h */,
@@ -776,9 +763,6 @@
 				3E6DD5FF11E8DC2600C8E018 /* AFLegendViewController.h */,
 				3E6DD60011E8DC2600C8E018 /* AFLegendViewController.m */,
 				3E6DD60111E8DC2600C8E018 /* AFLegendViewController.xib */,
-				3E9C3ACD11AC0552005B8021 /* AlertEditViewController.h */,
-				3E9C3ACE11AC0552005B8021 /* AlertEditViewController.m */,
-				3E9C3ACF11AC0552005B8021 /* AlertEditViewController.xib */,
 				3EF60ECC136B3DC900106CCE /* AV_NavigatorRootController.h */,
 				3EF60ECD136B3DDB00106CCE /* AV_NavigatorRootController.m */,
 			);
@@ -945,12 +929,10 @@
 				2860E38B111B897F00E27156 /* MainWindow_Phone.xib in Resources */,
 				3E82224711921574001F3644 /* af_icon.png in Resources */,
 				3EE9A43A119856B8007D3E14 /* LoginViewController.xib in Resources */,
-				3ED15662119C7B4500D4AB4E /* AlertDetailViewController.xib in Resources */,
 				3EF1004011A48C9A00C336FD /* alert.png in Resources */,
 				3EF1007811A4929600C336FD /* graph.png in Resources */,
 				3EF101F511A5B52900C336FD /* appfirst_logo_header_large.png in Resources */,
 				3EF102A811A5DD4F00C336FD /* appfirst_logo_header.png in Resources */,
-				3E9C3AD111AC0553005B8021 /* AlertEditViewController.xib in Resources */,
 				3E17E20511AEE86C00EC68E8 /* active_dot_saved.png in Resources */,
 				3E17E20911AEE9AD00EC68E8 /* active_dot.png in Resources */,
 				3E17E21E11AEEB9200EC68E8 /* inactive_dot.png in Resources */,
@@ -1032,9 +1014,7 @@
 				3ED15111119B142E00D4AB4E /* AFEmptyBarView.m in Sources */,
 				3ED151DA119B2FEA00D4AB4E /* AFDiskView.m in Sources */,
 				3ED154F8119B768A00D4AB4E /* AFDiskLegendView.m in Sources */,
-				3ED15661119C7B4500D4AB4E /* AlertDetailViewController.m in Sources */,
 				3EF1015A11A5943C00C336FD /* SFHFKeychainUtils.m in Sources */,
-				3E9C3AD011AC0552005B8021 /* AlertEditViewController.m in Sources */,
 				3E17E28311AEFBE200EC68E8 /* AFTitleView.m in Sources */,
 				3E1024F311C7FCE6009326FF /* AppHelper.m in Sources */,
 				3E10260F11CA59FA009326FF /* AFCpuDetailView.m in Sources */,

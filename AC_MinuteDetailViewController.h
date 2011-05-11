@@ -48,9 +48,4 @@
 @property (nonatomic, retain) IBOutlet AC_RegistryListViewController* registryController;
 @property (nonatomic, retain) IBOutlet AC_ThreadListViewController* threadController;
 
-//@property (nonatomic, retain) UINavigationController* socketContainer;
-//@property (nonatomic, retain) 
-
-
-
 @end

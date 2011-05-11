@@ -491,11 +491,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "AC_MinuteDetailViewController.h"
-         timestampString = "326751551.284403"
+         timestampString = "326836335.922538"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "54"
-         endingLineNumber = "54"
+         startingLineNumber = "49"
+         endingLineNumber = "49"
          landmarkName = "title"
          landmarkType = "19">
       </FileBreakpoint>

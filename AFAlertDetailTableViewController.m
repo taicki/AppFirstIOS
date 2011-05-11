@@ -101,6 +101,14 @@
 		} else {
 			UIAlertView *errorView = [[UIAlertView alloc] initWithTitle: @"Alert saved. " 
 																message: [error localizedDescription] delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
+            AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
+            for (int cnt = 0; cnt < [[appDelegate alertList] count]; cnt ++) {
+                AM_Alert* oldAlert = [[appDelegate alertList] objectAtIndex:cnt];
+                if ([oldAlert uid] == [alert uid]) {
+                    [oldAlert setActive:self.alertEnabled.on];
+                    break;
+                }
+            }
 			[errorView show];
 			[errorView release];
 		}
