@@ -29,7 +29,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+                // Custom initialization
     }
     return self;
 }
@@ -55,10 +55,11 @@
 }
 
 - (void) addRootViewData:(NSMutableArray*)newItems WithName:(NSString*) name withCount:(int) count {
-    NSMutableDictionary* newItem = [[[NSMutableDictionary alloc] init] autorelease];
+    NSMutableDictionary* newItem = [[NSMutableDictionary alloc] init];
     [newItem setValue:name forKey:@"name"];
     [newItem setValue:[NSNumber numberWithInt:count] forKey:@"count"];
     [newItems addObject:newItem];
+    [newItem release];
 }
 
 #pragma mark - View lifecycle
@@ -83,6 +84,8 @@
 {
     [super viewDidLoad];
     [self _createLogoutButton];
+    items = [[NSMutableArray alloc]init];
+    
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -104,8 +107,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [items removeAllObjects];
     AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
-    items = [[NSMutableArray alloc]init];
+    
     [self addRootViewData:items WithName:@"Server" withCount:[[appDelegate serverList] count]];
     [self addRootViewData:items WithName:@"Alert" withCount:[[appDelegate alertList] count]];
     [self addRootViewData:items WithName:@"PolledData" withCount:[[appDelegate polledDataList] count]];

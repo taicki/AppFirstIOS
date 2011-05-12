@@ -380,7 +380,7 @@ static const short _base64DecodingTable[256] = {
                                     initWithKey: sortKey ascending: YES selector: @selector(caseInsensitiveCompare
                                                                                             : ) ] ;
     [array sortUsingDescriptors: [NSArray arrayWithObject: nameSorter] ] ;
-    
+    [nameSorter release];
 }
 
 

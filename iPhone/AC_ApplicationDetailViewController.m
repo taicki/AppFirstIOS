@@ -1,10 +1,18 @@
-//
-//  AC_ApplicationDetailViewController.m
-//  AppFirst
-//
-//  Created by appfirst on 5/3/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/*
+ * Copyright 2009-2011 AppFirst, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "AC_ApplicationDetailViewController.h"
 #import "AC_ProcessResourceListViewController.h"
@@ -102,6 +110,7 @@
     [resourceViewContainer addSubview:resourceListViewController.view];
     [self.view addSubview: resourceViewContainer];
     [resourceViewContainer release];
+        //[resourceListViewController release];
     
 }
 
@@ -130,6 +139,8 @@
 		//self.detailData = dictionary;
         [jsonString release];
         [self renderView:resources data:data];
+        [resources release];
+        [data release];
 	}
 	@catch (NSException * e) {
 		NSLog(@"main: Caught %@: %@", [e name], [e reason]);

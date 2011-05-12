@@ -138,7 +138,7 @@
     [resourceListViewController setResources:resources];
     [resourceViewContainer addSubview:resourceListViewController.view];
     [self.scrollView addSubview: resourceViewContainer];
-    //[resourceViewContainer release];
+        //[resourceViewContainer release];
 }
 
 - (void) renderView: (NSMutableArray*) resources data:(AM_ProcessData*) data{
@@ -164,9 +164,12 @@
 		NSDictionary *dictionary = [(NSMutableArray*)[jsonString JSONValue] objectAtIndex:0];
         AM_ProcessData* data = [[AM_ProcessData alloc] initWithJSONObject:dictionary];
         [data generateResourceArray:resources];
-		[jsonString release];
+        [jsonString release];
         [self renderView:resources data:data];
         [self.view addSubview:self.scrollView];
+        [resources release];
+        [data release];
+		
     }
 	@catch (NSException * e) {
 		NSLog(@"main: Caught %@: %@", [e name], [e reason]);

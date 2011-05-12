@@ -195,6 +195,7 @@
     [cell setResourceValue:value];
     [cell setRenderOption:option];
     [newList addObject:cell];
+    [cell release];
 }
 
 - (void) generateResourceCell: (NSString *) name 
@@ -215,6 +216,7 @@
     [cell setGraphOption:graphOption];
     [cell setExtra:extra];
     [newList addObject:cell];
+    [cell release];
 }
 
 

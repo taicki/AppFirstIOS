@@ -303,6 +303,7 @@
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
+        [jsonString release];
         if ([dictionary count] > 0) {
             NSLog(@"count of polled data: %d", [dictionary count]);
             NSString* sortKey = @"name";
@@ -323,6 +324,7 @@
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
+        [jsonString release];
         if ([dictionary count] > 0) {
             NSLog(@"count of alert: %d", [dictionary count]);
             NSString* sortKey = @"name";
@@ -332,6 +334,7 @@
         for (int i=0; i < [dictionary count]; i++) {
             AM_Alert* item = [[AM_Alert alloc] initWithJSONObject:[dictionary objectAtIndex:i]];
             [alertList addObject:item];
+            [item release];
         }
     } 
 }
@@ -344,6 +347,7 @@
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
+        [jsonString release];
         if ([dictionary count] > 0) {
             NSLog(@"count of alertHistory: %d", [dictionary count]);
             NSString* sortKey = @"name";
@@ -365,6 +369,7 @@
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
+        [jsonString release];
         if ([dictionary count] > 0) {
             NSLog(@"count of application: %d", [dictionary count]);
             NSString* sortKey = @"name";
@@ -384,11 +389,14 @@
     
     NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings serverListUrl]];
     NSData* responseData = [AppComm makeGetRequest:urlString];
-    serverIdHostNameMap = [[NSMutableDictionary alloc] init];
+    [serverIdHostNameMap removeAllObjects];
+    
 	
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
+        [jsonString release];
+            //[responseData release];
         if ([dictionary count] > 0) {
             
             NSLog(@"count of server: %d", [dictionary count]);
@@ -411,6 +419,7 @@
     serverList = [[NSMutableArray alloc] init];
     applicationList = [[NSMutableArray alloc] init];
     alertHistoryList = [[NSMutableArray alloc] init];
+    serverIdHostNameMap = [[NSMutableDictionary alloc] init];
 }
 
 

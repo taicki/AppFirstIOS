@@ -72,6 +72,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    dataArray = [[NSMutableArray alloc] init];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -165,10 +166,11 @@
 	
 	@try {
         NSMutableArray* newDataArray = (NSMutableArray*)[jsonString JSONValue];
-        dataArray = [[NSMutableArray alloc] init];
+        
         for (int cnt = 0; cnt < [newDataArray count]; cnt ++) {
             AM_ProcessData* data = [[AM_ProcessData alloc] initWithJSONObject:[newDataArray objectAtIndex:cnt]];
             [dataArray addObject:data];
+            [data release];
         }
     }
 	@catch (NSException * e) {

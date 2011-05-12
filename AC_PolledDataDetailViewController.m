@@ -98,6 +98,7 @@
     [resourceListController setResources:resources];
     [resourceViewContainer addSubview:resourceListController.view];
     [self.view addSubview: resourceViewContainer];
+        //[resourceListController release];
 }
 
 
@@ -124,8 +125,9 @@
         float topPadding = IPHONE_WIDGET_PADDING;
         topPadding += [self createNameView:IPHONE_WIDGET_PADDING data:data];
         [self createResourceListView: topPadding + IPHONE_WIDGET_PADDING * 2 resources:resources data: data];
-        
+        [resources release];
         [jsonString release];
+        [data release];
     }
 	@catch (NSException * e) {
 		NSLog(@"main: Caught %@: %@", [e name], [e reason]);

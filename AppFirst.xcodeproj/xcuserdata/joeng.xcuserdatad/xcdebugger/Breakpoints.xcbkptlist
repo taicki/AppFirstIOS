@@ -213,11 +213,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Shared/AppDelegate_Shared.m"
-         timestampString = "326594242.862401"
+         timestampString = "326863929.407385"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "371"
-         endingLineNumber = "371"
+         startingLineNumber = "376"
+         endingLineNumber = "376"
          landmarkName = "-loadApplicationList"
          landmarkType = "5">
       </FileBreakpoint>
@@ -339,11 +339,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "iPhone/AFServerDetailViewController.m"
-         timestampString = "326171748.489511"
+         timestampString = "326901069.913466"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "21"
-         endingLineNumber = "21"
+         startingLineNumber = "29"
+         endingLineNumber = "29"
          landmarkName = "@implementation AFServerDetailViewController"
          landmarkType = "3">
          <Locations>
@@ -379,11 +379,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "iPhone/AFServerDetailViewController.m"
-         timestampString = "326647246.530372"
+         timestampString = "326901069.913466"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "148"
-         endingLineNumber = "148"
+         startingLineNumber = "157"
+         endingLineNumber = "157"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -477,11 +477,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "AC_SystemResouceListViewController.m"
-         timestampString = "326751551.284403"
+         timestampString = "326863929.407385"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "262"
-         endingLineNumber = "262"
+         startingLineNumber = "263"
+         endingLineNumber = "263"
          landmarkName = "-getResourceLabelsByIndex:dataObject:resourceName:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -623,11 +623,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "AFAlertDetailTableViewController.m"
-         timestampString = "326752110.313968"
+         timestampString = "326842897.971059"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "87"
-         endingLineNumber = "87"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
          landmarkName = "-setEditing:animated:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -679,11 +679,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "AV_NavigatorRootController.m"
-         timestampString = "326752110.313968"
+         timestampString = "326844822.333105"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "159"
-         endingLineNumber = "159"
+         startingLineNumber = "163"
+         endingLineNumber = "163"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -764,6 +764,20 @@
                endingLineNumber = "14">
             </Location>
          </Locations>
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "AFAlertDetailTableViewController.m"
+         timestampString = "326842897.971059"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "74"
+         endingLineNumber = "74"
+         landmarkName = "-setEditing:animated:"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

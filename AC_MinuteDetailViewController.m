@@ -81,7 +81,7 @@
         [mytabs addObject:[[tabController viewControllers] objectAtIndex:0]];
     }
     for (int cnt = 0; cnt < [sockets count]; cnt ++) {
-        [socketList addObject:[[AM_SocketData alloc] initWithJSONObject:[sockets objectAtIndex:cnt]]]; 
+        [socketList addObject:[[[AM_SocketData alloc] initWithJSONObject:[sockets objectAtIndex:cnt]] autorelease]]; 
     }
     [self.socketController setArray:socketList];
     [self.socketController.navigationItem setTitle:[NSString stringWithFormat:@"%d sockets", [sockets count]]];
@@ -97,7 +97,7 @@
         [mytabs addObject:[[tabController viewControllers] objectAtIndex:1]];
     }
     for (int cnt = 0; cnt < [objects count]; cnt ++) {
-        [objectList addObject:[[AM_ThreadData alloc] initWithJSONObject:[objects objectAtIndex:cnt]]]; 
+        [objectList addObject:[[[AM_ThreadData alloc] initWithJSONObject:[objects objectAtIndex:cnt]] autorelease]]; 
     }
     [self.threadController setArray:objectList];
     [self.threadController.navigationItem setTitle:[NSString stringWithFormat:@"%d threads", [objects count]]];
@@ -112,7 +112,7 @@
         [mytabs addObject:[[tabController viewControllers] objectAtIndex:2]];
     }
     for (int cnt = 0; cnt < [objects count]; cnt ++) {
-        [objectList addObject:[[AM_FileData alloc] initWithJSONObject:[objects objectAtIndex:cnt]]]; 
+        [objectList addObject:[[[AM_FileData alloc] initWithJSONObject:[objects objectAtIndex:cnt]] autorelease]]; 
     }
     [self.fileController setArray:objectList];
     [self.fileController.navigationItem setTitle:[NSString stringWithFormat:@"%d files", [objects count]]];
@@ -127,7 +127,7 @@
         [mytabs addObject:[[tabController viewControllers] objectAtIndex:4]];
     }
     for (int cnt = 0; cnt < [objects count]; cnt ++) {
-        [objectList addObject:[[AM_RegistryData alloc] initWithJSONObject:[objects objectAtIndex:cnt]]]; 
+        [objectList addObject:[[[AM_RegistryData alloc] initWithJSONObject:[objects objectAtIndex:cnt]] autorelease]]; 
     }
     [self.registryController setArray:objectList];
     [self.registryController.navigationItem setTitle:[NSString stringWithFormat:@"%d registries", [objects count]]];
@@ -142,7 +142,7 @@
         [mytabs addObject:[[tabController viewControllers] objectAtIndex:3]];
     }
     for (int cnt = 0; cnt < [objects count]; cnt ++) {
-        [objectList addObject:[[AM_LogData alloc] initWithJSONObject:[objects objectAtIndex:cnt]]]; 
+        [objectList addObject:[[[AM_LogData alloc] initWithJSONObject:[objects objectAtIndex:cnt]] autorelease]]; 
     }
     [self.incidentController setArray:objectList];
     [self.incidentController.navigationItem setTitle:[NSString stringWithFormat:@"%d incidents", [objects count]]];
@@ -171,6 +171,8 @@
         [appDelegate.window makeKeyAndVisible];
         
         [tabController setViewControllers:mytabs];
+        self.tabController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        
     }
 	@catch (NSException * e) {
 		NSLog(@"main: Caught %@: %@", [e name], [e reason]);
@@ -215,7 +217,7 @@
                                                target:self
                                                action:@selector(dismissView)] autorelease];
     self.navigationItem.title = [self title];
-    self.tabController.view.frame = self.view.frame;
+    
     [self getData];
 }
 

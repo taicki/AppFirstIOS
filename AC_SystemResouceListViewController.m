@@ -70,6 +70,7 @@
 {
     [super viewDidLoad];
     //[self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    dataArray = [[NSMutableArray alloc] init];
     [self getData];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -184,10 +185,10 @@
 	
 	@try {
         NSMutableArray* newDataArray = (NSMutableArray*)[jsonString JSONValue];
-        dataArray = [[NSMutableArray alloc] init];
         for (int cnt = 0; cnt < [newDataArray count]; cnt ++) {
             AM_SystemData* systemData = [[AM_SystemData alloc] initWithJSONObject:[newDataArray objectAtIndex:cnt]];
             [dataArray addObject:systemData];
+            [systemData release];
         }
     }
 	@catch (NSException * e) {

@@ -94,6 +94,7 @@
         [self renderView];
         [self.view addSubview:self.scrollView];
         self.navigationItem.title = @"message detail";
+        
     }
 	@catch (NSException * e) {
 		NSLog(@"main: Caught %@: %@", [e name], [e reason]);

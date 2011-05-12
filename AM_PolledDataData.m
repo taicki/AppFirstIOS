@@ -88,6 +88,7 @@
     [cell setResourceValue:value];
     [cell setRenderOption:option];
     [newList addObject:cell];
+    [cell release];
 }
 
 - (void) generateResourceArray: (NSMutableArray*) newList {

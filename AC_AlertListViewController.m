@@ -47,26 +47,33 @@
 
 - (void)dealloc
 {
+    [inIncidentAlerts release];
+    [normalAlerts release];
     [super dealloc];
 }
 
 - (void) reloadView {
     AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
     NSMutableArray* list = [appDelegate alertList];
-    NSMutableArray* newInIncidentAlerts = [[NSMutableArray alloc] init];
-    NSMutableArray* newNormalAlerts = [[NSMutableArray alloc] init];
+    [inIncidentAlerts removeAllObjects];
+    [normalAlerts removeAllObjects];
+    
+        //NSMutableArray* newInIncidentAlerts = [[NSMutableArray alloc] init];
+        //NSMutableArray* newNormalAlerts = [[NSMutableArray alloc] init];
     for (int i = 0; i < [list count]; i++) {
         AM_Alert* alert = [list objectAtIndex:i];
         if ([alert isIn_incident]) {
-            [newInIncidentAlerts addObject:alert];
+            [inIncidentAlerts addObject:alert];
+                //[newInIncidentAlerts addObject:alert];
         } else {
-            [newNormalAlerts addObject:alert];
+            [normalAlerts addObject:alert];
+                //[newNormalAlerts addObject:alert];
         }
     }
-    [self setInIncidentAlerts:newInIncidentAlerts];
-    [self setNormalAlerts:newNormalAlerts];
-    [newNormalAlerts release];
-    [newInIncidentAlerts release];
+        //[self setInIncidentAlerts:newInIncidentAlerts];
+        //[self setNormalAlerts:newNormalAlerts];
+        //[newNormalAlerts release];
+        //[newInIncidentAlerts release];
     [[self tableView] reloadData];
     self.navigationItem.title = [NSString stringWithFormat:@"%@", [AppHelper formatShortDateString:[NSDate date]]];
 }
@@ -100,6 +107,8 @@
 	refreshButton.style = UIBarButtonItemStyleBordered;
 	self.navigationItem.rightBarButtonItem = refreshButton;
 	[refreshButton release];
+    inIncidentAlerts = [[NSMutableArray alloc] init];
+    normalAlerts = [[NSMutableArray alloc] init];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

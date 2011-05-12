@@ -274,7 +274,7 @@
 	navigationController.tabBarItem.badgeValue = nil;
 	[UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 	
-	[NSURLConnection release];
+        //[NSURLConnection release];
 }
 
 /*

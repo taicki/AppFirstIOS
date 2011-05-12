@@ -129,7 +129,7 @@
 	
 	
 	[cell.contentView addSubview:diskView];
-    
+    [diskView release];
     // Configure the cell...
     
     return cell;

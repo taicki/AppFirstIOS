@@ -60,6 +60,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    dataArray = [[NSMutableArray alloc] init];
+    
     [self getData];
 
 }
@@ -156,10 +158,10 @@
 	
 	@try {
         NSMutableArray* newDataArray = (NSMutableArray*)[jsonString JSONValue];
-        dataArray = [[NSMutableArray alloc] init];
         for (int cnt = 0; cnt < [newDataArray count]; cnt ++) {
             AM_PolledDataData* data = [[AM_PolledDataData alloc] initWithJSONObject:[newDataArray objectAtIndex:cnt]];
             [dataArray addObject:data];
+            [data release];
         }
     }
 	@catch (NSException * e) {

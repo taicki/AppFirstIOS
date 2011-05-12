@@ -168,8 +168,6 @@
 	topPadding += (IPAD_WIDGET_INTERNAL_PADDING / 2);
 	
 	[self createCpuOverview:topPadding];
-	topPadding += (30 + IPAD_WIDGET_INTERNAL_PADDING);
-	
 	//[self createCpuCoreDetailView:topPadding];
 }
 

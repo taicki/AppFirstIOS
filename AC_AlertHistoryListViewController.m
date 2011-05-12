@@ -127,7 +127,6 @@
 		NSLog(@"%@", [error localizedDescription]);
 	}
 	
-	[NSURLConnection release];
 }
 
 - (void)viewWillAppear:(BOOL)animated
