@@ -17,14 +17,17 @@
 #import <UIKit/UIKit.h>
 #import "AFCpuDetailView.h"
 #import "AFDiskDetailViewController.h"
+#import "AC_SystemResouceListViewController.h"
 #import "AM_Server.h"
 
 @interface AFServerDetailViewController : UIViewController {
 	AM_Server* server;
 	NSMutableData* responseData;
+    AC_SystemResouceListViewController* resourceListViewController;
 }
 
 @property (nonatomic, retain) NSMutableData* responseData;
 @property (nonatomic, retain) AM_Server* server;
+@property (nonatomic, retain) AC_SystemResouceListViewController* resourceListController;
 
 @end

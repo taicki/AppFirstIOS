@@ -142,6 +142,7 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     AM_Application* application = [applications objectAtIndex:indexPath.row];
     cell.textLabel.text = [application name];
     

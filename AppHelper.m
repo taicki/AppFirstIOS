@@ -243,10 +243,8 @@ static const short _base64DecodingTable[256] = {
 }
 
 + (NSString *) base64Encoding:(NSString*) userLogin {
-    NSLog(@"encrypting string = %@",userLogin);
     NSData *data = [userLogin dataUsingEncoding: NSASCIIStringEncoding];
 	NSString *b64EncStr = [AppHelper encodeBase64WithData:data];
-    NSLog(@"encrypted string = %@", b64EncStr);
     return b64EncStr;
 }
 

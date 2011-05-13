@@ -18,7 +18,6 @@
 #import "AFServerNameView.h"
 #import "AFWidgetBaseView.h"
 #import "AppDelegate_Shared.h"
-#import "AC_SystemResouceListViewController.h"
 #import "JSON.h"
 #import "AppHelper.h"
 #import "AppStrings.h"
@@ -29,7 +28,7 @@
 @implementation AFServerDetailViewController
 
 @synthesize server;
-@synthesize responseData;
+@synthesize responseData, resourceListController;
 
 
 
@@ -57,7 +56,7 @@
                           [AppHelper formatDateString:[NSDate dateWithTimeIntervalSince1970:[systemData time]]]];
     resourceViewContainer.widgetNameLabelText = timeText;
     
-    AC_SystemResouceListViewController* resourceListViewController = [[AC_SystemResouceListViewController alloc] initWithNibName:@"AC_SystemResouceListViewController" bundle:nil];
+    resourceListViewController = [[AC_SystemResouceListViewController alloc] initWithNibName:@"AC_SystemResouceListViewController" bundle:nil];
     NSString* urlString = [NSString stringWithFormat:@"%@%@/%d/data/?num=60", 
                            [AppStrings appfirstServerAddress], 
                            [AppStrings serverListUrl], 
@@ -179,6 +178,7 @@
 - (void)dealloc {
 	[server release];
     [responseData release];
+    [resourceListController release];
     [super dealloc];
 }
 

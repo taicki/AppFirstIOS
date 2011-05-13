@@ -339,11 +339,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "iPhone/AFServerDetailViewController.m"
-         timestampString = "326901069.913466"
+         timestampString = "326901909.490169"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "29"
-         endingLineNumber = "29"
+         startingLineNumber = "28"
+         endingLineNumber = "28"
          landmarkName = "@implementation AFServerDetailViewController"
          landmarkType = "3">
          <Locations>
@@ -379,11 +379,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "iPhone/AFServerDetailViewController.m"
-         timestampString = "326901069.913466"
+         timestampString = "326901909.490169"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "157"
-         endingLineNumber = "157"
+         startingLineNumber = "156"
+         endingLineNumber = "156"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -777,6 +777,20 @@
          startingLineNumber = "74"
          endingLineNumber = "74"
          landmarkName = "-setEditing:animated:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Shared/AppDelegate_Shared.m"
+         timestampString = "326910721.181224"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "485"
+         endingLineNumber = "485"
+         landmarkName = "-trySignIn:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

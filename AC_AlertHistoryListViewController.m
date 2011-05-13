@@ -180,6 +180,7 @@
     }
     
     AM_AlertHistory* alertHistory = [alertHistories objectAtIndex:indexPath.row];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = [alertHistory subject];
     cell.textLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_BIG_FONTSIZE];
     

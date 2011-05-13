@@ -24,7 +24,6 @@ static NSString* authString;
 + (NSData *)makeGetRequest:(NSString *)url {
     NSHTTPURLResponse *response;
     NSError *error = nil;
-    NSLog(@"%@", url);
     NSURL *myWebserverURL = [NSURL URLWithString:url];
 	
     NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
