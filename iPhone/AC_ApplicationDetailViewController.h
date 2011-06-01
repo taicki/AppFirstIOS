@@ -23,6 +23,7 @@
     NSMutableData* responseData;
     UIButton* detailButton;
     long long dataTime;
+    UIActivityIndicatorView* activityIndicator;
 }
 
 @property (nonatomic, assign) long long dataTime;

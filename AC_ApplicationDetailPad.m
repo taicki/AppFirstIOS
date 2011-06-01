@@ -52,6 +52,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.title = @"Application detail";
     
     self.detailController = [[AC_ApplicationDetailViewController alloc]  initWithNibName:@"AC_ApplicationDetailViewController" bundle:nil];
     [detailController setApplication:application];

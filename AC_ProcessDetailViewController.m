@@ -43,6 +43,7 @@
     [scrollView release];
     [process release];
     [responseData release];
+    [activityIndicator release];
     [super dealloc];
 }
 
@@ -155,6 +156,7 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	
 	[connection release];
+    [activityIndicator stopAnimating];
 	scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
 	NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
 	NSMutableArray* resources = [[NSMutableArray alloc] init];
@@ -208,6 +210,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
 	[responseData appendData:data];
+    
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -218,11 +221,12 @@
 											  otherButtonTitles: nil];
 	[errorView show];
 	[errorView release];
+    [activityIndicator stopAnimating];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+     activityIndicator.center = self.view.center;
 }
 
 - (void)didReceiveMemoryWarning
@@ -239,7 +243,12 @@
 {
     [super viewDidLoad];
     [self getData];
-      
+    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+    activityIndicator.center = self.view.center;
+	[self.view addSubview: activityIndicator];
     
     
     

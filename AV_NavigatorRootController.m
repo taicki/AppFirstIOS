@@ -24,6 +24,7 @@
 
 
 @implementation AV_NavigatorRootController
+@synthesize items;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,11 +35,6 @@
     return self;
 }
 
-- (void) setItems:(NSMutableArray *)newItems {
-    [newItems retain];
-    [items release];
-    items = newItems;
-}
 
 - (void)dealloc
 {
@@ -54,12 +50,14 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void) addRootViewData:(NSMutableArray*)newItems WithName:(NSString*) name withCount:(int) count {
+- (void) addRootViewData:(NSString*) name withCount:(int) count {
+    
     NSMutableDictionary* newItem = [[NSMutableDictionary alloc] init];
     [newItem setValue:name forKey:@"name"];
     [newItem setValue:[NSNumber numberWithInt:count] forKey:@"count"];
-    [newItems addObject:newItem];
+    [items addObject:newItem];
     [newItem release];
+    [self.tableView reloadData];
 }
 
 #pragma mark - View lifecycle
@@ -84,15 +82,9 @@
 {
     [super viewDidLoad];
     [self _createLogoutButton];
-    items = [[NSMutableArray alloc]init];
+    if (items == nil) 
+        items = [[NSMutableArray alloc] init];
     
-    
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
@@ -109,14 +101,18 @@
     [super viewWillAppear:animated];
     [items removeAllObjects];
     AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
-    
-    [self addRootViewData:items WithName:@"Server" withCount:[[appDelegate serverList] count]];
-    [self addRootViewData:items WithName:@"Alert" withCount:[[appDelegate alertList] count]];
-    [self addRootViewData:items WithName:@"PolledData" withCount:[[appDelegate polledDataList] count]];
-    [self addRootViewData:items WithName:@"Application" withCount:[[appDelegate applicationList] count]];
-    [self addRootViewData:items WithName:@"Recent alerts" withCount:[[appDelegate alertHistoryList] count]];
+    if ([[appDelegate serverList] count] > 0)
+        [self addRootViewData:@"Server" withCount:[[appDelegate serverList] count]];
+    if ([[appDelegate alertList] count] > 0) 
+        [self  addRootViewData:@"Alert" withCount:[[appDelegate alertList] count]];
+    if ([[appDelegate polledDataList] count] > 0)
+        [self addRootViewData:@"PolledData" withCount:[[appDelegate polledDataList] count]];
+    if ([[appDelegate applicationList] count] > 0) 
+        [self addRootViewData:@"Application" withCount:[[appDelegate applicationList] count]];
+    if ([[appDelegate alertHistoryList] count] > 0)
+        [self addRootViewData:@"Recent alerts" withCount:[[appDelegate alertHistoryList] count]];
     [self.tableView reloadData];
-
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -158,6 +154,30 @@
     }
 }
 
+- (void) setCellIcon: (NSIndexPath *) indexPath cell: (UITableViewCell *) cell  {
+    UIImage* theImage;
+	NSString* path;
+    if (indexPath.row == 0) {
+        path = [[NSBundle mainBundle] pathForResource:@"ic_icon_server" ofType:@"png"];
+		theImage = [UIImage imageWithContentsOfFile:path];
+    } else if (indexPath.row == 1) {
+        path = [[NSBundle mainBundle] pathForResource:@"ic_icon_alert" ofType:@"png"];
+		theImage = [UIImage imageWithContentsOfFile:path];
+    } else if (indexPath.row == 2) {
+        path = [[NSBundle mainBundle] pathForResource:@"ic_icon_nagios" ofType:@"png"];
+		theImage = [UIImage imageWithContentsOfFile:path];
+    } else if (indexPath.row == 3) {
+        path = [[NSBundle mainBundle] pathForResource:@"ic_icon_application" ofType:@"png"];
+		theImage = [UIImage imageWithContentsOfFile:path];
+    } else {
+        path = [[NSBundle mainBundle] pathForResource:@"ic_icon_alerthistory" ofType:@"png"];
+		theImage = [UIImage imageWithContentsOfFile:path];
+    }
+	
+	cell.imageView.image = theImage;
+    
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
@@ -166,11 +186,12 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)", 
                            [[items objectAtIndex:indexPath.row] objectForKey:@"name"],
                            [[items objectAtIndex:indexPath.row] objectForKey:@"count"]] ;
-    
+    [self setCellIcon:indexPath cell:cell];
     // Configure the cell...
     
     return cell;

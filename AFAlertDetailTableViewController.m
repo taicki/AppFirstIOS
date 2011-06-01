@@ -32,7 +32,7 @@
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
 	
-	self.navigationItem.title = [alert name];
+	self.navigationItem.title = @"Alert detail";
  
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	

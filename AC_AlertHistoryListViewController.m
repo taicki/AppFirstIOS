@@ -61,7 +61,7 @@
     NSMutableArray* list = [appDelegate alertHistoryList];
     [self setAlertHistories:list];
     [self.tableView reloadData];
-    self.navigationItem.title = [NSString stringWithFormat:@"%@", [AppHelper formatShortDateString:[NSDate date]]];
+    self.navigationItem.title = @"Alert histories";
 }
 
 
@@ -76,18 +76,7 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
-									  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
-									  target:self 
-									  action:@selector(refreshData)];
-	refreshButton.style = UIBarButtonItemStyleBordered;
-	self.navigationItem.rightBarButtonItem = refreshButton;
-	[refreshButton release];
-    
-}
+
 
 
 - (void)viewDidUnload
@@ -109,7 +98,6 @@
 	
 	if ([UIApplication sharedApplication].applicationIconBadgeNumber == 0) 
 		return;
-	
 	postRequest.URL = [NSURL URLWithString:url];
 	
 	NSString *postData = [NSString stringWithFormat:@"uid=%@&badge=%d", appDelegate.UUID, 0];
@@ -126,7 +114,21 @@
 	if (error) {
 		NSLog(@"%@", [error localizedDescription]);
 	}
+	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 	
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
+									  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
+									  target:self 
+									  action:@selector(refreshData)];
+	refreshButton.style = UIBarButtonItemStyleBordered;
+	self.navigationItem.rightBarButtonItem = refreshButton;
+	[refreshButton release];
+    [self resetBadgeValue];    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -182,7 +184,7 @@
     AM_AlertHistory* alertHistory = [alertHistories objectAtIndex:indexPath.row];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = [alertHistory subject];
-    cell.textLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_BIG_FONTSIZE];
+        //cell.textLabel.font = [UIFont systemFontOfSize:IPAD_TABLE_CELL_BIG_FONTSIZE];
     
     return cell;
 }

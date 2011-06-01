@@ -105,6 +105,7 @@
 
 - (void)dealloc
 {
+    [activityIndicator release];
     [resourceListController release];
     [polledData release];
     [responseData release];
@@ -113,13 +114,12 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	[connection release];
-	
+	[activityIndicator stopAnimating];
 	NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
 	NSMutableArray* resources = [[NSMutableArray alloc] init];
 	
 	@try {
-        self.navigationItem.title = [NSString stringWithFormat:@"Updated at: %@", [AppHelper formatDateString:[NSDate date]]];
-		NSDictionary *dictionary = [(NSMutableArray*)[jsonString JSONValue] objectAtIndex:0];
+        NSDictionary *dictionary = [(NSMutableArray*)[jsonString JSONValue] objectAtIndex:0];
         AM_PolledDataData* data = [[AM_PolledDataData alloc] initWithJSONObject:dictionary];
         [data generateResourceArray:resources];
         float topPadding = IPHONE_WIDGET_PADDING;
@@ -159,6 +159,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
 	[responseData appendData:data];
+    
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -169,6 +170,7 @@
 											  otherButtonTitles: nil];
 	[errorView show];
 	[errorView release];
+    [activityIndicator stopAnimating];
 }
 
 - (void)didReceiveMemoryWarning
@@ -179,14 +181,24 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    activityIndicator.center = self.view.center;
+    
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self getData];
-    
-    // Do any additional setup after loading the view from its nib.
+    self.navigationItem.title = @"Detail";
+    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+	[self.view addSubview: activityIndicator];
 }
 
 - (void)viewDidUnload

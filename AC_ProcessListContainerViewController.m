@@ -41,6 +41,9 @@
     return self;
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
 
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -100,6 +103,7 @@
 }
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	[connection release];
+    [activityIndicator stopAnimating];
 	NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
 	[self parseProcesses: jsonString];
     [self createSubView];
@@ -124,6 +128,7 @@
     [processes release];
     [resourceUrl release];
     [processListController release];
+    [activityIndicator release];
     [super dealloc];
 }
 
@@ -142,6 +147,12 @@
     [super viewDidLoad];
     
     [self getData];
+    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	activityIndicator.frame = CGRectMake(self.view.frame.size.width/2, self.view.frame.size.height/2, 40.0, 40.0);
+    activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+    activityIndicator.center = self.view.center;
+	[self.view addSubview: activityIndicator];
     
     // Do any additional setup after loading the view from its nib.
 }

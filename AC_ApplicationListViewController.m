@@ -59,7 +59,7 @@
     NSMutableArray* list = [appDelegate applicationList];
     [self setApplications:list];
     [self.tableView reloadData];
-    self.navigationItem.title = [NSString stringWithFormat:@"%@", [AppHelper formatShortDateString:[NSDate date]]];
+    self.navigationItem.title = @"Applications";
 }
 
 - (void) refreshData {

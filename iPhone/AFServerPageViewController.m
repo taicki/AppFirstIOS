@@ -39,6 +39,7 @@
 	
     [super viewDidLoad];
 	[self.view setBackgroundColor:[UIColor grayColor]];
+    self.navigationItem.title = @"Server detail";
 
 	
 	scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);

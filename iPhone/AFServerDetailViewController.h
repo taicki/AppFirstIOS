@@ -24,6 +24,8 @@
 	AM_Server* server;
 	NSMutableData* responseData;
     AC_SystemResouceListViewController* resourceListViewController;
+    UIActivityIndicatorView* activityIndicator;
+    
 }
 
 @property (nonatomic, retain) NSMutableData* responseData;

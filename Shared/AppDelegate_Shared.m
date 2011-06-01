@@ -173,13 +173,7 @@
 	[postRequest setAllHTTPHeaderFields:headers];
 	
 	[NSURLConnection sendSynchronousRequest:postRequest returningResponse:&response error:&error];
-	
-    /*
-	UINavigationController* navigationController = [self.tabcontroller.viewControllers objectAtIndex:2];
-	
-	if ([UIApplication sharedApplication].applicationIconBadgeNumber > 0) {
-		navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", [UIApplication sharedApplication].applicationIconBadgeNumber];
-	} */
+        //[UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
@@ -187,18 +181,9 @@
     NSLog(@"Error in registration. Error: %@", err);
 }
 
-- (void) addRootViewData:(NSMutableArray*)items WithName:(NSString*) name withCount:(int) count {
-    NSMutableDictionary* newItem = [[[NSMutableDictionary alloc] init] autorelease];
-    [newItem setValue:name forKey:@"name"];
-    [newItem setValue:[NSNumber numberWithInt:count] forKey:@"count"];
-    [items addObject:newItem];
-}
 
 - (void) presentAppFirstRootView {
     homeViewController = [[AV_NavigatorRootController alloc] init];
-    // init data
-    
-    
     [window addSubview:navigationController.view];
 }
 
@@ -225,38 +210,24 @@
     [loginController.loginIndicator stopAnimating];
 	loginController.loginIndicator.hidden = YES;
 	[loginController.view removeFromSuperview];
-    [self presentAppFirstRootView];
+    
     
     //[detailViewController release];
-	
-	/*
-     [loginController.loginIndicator stopAnimating];
-     loginController.loginIndicator.hidden = YES;
-     [loginController.view removeFromSuperview];
-     [window addSubview:tabcontroller.view];
-     
-     
-     NSDate *today = [NSDate date];
-     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-     [dateFormatter setDateFormat:@"MMM dd, yyyy HH:mm"];
-     NSString *currentTime = [dateFormatter stringFromDate:today];
-     [dateFormatter release];
-     
-     
-     AFTitleView* titleView = (AFTitleView*)alertController.navigationItem.titleView;
-     titleView.titleLabel.text = @"Alerts";
-     titleView.timeLabel.text = [NSString stringWithFormat:@"Updated at %@", currentTime];
-     
-     titleView = (AFTitleView*)dashboardController.navigationItem.titleView;
-     titleView.titleLabel.text = @"Servers";
-     titleView.timeLabel.text = [NSString stringWithFormat:@"Updated at %@", currentTime];
-     
-     [dashboardController asyncGetServerListData];
-     [alertController asyncGetListData];
-     */
-    
 }
-
+- (void) getData:(NSString*) urlString
+{
+    [window addSubview:activityIndicator];
+    activityIndicator.center = window.center;
+    [activityIndicator startAnimating];
+    responseData = [[NSMutableData data] retain];
+	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
+	[request setHTTPMethod:@"GET"];
+	[request setURL:[NSURL URLWithString:urlString]];
+	[request setTimeoutInterval:20];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[AppComm authString] forHTTPHeaderField:@"Authorization"];
+	[[NSURLConnection alloc] initWithRequest:request delegate:self];
+}
 
 
 - (void) loginFailed:(NSString*)message {
@@ -295,11 +266,7 @@
     
 }
 
-- (void) loadPolledDataList {
-    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings polledDataListUrl]];
-    NSData* responseData = [AppComm makeGetRequest:urlString];
-	
-    
+- (void) processPolledDataList {
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
@@ -317,10 +284,13 @@
     }
 }
 
-- (void) loadAlertList {
-    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings alertListUrl]];
-    NSData* responseData = [AppComm makeGetRequest:urlString];
-	
+- (void) loadPolledDataList {
+    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings polledDataListUrl]];
+    [self getData:urlString];
+    currentQueryType = 2;
+}
+
+- (void) processAlertList {
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
@@ -339,11 +309,15 @@
     } 
 }
 
-- (void) loadAlertHistoryList {
-    
-    NSString* urlString = [NSString stringWithFormat:@"%@%@?num=50", [AppStrings appfirstServerAddress], [AppStrings alertHistoryUrl]];
-    NSData* responseData = [AppComm makeGetRequest:urlString];
+- (void) loadAlertList {
+    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings alertListUrl]];
+    currentQueryType = 1;
+    [self getData:urlString];
 	
+    
+}
+
+- (void) processAlertHistoryList {
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
@@ -361,11 +335,13 @@
     }    
 }
 
-- (void) loadApplicationList {
-    
-    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings applicationListUrl]];
-    NSData* responseData = [AppComm makeGetRequest:urlString];
-	
+- (void) loadAlertHistoryList {
+    NSString* urlString = [NSString stringWithFormat:@"%@%@?num=50", [AppStrings appfirstServerAddress], [AppStrings alertHistoryUrl]];
+    [self getData:urlString];
+    currentQueryType = 4;
+}
+
+- (void) processApplicationList {
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
@@ -381,17 +357,18 @@
             [applicationList addObject:item];
         }
     }    
+
 }
 
-
-
-- (void) loadServerList {
+- (void) loadApplicationList {
     
-    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings serverListUrl]];
-    NSData* responseData = [AppComm makeGetRequest:urlString];
-    [serverIdHostNameMap removeAllObjects];
+    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings applicationListUrl]];
     
-	
+    [self getData:urlString];
+    currentQueryType = 3;
+}
+
+- (void) processServerList {
     if (responseData != NULL) {
         NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
@@ -402,7 +379,7 @@
             NSLog(@"count of server: %d", [dictionary count]);
             NSString* sortKey = @"hostname";
             [AppHelper sortArrayByKey: sortKey dictionary: dictionary];
-
+            
         }
         [serverList removeAllObjects];
         for (int i=0; i < [dictionary count]; i++) {
@@ -410,8 +387,99 @@
             [serverIdHostNameMap setValue:[item hostname] forKey:[NSString stringWithFormat:@"%d", [item uid]]];
             [serverList addObject:item];
         }
-    }    
+    }
 }
+
+- (void) loadServerList {
+    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings serverListUrl]];
+    [self getData:urlString];
+    [serverIdHostNameMap removeAllObjects];
+    currentQueryType = 0;
+}
+
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	[connection release];
+    [activityIndicator stopAnimating];
+    [activityIndicator removeFromSuperview];
+    
+	switch (currentQueryType) {
+        case 0:
+            [self processServerList];
+            [responseData release];
+            if (firstServerQuery) {
+                [self loadAlertList];
+                firstServerQuery = NO;
+            }
+            break;
+        case 1:
+            [self processAlertList];
+            [responseData release];
+            if (firstAlertQuery) {
+                [self loadPolledDataList];
+                firstAlertQuery = NO;
+                [self.homeViewController viewWillAppear:YES];
+            }
+            break;
+        case 2:
+            [self processPolledDataList];
+            [responseData release];
+            if (firstPolledDataQuery) {
+                [self loadApplicationList];
+                firstPolledDataQuery = NO;
+            }
+            break;
+        case 3:
+            [self processApplicationList];
+            [responseData release];
+            if (firstApplicationQuery) {
+                [self loadAlertHistoryList];
+                firstApplicationQuery = NO;
+            }
+            break;
+        case 4:
+            [self processAlertHistoryList];
+            [responseData release];
+            if (firstAlertHistoryQuery) {
+                firstAlertHistoryQuery = NO;
+                
+                [self presentAppFirstRootView];
+            }
+            break;
+        default:
+            [responseData release];
+            break;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+	[responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	[responseData appendData:data];
+    
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+	UIAlertView *errorView = [[UIAlertView alloc] initWithTitle: @"Can't update server detail. " 
+														message: [error localizedDescription] 
+													   delegate: self 
+											  cancelButtonTitle: @"Ok" 
+											  otherButtonTitles: nil];
+	[errorView show];
+	[errorView release];
+}
+
 
 - (void) initDataArrays {
     polledDataList = [[NSMutableArray alloc] init];
@@ -435,13 +503,15 @@
 	NSURL *myWebserverURL = [NSURL URLWithString:self.loginUrl];
     [AppComm setAuthStringWith:self.loginController.usernameField.text andPassword:self.loginController.passwordField.text];
     [self initDataArrays];
-	[self loadServerList];
-    [self loadAlertList];
-    [self loadAlertHistoryList];
-    [self loadApplicationList];
-    [self loadPolledDataList];
-    
-    
+    firstAlertQuery = YES;
+    firstApplicationQuery = YES;
+    firstServerQuery = YES;
+    firstPolledDataQuery = YES;
+    firstAlertHistoryQuery = YES;
+    [self loadServerList];
+    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	activityIndicator.frame = CGRectMake(0, 0, 40.0, 40.0);
+    activityIndicator.hidden = NO;
 	
 	NSString *post =[NSString stringWithFormat:@"username=%@&password=%@", 
                      self.loginController.usernameField.text , self.loginController.passwordField.text];
@@ -456,9 +526,6 @@
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];
 	[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
 	[request setHTTPBody:postData];
-	
-	if (DEBUGGING)
-		[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[myWebserverURL host]];
 	
 	[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];	
 	
@@ -486,8 +553,6 @@
 	//loginController.loginIndicator.hidden = YES;
 	
 	if ( all.count == 0) {
-		
-		//NSLog(@"%@", [error localizedDescription]);
 		
 		[self performSelectorOnMainThread:@selector(loginFailed:)
 							   withObject:@"Invalid login."
@@ -615,7 +680,7 @@
     [managedObjectContext release];
     [managedObjectModel release];
     [persistentStoreCoordinator release];
-    
+    [activityIndicator release];
 	[window release];
 	[tabcontroller release];
 	[loginController release];

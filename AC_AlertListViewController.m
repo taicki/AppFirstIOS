@@ -75,7 +75,7 @@
         //[newNormalAlerts release];
         //[newInIncidentAlerts release];
     [[self tableView] reloadData];
-    self.navigationItem.title = [NSString stringWithFormat:@"%@", [AppHelper formatShortDateString:[NSDate date]]];
+    self.navigationItem.title = @"Alerts";
 }
 
 - (void)didReceiveMemoryWarning

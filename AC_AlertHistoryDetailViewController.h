@@ -23,6 +23,7 @@
     AM_AlertHistoryData* myData;
     UIScrollView* scrollView;
     NSMutableData* responseData;
+    UIActivityIndicatorView *activityIndicator;
 }
 
 @property (nonatomic, retain) AM_AlertHistory* alert_history;

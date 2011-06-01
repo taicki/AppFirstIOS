@@ -80,7 +80,7 @@
     [newHealthyPolledData release];
     [healthyDict release];
     [self.tableView reloadData];
-    self.navigationItem.title = [NSString stringWithFormat:@"%@", [AppHelper formatShortDateString:[NSDate date]]];
+    self.navigationItem.title = @"Polled datas";
 }
 
 - (void) refreshData {

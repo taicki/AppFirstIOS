@@ -22,6 +22,7 @@
     AM_PolledData* polledData;
     NSMutableData* responseData;
     AC_PolledDataResourceListViewController* resourceListController;
+    UIActivityIndicatorView *activityIndicator;
 }
 
 @property (nonatomic, retain) AM_PolledData* polledData;

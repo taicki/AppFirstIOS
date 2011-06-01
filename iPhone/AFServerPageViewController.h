@@ -27,6 +27,7 @@
 	IBOutlet UIPageControl *pageControl;
 	BOOL pageControlUsed;
 	AM_Server* server;
+    
 	
 	AFServerDetailViewController* serverDetailController;
 	AFPollDataController* pollDataController;

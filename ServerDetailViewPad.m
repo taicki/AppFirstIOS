@@ -87,7 +87,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = [NSString stringWithFormat:@"Updated at: %@", [AppHelper formatDateString:[NSDate date]]];
+    self.navigationItem.title = [NSString stringWithFormat:@"Server detail at: %@", [AppHelper formatDateString:[NSDate date]]];
 	
 	self.serverController = [[AFServerDetailViewController alloc]  initWithNibName:@"AFServerDetailViewController" bundle:nil];
     [serverController setServer:server];

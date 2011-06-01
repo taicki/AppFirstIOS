@@ -24,6 +24,7 @@
     NSMutableData* responseData;
     UIButton* detailButton;
     long long dataTime;
+    UIActivityIndicatorView* activityIndicator;
     AC_ProcessResourceListViewController* resourceListViewController;
 }
 

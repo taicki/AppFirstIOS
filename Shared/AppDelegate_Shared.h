@@ -46,6 +46,14 @@
     
     UINavigationController* navigationViewController;
     AV_NavigatorRootController* homeViewController;
+    NSMutableData* responseData;
+    int currentQueryType;
+    BOOL firstServerQuery;
+    BOOL firstAlertQuery;
+    BOOL firstAlertHistoryQuery;
+    BOOL firstApplicationQuery;
+    BOOL firstPolledDataQuery;
+    UIActivityIndicatorView* activityIndicator;
 }
 
 

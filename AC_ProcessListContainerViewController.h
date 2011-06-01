@@ -22,6 +22,7 @@
     NSMutableData* responseData;
     NSString* resourceUrl;
     AC_ProcessListViewController* processListController;
+    UIActivityIndicatorView* activityIndicator;
     
 }
 

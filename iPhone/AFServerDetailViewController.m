@@ -89,6 +89,7 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	
 	[connection release];
+    [activityIndicator stopAnimating];
 	
 	NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     NSMutableArray* resources = [[NSMutableArray alloc] init];
@@ -133,6 +134,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
 	[responseData appendData:data];
+    
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -143,16 +145,23 @@
 											  otherButtonTitles: nil];
 	[errorView show];
 	[errorView release];
+    [activityIndicator stopAnimating];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    activityIndicator.center = self.view.center;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self getData];
+        [self getData];
+    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+    activityIndicator.center = self.view.center;
+	[self.view addSubview: activityIndicator];
     
 }
 
@@ -179,6 +188,7 @@
 	[server release];
     [responseData release];
     [resourceListController release];
+    [activityIndicator release];
     [super dealloc];
 }
 

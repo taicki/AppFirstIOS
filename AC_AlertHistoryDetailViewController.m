@@ -38,6 +38,7 @@
     [scrollView release];
     [myData release];
     [alert_history release];
+    [activityIndicator release];
     [super dealloc];
 }
 
@@ -84,7 +85,7 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	
 	[connection release];
-	
+	[activityIndicator stopAnimating];
 	NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
 	scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
 	@try {
@@ -93,7 +94,7 @@
         [jsonString release];
         [self renderView];
         [self.view addSubview:self.scrollView];
-        self.navigationItem.title = @"message detail";
+        self.navigationItem.title = @"Alert message";
         
     }
 	@catch (NSException * e) {
@@ -122,6 +123,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 	[responseData setLength:0];
+    
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
@@ -136,6 +138,7 @@
 											  otherButtonTitles: nil];
 	[errorView show];
 	[errorView release];
+    [activityIndicator stopAnimating];
 }
 
 
@@ -148,6 +151,12 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    activityIndicator.center = self.view.center;
+    
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -156,6 +165,12 @@
       
     self.navigationItem.title = @"Updating...";
     [self getData];
+    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+    activityIndicator.center = self.view.center;
+	[self.view addSubview: activityIndicator];
     // Do any additional setup after loading the view from its nib.
 }
 

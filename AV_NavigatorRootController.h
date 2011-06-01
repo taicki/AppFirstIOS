@@ -21,6 +21,7 @@
     NSMutableArray* items;
 }
 
-- (void) setItems:(NSMutableArray*) newItems;
+@property (nonatomic, retain) NSMutableArray* items;
+- (void) addRootViewData:(NSString*) name withCount:(int) count;
 
 @end

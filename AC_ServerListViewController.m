@@ -56,7 +56,7 @@
     [newRunningServers release];
     [newStoppedServers release];
     [self.tableView reloadData];
-    self.navigationItem.title = [NSString stringWithFormat:@"%@", [AppHelper formatShortDateString:[NSDate date]]];
+    self.navigationItem.title = @"Severs";
 }
 
 

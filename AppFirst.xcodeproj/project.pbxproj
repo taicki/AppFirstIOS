@@ -70,6 +70,11 @@
 		3E47AE3811E0FB0D000A2C30 /* AFSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E47AE3611E0FB0D000A2C30 /* AFSettingsViewController.m */; };
 		3E47AE3911E0FB0D000A2C30 /* AFSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E47AE3711E0FB0D000A2C30 /* AFSettingsViewController.xib */; };
 		3E4E20C0135E01A7006803BD /* AM_Process.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4E20BF135E01A7006803BD /* AM_Process.m */; };
+		3E50FF2B1382215D00509113 /* ic_icon_application.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E50FF261382215600509113 /* ic_icon_application.png */; };
+		3E50FF2C1382215D00509113 /* ic_icon_alerthistory.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E50FF271382215700509113 /* ic_icon_alerthistory.png */; };
+		3E50FF2D1382215D00509113 /* ic_icon_alert.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E50FF281382215800509113 /* ic_icon_alert.png */; };
+		3E50FF2E1382215D00509113 /* ic_icon_nagios.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E50FF291382215900509113 /* ic_icon_nagios.png */; };
+		3E50FF2F1382215D00509113 /* ic_icon_server.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E50FF2A1382215B00509113 /* ic_icon_server.png */; };
 		3E5298D111BED63C0045A6CF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E5298D011BED63C0045A6CF /* Default.png */; };
 		3E6DD49511E7B47100C8E018 /* S7GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E6DD49311E7B47100C8E018 /* S7GraphView.m */; };
 		3E6DD49911E7B4DB00C8E018 /* AFGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E6DD49711E7B4DB00C8E018 /* AFGraphViewController.m */; };
@@ -287,6 +292,11 @@
 		3E47AE3711E0FB0D000A2C30 /* AFSettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AFSettingsViewController.xib; sourceTree = "<group>"; };
 		3E4E20BE135E01A7006803BD /* AM_Process.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AM_Process.h; sourceTree = "<group>"; };
 		3E4E20BF135E01A7006803BD /* AM_Process.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AM_Process.m; sourceTree = "<group>"; };
+		3E50FF261382215600509113 /* ic_icon_application.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_icon_application.png; sourceTree = "<group>"; };
+		3E50FF271382215700509113 /* ic_icon_alerthistory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_icon_alerthistory.png; sourceTree = "<group>"; };
+		3E50FF281382215800509113 /* ic_icon_alert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_icon_alert.png; sourceTree = "<group>"; };
+		3E50FF291382215900509113 /* ic_icon_nagios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_icon_nagios.png; sourceTree = "<group>"; };
+		3E50FF2A1382215B00509113 /* ic_icon_server.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_icon_server.png; sourceTree = "<group>"; };
 		3E5298D011BED63C0045A6CF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3E6DD49211E7B47100C8E018 /* S7GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S7GraphView.h; sourceTree = "<group>"; };
 		3E6DD49311E7B47100C8E018 /* S7GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S7GraphView.m; sourceTree = "<group>"; };
@@ -772,6 +782,11 @@
 		3EC706F8135E21E700F3143A /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				3E50FF261382215600509113 /* ic_icon_application.png */,
+				3E50FF271382215700509113 /* ic_icon_alerthistory.png */,
+				3E50FF281382215800509113 /* ic_icon_alert.png */,
+				3E50FF291382215900509113 /* ic_icon_nagios.png */,
+				3E50FF2A1382215B00509113 /* ic_icon_server.png */,
 				3E81CAD51377632E00342B88 /* tab_socket.png */,
 				3E81CAD3137762FF00342B88 /* tab_file.png */,
 				3E81CAD1137762E900342B88 /* tab_registry.png */,
@@ -988,6 +1003,11 @@
 				3E81CAD61377632E00342B88 /* tab_socket.png in Resources */,
 				3E81CADB1377884D00342B88 /* AC_AlertHistoryDetailViewController.xib in Resources */,
 				3E81CAE31377B64F00342B88 /* AC_ApplicationDetailPad.xib in Resources */,
+				3E50FF2B1382215D00509113 /* ic_icon_application.png in Resources */,
+				3E50FF2C1382215D00509113 /* ic_icon_alerthistory.png in Resources */,
+				3E50FF2D1382215D00509113 /* ic_icon_alert.png in Resources */,
+				3E50FF2E1382215D00509113 /* ic_icon_nagios.png in Resources */,
+				3E50FF2F1382215D00509113 /* ic_icon_server.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1097,7 +1117,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: AppFirst, Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bin Liu (9RPD8KSG7M)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "file:///Users/joeng/mobile/mobile/IPhoneOS/lib/core-plot/framework//**";
@@ -1118,8 +1138,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = AppFirst;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5E6784B5-530E-451D-886E-5B3D1655FDB4";
+				PROVISIONING_PROFILE = "88A488B6-F6C5-4DC1-90C7-BD0D933B02B8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "08CBA149-1DB2-4B10-A869-776E4E850009";
 				SDKROOT = iphoneos4.0;
 				"SDKROOT[arch=*]" = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1134,7 +1154,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: AppFirst, Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bin Liu (9RPD8KSG7M)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1152,8 +1172,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = AppFirst;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5E6784B5-530E-451D-886E-5B3D1655FDB4";
+				PROVISIONING_PROFILE = "88A488B6-F6C5-4DC1-90C7-BD0D933B02B8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "08CBA149-1DB2-4B10-A869-776E4E850009";
 				SDKROOT = iphoneos4.0;
 				"SDKROOT[arch=*]" = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1166,8 +1186,10 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: AppFirst, Inc.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: AppFirst, Inc.";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1183,8 +1205,8 @@
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "50A137DD-C840-4276-84A2-24A53E553F77";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "34A3D564-FEE9-4808-B92E-99B22602524F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "34A3D564-FEE9-4808-B92E-99B22602524F";
 				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1198,7 +1220,7 @@
 				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: AppFirst, Inc.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: AppFirst, Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppFirst_Prefix.pch;
@@ -1215,8 +1237,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = AppFirst;
-				PROVISIONING_PROFILE = "50A137DD-C840-4276-84A2-24A53E553F77";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "34A3D564-FEE9-4808-B92E-99B22602524F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "34A3D564-FEE9-4808-B92E-99B22602524F";
 				SDKROOT = iphoneos4.3;
 				"SDKROOT[arch=*]" = iphoneos4.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1228,6 +1250,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: AppFirst, Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1243,6 +1267,7 @@
 					"-ObjC",
 				);
 				PREBINDING = NO;
+				PROVISIONING_PROFILE = "34A3D564-FEE9-4808-B92E-99B22602524F";
 				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1253,6 +1278,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: AppFirst, Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -1270,7 +1296,7 @@
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "50A137DD-C840-4276-84A2-24A53E553F77";
+				PROVISIONING_PROFILE = "34A3D564-FEE9-4808-B92E-99B22602524F";
 				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
