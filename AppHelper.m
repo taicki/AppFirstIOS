@@ -120,6 +120,29 @@ static const short _base64DecodingTable[256] = {
 	}
 }
 
++ (NSString *) toRelativeTimeString:(long) timestamp {
+    NSDate *convertedDate = [[NSDate alloc] initWithTimeIntervalSince1970:timestamp];
+    NSDate *todayDate = [NSDate date];
+    double ti = [todayDate timeIntervalSinceDate:convertedDate];
+    [convertedDate release];
+    if (ti < 1) {
+        return @"never";
+    } else if (ti < 60) {
+        int diff = (int)ti;
+        return [NSString stringWithFormat:@"%d seconds ago", diff];
+    } else if (ti < 7200) {
+        int diff = round(ti / 60);
+        return [NSString stringWithFormat:@"%d minutes ago", diff];
+    } else if (ti < 86400) {
+        int diff = round(ti / 60 / 60);
+        return[NSString stringWithFormat:@"%d hours ago", diff];
+    } else if (ti < 2629743) {
+        int diff = round(ti / 60 / 60 / 24);
+        return[NSString stringWithFormat:@"%d days ago", diff];
+    } else {
+        return @"never";
+    }
+}
 
 + (UIColor*) backgroundGradientColor1 {
 	return [UIColor colorWithRed:202 green:202 blue:202 alpha:0.9];
