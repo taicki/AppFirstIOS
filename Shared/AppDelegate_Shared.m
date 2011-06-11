@@ -209,15 +209,19 @@
     
     [loginController.loginIndicator stopAnimating];
 	loginController.loginIndicator.hidden = YES;
+    
+    
+    
 	[loginController.view removeFromSuperview];
-    
-    
-    //[detailViewController release];
-}
-- (void) getData:(NSString*) urlString
-{
     [window addSubview:activityIndicator];
     activityIndicator.center = window.center;
+}
+
+
+
+- (void) getData:(NSString*) urlString
+{
+    window.userInteractionEnabled = NO;
     [activityIndicator startAnimating];
     responseData = [[NSMutableData data] retain];
 	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
@@ -231,7 +235,7 @@
 
 
 - (void) loginFailed:(NSString*)message {
-	
+	NSError *error;
 	
 	loginController.loginButton.enabled = YES;
 	loginController.invalidLoginLabel.hidden = NO;
@@ -248,8 +252,8 @@
 		[window addSubview:loginController.view];
 	
 	// delete the password
-	//[SFHFKeychainUtils storeUsername:self.loginController.usernameField.text andPassword:@""
-	//				  forServiceName:@"appfirst" updateExisting:YES error:&error];
+	[SFHFKeychainUtils storeUsername:self.loginController.usernameField.text andPassword:@""
+					  forServiceName:@"appfirst" updateExisting:YES error:&error];
 }
 
 
@@ -258,7 +262,6 @@
 	NSError *error;
 	[SFHFKeychainUtils storeUsername:self.loginController.usernameField.text andPassword:@""
 					  forServiceName:@"appfirst" updateExisting:YES error:&error];
-	
     
 	[tabcontroller.view removeFromSuperview];
 	[window addSubview:loginController.view];
@@ -266,9 +269,9 @@
     
 }
 
-- (void) processPolledDataList {
-    if (responseData != NULL) {
-        NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+- (void) processPolledDataList: (NSMutableData*) data {
+    if (data != NULL) {
+        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
         [jsonString release];
         if ([dictionary count] > 0) {
@@ -284,15 +287,15 @@
     }
 }
 
-- (void) loadPolledDataList {
+- (void) refreshPolledDataList {
     NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings polledDataListUrl]];
     [self getData:urlString];
     currentQueryType = 2;
 }
 
-- (void) processAlertList {
-    if (responseData != NULL) {
-        NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+- (void) processAlertList: (NSMutableData*) data {
+    if (data != NULL) {
+        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
         [jsonString release];
         if ([dictionary count] > 0) {
@@ -309,7 +312,7 @@
     } 
 }
 
-- (void) loadAlertList {
+- (void) refreshAlertList {
     NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings alertListUrl]];
     currentQueryType = 1;
     [self getData:urlString];
@@ -317,9 +320,9 @@
     
 }
 
-- (void) processAlertHistoryList {
-    if (responseData != NULL) {
-        NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+- (void) processAlertHistoryList: (NSMutableData*) data {
+    if (data != NULL) {
+        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
         [jsonString release];
         if ([dictionary count] > 0) {
@@ -335,15 +338,15 @@
     }    
 }
 
-- (void) loadAlertHistoryList {
+- (void) refreshAlertHistoryList {
     NSString* urlString = [NSString stringWithFormat:@"%@%@?num=50", [AppStrings appfirstServerAddress], [AppStrings alertHistoryUrl]];
     [self getData:urlString];
     currentQueryType = 4;
 }
 
-- (void) processApplicationList {
-    if (responseData != NULL) {
-        NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+- (void) processApplicationList: (NSMutableData*) data {
+    if (data != NULL) {
+        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
         [jsonString release];
         if ([dictionary count] > 0) {
@@ -357,25 +360,20 @@
             [applicationList addObject:item];
         }
     }    
-
 }
 
-- (void) loadApplicationList {
-    
+- (void) refreshApplicationList {
     NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings applicationListUrl]];
-    
     [self getData:urlString];
     currentQueryType = 3;
 }
 
-- (void) processServerList {
-    if (responseData != NULL) {
-        NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+- (void) processServerList: (NSMutableData*) data {
+    if (data != NULL) {
+        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSMutableArray *dictionary = (NSMutableArray*)[jsonString JSONValue];
         [jsonString release];
-            //[responseData release];
         if ([dictionary count] > 0) {
-            
             NSLog(@"count of server: %d", [dictionary count]);
             NSString* sortKey = @"hostname";
             [AppHelper sortArrayByKey: sortKey dictionary: dictionary];
@@ -390,7 +388,7 @@
     }
 }
 
-- (void) loadServerList {
+- (void) refreshServerList {
     NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings serverListUrl]];
     [self getData:urlString];
     [serverIdHostNameMap removeAllObjects];
@@ -398,68 +396,64 @@
 }
 
 
+- (void) loadPolledDataListSynchronized {
+    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings polledDataListUrl]];
+    NSMutableData* data = [AppComm makeGetRequest:urlString];
+    [self processPolledDataList:data];    
+}
+
+- (void) loadAlertListSynchronized {
+    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings alertListUrl]];
+    NSMutableData* data= [AppComm makeGetRequest:urlString];
+    [self processAlertList:data]; 
+}
+
+- (void) loadAlertHistoryListSynchronized {
+    
+    NSString* urlString = [NSString stringWithFormat:@"%@%@?num=50", [AppStrings appfirstServerAddress], [AppStrings alertHistoryUrl]];
+    NSMutableData* data = [AppComm makeGetRequest:urlString];
+    [self processAlertHistoryList:data]; 
+}
+
+- (void) loadApplicationListSynchronized {
+    
+    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings applicationListUrl]];
+    NSMutableData* data = [AppComm makeGetRequest:urlString];
+    [self processApplicationList:data];
+}
+
+- (void) loadServerListSynchronized {
+    NSString* urlString = [NSString stringWithFormat:@"%@%@", [AppStrings appfirstServerAddress], [AppStrings serverListUrl]];
+    NSMutableData* data = [AppComm makeGetRequest:urlString];
+    [serverIdHostNameMap removeAllObjects];
+    [self processServerList:data];   
+}
+
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	[connection release];
     [activityIndicator stopAnimating];
-    [activityIndicator removeFromSuperview];
-    
-	switch (currentQueryType) {
+    switch (currentQueryType) {
         case 0:
-            [self processServerList];
-            [responseData release];
-            if (firstServerQuery) {
-                [self loadAlertList];
-                firstServerQuery = NO;
-            }
+            [self processServerList:responseData];
             break;
         case 1:
-            [self processAlertList];
-            [responseData release];
-            if (firstAlertQuery) {
-                [self loadPolledDataList];
-                firstAlertQuery = NO;
-                [self.homeViewController viewWillAppear:YES];
-            }
+            [self processAlertList:responseData];
             break;
         case 2:
-            [self processPolledDataList];
-            [responseData release];
-            if (firstPolledDataQuery) {
-                [self loadApplicationList];
-                firstPolledDataQuery = NO;
-            }
+            [self processPolledDataList:responseData];
             break;
         case 3:
-            [self processApplicationList];
-            [responseData release];
-            if (firstApplicationQuery) {
-                [self loadAlertHistoryList];
-                firstApplicationQuery = NO;
-            }
+            [self processApplicationList:responseData];
             break;
         case 4:
-            [self processAlertHistoryList];
-            [responseData release];
-            if (firstAlertHistoryQuery) {
-                firstAlertHistoryQuery = NO;
-                
-                [self presentAppFirstRootView];
-            }
+            [self processAlertHistoryList:responseData];
             break;
         default:
-            [responseData release];
             break;
     }
+    window.userInteractionEnabled = YES;
+    [responseData release];
 }
-
-
-
-
-
-
-
-
-
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 	[responseData setLength:0];
@@ -478,6 +472,8 @@
 											  otherButtonTitles: nil];
 	[errorView show];
 	[errorView release];
+    [activityIndicator stopAnimating];
+    window.userInteractionEnabled = YES;
 }
 
 
@@ -503,16 +499,17 @@
 	NSURL *myWebserverURL = [NSURL URLWithString:self.loginUrl];
     [AppComm setAuthStringWith:self.loginController.usernameField.text andPassword:self.loginController.passwordField.text];
     [self initDataArrays];
-    firstAlertQuery = YES;
-    firstApplicationQuery = YES;
-    firstServerQuery = YES;
-    firstPolledDataQuery = YES;
-    firstAlertHistoryQuery = YES;
-    [self loadServerList];
+    [self loadServerListSynchronized];
+    [self loadApplicationListSynchronized];
+    [self loadAlertListSynchronized];
+    [self loadPolledDataListSynchronized]; 
+    [self loadAlertHistoryListSynchronized];
+    
+    
     activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 	activityIndicator.frame = CGRectMake(0, 0, 40.0, 40.0);
-    activityIndicator.hidden = NO;
-	
+    [self presentAppFirstRootView];
+    
 	NSString *post =[NSString stringWithFormat:@"username=%@&password=%@", 
                      self.loginController.usernameField.text , self.loginController.passwordField.text];
     
@@ -549,8 +546,6 @@
 	
 	// If you want to get all of the cookies:
 	NSArray * all = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:[NSURL URLWithString:urlBase]];
-	
-	//loginController.loginIndicator.hidden = YES;
 	
 	if ( all.count == 0) {
 		

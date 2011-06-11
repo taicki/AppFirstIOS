@@ -58,8 +58,6 @@
     [inIncidentAlerts removeAllObjects];
     [normalAlerts removeAllObjects];
     
-        //NSMutableArray* newInIncidentAlerts = [[NSMutableArray alloc] init];
-        //NSMutableArray* newNormalAlerts = [[NSMutableArray alloc] init];
     for (int i = 0; i < [list count]; i++) {
         AM_Alert* alert = [list objectAtIndex:i];
         if ([alert isIn_incident]) {
@@ -70,10 +68,7 @@
                 //[newNormalAlerts addObject:alert];
         }
     }
-        //[self setInIncidentAlerts:newInIncidentAlerts];
-        //[self setNormalAlerts:newNormalAlerts];
-        //[newNormalAlerts release];
-        //[newInIncidentAlerts release];
+        
     [[self tableView] reloadData];
     self.navigationItem.title = @"Alerts";
 }
@@ -90,7 +85,7 @@
     AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
     self.navigationItem.title = @"Updating...";
     self.tableView.userInteractionEnabled = NO;
-    [appDelegate loadAlertList];
+    [appDelegate refreshAlertList];
     [self reloadView];
     self.tableView.userInteractionEnabled = YES;
 }

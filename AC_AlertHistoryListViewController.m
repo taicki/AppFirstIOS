@@ -69,7 +69,7 @@
     AppDelegate_Shared* appDelegate = (AppDelegate_Shared *)[[UIApplication sharedApplication] delegate];
     self.navigationItem.title = @"Updating...";
     self.tableView.userInteractionEnabled = NO;
-    [appDelegate loadAlertHistoryList];
+    [appDelegate refreshAlertHistoryList];
     [self reloadView];
     self.tableView.userInteractionEnabled = YES;
 }

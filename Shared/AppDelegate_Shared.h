@@ -96,11 +96,17 @@
 - (NSMutableArray*) polledDataList;
 - (NSMutableArray*) alertHistoryList;
 
-- (void) loadApplicationList;
-- (void) loadAlertList;
-- (void) loadServerList;
-- (void) loadAlertHistoryList;
-- (void) loadPolledDataList;
+- (void) loadApplicationListSynchronized;
+- (void) loadAlertListSynchronized;
+- (void) loadServerListSynchronized;
+- (void) loadAlertHistoryListSynchronized;
+- (void) loadPolledDataListSynchronized;
+
+- (void) refreshServerList;
+- (void) refreshApplicationList;
+- (void) refreshAlertList;
+- (void) refreshPolledDataList;
+- (void) refreshAlertHistoryList;
 
 - (void) addRootViewData:(NSMutableArray*)items WithName:(NSString*) name withCount:(int) count;
 - (void) presentAppFirstRootView;

@@ -21,7 +21,7 @@
     
 }
 
-+(NSData*) makeGetRequest:(NSString*)url;
++(NSMutableData*) makeGetRequest:(NSString*)url;
 +(NSString*) authString;
 +(void) setAuthStringWith:(NSString*) username andPassword: (NSString*) password;
 

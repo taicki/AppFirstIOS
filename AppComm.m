@@ -21,7 +21,7 @@
 @implementation AppComm
 
 static NSString* authString;
-+ (NSData *)makeGetRequest:(NSString *)url {
++ (NSMutableData *)makeGetRequest:(NSString *)url {
     NSHTTPURLResponse *response;
     NSError *error = nil;
     NSURL *myWebserverURL = [NSURL URLWithString:url];
@@ -33,7 +33,7 @@ static NSString* authString;
 	[request setHTTPMethod:@"GET"];
 	[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setValue:authString forHTTPHeaderField:@"Authorization"];
-    NSData* responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSMutableData* responseData = (NSMutableData*) [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     if (error) {
         NSLog(@"%@", [error localizedDescription]);
